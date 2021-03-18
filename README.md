@@ -44,7 +44,7 @@ To allow fair metric comparison from api tests, the api model resource will be s
     ],
     "platforms": [
         "Nintendo 64"
-    ]
+    ],
     "date_released": "29 June 1998",  
 }
 ```
