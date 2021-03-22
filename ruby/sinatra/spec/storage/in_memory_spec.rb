@@ -50,7 +50,7 @@ describe InMemory do
             updating_video_game = double 'updating video game'
 
             # Act
-            updated_video_game = subject.update(1, updating_video_game)
+            updated_video_game = subject.update 1, updating_video_game
 
             # Assert
             expect(updated_video_game).to be updated_video_game
@@ -63,7 +63,7 @@ describe InMemory do
             updating_video_game = double 'updating video game'
 
             # Act
-            updated_video_game = subject.update(2, updating_video_game)
+            updated_video_game = subject.update 2, updating_video_game
 
             # Assert
             expect(updated_video_game).to eq nil
@@ -73,7 +73,7 @@ describe InMemory do
     describe '#delete' do
         it 'should remove and return video game with passed id' do
             # Arrange
-            subject.video_games[0] = video_game_to_delete = double('video game to delete', id: 1)
+            subject.video_games[0] = video_game_to_delete = double 'video game to delete', id: 1
 
             # Act
             deleted_video_game = subject.delete 1
