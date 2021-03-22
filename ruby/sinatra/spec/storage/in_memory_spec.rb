@@ -56,5 +56,17 @@ describe InMemory do
             expect(updated_video_game).to be updated_video_game
             expect(subject.video_games[0]).to be updating_video_game
         end
+
+        it 'should return nil when no video game has passed id' do
+            # Arrange
+            subject.video_games << double('original video game', id: 1)
+            updating_video_game = double 'updating video game'
+
+            # Act
+            updated_video_game = subject.update(2, updating_video_game)
+
+            # Assert
+            expect(updated_video_game).to eq nil
+        end
     end
 end
