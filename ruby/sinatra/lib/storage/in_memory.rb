@@ -11,4 +11,7 @@ class InMemory
     def add(video_game)
         video_games << video_game
     end
+
+    def get(index)
+    end
 end
