@@ -31,5 +31,12 @@ class InMemory
     end
 
     def delete(id)
+        i = 0
+
+        while i < video_games.length
+            return video_games.delete_at(i) if video_games[i].id == id
+
+            i += 1
+        end
     end
 end
