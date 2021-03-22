@@ -44,15 +44,16 @@ describe InMemory do
     end
 
     describe '#update' do
-        it 'should overwrite video game with passed id' do
+        it 'should overwrite and return video game with passed id' do
             # Arrange
             subject.video_games << double('original video game', id: 1)
             updating_video_game = double 'updating video game'
 
             # Act
-            subject.update(1, updating_video_game)
+            updated_video_game = subject.update(1, updating_video_game)
 
             # Assert
+            expect(updated_video_game).to be updated_video_game
             expect(subject.video_games[0]).to be updating_video_game
         end
     end
