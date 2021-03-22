@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # in memory storage
 class InMemory
     attr_accessor :video_games
