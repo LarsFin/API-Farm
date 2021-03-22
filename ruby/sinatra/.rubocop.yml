@@ -9,3 +9,8 @@ Layout/TrailingEmptyLines:
 
 Layout/IndentationWidth:
   Enabled: false
+
+Metrics/BlockLength:
+  Enabled: true
+  Exclude: 
+    - spec/**/*
