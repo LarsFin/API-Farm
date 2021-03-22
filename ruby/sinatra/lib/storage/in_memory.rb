@@ -20,6 +20,9 @@ class InMemory
         nil
     end
 
+    def get_all
+    end
+
     def update(id, video_game)
         i = 0
 
