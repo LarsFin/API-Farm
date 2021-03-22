@@ -25,6 +25,7 @@ class InMemory
 
         while i < video_games.length
             return video_games[i] = video_game if video_games[i].id == id
+
             i += 1
         end
     end
