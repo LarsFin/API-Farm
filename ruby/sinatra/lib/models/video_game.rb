@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 class VideoGame
-    attr_accessor :name,
+    attr_accessor :id,
+                  :name,
                   :developers,
                   :publishers,
                   :directors,
