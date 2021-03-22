@@ -17,6 +17,6 @@ class InMemory
             return video_game if video_game.id == index
         end
 
-        return
+        nil
     end
 end
