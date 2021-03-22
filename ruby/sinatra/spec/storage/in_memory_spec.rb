@@ -38,7 +38,7 @@ describe InMemory do
             # Act
             retrieved_video_game = subject.get 2
 
-            #Assert
+            # Assert
             expect(retrieved_video_game).to eq nil
         end
     end
