@@ -42,4 +42,18 @@ describe InMemory do
             expect(retrieved_video_game).to eq nil
         end
     end
+
+    describe '#update' do
+        it 'should overwrite video game with passed id' do
+            # Arrange
+            subject.video_games << double('original video game', id: 1)
+            updating_video_game = double 'updating video game'
+
+            # Act
+            subject.update(1, updating_video_game)
+
+            # Assert
+            expect(subject.video_games[0]).to be updating_video_game
+        end
+    end
 end
