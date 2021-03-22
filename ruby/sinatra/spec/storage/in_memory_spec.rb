@@ -43,6 +43,22 @@ describe InMemory do
         end
     end
 
+    describe '#get_all' do
+        it 'should return all video games' do
+            # Arrange
+            subject.video_games << double('video game 1')
+            subject.video_games << double('video game 2')
+            subject.video_games << double('video game 3')
+
+            # Act
+            retrieved_video_games = subject.get_all
+
+            # Assert
+            expect(retrieved_video_games.length).to eq 3
+            expect(retrieved_video_games).to be subject.video_games
+        end
+    end
+
     describe '#update' do
         it 'should overwrite and return video game with passed id' do
             # Arrange
