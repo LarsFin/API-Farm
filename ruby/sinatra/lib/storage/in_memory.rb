@@ -21,6 +21,7 @@ class InMemory
     end
 
     def get_all
+        video_games
     end
 
     def update(id, video_game)
