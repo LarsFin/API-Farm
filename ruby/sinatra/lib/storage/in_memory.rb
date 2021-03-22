@@ -19,4 +19,7 @@ class InMemory
 
         nil
     end
+
+    def update(index, video_game)
+    end
 end
