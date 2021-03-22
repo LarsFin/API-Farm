@@ -7,5 +7,6 @@ class InMemory
     end
 
     def add(video_game)
+        video_games << video_game
     end
 end
