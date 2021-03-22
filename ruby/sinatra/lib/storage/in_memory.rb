@@ -12,14 +12,20 @@ class InMemory
         video_games << video_game
     end
 
-    def get(index)
+    def get(id)
         video_games.each do |video_game|
-            return video_game if video_game.id == index
+            return video_game if video_game.id == id
         end
 
         nil
     end
 
-    def update(index, video_game)
+    def update(id, video_game)
+        i = 0
+
+        while i < video_games.length
+            return video_games[i] = video_game if video_games[i].id == id
+            i += 1
+        end
     end
 end
