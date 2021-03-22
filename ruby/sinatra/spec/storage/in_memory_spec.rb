@@ -20,15 +20,15 @@ describe InMemory do
     describe '#get' do
         it 'should get video game from array with passed index' do
             # Arrange
-            subject.video_games[0] = video_game_1 = double('first video game', id: 1)
-            subject.video_games[1] = video_game_2 = double('second video game', id: 2)
-            subject.video_games[2] = video_game_3 = double('second video game', id: 3)
+            subject.video_games[0] = double('first video game', id: 1)
+            subject.video_games[1] = double('second video game', id: 2)
+            subject.video_games[2] = double('second video game', id: 3)
 
             # Act
             retrieved_video_game = subject.get 2
 
             # Assert
-            expect(retrieved_video_game).to be video_game_2
+            expect(retrieved_video_game).to be subject.video_games[1]
         end
     end
 end

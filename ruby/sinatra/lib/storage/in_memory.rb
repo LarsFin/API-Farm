@@ -13,7 +13,7 @@ class InMemory
     end
 
     def get(index)
-        for video_game in video_games
+        video_games.each do |video_game|
             return video_game if video_game.id == index
         end
     end
