@@ -13,5 +13,8 @@ class InMemory
     end
 
     def get(index)
+        for video_game in video_games
+            return video_game if video_game.id == index
+        end
     end
 end
