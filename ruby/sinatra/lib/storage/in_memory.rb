@@ -16,5 +16,7 @@ class InMemory
         video_games.each do |video_game|
             return video_game if video_game.id == index
         end
+
+        return
     end
 end
