@@ -59,7 +59,7 @@ describe InMemory do
 
         it 'should return nil when no video game has passed id' do
             # Arrange
-            subject.video_games << double('original video game', id: 1)
+            subject.video_games << double('video game', id: 1)
             updating_video_game = double 'updating video game'
 
             # Act
@@ -81,6 +81,18 @@ describe InMemory do
             # Assert
             expect(subject.video_games.length).to eq 0
             expect(deleted_video_game).to be video_game_to_delete
+        end
+
+        it 'should return nil when no video game has passed id' do
+            # Arrange
+            subject.video_games << double('video game', id: 1)
+
+            # Act
+            deleted_video_game = subject.delete 2
+
+            # Assert
+            expect(subject.video_games.length).to eq 1
+            expect(deleted_video_game).to eq nil
         end
     end
 end
