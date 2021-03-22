@@ -69,4 +69,18 @@ describe InMemory do
             expect(updated_video_game).to eq nil
         end
     end
+
+    describe '#delete' do
+        it 'should remove and return video game with passed id' do
+            # Arrange
+            subject.video_games[0] = video_game_to_delete = double('video game to delete', id: 1)
+
+            # Act
+            deleted_video_game = subject.delete 1
+
+            # Assert
+            expect(subject.video_games.length).to eq 0
+            expect(deleted_video_game).to be video_game_to_delete
+        end
+    end
 end
