@@ -29,4 +29,7 @@ class InMemory
             i += 1
         end
     end
+
+    def delete(id)
+    end
 end
