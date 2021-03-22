@@ -45,9 +45,11 @@ To allow fair metric comparison from api tests, the api model resource will be s
     "platforms": [
         "Nintendo 64"
     ],
-    "date_released": "29 June 1998",  
+    "date_released": "29/06/1998"
 }
 ```
+
+
 
 ### Languages & Frameworks
 
@@ -70,4 +72,4 @@ api_farm
     |___framework-1
 ```
 
-Each framework will have its own standalone api example.
+Each framework will have its own standalone api example within a separate directory.

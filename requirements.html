@@ -1,0 +1,280 @@
+<html>
+    <head>
+        <title>API Farm Reqs</title>
+
+        <style>
+            table, th, td {
+                border: 1px solid black;
+            }
+
+            th {
+                text-align: left;
+            }
+        </style>
+    </head>
+
+    <body style="font-family: Consolas;">
+        <h1>API Farm Requirements</h1>
+        <p>
+            Each endpoint for the API is listed below. Including its expected behaviour with given data.
+        </p>
+
+        <div>
+            <h2>GET /video_games</h2>
+            <p>
+                Retrieves all video games from storage and responded as an array in the body.
+            </p>
+
+            <div>
+                <h3>Examples</h3>
+
+                <div>
+                    <h4>Request</h4>
+                    <p>
+                        Request of method type <code>GET</code> made to <code>/video_games</code> endpoint.
+                    </p>
+
+                    <h4>Response 200</h4>
+                    <pre>
+[
+    {
+        "name": "Perfect Dark",
+        ...
+    },
+
+    {
+        "name": "Super Mario 64",
+        ...
+    }
+]
+                    </pre>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <h2>GET /video_games/:id</h2>
+            <p>
+                Retrieves video game with specified id from storage and set as response body.
+            </p>
+
+            <div>
+                <h3>Examples</h3>
+
+                <div>
+                    <h4>Request</h4>
+                    <p>
+                        Request of method type <code>GET</code> made to <code>/video_games/:id</code>, where the id is that of the desired video game.
+                    </p>
+
+                    <h4>Response 200</h4>
+                    <pre>
+{
+    "name": "Bomberman 64",
+    ...
+}
+                    </pre>
+
+                    <h4>Response 404</h4>
+                    <pre>No video game with id 'x' could be found.</pre>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <h2>POST /video_games</h2>
+            <p>
+                Creates a video game within storage with the provided data from the request body. Failing to provide required or invalid data will result in 
+                a bad request response. The table below shows what data is expected and its type.
+            </p>
+            <table style="width: 100%;">
+                <tr>
+                    <th>Attribute</th>
+                    <th>Type</th>
+                    <th>Required?</th>
+                    <th>Default Value</th>
+                    <th>Description</th>
+                </tr>
+
+                <tr>
+                    <td>name</td>
+                    <td>string</td>
+                    <td>yes</td>
+                    <td>N/A</td>
+                    <td>The name of the video game. This must be provided in the body of the request.</td>
+                </tr>
+
+                <tr>
+                    <td>developers</td>
+                    <td>string[]</td>
+                    <td>no</td>
+                    <td>[]</td>
+                    <td>An array of the names of the developers who worked on the video game.</td>
+                </tr>
+
+                <tr>
+                    <td>directors</td>
+                    <td>string[]</td>
+                    <td>no</td>
+                    <td>[]</td>
+                    <td>An array of the names of the people who directed the video game.</td>
+                </tr>
+
+                <tr>
+                    <td>producers</td>
+                    <td>string[]</td>
+                    <td>no</td>
+                    <td>[]</td>
+                    <td>An array of the names of the people who produced the video game.</td>
+                </tr>
+
+                <tr>
+                    <td>designers</td>
+                    <td>string[]</td>
+                    <td>no</td>
+                    <td>[]</td>
+                    <td>An array of the names of the people who designed the video game.</td>
+                </tr>
+
+                <tr>
+                    <td>programmers</td>
+                    <td>string[]</td>
+                    <td>no</td>
+                    <td>[]</td>
+                    <td>An array of the names of the people who programmed the video game.</td>
+                </tr>
+
+                <tr>
+                    <td>artists</td>
+                    <td>string[]</td>
+                    <td>no</td>
+                    <td>[]</td>
+                    <td>An array of the names of the people who worked on the art of the video game.</td>
+                </tr>
+
+                <tr>
+                    <td>composers</td>
+                    <td>string[]</td>
+                    <td>no</td>
+                    <td>[]</td>
+                    <td>An array of the names of the people who composed the soundtrack of the video game.</td>
+                </tr>
+
+                <tr>
+                    <td>platforms</td>
+                    <td>string[]</td>
+                    <td>no</td>
+                    <td>[]</td>
+                    <td>An array of the names of the platforms the video game had been released on.</td>
+                </tr>
+
+                <tr>
+                    <td>date_released</td>
+                    <td>string</td>
+                    <td>yes</td>
+                    <td>N/A</td>
+                    <td>The date that the video game had been released. The date must be in the format 'DD/MM/YYYY'.</td>
+                </tr>
+            </table>
+
+            <div>
+                <h3>Examples</h3>
+
+                <div>
+                    <h4>Request</h4>
+                    <p>
+                        Request of method type <code>POST</code> made to <code>/video_games</code>. The request body makes up the attributes of the new video game. 
+                        Below, is an example request;
+                    </p>
+                    <pre>
+{
+    "name": "Banjo Kazooie",
+    "developers": [
+        "Rare",
+    ],
+    "publishers": [
+        "Nintendo"
+    ],
+    "directors": [
+        "Gregg Mayles",
+        "George Andreas"
+    ],
+    "producers": [
+        "Tim Stamper",
+        "Chris Stamper"
+    ],
+    "designers": [
+        "Gregg Mayles"
+    ],
+    "programmers": [
+        "Chris Sutherland"
+    ],
+    "artists": [
+        "Steve Mayles",
+        "John Nash",
+        "Kevin Bayliss",
+        "Tim Stamper"
+    ],
+    "composers": [
+        "Grant Kirkhope"
+    ],
+    "platforms": [
+        "Nintendo 64"
+    ],
+    "date_released": "29/06/1998" 
+}
+                    </pre>
+
+                    <h4>Response 201</h4>
+                    <pre>
+{
+    "id": 3,
+    "name": "Banjo Kazooie",
+    "developers": [
+        "Rare",
+    ],
+    "publishers": [
+        "Nintendo"
+    ],
+    "directors": [
+        "Gregg Mayles",
+        "George Andreas"
+    ],
+    "producers": [
+        "Tim Stamper",
+        "Chris Stamper"
+    ],
+    "designers": [
+        "Gregg Mayles"
+    ],
+    "programmers": [
+        "Chris Sutherland"
+    ],
+    "artists": [
+        "Steve Mayles",
+        "John Nash",
+        "Kevin Bayliss",
+        "Tim Stamper"
+    ],
+    "composers": [
+        "Grant Kirkhope"
+    ],
+    "platforms": [
+        "Nintendo 64"
+    ],
+    "date_released": "29/06/1998" 
+}
+                    </pre>
+
+                    <h4>Response 400</h4>
+                    <p>
+                        A bad request can be the result of either not providing a value for the <name>name</name> or <code>date_released</code>. 
+                        Additionally, a bad request can be responded when the provided <code>date_released</code> is invalid.
+                    </p>
+                    <pre>A name is required for a video game.</pre>
+                    <pre>The provided date_released '29 June 1998' is invalid and must be in the format 'DD/MM/YYYY'.</pre>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
