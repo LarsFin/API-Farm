@@ -5,4 +5,7 @@ class VideoGames
     def initialize(storage)
         @storage = storage
     end
+
+    def get_all
+    end
 end
