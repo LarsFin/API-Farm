@@ -6,10 +6,14 @@ class InMemory
 
     def initialize
         @video_games = []
+        @counter = 0
     end
 
     def add(video_game)
+        @counter += 1
+        video_game.id = @counter        
         @video_games << video_game
+        video_game
     end
 
     def get(id)

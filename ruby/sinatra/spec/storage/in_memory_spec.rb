@@ -8,6 +8,9 @@ describe InMemory do
             # Arrange
             video_game = double 'mock video game'
 
+            # Assert
+            expect(video_game).to receive(:id=).with 1
+
             # Act
             subject.add video_game
 
@@ -21,15 +24,16 @@ describe InMemory do
             video_game_1 = double 'first video game'
             video_game_2 = double 'second video game'
 
+            # Assert
+            expect(video_game_1).to receive(:id=).with 1
+            expect(video_game_2).to receive(:id=).with 2
+
             # Act
             created_video_game_1 = subject.add video_game_1
             created_video_game_2 = subject.add video_game_2
 
             # Assert
-            expect(video_game_1).to receive(:id=).with 1
             expect(created_video_game_1).to be video_game_1
-            
-            expect(video_game_2).to receive(:id=).with 2
             expect(created_video_game_2).to be video_game_2
         end
     end
