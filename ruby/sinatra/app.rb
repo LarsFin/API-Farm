@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require 'json'
 require 'sinatra'
 
 require_relative 'lib/services/video_games'
@@ -14,5 +13,5 @@ get '/' do
 end
 
 get '/video_games' do
-    service.get_all.to_json
+    service.get_all
 end
