@@ -15,6 +15,23 @@ describe InMemory do
             expect(subject.video_games.length).to eq 1
             expect(subject.video_games[0]).to be video_game
         end
+
+        it 'should return video game with id which increments' do
+            # Arrange
+            video_game_1 = double 'first video game'
+            video_game_2 = double 'second video game'
+
+            # Act
+            created_video_game_1 = subject.add video_game_1
+            created_video_game_2 = subject.add video_game_2
+
+            # Assert
+            expect(video_game_1).to receive(:id=).with 1
+            expect(created_video_game_1).to be video_game_1
+            
+            expect(video_game_2).to receive(:id=).with 2
+            expect(created_video_game_2).to be video_game_2
+        end
     end
 
     describe '#get' do
