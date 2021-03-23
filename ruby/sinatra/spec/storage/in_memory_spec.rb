@@ -21,20 +21,20 @@ describe InMemory do
 
         it 'should return video game with id which increments' do
             # Arrange
-            video_game_1 = double 'first video game'
-            video_game_2 = double 'second video game'
+            video_game1 = double 'first video game'
+            video_game2 = double 'second video game'
 
             # Assert
-            expect(video_game_1).to receive(:id=).with 1
-            expect(video_game_2).to receive(:id=).with 2
+            expect(video_game1).to receive(:id=).with 1
+            expect(video_game2).to receive(:id=).with 2
 
             # Act
-            created_video_game_1 = subject.add video_game_1
-            created_video_game_2 = subject.add video_game_2
+            created_video_game1 = subject.add video_game1
+            created_video_game2 = subject.add video_game2
 
             # Assert
-            expect(created_video_game_1).to be video_game_1
-            expect(created_video_game_2).to be video_game_2
+            expect(created_video_game1).to be video_game1
+            expect(created_video_game2).to be video_game2
         end
     end
 
