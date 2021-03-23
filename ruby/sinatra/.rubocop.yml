@@ -15,6 +15,9 @@ Metrics/BlockLength:
   Exclude: 
     - spec/**/*
 
+Naming/AccessorMethodName:
+  Enabled: false
+
 Style/MethodCallWithArgsParentheses:
   Enabled: true
   EnforcedStyle: omit_parentheses
