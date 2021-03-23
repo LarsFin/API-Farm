@@ -11,7 +11,7 @@ class InMemory
 
     def add(video_game)
         @counter += 1
-        video_game.id = @counter        
+        video_game.id = @counter
         @video_games << video_game
         video_game
     end
