@@ -24,11 +24,9 @@ class InMemory
         nil
     end
 
-    # rubocop:disable Naming/AccessorMethodName
     def get_all
         @video_games
     end
-    # rubocop:enable Naming/AccessorMethodName
 
     def update(id, video_game)
         i = 0
