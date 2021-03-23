@@ -7,5 +7,6 @@ class VideoGames
     end
 
     def get_all
+        @storage.get_all
     end
 end
