@@ -14,7 +14,7 @@ To allow fair metric comparison from api tests, the api model resource will be s
 {
     "name": "Banjo Kazooie",
     "developers": [
-        "Rare",
+        "Rare"
     ],
     "publishers": [
         "Nintendo"
@@ -48,8 +48,6 @@ To allow fair metric comparison from api tests, the api model resource will be s
     "date_released": "29/06/1998"
 }
 ```
-
-
 
 ### Languages & Frameworks
 
