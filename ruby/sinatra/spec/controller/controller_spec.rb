@@ -61,7 +61,6 @@ describe Controller do
             json_video_game = double 'video game as json'
             video_game_data = double 'video game data'
             addition = double 'attempt to add video game'
-            result = double 'created video game result'
             fail_reason = 'No name was provided'
 
             allow(request).to receive(:body).and_return request_body
