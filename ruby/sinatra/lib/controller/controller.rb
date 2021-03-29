@@ -10,30 +10,43 @@ class Controller
 
     def get_video_games
         video_games = @video_games_service.get_all
-
-        [
-          200,
-          { 'Content-Type' => 'application/json' },
-          video_games.to_json
-        ]
+        ok video_games
     end
 
-    def add_video_game request
+    def add_video_game(request)
         video_game_data = JSON.parse request.body.read
         addition = @video_games_service.add video_game_data
 
         if addition.fail_reason
-            [
-                400,
-                { 'Content-Type' => 'text/plain' },
-                addition.fail_reason
-            ]
+            bad_request addition.fail_reason
         else
-            [
-                201,
-                { 'Content-Type' => 'application/json' },
-                addition.result.to_json
-            ]
+            created addition.result
         end
+    end
+
+  private
+
+    def ok(result)
+        [
+            200,
+            { 'Content-Type' => 'application/json' },
+            result.to_json
+        ]
+    end
+
+    def created(result)
+        [
+            201,
+            { 'Content-Type' => 'application/json' },
+            result.to_json
+        ]
+    end
+
+    def bad_request(reason)
+        [
+            400,
+            { 'Content-Type' => 'text/plain' },
+            reason
+        ]
     end
 end
