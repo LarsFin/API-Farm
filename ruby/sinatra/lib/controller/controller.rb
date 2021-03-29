@@ -7,5 +7,11 @@ class Controller
     end
 
     def get_all_video_games
+        video_games = @video_games_service.get_all
+        [
+            200,
+            { 'Content-Type': 'application/json' },
+            video_games
+        ]
     end
 end
