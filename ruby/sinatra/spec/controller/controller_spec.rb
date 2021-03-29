@@ -6,7 +6,7 @@ describe Controller do
     let(:video_games_service) { double 'video game service' }
     subject { Controller.new video_games_service }
 
-    describe '#get_all_video_games' do
+    describe '#get_video_games' do
         it 'should return correct response with 200 status code' do
             # Arrange
             video_games = double 'video games'
@@ -15,7 +15,7 @@ describe Controller do
             allow(video_games).to receive(:to_json).and_return json_video_games
 
             # Act
-            response = subject.get_all_video_games
+            response = subject.get_video_games
 
             # Assert
             expect(response[0]).to eq 200
