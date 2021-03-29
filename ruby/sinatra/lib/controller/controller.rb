@@ -8,7 +8,7 @@ class Controller
         @video_games_service = video_games_service
     end
 
-    def get_all_video_games
+    def get_video_games
         video_games = @video_games_service.get_all
 
         [
