@@ -10,7 +10,7 @@ class Controller
         video_games = @video_games_service.get_all
         [
           200,
-          { 'Content-Type': 'application/json' },
+          { 'Content-Type' => 'application/json' },
           video_games
         ]
     end
