@@ -648,5 +648,235 @@
             "iOS"
         ],
         "date_released": "11/11/2011"
+    },
+
+    {
+        "name": "Super Mario World",
+        "developers": [
+            "Nintendo EAD"
+        ],
+        "publishers": [
+            "Nintendo"
+        ],
+        "directors": [
+            "Takashi Tezuka"
+        ],
+        "producers": [
+            "Shigeru Miyamoto",
+            "Hideki Konno"
+        ],
+        "designers": [
+            "Katsuya Eguchi",
+            "Hideki Konno"
+        ],
+        "programmers": [
+            "Toshihiko Nakago"
+        ],
+        "artists": [
+            "Shigefumi Hino"
+        ],
+        "composers": [
+            "Koji Kondo"
+        ],
+        "platforms": [
+            "Super NES",
+            "Kiosk",
+            "Game Boy Advance"
+        ],
+        "date_released": "21/11/1990"
+    },
+
+    {
+        "name": "Tekken 3",
+        "developers": [
+            "Namco"
+        ],
+        "publishers": [
+            "Namco Ltd.",
+            "Namco Hometek",
+            "SCEE"
+        ],
+        "directors": [
+            "Masamichi Abe",
+            "Yutaka Kounoe"
+        ],
+        "producers": [
+            "Hajime Nakatani"
+        ],
+        "designers": [
+            "Masahiro Kimoto",
+            "Katsuhiro Harada"
+        ],
+        "programmers": [
+            "Masanori Yashinari",
+            "Mizushima"
+        ],
+        "composers": [
+            "Nobuyoshi Sano",
+            "Keiichi Okabe",
+            "Yuu Miyake",
+            "Minamo Takahashi",
+            "Hiroyuki Kawada",
+            "Yoshie Arakawa",
+            "Hideki Tobeta"
+        ],
+        "platforms": [
+            "Arcade",
+            "Playstation"
+        ],
+        "date_released": "20/03/1997"
+    },
+
+    {
+        "name": "Under Night In-Birth",
+        "developers": [
+            "Arc System Works",
+            "French Bread",
+            "Ecole Software"
+        ],
+        "publishers": [
+            "Sega",
+            "Arc System Works",
+            "Aksys Games",
+            "NIS America",
+            "PQube"
+        ],
+        "directors": [
+            "Nobuya Narita"
+        ],
+        "producers": [
+            "Nobuya Narita",
+            "Toshimichi Mori"
+        ],
+        "artists": [
+            "Seiichi Yoshihara"
+        ],
+        "composers": [
+            "Raito"
+        ],
+        "platforms": [
+            "Arcade",
+            "Playstation 3",
+            "Microsoft Windows",
+            "Playstation 4",
+            "Playstation Vita",
+            "Nintendo Switch"
+        ],
+        "date_released": "20/09/2012"
+    },
+
+    {
+        "name": "VVVVVV",
+        "developers": [
+            "Terry Cavanagh"
+        ],
+        "publishers": [
+            "Nicalis"
+        ],
+        "designers": [
+            "Terry Cavanagh",
+            "Bennett Foddy"
+        ],
+        "composers": [
+            "Magnus Pålsson"
+        ],
+        "platforms": [
+            "Microsoft Windows",
+            "Nintendo Switch",
+            "Mac OS X",
+            "Linux",
+            "Nintendo 3DS",
+            "Playstation Vita",
+            "Playstation 4",
+            "iOS",
+            "Android",
+            "Ouya",
+            "Commodore 64",
+            "Pandora"
+        ],
+        "date_released": "11/01/2010"
+    },
+
+    {
+        "name": "World of Warcraft",
+        "developers": [
+            "Blizzard Entertainment"
+        ],
+        "publishers": [
+            "Blizzard Entertainment"
+        ],
+        "designers": [
+            "Rob Pardo",
+            "Jeff Kaplan",
+            "Tom Chilton"
+        ],
+        "composers": [
+            "Jason Hayes"
+        ],
+        "platforms": [
+            "Microsoft Windows",
+            "Mac OS"
+        ],
+        "date_released": "23/11/2004"
+    },
+
+    {
+        "name": "Xenoblade Chronicles",
+        "developers": [
+            "Monolith Soft"
+        ],
+        "publishers": [
+            "Nintendo"
+        ],
+        "artists": [
+            "Norihino Takami",
+            "Kunihiko Tanaka",
+            "Tetsuya Nomura"
+        ],
+        "composers": [
+            "Manami Kiyota",
+            "ACE",
+            "Kenji Hiramatsu",
+            "Yasunori Mitsuda",
+            "Hiroyuki Sawano"
+        ],
+        "platforms": [
+            "Nintendo Wii",
+            "Nintendo 3DS",
+            "Nintendo Wii U",
+            "Nintendo Switch"
+        ],
+        "date_released": "10/06/2010"
+    },
+
+    {
+        "name": "Yoshi's Island",
+        "developers": [
+            "Nintendo EAD"
+        ],
+        "publishers": [
+            "Nintendo"
+        ],
+        "directors": [
+            "Takashi Tezuka",
+            "Toshihiko Nakago",
+            "Shigefumi Hino",
+            "Hideki Konno"
+        ],
+        "producers": [
+            "Shigeru Miyamoto"
+        ],
+        "artists": [
+            "Yoshiaki Koizumi",
+            "Hisashi Nogami"
+        ],
+        "composers": [
+            "Koji Kondo"
+        ],
+        "platforms": [
+            "Super NES",
+            "Game Boy Advance"
+        ],
+        "date_released": "05/08/1995"
     }
 ]
