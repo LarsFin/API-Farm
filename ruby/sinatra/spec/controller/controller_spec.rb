@@ -38,7 +38,7 @@ describe Controller do
 
             allow(request).to receive(:body).and_return request_body
             allow(request_body).to receive(:read).and_return json_video_game
-            JSON.stub(:parse).with(json_video_game).and_return video_game_data
+            allow(JSON).to receive(:parse).with(json_video_game).and_return video_game_data
             allow(video_games_service).to receive(:add).with(video_game_data).and_return addition
             allow(addition).to receive(:fail_reason)
             allow(addition).to receive(:result).and_return result
@@ -65,7 +65,7 @@ describe Controller do
 
             allow(request).to receive(:body).and_return request_body
             allow(request_body).to receive(:read).and_return json_video_game
-            JSON.stub(:parse).with(json_video_game).and_return video_game_data
+            allow(JSON).to receive(:parse).with(json_video_game).and_return video_game_data
             allow(video_games_service).to receive(:add).with(video_game_data).and_return addition
             allow(addition).to receive(:fail_reason).and_return fail_reason
 
