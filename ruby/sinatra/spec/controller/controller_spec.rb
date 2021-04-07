@@ -59,9 +59,7 @@ describe Controller do
             request = double 'request'
             request_body = double 'request body'
             json_video_game = double 'video game as json'
-            video_game_data = double 'video game data'
-            addition = double 'attempt to add video game'
-            fail_reason = 'Failed to parse body'
+            fail_reason = 'Invalid JSON in body'
 
             allow(request).to receive(:body).and_return request_body
             allow(request_body).to receive(:read).and_return json_video_game
