@@ -3,11 +3,12 @@
 require 'sinatra'
 
 require_relative 'lib/controller/controller'
+require_relative 'lib/models/video_game'
 require_relative 'lib/services/video_games'
 require_relative 'lib/storage/in_memory'
 
 storage = InMemory.new
-service = VideoGames.new storage
+service = VideoGames.new storage, VideoGame
 controller = Controller.new service
 
 get '/' do
@@ -15,5 +16,9 @@ get '/' do
 end
 
 get '/video_games' do
-    controller.get_all_video_games
+    controller.get_video_games
+end
+
+post '/video_games' do
+    controller.add_video_game request
 end
