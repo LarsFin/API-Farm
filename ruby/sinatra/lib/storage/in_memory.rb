@@ -25,9 +25,7 @@ class InMemory
     end
 
     def get_all
-        @video_games.map do |video_game|
-            video_game.to_hash
-        end
+        @video_games.map(&:to_hash)
     end
 
     def update(id, video_game)
