@@ -25,17 +25,17 @@ describe VideoGames do
         it 'should create and add video game to storage and return stored instance' do
             # Arrange
             video_game_data = {
-                'name' => 'Video Game II',
-                'developers' => [ 'developer 1', 'developer 2' ],
-                'publishers' => [ 'publisher 1', 'publisher 2' ],
-                'directors' => [ 'director 1' ],
-                'producers' => [ 'producer 1', 'producer 2' ],
-                'designers' => [ 'designer 1' ],
-                'programmers' => [ 'programmer 1', 'programmer 2' ],
-                'artists' => [ 'artist 1', 'artist 2' ],
-                'composers' => [ 'composer 1' ],
-                'platforms' => [ 'platform 1', 'platform 2', 'platform 3' ],
-                'date_released' => '18/02/2002'
+              'name' => 'Video Game II',
+              'developers' => ['developer 1', 'developer 2'],
+              'publishers' => ['publisher 1', 'publisher 2'],
+              'directors' => ['director 1'],
+              'producers' => ['producer 1', 'producer 2'],
+              'designers' => ['designer 1'],
+              'programmers' => ['programmer 1', 'programmer 2'],
+              'artists' => ['artist 1', 'artist 2'],
+              'composers' => ['composer 1'],
+              'platforms' => ['platform 1', 'platform 2', 'platform 3'],
+              'date_released' => '18/02/2002'
             }
             converted_date_released = double 'date released as date object'
             video_game = double 'video game'
@@ -66,8 +66,7 @@ describe VideoGames do
 
         it 'should return failure when video game data has no name' do
             # Arrange
-            video_game_data = { }
-            converted_date_released = double 'date released as date object'
+            video_game_data = {}
             video_game = double 'video game'
             allow(video_game_class).to receive(:new).and_return video_game
 
@@ -81,9 +80,8 @@ describe VideoGames do
         it 'should return failure when video game data has no date' do
             # Arrange
             video_game_data = {
-                'name' => 'Video Game II'
+              'name' => 'Video Game II'
             }
-            converted_date_released = double 'date released as date object'
             video_game = double 'video game'
             allow(video_game_class).to receive(:new).and_return video_game
 
@@ -100,10 +98,9 @@ describe VideoGames do
         it 'should return failure when video game data has an invalid date' do
             # Arrange
             video_game_data = {
-                'name' => 'Video Game II',
-                'date_released' => '08/23/2007'
+              'name' => 'Video Game II',
+              'date_released' => '08/23/2007'
             }
-            converted_date_released = double 'date released as date object'
             video_game = double 'video game'
             allow(video_game_class).to receive(:new).and_return video_game
             allow(Date).to receive(:parse).and_raise('Failed!')
@@ -115,7 +112,8 @@ describe VideoGames do
             addition = subject.add video_game_data
 
             # Assert
-            expect(addition[:fail_reason]).to eq "The provided date_released '#{video_game_data['date_released']}' is invalid."
+            expect(addition[:fail_reason]).to eq "The provided date_released '#{video_game_data['date_released']}'" \
+                                                 ' is invalid.'
         end
     end
 end
