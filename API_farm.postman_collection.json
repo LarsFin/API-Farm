@@ -1,0 +1,53 @@
+{
+	"info": {
+		"_postman_id": "1d3f0530-5ed4-472f-984a-c0fbad478ece",
+		"name": "API_farm",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET video_games",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4567/video_games",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4567",
+					"path": [
+						"video_games"
+					]
+				},
+				"description": "Makes a request to retrieve all existing video games within storage."
+			},
+			"response": []
+		},
+		{
+			"name": "POST video_games",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Banjo Kazooie\",\r\n    \"developers\": [\r\n        \"Rare\"\r\n    ],\r\n    \"publishers\": [\r\n        \"Nintendo\"\r\n    ],\r\n    \"directors\": [\r\n        \"Gregg Mayles\",\r\n        \"George Andreas\"\r\n    ],\r\n    \"producers\": [\r\n        \"Tim Stamper\",\r\n        \"Chris Stamper\"\r\n    ],\r\n    \"designers\": [\r\n        \"Gregg Mayles\"\r\n    ],\r\n    \"programmers\": [\r\n        \"Chris Sutherland\"\r\n    ],\r\n    \"artists\": [\r\n        \"Steve Mayles\",\r\n        \"John Nash\",\r\n        \"Kevin Bayliss\",\r\n        \"Tim Stamper\"\r\n    ],\r\n    \"composers\": [\r\n        \"Grant Kirkhope\"\r\n    ],\r\n    \"platforms\": [\r\n        \"Nintendo 64\"\r\n    ],\r\n    \"date_released\": \"29/06/1998\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:4567/video_games",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4567",
+					"path": [
+						"video_games"
+					]
+				},
+				"description": "Makes a request to add a sample video game to storage."
+			},
+			"response": []
+		}
+	]
+}
