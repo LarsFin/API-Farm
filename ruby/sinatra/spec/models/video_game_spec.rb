@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative '../../lib/models/video_game'
 
 describe VideoGame do
@@ -5,17 +7,17 @@ describe VideoGame do
         it 'should return object as hash' do
             # Arrange
             subject.id = 5
-            subject.name = "Dodo Alone"
-            subject.developers = "Astral Dawn Studios"
+            subject.name = 'Dodo Alone'
+            subject.developers = 'Astral Dawn Studios'
             subject.publishers = []
             subject.directors = []
-            subject.producers = [ "Lars Finlay" ]
-            subject.designers = [ "Karsten Finlay" ]
-            subject.programmers = [ "Lars Finlay" ]
-            subject.artists = [ "Jack Hopkins" ]
-            subject.composers = [ "Jack Hopkins" ]
-            subject.platforms = [ "Windows OS" ]
-            subject.date_released = "22/10/2022"
+            subject.producers = ['Lars Finlay']
+            subject.designers = ['Karsten Finlay']
+            subject.programmers = ['Lars Finlay']
+            subject.artists = ['Jack Hopkins']
+            subject.composers = ['Jack Hopkins']
+            subject.platforms = ['Windows OS']
+            subject.date_released = '22/10/2022'
 
             # Act
             result = subject.to_hash
