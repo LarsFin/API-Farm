@@ -7,6 +7,7 @@ describe InMemory do
         it 'should add video game to array' do
             # Arrange
             video_game = double 'mock video game'
+            allow(video_game).to receive(:to_hash)
 
             # Assert
             expect(video_game).to receive(:id=).with 1
@@ -22,7 +23,11 @@ describe InMemory do
         it 'should return video game with id which increments' do
             # Arrange
             video_game1 = double 'first video game'
+            video_game1_hash = double 'first video game as hash'
             video_game2 = double 'second video game'
+            video_game2_hash = double 'second video game as hash'
+            allow(video_game1).to receive(:to_hash).and_return video_game1_hash
+            allow(video_game2).to receive(:to_hash).and_return video_game2_hash
 
             # Assert
             expect(video_game1).to receive(:id=).with 1
@@ -33,8 +38,8 @@ describe InMemory do
             created_video_game2 = subject.add video_game2
 
             # Assert
-            expect(created_video_game1).to be video_game1
-            expect(created_video_game2).to be video_game2
+            expect(created_video_game1).to be video_game1_hash
+            expect(created_video_game2).to be video_game2_hash
         end
     end
 
@@ -67,16 +72,28 @@ describe InMemory do
     describe '#get_all' do
         it 'should return all video games' do
             # Arrange
-            subject.video_games << double('video game 1')
-            subject.video_games << double('video game 2')
-            subject.video_games << double('video game 3')
+            video_game1 = double 'video game 1'
+            video_game1_hash = double 'video game 1 as hash'
+            video_game2 = double 'video game 2'
+            video_game2_hash = double 'video game 2 as hash'
+            video_game3 = double 'video game 3'
+            video_game3_hash = double 'video game 3 as hash'
+            allow(video_game1).to receive(:to_hash).and_return video_game1_hash
+            allow(video_game2).to receive(:to_hash).and_return video_game2_hash
+            allow(video_game3).to receive(:to_hash).and_return video_game3_hash
+            subject.video_games << video_game1 << video_game2 << video_game3
+            expected = [
+                video_game1_hash,
+                video_game2_hash,
+                video_game3_hash
+            ]
 
             # Act
             retrieved_video_games = subject.get_all
 
             # Assert
             expect(retrieved_video_games.length).to eq 3
-            expect(retrieved_video_games).to be subject.video_games
+            expect(retrieved_video_games).to eq expected
         end
     end
 

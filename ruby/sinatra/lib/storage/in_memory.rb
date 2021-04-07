@@ -13,7 +13,7 @@ class InMemory
         @counter += 1
         video_game.id = @counter
         @video_games << video_game
-        video_game
+        video_game.to_hash
     end
 
     def get(id)
@@ -25,7 +25,7 @@ class InMemory
     end
 
     def get_all
-        @video_games
+        @video_games.map(&:to_hash)
     end
 
     def update(id, video_game)
