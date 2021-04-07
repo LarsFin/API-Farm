@@ -17,10 +17,10 @@ class Controller
         video_game_data = JSON.parse request.body.read
         addition = @video_games_service.add video_game_data
 
-        if addition.fail_reason
-            bad_request addition.fail_reason
+        if addition[:fail_reason]
+            bad_request addition[:fail_reason]
         else
-            created addition.result
+            created addition[:result]
         end
     end
 
