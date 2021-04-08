@@ -28,6 +28,9 @@ class Controller
         end
     end
 
+    def update_video_game(request)
+    end
+
   private
 
     def ok(result)
