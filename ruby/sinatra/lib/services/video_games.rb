@@ -35,11 +35,23 @@ class VideoGames
             end
         end
 
-        updated_video_game = @storage.update id, video_game_data
+        video_game = @storage.get id
 
-        return { fail_code: 404, fail_reason: "Could not find video game with id '#{id}'." } unless updated_video_game
+        return { fail_code: 404, fail_reason: "Could not find video game with id '#{id}'." } unless video_game
 
-        { result: updated_video_game }
+        set_name video_game, video_game_data
+        set_optional_properties video_game, video_game_data
+        
+        fail_result = set_date video_game, video_game_data
+
+        if fail_result
+            fail_result[:fail_code] = 400
+            return fail_result
+        end
+
+        @storage.update id, video_game
+
+        { result: video_game }
     end
 
   private
