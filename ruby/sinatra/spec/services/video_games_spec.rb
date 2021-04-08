@@ -118,31 +118,40 @@ describe VideoGames do
     end
 
     describe '#update' do
-        it 'should ensure data is valid and update in storage' do
+        it 'should get existing video game and update in storage' do
             # Arrange
             id = 5
+            designers = %w[d1, d2]
+            artists = %w[a1, a2]
             video_game_data = {
-              'designers' => ['t123'],
-              'artists' => %w[t456 t098]
+              'designers' => designers,
+              'artists' => artists
             }
-            updated_video_game = double 'updated video game'
+            video_game = double 'existing video game'
             allow(video_game_class).to receive(:method_defined?).with(:designers).and_return true
             allow(video_game_class).to receive(:method_defined?).with(:artists).and_return true
-            allow(storage).to receive(:update).with(id, video_game_data).and_return updated_video_game
+            allow(storage).to receive(:get).with(id).and_return video_game
+            
+            # Assert
+            expect(video_game).to receive(:designers=).with designers
+            expect(video_game).to receive(:artists=).with artists
+            expect(storage).to receive(:update).with id, video_game
 
             # Act
             update = subject.update id, video_game_data
 
             # Assert
-            expect(update[:result]).to be updated_video_game
+            expect(update[:result]).to be video_game
         end
 
         it 'should return failure when data has invalid attribute' do
             # Arrange
             id = 5
+            designers = %w[d1, d2]
+            testers = %w[t1, t2]
             video_game_data = {
-              'designers' => ['t123'],
-              'testers' => %w[t001 t002]
+              'designers' => designers,
+              'testers' => testers
             }
             allow(video_game_class).to receive(:method_defined?).with(:designers).and_return true
             allow(video_game_class).to receive(:method_defined?).with(:testers).and_return false
@@ -155,23 +164,52 @@ describe VideoGames do
             expect(update[:fail_reason]).to eq 'The provided data has an invalid attribute \'testers\'.'
         end
 
-        it 'should return failure when storage update returns nil' do
+        it 'should return failure when no such existing video game with id' do
             # Arrange
             id = 5
+            designers = %w[d1, d2]
+            artists = %w[a1, a2]
             video_game_data = {
-              'designers' => ['t123'],
-              'artists' => %w[t456 t098]
+              'designers' => designers,
+              'artists' => artists
             }
+            video_game = double 'existing video game'
             allow(video_game_class).to receive(:method_defined?).with(:designers).and_return true
             allow(video_game_class).to receive(:method_defined?).with(:artists).and_return true
-            allow(storage).to receive(:update).with(id, video_game_data)
-
+            allow(storage).to receive(:get).with(id)
+            
             # Act
             update = subject.update id, video_game_data
 
             # Assert
             expect(update[:fail_code]).to eq 404
             expect(update[:fail_reason]).to eq "Could not find video game with id '#{id}'."
+        end
+
+        it 'should return failure when provided date is invalid' do
+            # Arrange
+            id = 5
+            designers = %w[d1, d2]
+            video_game_data = {
+              'designers' => designers,
+              'date_released' => 'Last Monday'
+            }
+            video_game = double 'existing video game'
+            allow(video_game_class).to receive(:method_defined?).with(:designers).and_return true
+            allow(video_game_class).to receive(:method_defined?).with(:date_released).and_return true
+            allow(storage).to receive(:get).with(id).and_return video_game
+            allow(Date).to receive(:parse).and_raise('Failed!')
+            
+            # Assert
+            expect(video_game).to receive(:designers=).with designers
+
+            # Act
+            update = subject.update id, video_game_data
+
+            # Assert
+            expect(update[:fail_code]).to eq 400
+            expect(update[:fail_reason]).to eq "The provided date_released '#{video_game_data['date_released']}'" \
+                                               ' is invalid.'
         end
     end
 end
