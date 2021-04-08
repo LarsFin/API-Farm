@@ -68,15 +68,15 @@ describe VideoGames do
         it 'should return failure when video game data has invalid attribute' do
             # Arrange
             video_game_data = {
-                'name' => 'League of Horses',
-                'testers' => %w[t1 t2]
+              'name' => 'League of Horses',
+              'testers' => %w[t1 t2]
             }
             allow(video_game_class).to receive(:method_defined?).with(:name).and_return true
             allow(video_game_class).to receive(:method_defined?).with(:testers).and_return false
 
             # Act
             addition = subject.add video_game_data
-            
+
             # Assert
             expect(addition[:fail_reason]).to eq 'The provided data has an invalid attribute \'testers\'.'
         end
