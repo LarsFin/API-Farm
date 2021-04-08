@@ -113,7 +113,7 @@ describe Controller do
             update = double 'attempt to update video game'
             result = double 'updated video game'
             json_result = double 'updated video game result as json'
-            
+
             allow(request).to receive(:params).and_return request_params
             allow(request).to receive(:body).and_return request_body
             allow(request_body).to receive(:read).and_return json_video_game
