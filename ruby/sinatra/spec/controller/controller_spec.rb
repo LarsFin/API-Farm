@@ -100,4 +100,37 @@ describe Controller do
             expect(response[2]).to be fail_reason
         end
     end
+
+    describe '#update_video_game' do
+        it 'should return correct response with 200 status code' do
+            # Arrange
+            id = '12'
+            request_params = { 'id' => id }
+            request = double 'request'
+            request_body = double 'request_body'
+            json_video_game = double 'video game data as json'
+            video_game_data = double 'video game data'
+            update = double 'attempt to update video game'
+            result = double 'updated video game'
+            json_result = double 'updated video game result as json'
+            
+            allow(request).to receive(:params).and_return request_params
+            allow(request).to receive(:body).and_return request_body
+            allow(request_body).to receive(:read).and_return json_video_game
+            allow(JSON).to receive(:parse).with(json_video_game).and_return video_game_data
+            allow(video_games_service).to receive(:update).with(id.to_i, video_game_data).and_return update
+            allow(update).to receive(:[]).with(:fail_code)
+            allow(update).to receive(:[]).with(:result).and_return result
+            allow(result).to receive(:to_json).and_return json_result
+
+            # Act
+            response = subject.update_video_game request
+
+            # Assert
+            expect(response[0]).to eq 200
+            expected_headers = { 'Content-Type' => 'application/json' }
+            expect(response[1]).to eq expected_headers
+            expect(response[2]).to be json_result
+        end
+    end
 end
