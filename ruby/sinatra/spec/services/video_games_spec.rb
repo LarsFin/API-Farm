@@ -40,6 +40,7 @@ describe VideoGames do
             converted_date_released = double 'date released as date object'
             video_game = double 'video game'
             stored_video_game = double 'video game added to storage'
+            allow(video_game_class).to receive(:method_defined?).and_return true
             allow(video_game_class).to receive(:new).and_return video_game
             allow(Date).to receive(:parse).with(video_game_data['date_released']).and_return converted_date_released
             allow(storage).to receive(:add).with(video_game).and_return stored_video_game
@@ -64,10 +65,27 @@ describe VideoGames do
             expect(addition[:result]).to be stored_video_game
         end
 
+        it 'should return failure when video game data has invalid attribute' do
+            # Arrange
+            video_game_data = {
+                'name' => 'League of Horses',
+                'testers' => %w[t1 t2]
+            }
+            allow(video_game_class).to receive(:method_defined?).with(:name).and_return true
+            allow(video_game_class).to receive(:method_defined?).with(:testers).and_return false
+
+            # Act
+            addition = subject.add video_game_data
+            
+            # Assert
+            expect(addition[:fail_reason]).to eq 'The provided data has an invalid attribute \'testers\'.'
+        end
+
         it 'should return failure when video game data has no name' do
             # Arrange
             video_game_data = {}
             video_game = double 'video game'
+            allow(video_game_class).to receive(:method_defined?).and_return true
             allow(video_game_class).to receive(:new).and_return video_game
 
             # Act
@@ -83,6 +101,7 @@ describe VideoGames do
               'name' => 'Video Game II'
             }
             video_game = double 'video game'
+            allow(video_game_class).to receive(:method_defined?).and_return true
             allow(video_game_class).to receive(:new).and_return video_game
 
             # Act
@@ -99,6 +118,7 @@ describe VideoGames do
               'date_released' => '08/23/2007'
             }
             video_game = double 'video game'
+            allow(video_game_class).to receive(:method_defined?).and_return true
             allow(video_game_class).to receive(:new).and_return video_game
             allow(Date).to receive(:parse).and_raise('Failed!')
 
