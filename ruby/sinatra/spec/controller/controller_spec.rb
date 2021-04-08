@@ -145,7 +145,7 @@ describe Controller do
             response = subject.update_video_game request
 
             # Assert
-            expect(response[0]).to eq 200
+            expect(response[0]).to eq 400
             expected_headers = { 'Content-Type' => 'text/plain' }
             expect(response[1]).to eq expected_headers
             expect(response[2]).to eq "The provided id '#{id}' is invalid."
@@ -166,7 +166,7 @@ describe Controller do
             allow(JSON).to receive(:parse).with(json_video_game).and_raise JSON::ParserError.new fail_reason
 
             # Act
-            response = subject.add_video_game request
+            response = subject.update_video_game request
 
             # Assert
             expect(response[0]).to eq 400

@@ -29,9 +29,16 @@ class Controller
     end
 
     def update_video_game(request)
-        id = request.params['id'].to_i
-        video_game_data = JSON.parse request.body.read
-        update = @video_games_service.update id, video_game_data
+        id_s = request.params['id']
+        id_i = id_s.to_i
+        return bad_request "The provided id '#{id_s}' is invalid." if id_i <= 0
+
+        begin video_game_data = JSON.parse request.body.read
+        rescue JSON::ParserError
+            return bad_request 'Invalid JSON in body'
+        end
+
+        update = @video_games_service.update id_i, video_game_data
 
         case update[:fail_code]
         when 400 then bad_request update[:fail_reason]
@@ -61,6 +68,14 @@ class Controller
     def bad_request(reason)
         [
             400,
+            { 'Content-Type' => 'text/plain' },
+            reason
+        ]
+    end
+
+    def not_found(reason)
+        [
+            404,
             { 'Content-Type' => 'text/plain' },
             reason
         ]
