@@ -14,7 +14,11 @@ class Controller
     end
 
     def add_video_game(request)
-        video_game_data = JSON.parse request.body.read
+        begin video_game_data = JSON.parse request.body.read
+        rescue JSON::ParserError
+            return bad_request 'Invalid JSON in body'
+        end
+
         addition = @video_games_service.add video_game_data
 
         if addition[:fail_reason]
