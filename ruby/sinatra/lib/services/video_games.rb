@@ -14,6 +14,8 @@ class VideoGames
     end
 
     def get(id)
+        return { fail_reason: 'There is no video game with this id.' } unless id.is_a? Integer
+        
         @storage.get(id)
     end
 

@@ -22,7 +22,6 @@ describe VideoGames do
     end
 
     describe '#get' do
-
         it 'should get a single specified video game from storage and return it' do
             # Arrange
             id = 1
@@ -34,6 +33,19 @@ describe VideoGames do
 
             # Assert
             expect(retrieved_video_game).to be video_game
+        end
+
+        it 'should return failure when video game data has an invalid id, and return an error' do
+            # Arrange
+            id = 'invalid'
+            video_game = double 'video game'
+            allow(storage).to receive(:get).and_return video_game
+
+            # Act
+            retrieved_video_game = subject.get id
+
+            # Assert
+            expect(retrieved_video_game[:fail_reason]).to eq 'There is no video game with this id.'
         end
     end
 
