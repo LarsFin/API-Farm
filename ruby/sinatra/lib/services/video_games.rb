@@ -16,11 +16,13 @@ class VideoGames
     def add(video_game_data)
         video_game = @video_game_class.new
 
-        fail_result = validate_name_and_date video_game, video_game_data
+        fail_result = validate_required_properties video_game_data
 
         return fail_result if fail_result
 
-        set_optional_properties video_game, video_game_data
+        fail_result = set_properties video_game, video_game_data
+
+        return fail_result if fail_result
 
         stored_video_game = @storage.add video_game
 
@@ -28,26 +30,17 @@ class VideoGames
     end
 
     def update(id, video_game_data)
-        video_game_data.each_key do |key|
-            unless @video_game_class.method_defined? key.to_sym
-              return { fail_code: 400,
-                       fail_reason: "The provided data has an invalid attribute '#{key}'." }
-            end
-        end
+        fail_result = validate_keys video_game_data
+
+        return fail_result if fail_result
 
         video_game = @storage.get id
 
         return { fail_code: 404, fail_reason: "Could not find video game with id '#{id}'." } unless video_game
 
-        set_name video_game, video_game_data
-        set_optional_properties video_game, video_game_data
-        
-        fail_result = set_date video_game, video_game_data
+        fail_result = set_properties video_game, video_game_data
 
-        if fail_result
-            fail_result[:fail_code] = 400
-            return fail_result
-        end
+        return fail_result if fail_result
 
         @storage.update id, video_game
 
@@ -56,21 +49,25 @@ class VideoGames
 
   private
 
-    def validate_name_and_date(video_game, video_game_data)
-        return { fail_reason: 'A name is required for a video game.' } unless video_game_data['name']
-
-        set_name video_game, video_game_data
-
-        return { fail_reason: 'A date_released is required for a video game.' } unless video_game_data['date_released']
-
-        fail_result = set_date video_game, video_game_data
-
-        return fail_result if fail_result
+    def validate_keys(video_game_data)
+        video_game_data.each_key do |key|
+            unless @video_game_class.method_defined? key.to_sym
+              return { fail_code: 400,
+                       fail_reason: "The provided data has an invalid attribute '#{key}'." }
+            end
+        end
 
         nil
     end
 
-    def set_optional_properties(video_game, video_game_data)
+    def validate_required_properties(video_game_data)
+        return { fail_reason: 'A name is required for a video game.' } unless video_game_data['name']
+
+        return { fail_reason: 'A date_released is required for a video game.' } unless video_game_data['date_released']
+    end
+
+    def set_properties(video_game, video_game_data)
+        set_name video_game, video_game_data
         set_developers video_game, video_game_data
         set_publishers video_game, video_game_data
         set_directors video_game, video_game_data
@@ -80,6 +77,9 @@ class VideoGames
         set_artists video_game, video_game_data
         set_composers video_game, video_game_data
         set_platforms video_game, video_game_data
+
+        fail_result = set_date video_game, video_game_data
+        return fail_result if fail_result
     end
 
     def set_name(video_game, video_game_data)
@@ -128,7 +128,8 @@ class VideoGames
         begin
             video_game.date_released = Date.parse video_game_data['date_released']
         rescue StandardError
-            return { fail_reason: "The provided date_released '#{video_game_data['date_released']}' is invalid." }
+            return { fail_code: 400,
+                     fail_reason: "The provided date_released '#{video_game_data['date_released']}' is invalid." }
         end
 
         nil
