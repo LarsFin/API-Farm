@@ -27,6 +27,10 @@ class VideoGames
         { result: stored_video_game }
     end
 
+    def update(id, video_game_data)
+        
+    end
+
   private
 
     def set_name_and_date(video_game, video_game_data)

@@ -116,4 +116,62 @@ describe VideoGames do
                                                  ' is invalid.'
         end
     end
+
+    describe '#update' do
+        it 'should ensure data is valid and update in storage' do
+            # Arrange
+            id = 5
+            video_game_data = {
+                'designers' => ['t123'],
+                'artists' => ['t456', 't098']
+            }
+            updated_video_game = double 'updated video game'
+            allow(video_game_class).to receive(:method_defined?).with(:designers).and_return true
+            allow(video_game_class).to receive(:method_defined?).with(:artists).and_return true
+            allow(storage).to receive(:update).with(id, video_game_data).and_return updated_video_game
+
+            # Act
+            update = subject.update id, video_game_data
+            
+            # Assert
+            expect(update[:result]).to be updated_video_game
+        end
+
+        it 'should return failure when data has invalid attribute' do
+            # Arrange
+            id = 5
+            video_game_data = {
+                'designers' => ['t123'],
+                'testers' => ['t001', 't002']
+            }
+            allow(video_game_class).to receive(:method_defined?).with(:designers).and_return true
+            allow(video_game_class).to receive(:method_defined?).with(:testers).and_return false
+
+            # Act
+            update = subject.update id, video_game_data
+
+            # Assert
+            expect(update[:fail_code]).to eq 400
+            expect(update[:fail_reason]).to eq "The provided data has an invalid attribute 'testers'."
+        end
+
+        it 'should return failure when storage update returns nil' do
+            # Arrange
+            id = 5
+            video_game_data = {
+                'designers' => ['t123'],
+                'artists' => ['t456', 't098']
+            }
+            allow(video_game_class).to receive(:method_defined?).with(:designers).and_return true
+            allow(video_game_class).to receive(:method_defined?).with(:artists).and_return true
+            allow(storage).to receive(:update).with(id, video_game_data)
+
+            # Act
+            update = subject.update id, video_game_data
+
+            # Assert
+            expect(update[:fail_code]).to eq 404
+            expect(update[:fail_reason]).to eq "Could not find video game with id '#{id}'."
+        end
+    end
 end
