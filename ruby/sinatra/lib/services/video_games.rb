@@ -13,6 +13,10 @@ class VideoGames
         @storage.get_all
     end
 
+    def get(id)
+        @storage.get(id)
+    end
+
     def add(video_game_data)
         fail_result = validate_keys video_game_data
 
