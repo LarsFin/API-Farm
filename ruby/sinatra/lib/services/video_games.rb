@@ -14,6 +14,10 @@ class VideoGames
     end
 
     def add(video_game_data)
+        fail_result = validate_keys video_game_data
+
+        return fail_result if fail_result
+
         video_game = @video_game_class.new
 
         fail_result = validate_required_properties video_game_data
