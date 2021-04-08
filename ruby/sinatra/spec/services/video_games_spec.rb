@@ -122,8 +122,8 @@ describe VideoGames do
             # Arrange
             id = 5
             video_game_data = {
-                'designers' => ['t123'],
-                'artists' => ['t456', 't098']
+              'designers' => ['t123'],
+              'artists' => %w[t456 t098]
             }
             updated_video_game = double 'updated video game'
             allow(video_game_class).to receive(:method_defined?).with(:designers).and_return true
@@ -132,7 +132,7 @@ describe VideoGames do
 
             # Act
             update = subject.update id, video_game_data
-            
+
             # Assert
             expect(update[:result]).to be updated_video_game
         end
@@ -141,8 +141,8 @@ describe VideoGames do
             # Arrange
             id = 5
             video_game_data = {
-                'designers' => ['t123'],
-                'testers' => ['t001', 't002']
+              'designers' => ['t123'],
+              'testers' => %w[t001 t002]
             }
             allow(video_game_class).to receive(:method_defined?).with(:designers).and_return true
             allow(video_game_class).to receive(:method_defined?).with(:testers).and_return false
@@ -159,8 +159,8 @@ describe VideoGames do
             # Arrange
             id = 5
             video_game_data = {
-                'designers' => ['t123'],
-                'artists' => ['t456', 't098']
+              'designers' => ['t123'],
+              'artists' => %w[t456 t098]
             }
             allow(video_game_class).to receive(:method_defined?).with(:designers).and_return true
             allow(video_game_class).to receive(:method_defined?).with(:artists).and_return true
