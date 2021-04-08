@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # frozen_string_literal: true
 
 require 'json'
@@ -100,4 +101,62 @@ class Controller
             reason
         ]
     end
+=======
+# frozen_string_literal: true
+
+require 'json'
+
+# couples sinatra framework with services
+class Controller
+    def initialize(video_games_service)
+        @video_games_service = video_games_service
+    end
+
+    def get_video_games
+        video_games = @video_games_service.get_all
+        ok video_games
+    end
+
+    def get_single_video_game(id)
+    video_game = @video_games_service.get id
+    ok video_game
+    end
+
+    def add_video_game(request)
+        video_game_data = JSON.parse request.body.read
+        addition = @video_games_service.add video_game_data
+
+        if addition[:fail_reason]
+            bad_request addition[:fail_reason]
+        else
+            created addition[:result]
+        end
+    end
+
+  private
+
+    def ok(result)
+        [
+            200,
+            { 'Content-Type' => 'application/json' },
+            result.to_json
+        ]
+    end
+
+    def created(result)
+        [
+            201,
+            { 'Content-Type' => 'application/json' },
+            result.to_json
+        ]
+    end
+
+    def bad_request(reason)
+        [
+            400,
+            { 'Content-Type' => 'text/plain' },
+            reason
+        ]
+    end
+>>>>>>> c7b8aeb... Rubocop arrested
 end
