@@ -14,12 +14,10 @@ class Controller
     end
 
     def add_video_game(request)
-        begin video_game_data = JSON.parse request.body.read
-        rescue JSON::ParserError
-            return bad_request 'Invalid JSON in body'
-        end
+        body_retrieval = get_body request
+        return bad_request body_retrieval[:fail_reason] if body_retrieval[:fail_reason]
 
-        addition = @video_games_service.add video_game_data
+        addition = @video_games_service.add body_retrieval[:result]
 
         if addition[:fail_reason]
             bad_request addition[:fail_reason]
@@ -29,25 +27,42 @@ class Controller
     end
 
     def update_video_game(request)
-        id_s = request.params['id']
-        id_i = id_s.to_i
-        return bad_request "The provided id '#{id_s}' is invalid." if id_i <= 0
+        id_retrieval = get_id request
+        return bad_request id_retrieval[:fail_reason] if id_retrieval[:fail_reason]
 
-        begin video_game_data = JSON.parse request.body.read
-        rescue JSON::ParserError
-            return bad_request 'Invalid JSON in body'
-        end
+        body_retrieval = get_body request
+        return bad_request body_retrieval[:fail_reason] if body_retrieval[:fail_reason]
 
-        update = @video_games_service.update id_i, video_game_data
+        update = @video_games_service.update id_retrieval[:result], body_retrieval[:result]
 
-        case update[:fail_code]
-        when 400 then bad_request update[:fail_reason]
-        when 404 then not_found update[:fail_reason]
-        else ok update[:result]
-        end
+        determine_update_response update
     end
 
   private
+
+    def get_id(request)
+        id_s = request.params['id']
+        id_i = id_s.to_i
+
+        return { fail_reason: "The provided id '#{id_s}' is invalid." } if id_i <= 0
+
+        { result: id_i }
+    end
+
+    def get_body(request)
+        body = JSON.parse request.body.read
+        { result: body }
+    rescue JSON::ParserError
+        { fail_reason: 'Invalid JSON in body' }
+    end
+
+    def determine_update_response(update_attempt)
+        case update_attempt[:fail_code]
+        when 400 then bad_request update_attempt[:fail_reason]
+        when 404 then not_found update_attempt[:fail_reason]
+        else ok update_attempt[:result]
+        end
+    end
 
     def ok(result)
         [
