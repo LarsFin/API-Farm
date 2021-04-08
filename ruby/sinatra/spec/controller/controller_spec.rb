@@ -25,6 +25,26 @@ describe Controller do
         end
     end
 
+    describe '#get_single_video_game' do
+      it 'Should return a specific video game via id given' do
+        # Arrange
+          video_game = double 'video game'
+          json_video_game = double 'video game as json'
+          video_game_id = double 'id'
+          allow(video_games_service).to receive(:get).and_return video_game
+          allow(video_game).to receive(:to_json).and_return json_video_game
+
+        # Act
+        response = subject.get_single_video_game(video_game_id)
+
+        # Assert
+        expect(response[0]).to eq 200
+        expected_headers = { 'Content-Type' => 'application/json' }
+        expect(response[1]).to eq expected_headers
+        expect(response[2]).to be json_video_game
+      end
+    end
+
     describe '#add_video_game' do
         it 'should return correct response with 201 status code' do
             # Arrange
