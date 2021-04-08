@@ -21,6 +21,22 @@ describe VideoGames do
         end
     end
 
+    describe '#get' do
+
+        it 'should get a single specified video game from storage and return it' do
+            # Arrange
+            id = 1
+            video_game = double 'video game'
+            allow(storage).to receive(:get).and_return video_game
+
+            # Act
+            retrieved_video_game = subject.get(id)
+
+            # Assert
+            expect(retrieved_video_game).to be video_game
+        end
+    end
+
     describe '#add' do
         it 'should create and add video game to storage and return stored instance' do
             # Arrange

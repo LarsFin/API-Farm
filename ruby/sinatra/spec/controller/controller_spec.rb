@@ -282,8 +282,8 @@ describe Controller do
         end
     end
 
-    describe '#get_single_video_game' do
-      it 'Should return a specific video game via id given' do
+    describe '#get_video_game' do
+      it 'Should return correct response with 200 status' do
           # Arrange
           video_game = double 'video game'
           json_video_game = double 'video game as json'
@@ -292,7 +292,7 @@ describe Controller do
           allow(video_game).to receive(:to_json).and_return json_video_game
 
           # Act
-          response = subject.get_single_video_game video_game_id
+          response = subject.get_video_game video_game_id
 
           # Assert
           expect(response[0]).to eq 200
