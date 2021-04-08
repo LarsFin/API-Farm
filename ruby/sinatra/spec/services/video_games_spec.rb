@@ -85,9 +85,6 @@ describe VideoGames do
             video_game = double 'video game'
             allow(video_game_class).to receive(:new).and_return video_game
 
-            # Assert
-            expect(video_game).to receive(:name=).with video_game_data['name']
-
             # Act
             addition = subject.add video_game_data
 
@@ -121,8 +118,8 @@ describe VideoGames do
         it 'should get existing video game and update in storage' do
             # Arrange
             id = 5
-            designers = %w[d1, d2]
-            artists = %w[a1, a2]
+            designers = %w[d1 d2]
+            artists = %w[a1 a2]
             video_game_data = {
               'designers' => designers,
               'artists' => artists
@@ -131,7 +128,7 @@ describe VideoGames do
             allow(video_game_class).to receive(:method_defined?).with(:designers).and_return true
             allow(video_game_class).to receive(:method_defined?).with(:artists).and_return true
             allow(storage).to receive(:get).with(id).and_return video_game
-            
+
             # Assert
             expect(video_game).to receive(:designers=).with designers
             expect(video_game).to receive(:artists=).with artists
@@ -147,8 +144,8 @@ describe VideoGames do
         it 'should return failure when data has invalid attribute' do
             # Arrange
             id = 5
-            designers = %w[d1, d2]
-            testers = %w[t1, t2]
+            designers = %w[d1 d2]
+            testers = %w[t1 t2]
             video_game_data = {
               'designers' => designers,
               'testers' => testers
@@ -167,17 +164,16 @@ describe VideoGames do
         it 'should return failure when no such existing video game with id' do
             # Arrange
             id = 5
-            designers = %w[d1, d2]
-            artists = %w[a1, a2]
+            designers = %w[d1 d2]
+            artists = %w[a1 a2]
             video_game_data = {
               'designers' => designers,
               'artists' => artists
             }
-            video_game = double 'existing video game'
             allow(video_game_class).to receive(:method_defined?).with(:designers).and_return true
             allow(video_game_class).to receive(:method_defined?).with(:artists).and_return true
             allow(storage).to receive(:get).with(id)
-            
+
             # Act
             update = subject.update id, video_game_data
 
@@ -189,7 +185,7 @@ describe VideoGames do
         it 'should return failure when provided date is invalid' do
             # Arrange
             id = 5
-            designers = %w[d1, d2]
+            designers = %w[d1 d2]
             video_game_data = {
               'designers' => designers,
               'date_released' => 'Last Monday'
@@ -199,7 +195,7 @@ describe VideoGames do
             allow(video_game_class).to receive(:method_defined?).with(:date_released).and_return true
             allow(storage).to receive(:get).with(id).and_return video_game
             allow(Date).to receive(:parse).and_raise('Failed!')
-            
+
             # Assert
             expect(video_game).to receive(:designers=).with designers
 
