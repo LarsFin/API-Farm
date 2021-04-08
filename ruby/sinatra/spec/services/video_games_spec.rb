@@ -152,7 +152,7 @@ describe VideoGames do
 
             # Assert
             expect(update[:fail_code]).to eq 400
-            expect(update[:fail_reason]).to eq "The provided data has an invalid attribute 'testers'."
+            expect(update[:fail_reason]).to eq 'The provided data has an invalid attribute \'testers\'.'
         end
 
         it 'should return failure when storage update returns nil' do

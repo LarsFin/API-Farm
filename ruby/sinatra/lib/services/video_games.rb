@@ -28,7 +28,15 @@ class VideoGames
     end
 
     def update(id, video_game_data)
-        
+        video_game_data.keys.each do |key|
+            return { fail_code: 400, fail_reason: "The provided data has an invalid attribute '#{key}'." } unless @video_game_class.method_defined? key.to_sym
+        end
+
+        updated_video_game = @storage.update id, video_game_data
+
+        return { fail_code: 404, fail_reason: "Could not find video game with id '#{id}'." } unless updated_video_game
+    
+        { result: updated_video_game }
     end
 
   private
