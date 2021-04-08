@@ -25,17 +25,17 @@ describe Controller do
         end
     end
 
-    describe '#get_single_video_game' do
+    describe '#get_video_game' do
       it 'Should return a specific video game via id given' do
         # Arrange
           video_game = double 'video game'
           json_video_game = double 'video game as json'
-          video_game_id = double 'id'
+          id = 1
           allow(video_games_service).to receive(:get).and_return video_game
           allow(video_game).to receive(:to_json).and_return json_video_game
 
         # Act
-        response = subject.get_single_video_game(video_game_id)
+        response = subject.get_video_game(id)
 
         # Assert
         expect(response[0]).to eq 200
