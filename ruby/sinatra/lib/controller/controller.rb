@@ -29,6 +29,15 @@ class Controller
     end
 
     def update_video_game(request)
+        id = request.params['id'].to_i
+        video_game_data = JSON.parse request.body.read
+        update = @video_games_service.update id, video_game_data
+
+        case update[:fail_code]
+        when 400 then bad_request update[:fail_reason]
+        when 404 then not_found update[:fail_reason]
+        else ok update[:result]
+        end
     end
 
   private
