@@ -13,9 +13,10 @@ class Controller
         ok video_games
     end
 
-    def get_single_video_game(id)
-		video_game = @video_games_service.get(id)
-		ok video_game
+    def get_video_game(id)
+		id = id.to_i
+        video_game = @video_games_service.get id
+        ok video_game
     end
 
     def add_video_game(request)
