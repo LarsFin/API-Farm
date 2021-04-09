@@ -14,9 +14,19 @@ class Controller
     end
 
     def get_video_game(id)
-		id = id.to_i
-        video_game = @video_games_service.get id
-        ok video_game
+        id = id.to_i
+        
+        if id == 0 
+            bad_request('No video game with this id')
+        else
+            video_game = @video_games_service.get id
+
+            if video_game[:fail_reason]
+                bad_request video_game[:fail_reason]
+            else
+                ok video_game
+            end
+        end
     end
 
     def add_video_game(request)

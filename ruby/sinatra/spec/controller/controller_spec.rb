@@ -26,23 +26,42 @@ describe Controller do
     end
 
     describe '#get_video_game' do
-      it 'Should return a specific video game via id given' do
-        # Arrange
-          video_game = double 'video game'
-          json_video_game = double 'video game as json'
-          id = 1
-          allow(video_games_service).to receive(:get).and_return video_game
-          allow(video_game).to receive(:to_json).and_return json_video_game
+        it 'Should return a specific video game via id given' do
+            # Arrange
+            video_game = double 'video game'
+            json_video_game = double 'video game as json'
+            id = 1
+            allow(video_game).to receive(:[]).with(:fail_reason)
+            allow(video_games_service).to receive(:get).and_return video_game
+            allow(video_game).to receive(:to_json).and_return json_video_game
 
-        # Act
-        response = subject.get_video_game(id)
+            # Act
+            response = subject.get_video_game(id)
 
-        # Assert
-        expect(response[0]).to eq 200
-        expected_headers = { 'Content-Type' => 'application/json' }
-        expect(response[1]).to eq expected_headers
-        expect(response[2]).to be json_video_game
-      end
+            # Assert
+            expect(response[0]).to eq 200
+            expected_headers = { 'Content-Type' => 'application/json' }
+            expect(response[1]).to eq expected_headers
+            expect(response[2]).to be json_video_game
+        end
+
+        it 'should return correct response with 400 status code' do
+            # Arrange
+            video_game = double 'video game'
+            json_video_game = double 'video game as json'
+            id = 'invalid'
+            allow(video_games_service).to receive(:get).with(id).and_return video_game
+            allow(video_game).to receive(:to_json).and_return json_video_game
+
+            # Act
+            response = subject.get_video_game id
+
+            # Assert
+            expect(response[0]).to eq 400
+            expected_headers = { 'Content-Type' => 'text/plain' }
+            expect(response[1]).to eq expected_headers
+            expect(response[2]).to be 'No video game with this id'
+        end
     end
 
     describe '#add_video_game' do
