@@ -20,7 +20,7 @@ class Controller
 
         video_game = @video_games_service.get id_retrieval[:result]
 
-        ok video_game
+        determine_response video_game
     end
 
     def add_video_game(request)
@@ -45,7 +45,7 @@ class Controller
 
         update = @video_games_service.update id_retrieval[:result], body_retrieval[:result]
 
-        determine_update_response update
+        determine_response update
     end
 
   private
@@ -66,11 +66,11 @@ class Controller
         { fail_reason: 'Invalid JSON in body' }
     end
 
-    def determine_update_response(update_attempt)
-        case update_attempt[:fail_code]
-        when 400 then bad_request update_attempt[:fail_reason]
-        when 404 then not_found update_attempt[:fail_reason]
-        else ok update_attempt[:result]
+    def determine_response(attempt)
+        case attempt[:fail_code]
+        when 400 then bad_request attempt[:fail_reason]
+        when 404 then not_found attempt[:fail_reason]
+        else ok attempt[:result]
         end
     end
 
