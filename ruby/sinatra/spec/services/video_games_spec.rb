@@ -29,7 +29,7 @@ describe VideoGames do
             allow(storage).to receive(:get).and_return video_game
 
             # Act
-            retrieved_video_game = subject.get(id)
+            retrieved_video_game = subject.get id
 
             # Assert
             expect(retrieved_video_game).to be video_game

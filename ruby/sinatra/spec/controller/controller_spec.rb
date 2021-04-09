@@ -31,12 +31,10 @@ describe Controller do
             id = '1'
             request_params = { 'id' => id }
             request = double 'request'
-            video_game = double 'video game'
-            json_video_game = double 'video game as json'
             get = double 'attempt to get video game'
             result = double 'video game obtained'
             json_result = double 'video game obtained as a json'
-            
+
             allow(request).to receive(:params).and_return request_params
             allow(video_games_service).to receive(:get).with(id.to_i).and_return get
             allow(get).to receive(:[]).with(:fail_code)
