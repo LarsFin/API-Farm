@@ -22,3 +22,8 @@ end
 post '/video_games' do
     controller.add_video_game request
 end
+
+put '/video_games/:id' do
+    params.each { |key, value| request.params[key] = value }
+    controller.update_video_game request
+end
