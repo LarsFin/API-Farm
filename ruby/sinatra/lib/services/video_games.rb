@@ -46,9 +46,9 @@ class VideoGames
 
         return fail_result if fail_result
 
-        @storage.update id, video_game
+        updated_video_game = @storage.update id, video_game
 
-        { result: video_game }
+        { result: updated_video_game }
     end
 
   private

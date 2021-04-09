@@ -145,20 +145,21 @@ describe VideoGames do
               'artists' => artists
             }
             video_game = double 'existing video game'
+            updated_video_game = double 'updated video game in storage'
             allow(video_game_class).to receive(:method_defined?).with(:designers).and_return true
             allow(video_game_class).to receive(:method_defined?).with(:artists).and_return true
             allow(storage).to receive(:get).with(id).and_return video_game
+            allow(storage).to receive(:update).with(id, video_game).and_return updated_video_game
 
             # Assert
             expect(video_game).to receive(:designers=).with designers
             expect(video_game).to receive(:artists=).with artists
-            expect(storage).to receive(:update).with id, video_game
 
             # Act
             update = subject.update id, video_game_data
 
             # Assert
-            expect(update[:result]).to be video_game
+            expect(update[:result]).to be updated_video_game
         end
 
         it 'should return failure when data has invalid attribute' do
