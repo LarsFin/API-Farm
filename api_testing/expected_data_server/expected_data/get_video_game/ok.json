@@ -1,0 +1,43 @@
+{
+    "id": 10,
+    "name": "Jak 3",
+    "developers": [
+      "Naughty Dog"
+    ],
+    "publishers": [
+      "Sony Computer Entertainment"
+    ],
+    "directors": [
+      "Jason Rubin",
+      "Amy Hennig"
+    ],
+    "designers": [
+      "Evan Wells",
+      "Richard Lemarchand"
+    ],
+    "programmers": [
+      "Andy Gavin",
+      "Christopher Christensen",
+      "Neil Druckmann",
+      "Christophe Balestra",
+      "Dan Liebgold"
+    ],
+    "artists": [
+      "Bob Rafei",
+      "Bruce Straley",
+      "Erick Pangilinan"
+    ],
+    "composers": [
+      "Josh Mancell",
+      "Larry Hopkins"
+    ],
+    "platforms": [
+      "Playstation 2",
+      "Playstation 3",
+      "Playstation Vita"
+    ],
+    "date_released": "09/11/2004",
+    "producers": [
+
+    ]
+}

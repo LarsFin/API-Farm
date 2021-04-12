@@ -1,0 +1,997 @@
+[
+  {
+    "id": 1,
+    "name": "Age of Empires II",
+    "developers": [
+      "Ensemble Studios"
+    ],
+    "publishers": [
+      "Microsoft",
+      "Konami"
+    ],
+    "directors": [
+
+    ],
+    "designers": [
+      "Bruce Shelley"
+    ],
+    "programmers": [
+      "Angelo Laudon"
+    ],
+    "artists": [
+      "Brad Crow",
+      "Scott Winsett"
+    ],
+    "composers": [
+      "Stephen Rippy"
+    ],
+    "platforms": [
+      "Microsoft Windows",
+      "Mac OS",
+      "Playstation 2"
+    ],
+    "date_released": "30/09/1999",
+    "producers": [
+
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Banjo Kazooie",
+    "developers": [
+      "Rare"
+    ],
+    "publishers": [
+      "Nintendo"
+    ],
+    "directors": [
+      "Gregg Mayles",
+      "George Andreas"
+    ],
+    "producers": [
+      "Tim Stamper",
+      "Chris Stamper"
+    ],
+    "designers": [
+      "Gregg Mayles"
+    ],
+    "programmers": [
+      "Chris Sutherland"
+    ],
+    "artists": [
+      "Steve Mayles",
+      "John Nash",
+      "Kevin Bayliss",
+      "Tim Stamper"
+    ],
+    "composers": [
+      "Grant Kirkhope"
+    ],
+    "platforms": [
+      "Nintendo 64"
+    ],
+    "date_released": "29/06/1998"
+  },
+  {
+    "id": 3,
+    "name": "Crash Bandicoot",
+    "developers": [
+      "Naughty Dog"
+    ],
+    "publishers": [
+      "Sony Computer Entertainment"
+    ],
+    "directors": [
+      "Jason Rubin"
+    ],
+    "producers": [
+      "David Siller"
+    ],
+    "programmers": [
+      "Andy Gavin",
+      "Dave Baggett"
+    ],
+    "artists": [
+      "Charles Zembillas",
+      "Joe Pearson",
+      "Bob Rafei"
+    ],
+    "composers": [
+      "Josh Mancell"
+    ],
+    "platforms": [
+      "Playstation"
+    ],
+    "date_released": "09/09/1996",
+    "designers": [
+
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Dark Souls",
+    "developers": [
+      "FromSoftware"
+    ],
+    "publishers": [
+      "Namco Bandai Games",
+      "FromSoftware"
+    ],
+    "directors": [
+      "Hidetaka Miyazaki"
+    ],
+    "producers": [
+      "Hidetaka Miyazaki",
+      "Daisuke Uchiyama",
+      "Kei Hirono"
+    ],
+    "programmers": [
+      "Jun Ito"
+    ],
+    "artists": [
+      "Makoto Sato"
+    ],
+    "composers": [
+      "Motoi Sato"
+    ],
+    "platforms": [
+      "Playstation 3",
+      "Xbox 360",
+      "Microsoft Windows",
+      "Playstation 4",
+      "Xbox One",
+      "Nintendo Switch"
+    ],
+    "date_released": "22/09/2011",
+    "designers": [
+
+    ]
+  },
+  {
+    "id": 5,
+    "name": "The Elder Scrolls V: Skyrim",
+    "developers": [
+      "Bethesda Game Studios"
+    ],
+    "publishers": [
+      "Bethesda Softworks"
+    ],
+    "directors": [
+      "Todd Howard"
+    ],
+    "producers": [
+      "Ashley Cheng",
+      "Craig Lafferty"
+    ],
+    "designers": [
+      "Bruce Nesmith",
+      "Kurt Kuhlmann",
+      "Emil Pagliarulo"
+    ],
+    "programmers": [
+      "Guy Carver"
+    ],
+    "artists": [
+      "Matthew Carofano"
+    ],
+    "composers": [
+      "Jeremy Soule"
+    ],
+    "platforms": [
+      "Microsoft Windows",
+      "Playstation 3",
+      "Xbox 360",
+      "Playstation 4",
+      "Xbox One",
+      "Nintendo Switch"
+    ],
+    "date_released": "11/11/2011"
+  },
+  {
+    "id": 6,
+    "name": "Final Fantasy VII",
+    "developers": [
+      "Square"
+    ],
+    "publishers": [
+      "Square Enix"
+    ],
+    "directors": [
+      "Yoshinori Kitase"
+    ],
+    "producers": [
+      "Hironobu Sakaguchi"
+    ],
+    "programmers": [
+      "Ken Narita"
+    ],
+    "artists": [
+      "Yusuke Naora",
+      "Tetsuya Nomura"
+    ],
+    "composers": [
+      "Nobuo Uematsu"
+    ],
+    "platforms": [
+      "Playstation",
+      "Microsoft Windows",
+      "iOS",
+      "Playstation 4",
+      "Android",
+      "Nintendo Switch",
+      "Xbox One"
+    ],
+    "date_released": "31/01/1997",
+    "designers": [
+
+    ]
+  },
+  {
+    "id": 7,
+    "name": "Grand Theft Auto: San Andreas",
+    "developers": [
+      "Rockstar North"
+    ],
+    "publishers": [
+      "Rockstar Games"
+    ],
+    "producers": [
+      "Leslie Benzies"
+    ],
+    "programmers": [
+      "Adam Fowler",
+      "Obbe Vermeij"
+    ],
+    "artists": [
+      "Aaron Garbut"
+    ],
+    "composers": [
+      "Michael Hunter"
+    ],
+    "platforms": [
+      "Playstation 2",
+      "Microsoft Windows",
+      "Xbox",
+      "Mac OS X",
+      "iOS",
+      "Android",
+      "Windows Phone",
+      "Fire OS",
+      "Xbox 360",
+      "Playstation 3"
+    ],
+    "date_released": "26/10/2004",
+    "directors": [
+
+    ],
+    "designers": [
+
+    ]
+  },
+  {
+    "id": 8,
+    "name": "Half-Life",
+    "developers": [
+      "Valve"
+    ],
+    "publishers": [
+      "Sierra Studios",
+      "Valve (digital)"
+    ],
+    "composers": [
+      "Kelly Bailey"
+    ],
+    "platforms": [
+      "Microsoft Windows",
+      "Playstation 2",
+      "Mac OS X",
+      "Linux"
+    ],
+    "date_released": "19/11/1998",
+    "directors": [
+
+    ],
+    "producers": [
+
+    ],
+    "designers": [
+
+    ],
+    "programmers": [
+
+    ],
+    "artists": [
+
+    ]
+  },
+  {
+    "id": 9,
+    "name": "Ico",
+    "developers": [
+      "Japan Studio",
+      "Team Ico"
+    ],
+    "publishers": [
+      "Sony Computer Entertainment"
+    ],
+    "directors": [
+      "Fumito Ueda"
+    ],
+    "producers": [
+      "Kenji Kaido"
+    ],
+    "designers": [
+      "Fumito Ueda"
+    ],
+    "composers": [
+      "Michiru Oshima",
+      "Koichi Yamazaki",
+      "Mitsukuni Murayama"
+    ],
+    "platforms": [
+      "Playstation 2"
+    ],
+    "date_released": "24/09/2001",
+    "programmers": [
+
+    ],
+    "artists": [
+
+    ]
+  },
+  {
+    "id": 10,
+    "name": "Jak 3",
+    "developers": [
+      "Naughty Dog"
+    ],
+    "publishers": [
+      "Sony Computer Entertainment"
+    ],
+    "directors": [
+      "Jason Rubin",
+      "Amy Hennig"
+    ],
+    "designers": [
+      "Evan Wells",
+      "Richard Lemarchand"
+    ],
+    "programmers": [
+      "Andy Gavin",
+      "Christopher Christensen",
+      "Neil Druckmann",
+      "Christophe Balestra",
+      "Dan Liebgold"
+    ],
+    "artists": [
+      "Bob Rafei",
+      "Bruce Straley",
+      "Erick Pangilinan"
+    ],
+    "composers": [
+      "Josh Mancell",
+      "Larry Hopkins"
+    ],
+    "platforms": [
+      "Playstation 2",
+      "Playstation 3",
+      "Playstation Vita"
+    ],
+    "date_released": "09/11/2004",
+    "producers": [
+
+    ]
+  },
+  {
+    "id": 11,
+    "name": "Kingdom Hearts",
+    "developers": [
+      "Square"
+    ],
+    "publishers": [
+      "Square",
+      "Square Electronic Arts",
+      "Sony Computer Entertainment Europe"
+    ],
+    "directors": [
+      "Tetsuya Nomura"
+    ],
+    "producers": [
+      "Shinji Hashimoto",
+      "Yoshinori Kitase"
+    ],
+    "programmers": [
+      "Hiroshi Harata",
+      "Kentarou Yasui"
+    ],
+    "artists": [
+      "Tetsuya Nomura"
+    ],
+    "composers": [
+      "Yoko Shimomura"
+    ],
+    "platforms": [
+      "Playstation 2",
+      "Playstation 3",
+      "Playstation 4",
+      "Xbox One",
+      "Microsoft Windows"
+    ],
+    "date_released": "28/03/2002",
+    "designers": [
+
+    ]
+  },
+  {
+    "id": 12,
+    "name": "The Legend of Zelda: Ocarina of Time",
+    "developers": [
+      "Nintendo EAD"
+    ],
+    "publishers": [
+      "Nintendo"
+    ],
+    "directors": [
+      "Toru Osawa",
+      "Yoichi Yamada",
+      "Eiji Aonuma",
+      "Yoshiaki Koizumi",
+      "Toshio Iwawaki"
+    ],
+    "producers": [
+      "Shigeru Miyamoto"
+    ],
+    "programmers": [
+      "Kenzo Hayakawa"
+    ],
+    "artists": [
+      "Yoshiaki Koizumi",
+      "Yusuke Nakano"
+    ],
+    "composers": [
+      "Koji Kondo"
+    ],
+    "platforms": [
+      "Ningendo 64",
+      "GameCube",
+      "iQue Player"
+    ],
+    "date_released": "21/11/1998",
+    "designers": [
+
+    ]
+  },
+  {
+    "id": 13,
+    "name": "Metal Gear Solid",
+    "developers": [
+      "Konami Computer Entertainment Japan"
+    ],
+    "publishers": [
+      "Konami"
+    ],
+    "directors": [
+      "Hideo Kojima"
+    ],
+    "producers": [
+      "Hideo Kojima",
+      "Motoyuki Yoshioka"
+    ],
+    "designers": [
+      "Hideo Kojima",
+      "Yoji Shinkawa"
+    ],
+    "programmers": [
+      "Kazunobu Uehara"
+    ],
+    "artists": [
+      "Yoji Shinkawa"
+    ],
+    "composers": [
+      "Kazuki Muraoka",
+      "Hiroyuki Togo",
+      "Takanari Ishiyama",
+      "Lee Jeon Myung",
+      "Maki Kirioka"
+    ],
+    "platforms": [
+      "Playstation",
+      "Microsoft Windows"
+    ],
+    "date_released": "03/09/1998"
+  },
+  {
+    "id": 14,
+    "name": "Nier Automata",
+    "developers": [
+      "Platinum Games"
+    ],
+    "publishers": [
+      "Square Enix"
+    ],
+    "directors": [
+      "Yoko Taro"
+    ],
+    "producers": [
+      "Eijiro Nishimura",
+      "Yosuke Saito"
+    ],
+    "designers": [
+      "Takahisa Taura",
+      "Isao Negishi"
+    ],
+    "programmers": [
+      "Ryo Onishi"
+    ],
+    "artists": [
+      "Akihiko Yoshida",
+      "Yuya Nagai",
+      "Toshiyuki Itahana"
+    ],
+    "composers": [
+      "Keiichi Okabe",
+      "Keigo Hoashi",
+      "Kuniyuki Takahashi"
+    ],
+    "platforms": [
+      "Playstation 4",
+      "Microsoft Windows",
+      "Xbox One"
+    ],
+    "date_released": "23/02/2017"
+  },
+  {
+    "id": 15,
+    "name": "Ōkami",
+    "developers": [
+      "Clover Studio"
+    ],
+    "publishers": [
+      "Capcom"
+    ],
+    "directors": [
+      "Hideki Kamiya"
+    ],
+    "producers": [
+      "Atsushi Shibata"
+    ],
+    "designers": [
+      "Hiroshi Shibata"
+    ],
+    "programmers": [
+      "Ryuta Takahashi"
+    ],
+    "artists": [
+      "Sawaki Takeyasu",
+      "Kenichiro Yoshimura",
+      "Mari Shimazaki",
+      "Naoki Katakai",
+      "Ikumi Nakamura"
+    ],
+    "composers": [
+      "Masami Ueda",
+      "Hiroshi Yamaguchi",
+      "Rei Kondoh",
+      "Akari Kaida"
+    ],
+    "platforms": [
+      "Playstation 2",
+      "Nintendo Wii",
+      "Playstation 3",
+      "Microsoft Windows",
+      "Playstation 4",
+      "Xbox One",
+      "Nintendo Switch"
+    ],
+    "date_released": "20/06/2006"
+  },
+  {
+    "id": 16,
+    "name": "Persona 3",
+    "developers": [
+      "Atlus"
+    ],
+    "publishers": [
+      "Atlus",
+      "Atlus USA",
+      "Koei",
+      "THQ",
+      "Ghostlight"
+    ],
+    "directors": [
+      "Katsura Hashino"
+    ],
+    "producers": [
+      "Katsura Hashino"
+    ],
+    "programmers": [
+      "Hirokazu Tohyama"
+    ],
+    "artists": [
+      "Shigenori Soejima"
+    ],
+    "composers": [
+      "Shoji Meguro"
+    ],
+    "platforms": [
+      "Playstation 2",
+      "Playstation Portable"
+    ],
+    "date_released": "13/07/2006",
+    "designers": [
+
+    ]
+  },
+  {
+    "id": 17,
+    "name": "Q*bert",
+    "developers": [
+      "Gottlieb"
+    ],
+    "publishers": [
+      "Gottlieb",
+      "Parker Brothers",
+      "Ultra Games"
+    ],
+    "designers": [
+      "Warren Davis",
+      "Jeff Lee"
+    ],
+    "programmers": [
+      "Warren Davis"
+    ],
+    "artists": [
+      "Jeff Lee"
+    ],
+    "composers": [
+      "David Thiel"
+    ],
+    "platforms": [
+      "Arcade",
+      "Atari 2600",
+      "Atari 5200",
+      "Atari 8-bit",
+      "ColecoVision",
+      "Commodore 64",
+      "Game Boy Color",
+      "MSX",
+      "VIC-20",
+      "Intellivision",
+      "NES",
+      "Odyssey",
+      "Mobile"
+    ],
+    "date_released": "01/10/1982",
+    "directors": [
+
+    ],
+    "producers": [
+
+    ]
+  },
+  {
+    "id": 18,
+    "name": "Rayman 2: The Great Escape",
+    "developers": [
+      "Ubi Pictures",
+      "Ubi Soft Annecy",
+      "Ubi Soft Shanghai",
+      "Ubi Soft Milan"
+    ],
+    "publishers": [
+      "Ubi Soft"
+    ],
+    "directors": [
+      "Michel Ancel"
+    ],
+    "producers": [
+      "Arnaud Carette",
+      "Pauline Jacquey"
+    ],
+    "designers": [
+      "Michel Ancel",
+      "Jean-Christophe Guyot",
+      "Serge Hacoët"
+    ],
+    "artists": [
+      "Michel Ancel",
+      "Florent Sacre",
+      "Paul Tumelaire"
+    ],
+    "composers": [
+      "Eric Chevalier"
+    ],
+    "platforms": [
+      "Dreamcast",
+      "Playstation",
+      "Nintendo 64",
+      "Microsoft Windows",
+      "iOS"
+    ],
+    "date_released": "11/11/2011",
+    "programmers": [
+
+    ]
+  },
+  {
+    "id": 19,
+    "name": "Super Mario World",
+    "developers": [
+      "Nintendo EAD"
+    ],
+    "publishers": [
+      "Nintendo"
+    ],
+    "directors": [
+      "Takashi Tezuka"
+    ],
+    "producers": [
+      "Shigeru Miyamoto",
+      "Hideki Konno"
+    ],
+    "designers": [
+      "Katsuya Eguchi",
+      "Hideki Konno"
+    ],
+    "programmers": [
+      "Toshihiko Nakago"
+    ],
+    "artists": [
+      "Shigefumi Hino"
+    ],
+    "composers": [
+      "Koji Kondo"
+    ],
+    "platforms": [
+      "Super NES",
+      "Kiosk",
+      "Game Boy Advance"
+    ],
+    "date_released": "21/11/1990"
+  },
+  {
+    "id": 20,
+    "name": "Tekken 3",
+    "developers": [
+      "Namco"
+    ],
+    "publishers": [
+      "Namco Ltd.",
+      "Namco Hometek",
+      "SCEE"
+    ],
+    "directors": [
+      "Masamichi Abe",
+      "Yutaka Kounoe"
+    ],
+    "producers": [
+      "Hajime Nakatani"
+    ],
+    "designers": [
+      "Masahiro Kimoto",
+      "Katsuhiro Harada"
+    ],
+    "programmers": [
+      "Masanori Yashinari",
+      "Mizushima"
+    ],
+    "composers": [
+      "Nobuyoshi Sano",
+      "Keiichi Okabe",
+      "Yuu Miyake",
+      "Minamo Takahashi",
+      "Hiroyuki Kawada",
+      "Yoshie Arakawa",
+      "Hideki Tobeta"
+    ],
+    "platforms": [
+      "Arcade",
+      "Playstation"
+    ],
+    "date_released": "20/03/1997",
+    "artists": [
+
+    ]
+  },
+  {
+    "id": 21,
+    "name": "Under Night In-Birth",
+    "developers": [
+      "Arc System Works",
+      "French Bread",
+      "Ecole Software"
+    ],
+    "publishers": [
+      "Sega",
+      "Arc System Works",
+      "Aksys Games",
+      "NIS America",
+      "PQube"
+    ],
+    "directors": [
+      "Nobuya Narita"
+    ],
+    "producers": [
+      "Nobuya Narita",
+      "Toshimichi Mori"
+    ],
+    "artists": [
+      "Seiichi Yoshihara"
+    ],
+    "composers": [
+      "Raito"
+    ],
+    "platforms": [
+      "Arcade",
+      "Playstation 3",
+      "Microsoft Windows",
+      "Playstation 4",
+      "Playstation Vita",
+      "Nintendo Switch"
+    ],
+    "date_released": "20/09/2012",
+    "designers": [
+
+    ],
+    "programmers": [
+
+    ]
+  },
+  {
+    "id": 22,
+    "name": "VVVVVV",
+    "developers": [
+      "Terry Cavanagh"
+    ],
+    "publishers": [
+      "Nicalis"
+    ],
+    "designers": [
+      "Terry Cavanagh",
+      "Bennett Foddy"
+    ],
+    "composers": [
+      "Magnus Pålsson"
+    ],
+    "platforms": [
+      "Microsoft Windows",
+      "Nintendo Switch",
+      "Mac OS X",
+      "Linux",
+      "Nintendo 3DS",
+      "Playstation Vita",
+      "Playstation 4",
+      "iOS",
+      "Android",
+      "Ouya",
+      "Commodore 64",
+      "Pandora"
+    ],
+    "date_released": "11/01/2010",
+    "directors": [
+
+    ],
+    "producers": [
+
+    ],
+    "programmers": [
+
+    ],
+    "artists": [
+
+    ]
+  },
+  {
+    "id": 23,
+    "name": "World of Warcraft",
+    "developers": [
+      "Blizzard Entertainment"
+    ],
+    "publishers": [
+      "Blizzard Entertainment"
+    ],
+    "designers": [
+      "Rob Pardo",
+      "Jeff Kaplan",
+      "Tom Chilton"
+    ],
+    "composers": [
+      "Jason Hayes"
+    ],
+    "platforms": [
+      "Microsoft Windows",
+      "Mac OS"
+    ],
+    "date_released": "23/11/2004",
+    "directors": [
+
+    ],
+    "producers": [
+
+    ],
+    "programmers": [
+
+    ],
+    "artists": [
+
+    ]
+  },
+  {
+    "id": 24,
+    "name": "Xenoblade Chronicles",
+    "developers": [
+      "Monolith Soft"
+    ],
+    "publishers": [
+      "Nintendo"
+    ],
+    "artists": [
+      "Norihino Takami",
+      "Kunihiko Tanaka",
+      "Tetsuya Nomura"
+    ],
+    "composers": [
+      "Manami Kiyota",
+      "ACE",
+      "Kenji Hiramatsu",
+      "Yasunori Mitsuda",
+      "Hiroyuki Sawano"
+    ],
+    "platforms": [
+      "Nintendo Wii",
+      "Nintendo 3DS",
+      "Nintendo Wii U",
+      "Nintendo Switch"
+    ],
+    "date_released": "10/06/2010",
+    "directors": [
+
+    ],
+    "producers": [
+
+    ],
+    "designers": [
+
+    ],
+    "programmers": [
+
+    ]
+  },
+  {
+    "id": 25,
+    "name": "Yoshi's Island",
+    "developers": [
+      "Nintendo EAD"
+    ],
+    "publishers": [
+      "Nintendo"
+    ],
+    "directors": [
+      "Takashi Tezuka",
+      "Toshihiko Nakago",
+      "Shigefumi Hino",
+      "Hideki Konno"
+    ],
+    "producers": [
+      "Shigeru Miyamoto"
+    ],
+    "artists": [
+      "Yoshiaki Koizumi",
+      "Hisashi Nogami"
+    ],
+    "composers": [
+      "Koji Kondo"
+    ],
+    "platforms": [
+      "Super NES",
+      "Game Boy Advance"
+    ],
+    "date_released": "05/08/1995",
+    "designers": [
+
+    ],
+    "programmers": [
+
+    ]
+  }
+]
