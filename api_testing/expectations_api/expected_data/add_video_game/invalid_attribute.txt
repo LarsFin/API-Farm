@@ -1,1 +1,0 @@
-The provided data has an invalid attribute 'testers'.

@@ -1,1 +1,0 @@
-A date_released is required for a video game.

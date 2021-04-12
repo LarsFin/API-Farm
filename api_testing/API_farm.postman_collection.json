@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "1d3f0530-5ed4-472f-984a-c0fbad478ece",
+		"_postman_id": "b00956ac-ccc4-4276-b833-73d7f9c61d52",
 		"name": "API_farm",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -148,7 +148,7 @@
 							},
 							"status": "Bad Request",
 							"code": 400,
-							"_postman_previewlanguage": null,
+							"_postman_previewlanguage": "Text",
 							"header": [
 								{
 									"key": "Content-Type",
@@ -186,7 +186,7 @@
 							},
 							"status": "Not Found",
 							"code": 404,
-							"_postman_previewlanguage": null,
+							"_postman_previewlanguage": "Text",
 							"header": [
 								{
 									"key": "Content-Type",
@@ -228,53 +228,6 @@
 						}
 					},
 					"response": [
-						{
-							"name": "400 Name Required",
-							"originalRequest": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"name": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"developers\": [\r\n        \"Rare\"\r\n    ],\r\n    \"publishers\": [\r\n        \"Nintendo\"\r\n    ],\r\n    \"directors\": [\r\n        \"Gregg Mayles\",\r\n        \"George Andreas\"\r\n    ],\r\n    \"producers\": [\r\n        \"Tim Stamper\",\r\n        \"Chris Stamper\"\r\n    ],\r\n    \"designers\": [\r\n        \"Gregg Mayles\"\r\n    ],\r\n    \"programmers\": [\r\n        \"Chris Sutherland\"\r\n    ],\r\n    \"artists\": [\r\n        \"Steve Mayles\",\r\n        \"John Nash\",\r\n        \"Kevin Bayliss\",\r\n        \"Tim Stamper\"\r\n    ],\r\n    \"composers\": [\r\n        \"Grant Kirkhope\"\r\n    ],\r\n    \"platforms\": [\r\n        \"Nintendo 64\"\r\n    ],\r\n    \"date_released\": \"29/06/1998\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://{{host}}:{{port}}/video_games",
-									"protocol": "http",
-									"host": [
-										"{{host}}"
-									],
-									"port": "{{port}}",
-									"path": [
-										"video_games"
-									]
-								}
-							},
-							"status": "Bad Request",
-							"code": 400,
-							"_postman_previewlanguage": null,
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "text/plain",
-									"description": "",
-									"type": "text"
-								}
-							],
-							"cookie": [],
-							"body": "A name is required for a video game."
-						},
 						{
 							"name": "400 Invalid Body JSON",
 							"originalRequest": {
@@ -323,7 +276,7 @@
 							"body": "Invalid JSON in body."
 						},
 						{
-							"name": "400 Invalid Date Released",
+							"name": "400 Date Released Required",
 							"originalRequest": {
 								"method": "POST",
 								"header": [
@@ -336,7 +289,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"name\": \"Banjo Kazooie\",\r\n    \"developers\": [\r\n        \"Rare\"\r\n    ],\r\n    \"publishers\": [\r\n        \"Nintendo\"\r\n    ],\r\n    \"directors\": [\r\n        \"Gregg Mayles\",\r\n        \"George Andreas\"\r\n    ],\r\n    \"producers\": [\r\n        \"Tim Stamper\",\r\n        \"Chris Stamper\"\r\n    ],\r\n    \"designers\": [\r\n        \"Gregg Mayles\"\r\n    ],\r\n    \"programmers\": [\r\n        \"Chris Sutherland\"\r\n    ],\r\n    \"artists\": [\r\n        \"Steve Mayles\",\r\n        \"John Nash\",\r\n        \"Kevin Bayliss\",\r\n        \"Tim Stamper\"\r\n    ],\r\n    \"composers\": [\r\n        \"Grant Kirkhope\"\r\n    ],\r\n    \"platforms\": [\r\n        \"Nintendo 64\"\r\n    ],\r\n    \"date_released\": \"29th June 1998\"\r\n}",
+									"raw": "{\r\n    \"name\": \"Banjo Kazooie\",\r\n    \"developers\": [\r\n        \"Rare\"\r\n    ],\r\n    \"publishers\": [\r\n        \"Nintendo\"\r\n    ],\r\n    \"directors\": [\r\n        \"Gregg Mayles\",\r\n        \"George Andreas\"\r\n    ],\r\n    \"producers\": [\r\n        \"Tim Stamper\",\r\n        \"Chris Stamper\"\r\n    ],\r\n    \"designers\": [\r\n        \"Gregg Mayles\"\r\n    ],\r\n    \"programmers\": [\r\n        \"Chris Sutherland\"\r\n    ],\r\n    \"artists\": [\r\n        \"Steve Mayles\",\r\n        \"John Nash\",\r\n        \"Kevin Bayliss\",\r\n        \"Tim Stamper\"\r\n    ],\r\n    \"composers\": [\r\n        \"Grant Kirkhope\"\r\n    ],\r\n    \"platforms\": [\r\n        \"Nintendo 64\"\r\n    ]\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -357,7 +310,7 @@
 							},
 							"status": "Bad Request",
 							"code": 400,
-							"_postman_previewlanguage": null,
+							"_postman_previewlanguage": "Text",
 							"header": [
 								{
 									"key": "Content-Type",
@@ -367,7 +320,54 @@
 								}
 							],
 							"cookie": [],
-							"body": "The provided date_released '29th June 1998' is invalid."
+							"body": "A date_released is required for a video game."
+						},
+						{
+							"name": "400 Invalid Attribute",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Banjo Kazooie\",\r\n    \"developers\": [\r\n        \"Rare\"\r\n    ],\r\n    \"publishers\": [\r\n        \"Nintendo\"\r\n    ],\r\n    \"directors\": [\r\n        \"Gregg Mayles\",\r\n        \"George Andreas\"\r\n    ],\r\n    \"producers\": [\r\n        \"Tim Stamper\",\r\n        \"Chris Stamper\"\r\n    ],\r\n    \"designers\": [\r\n        \"Gregg Mayles\"\r\n    ],\r\n    \"programmers\": [\r\n        \"Chris Sutherland\"\r\n    ],\r\n    \"testers\": [\r\n        \"Chris Sutherland\"\r\n    ],\r\n    \"artists\": [\r\n        \"Steve Mayles\",\r\n        \"John Nash\",\r\n        \"Kevin Bayliss\",\r\n        \"Tim Stamper\"\r\n    ],\r\n    \"composers\": [\r\n        \"Grant Kirkhope\"\r\n    ],\r\n    \"platforms\": [\r\n        \"Nintendo 64\"\r\n    ],\r\n    \"date_released\": \"29/06/1998\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{host}}:{{port}}/video_games",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"video_games"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "Text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "The provided data has an invalid attribute 'testers'."
 						},
 						{
 							"name": "201 Created",
@@ -417,7 +417,7 @@
 							"body": "{\r\n    \"id\": 1,\r\n    \"name\": \"Banjo Kazooie\",\r\n    \"developers\": [\r\n        \"Rare\"\r\n    ],\r\n    \"publishers\": [\r\n        \"Nintendo\"\r\n    ],\r\n    \"directors\": [\r\n        \"Gregg Mayles\",\r\n        \"George Andreas\"\r\n    ],\r\n    \"producers\": [\r\n        \"Tim Stamper\",\r\n        \"Chris Stamper\"\r\n    ],\r\n    \"designers\": [\r\n        \"Gregg Mayles\"\r\n    ],\r\n    \"programmers\": [\r\n        \"Chris Sutherland\"\r\n    ],\r\n    \"artists\": [\r\n        \"Steve Mayles\",\r\n        \"John Nash\",\r\n        \"Kevin Bayliss\",\r\n        \"Tim Stamper\"\r\n    ],\r\n    \"composers\": [\r\n        \"Grant Kirkhope\"\r\n    ],\r\n    \"platforms\": [\r\n        \"Nintendo 64\"\r\n    ],\r\n    \"date_released\": \"29/06/1998\"\r\n}"
 						},
 						{
-							"name": "400 Invalid Attribute",
+							"name": "400 Invalid Date Released",
 							"originalRequest": {
 								"method": "POST",
 								"header": [
@@ -430,7 +430,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"name\": \"Banjo Kazooie\",\r\n    \"developers\": [\r\n        \"Rare\"\r\n    ],\r\n    \"publishers\": [\r\n        \"Nintendo\"\r\n    ],\r\n    \"directors\": [\r\n        \"Gregg Mayles\",\r\n        \"George Andreas\"\r\n    ],\r\n    \"producers\": [\r\n        \"Tim Stamper\",\r\n        \"Chris Stamper\"\r\n    ],\r\n    \"designers\": [\r\n        \"Gregg Mayles\"\r\n    ],\r\n    \"programmers\": [\r\n        \"Chris Sutherland\"\r\n    ],\r\n    \"testers\": [\r\n        \"Chris Sutherland\"\r\n    ],\r\n    \"artists\": [\r\n        \"Steve Mayles\",\r\n        \"John Nash\",\r\n        \"Kevin Bayliss\",\r\n        \"Tim Stamper\"\r\n    ],\r\n    \"composers\": [\r\n        \"Grant Kirkhope\"\r\n    ],\r\n    \"platforms\": [\r\n        \"Nintendo 64\"\r\n    ],\r\n    \"date_released\": \"29/06/1998\"\r\n}",
+									"raw": "{\r\n    \"name\": \"Banjo Kazooie\",\r\n    \"developers\": [\r\n        \"Rare\"\r\n    ],\r\n    \"publishers\": [\r\n        \"Nintendo\"\r\n    ],\r\n    \"directors\": [\r\n        \"Gregg Mayles\",\r\n        \"George Andreas\"\r\n    ],\r\n    \"producers\": [\r\n        \"Tim Stamper\",\r\n        \"Chris Stamper\"\r\n    ],\r\n    \"designers\": [\r\n        \"Gregg Mayles\"\r\n    ],\r\n    \"programmers\": [\r\n        \"Chris Sutherland\"\r\n    ],\r\n    \"artists\": [\r\n        \"Steve Mayles\",\r\n        \"John Nash\",\r\n        \"Kevin Bayliss\",\r\n        \"Tim Stamper\"\r\n    ],\r\n    \"composers\": [\r\n        \"Grant Kirkhope\"\r\n    ],\r\n    \"platforms\": [\r\n        \"Nintendo 64\"\r\n    ],\r\n    \"date_released\": \"29th June 1998\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -451,7 +451,7 @@
 							},
 							"status": "Bad Request",
 							"code": 400,
-							"_postman_previewlanguage": null,
+							"_postman_previewlanguage": "Text",
 							"header": [
 								{
 									"key": "Content-Type",
@@ -461,10 +461,10 @@
 								}
 							],
 							"cookie": [],
-							"body": "The provided data has an invalid attribute 'testers'."
+							"body": "The provided date_released '29th June 1998' is invalid."
 						},
 						{
-							"name": "400 Date Released Required",
+							"name": "400 Name Required",
 							"originalRequest": {
 								"method": "POST",
 								"header": [
@@ -477,7 +477,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"name\": \"Banjo Kazooie\",\r\n    \"developers\": [\r\n        \"Rare\"\r\n    ],\r\n    \"publishers\": [\r\n        \"Nintendo\"\r\n    ],\r\n    \"directors\": [\r\n        \"Gregg Mayles\",\r\n        \"George Andreas\"\r\n    ],\r\n    \"producers\": [\r\n        \"Tim Stamper\",\r\n        \"Chris Stamper\"\r\n    ],\r\n    \"designers\": [\r\n        \"Gregg Mayles\"\r\n    ],\r\n    \"programmers\": [\r\n        \"Chris Sutherland\"\r\n    ],\r\n    \"artists\": [\r\n        \"Steve Mayles\",\r\n        \"John Nash\",\r\n        \"Kevin Bayliss\",\r\n        \"Tim Stamper\"\r\n    ],\r\n    \"composers\": [\r\n        \"Grant Kirkhope\"\r\n    ],\r\n    \"platforms\": [\r\n        \"Nintendo 64\"\r\n    ]\r\n}",
+									"raw": "{\r\n    \"developers\": [\r\n        \"Rare\"\r\n    ],\r\n    \"publishers\": [\r\n        \"Nintendo\"\r\n    ],\r\n    \"directors\": [\r\n        \"Gregg Mayles\",\r\n        \"George Andreas\"\r\n    ],\r\n    \"producers\": [\r\n        \"Tim Stamper\",\r\n        \"Chris Stamper\"\r\n    ],\r\n    \"designers\": [\r\n        \"Gregg Mayles\"\r\n    ],\r\n    \"programmers\": [\r\n        \"Chris Sutherland\"\r\n    ],\r\n    \"artists\": [\r\n        \"Steve Mayles\",\r\n        \"John Nash\",\r\n        \"Kevin Bayliss\",\r\n        \"Tim Stamper\"\r\n    ],\r\n    \"composers\": [\r\n        \"Grant Kirkhope\"\r\n    ],\r\n    \"platforms\": [\r\n        \"Nintendo 64\"\r\n    ],\r\n    \"date_released\": \"29/06/1998\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -498,7 +498,7 @@
 							},
 							"status": "Bad Request",
 							"code": 400,
-							"_postman_previewlanguage": null,
+							"_postman_previewlanguage": "Text",
 							"header": [
 								{
 									"key": "Content-Type",
@@ -508,7 +508,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "A date_released is required for a video game."
+							"body": "A name is required for a video game."
 						}
 					]
 				},
@@ -589,7 +589,7 @@
 							},
 							"status": "Bad Request",
 							"code": 400,
-							"_postman_previewlanguage": null,
+							"_postman_previewlanguage": "Text",
 							"header": [
 								{
 									"key": "Content-Type",
@@ -643,7 +643,7 @@
 							},
 							"status": "Bad Request",
 							"code": 400,
-							"_postman_previewlanguage": null,
+							"_postman_previewlanguage": "Text",
 							"header": [
 								{
 									"key": "Content-Type",
@@ -654,60 +654,6 @@
 							],
 							"cookie": [],
 							"body": "Invalid JSON in body."
-						},
-						{
-							"name": "404 Not Found",
-							"originalRequest": {
-								"method": "PUT",
-								"header": [
-									{
-										"key": "Content-Type",
-										"name": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"publishers\": [\r\n        \"Nintendo\",\r\n        \"Microsoft Game Studios\"\r\n    ],\r\n    \"platforms\": [\r\n        \"Nintendo 64\",\r\n        \"Xbox 360\"\r\n    ]\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://{{host}}:{{port}}/video_games/:id",
-									"protocol": "http",
-									"host": [
-										"{{host}}"
-									],
-									"port": "{{port}}",
-									"path": [
-										"video_games",
-										":id"
-									],
-									"variable": [
-										{
-											"key": "id",
-											"value": "25"
-										}
-									]
-								}
-							},
-							"status": "Not Found",
-							"code": 404,
-							"_postman_previewlanguage": null,
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "text/plain",
-									"description": "",
-									"type": "text"
-								}
-							],
-							"cookie": [],
-							"body": "No video game with id '25' could be found."
 						},
 						{
 							"name": "200 OK",
@@ -805,7 +751,7 @@
 							},
 							"status": "Bad Request",
 							"code": 400,
-							"_postman_previewlanguage": null,
+							"_postman_previewlanguage": "Text",
 							"header": [
 								{
 									"key": "Content-Type",
@@ -859,7 +805,7 @@
 							},
 							"status": "Bad Request",
 							"code": 400,
-							"_postman_previewlanguage": null,
+							"_postman_previewlanguage": "Text",
 							"header": [
 								{
 									"key": "Content-Type",
@@ -870,6 +816,60 @@
 							],
 							"cookie": [],
 							"body": "The provided data has an invalid attribute 'testers'."
+						},
+						{
+							"name": "404 Not Found",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"publishers\": [\r\n        \"Nintendo\",\r\n        \"Microsoft Game Studios\"\r\n    ],\r\n    \"platforms\": [\r\n        \"Nintendo 64\",\r\n        \"Xbox 360\"\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{host}}:{{port}}/video_games/:id",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"video_games",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "25"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "Text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "No video game with id '25' could be found."
 						}
 					]
 				},
@@ -899,44 +899,6 @@
 					},
 					"response": [
 						{
-							"name": "200 OK",
-							"originalRequest": {
-								"method": "DELETE",
-								"header": [],
-								"url": {
-									"raw": "http://{{host}}:{{port}}/video_games/:id",
-									"protocol": "http",
-									"host": [
-										"{{host}}"
-									],
-									"port": "{{port}}",
-									"path": [
-										"video_games",
-										":id"
-									],
-									"variable": [
-										{
-											"key": "id",
-											"value": "1"
-										}
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": null,
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "text/plain",
-									"description": "",
-									"type": "text"
-								}
-							],
-							"cookie": [],
-							"body": "Deleted video game with id '1'."
-						},
-						{
 							"name": "404 Not Found",
 							"originalRequest": {
 								"method": "DELETE",
@@ -962,7 +924,7 @@
 							},
 							"status": "Not Found",
 							"code": 404,
-							"_postman_previewlanguage": null,
+							"_postman_previewlanguage": "Text",
 							"header": [
 								{
 									"key": "Content-Type",
@@ -973,6 +935,44 @@
 							],
 							"cookie": [],
 							"body": "No video game with id '25' could be found."
+						},
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://{{host}}:{{port}}/video_games/:id",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"video_games",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "Text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "Deleted video game with id '1'."
 						},
 						{
 							"name": "400 Invalid Id",
@@ -1000,7 +1000,7 @@
 							},
 							"status": "Bad Request",
 							"code": 400,
-							"_postman_previewlanguage": null,
+							"_postman_previewlanguage": "Text",
 							"header": [
 								{
 									"key": "Content-Type",
@@ -1031,7 +1031,7 @@
 										"exec": [
 											"let expectedBody;\r",
 											"\r",
-											"getExpectedData(\"get_video_games/ok\", body => {\r",
+											"getExpectedData(\"get_video_games/ok.json\", body => {\r",
 											"    expectedBody = body\r",
 											"});"
 										],
@@ -1055,8 +1055,8 @@
 											"    pm.expect(body).to.be.eql(expectedBody);\r",
 											"});\r",
 											"\r",
-											"pm.test(\"Response time is less than 200ms\", () => {\r",
-											"    pm.expect(pm.responseTime).to.be.below(200);\r",
+											"pm.test(\"Response time is less than 250ms\", () => {\r",
+											"    pm.expect(pm.responseTime).to.be.below(250);\r",
 											"});"
 										],
 										"type": "text/javascript"
@@ -1075,6 +1075,1199 @@
 									"port": "{{port}}",
 									"path": [
 										"video_games"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Get video game",
+					"item": [
+						{
+							"name": "200 OK",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"let expectedBody;\r",
+											"\r",
+											"getExpectedData(\"get_video_game/ok.json\", body => {\r",
+											"    expectedBody = body\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", () => {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Content-Type header is application/json\", () => {\r",
+											"    expect(pm.response.headers.get(\"Content-Type\")).to.eql(\"application/json\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Body includes requested video game\", () => {\r",
+											"    const body = pm.response.json();\r",
+											"    pm.expect(body).to.be.eql(expectedBody);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response time is less than 250ms\", () => {\r",
+											"    pm.expect(pm.responseTime).to.be.below(250);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{host}}:{{port}}/video_games/:id",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"video_games",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "10"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "400 Invalid Id",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", () => {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Content-Type header is text/plain\", () => {\r",
+											"    expect(pm.response.headers.get(\"Content-Type\")).to.eql(\"text/plain\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Body states bad request reason\", () => {\r",
+											"    pm.expect(pm.response.body).to.be.eql(\"The provided id 'invalid!' is invalid.\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response time is less than 250ms\", () => {\r",
+											"    pm.expect(pm.responseTime).to.be.below(250);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{host}}:{{port}}/video_games/:id",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"video_games",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "invalid!"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "404 Not Found",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", () => {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Content-Type header is text/plain\", () => {\r",
+											"    expect(pm.response.headers.get(\"Content-Type\")).to.eql(\"text/plain\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Body states video game was not found\", () => {\r",
+											"    pm.expect(pm.response.body).to.be.eql(\"No video game with id '99' could be found.\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response time is less than 250ms\", () => {\r",
+											"    pm.expect(pm.responseTime).to.be.below(250);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{host}}:{{port}}/video_games/:id",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"video_games",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "99"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Add video game",
+					"item": [
+						{
+							"name": "201 Created",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"let expectedBody;\r",
+											"\r",
+											"getExpectedData(\"add_video_game/created.json\", body => {\r",
+											"    expectedBody = body\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 201\", () => {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Content-Type header is application/json\", () => {\r",
+											"    expect(pm.response.headers.get(\"Content-Type\")).to.eql(\"application/json\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Body includes newly created video game\", () => {\r",
+											"    const body = pm.response.json();\r",
+											"    pm.expect(body).to.be.eql(expectedBody);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response time is less than 250ms\", () => {\r",
+											"    pm.expect(pm.responseTime).to.be.below(250);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Bloodborne\",\r\n    \"developers\": [\r\n      \"FromSoftware\"\r\n    ],\r\n    \"publishers\": [\r\n      \"Sony Computer Entertainment\"\r\n    ],\r\n    \"directors\": [\r\n      \"Hidetaka Miyazaki\"\r\n    ],\r\n    \"producers\": [\r\n      \"Masaaki Yamagiwa\",\r\n      \"Teruyuki Toriyama\"\r\n    ],\r\n    \"designers\": [\r\n      \"Kazuhiro Hamatani\"\r\n    ],\r\n    \"programmers\": [\r\n      \"Jun Ito\"\r\n    ],\r\n    \"artists\": [\r\n      \"Ryo Fujimaki\"\r\n    ],\r\n    \"composers\": [\r\n      \"Ryan Amon\",\r\n      \"Tsukasa Saitoh\",\r\n      \"Yuka Kitamura\",\r\n      \"Nobuyoshi Suzuki\",\r\n      \"Cris Velasco\",\r\n      \"Michael Wandmacher\"\r\n    ],\r\n    \"platforms\": [\r\n      \"Playstation 4\"\r\n    ],\r\n    \"date_released\": \"24/03/2015\"\r\n}"
+								},
+								"url": {
+									"raw": "http://{{host}}:{{port}}/video_games",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"video_games"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "400 Date Released Required",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", () => {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Content-Type header is text/plain\", () => {\r",
+											"    expect(pm.response.headers.get(\"Content-Type\")).to.eql(\"text/plain\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Body states bad request reason\", () => {\r",
+											"    pm.expect(pm.response.body).to.be.eql(\"A date_released is required for a video game.\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response time is less than 250ms\", () => {\r",
+											"    pm.expect(pm.responseTime).to.be.below(250);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Bloodborne\",\r\n    \"developers\": [\r\n      \"FromSoftware\"\r\n    ],\r\n    \"publishers\": [\r\n      \"Sony Computer Entertainment\"\r\n    ],\r\n    \"directors\": [\r\n      \"Hidetaka Miyazaki\"\r\n    ],\r\n    \"producers\": [\r\n      \"Masaaki Yamagiwa\",\r\n      \"Teruyuki Toriyama\"\r\n    ],\r\n    \"designers\": [\r\n      \"Kazuhiro Hamatani\"\r\n    ],\r\n    \"programmers\": [\r\n      \"Jun Ito\"\r\n    ],\r\n    \"artists\": [\r\n      \"Ryo Fujimaki\"\r\n    ],\r\n    \"composers\": [\r\n      \"Ryan Amon\",\r\n      \"Tsukasa Saitoh\",\r\n      \"Yuka Kitamura\",\r\n      \"Nobuyoshi Suzuki\",\r\n      \"Cris Velasco\",\r\n      \"Michael Wandmacher\"\r\n    ],\r\n    \"platforms\": [\r\n      \"Playstation 4\"\r\n    ]\r\n}"
+								},
+								"url": {
+									"raw": "http://{{host}}:{{port}}/video_games",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"video_games"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "400 Invalid Attribute",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", () => {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Content-Type header is text/plain\", () => {\r",
+											"    expect(pm.response.headers.get(\"Content-Type\")).to.eql(\"text/plain\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Body states bad request reason\", () => {\r",
+											"    pm.expect(pm.response.body).to.be.eql(\"The provided data has an invalid attribute 'testers'.\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response time is less than 250ms\", () => {\r",
+											"    pm.expect(pm.responseTime).to.be.below(250);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Bloodborne\",\r\n    \"developers\": [\r\n      \"FromSoftware\"\r\n    ],\r\n    \"publishers\": [\r\n      \"Sony Computer Entertainment\"\r\n    ],\r\n    \"directors\": [\r\n      \"Hidetaka Miyazaki\"\r\n    ],\r\n    \"producers\": [\r\n      \"Masaaki Yamagiwa\",\r\n      \"Teruyuki Toriyama\"\r\n    ],\r\n    \"designers\": [\r\n      \"Kazuhiro Hamatani\"\r\n    ],\r\n    \"programmers\": [\r\n      \"Jun Ito\"\r\n    ],\r\n    \"artists\": [\r\n      \"Ryo Fujimaki\"\r\n    ],\r\n    \"composers\": [\r\n      \"Ryan Amon\",\r\n      \"Tsukasa Saitoh\",\r\n      \"Yuka Kitamura\",\r\n      \"Nobuyoshi Suzuki\",\r\n      \"Cris Velasco\",\r\n      \"Michael Wandmacher\"\r\n    ],\r\n    \"platforms\": [\r\n      \"Playstation 4\"\r\n    ],\r\n    \"date_released\": \"24/03/2015\",\r\n    \"testers\": [\r\n      \"Jun Ito\"\r\n    ]\r\n}"
+								},
+								"url": {
+									"raw": "http://{{host}}:{{port}}/video_games",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"video_games"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "400 Invalid Body JSON",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", () => {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Content-Type header is text/plain\", () => {\r",
+											"    expect(pm.response.headers.get(\"Content-Type\")).to.eql(\"text/plain\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Body states bad request reason\", () => {\r",
+											"    pm.expect(pm.response.body).to.be.eql(\"Invalid JSON in body.\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response time is less than 250ms\", () => {\r",
+											"    pm.expect(pm.responseTime).to.be.below(250);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Bloodborne\"\r\n    \"date_released\": \"24/03/2015\"\r\n}"
+								},
+								"url": {
+									"raw": "http://{{host}}:{{port}}/video_games",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"video_games"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "400 Invalid Date Released",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", () => {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Content-Type header is text/plain\", () => {\r",
+											"    expect(pm.response.headers.get(\"Content-Type\")).to.eql(\"text/plain\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Body includes all initial video games\", () => {\r",
+											"    pm.expect(pm.response.body).to.be.eql(\"The provided date_released '24th March 2015' is invalid.\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response time is less than 250ms\", () => {\r",
+											"    pm.expect(pm.responseTime).to.be.below(250);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Bloodborne\",\r\n    \"developers\": [\r\n      \"FromSoftware\"\r\n    ],\r\n    \"publishers\": [\r\n      \"Sony Computer Entertainment\"\r\n    ],\r\n    \"directors\": [\r\n      \"Hidetaka Miyazaki\"\r\n    ],\r\n    \"producers\": [\r\n      \"Masaaki Yamagiwa\",\r\n      \"Teruyuki Toriyama\"\r\n    ],\r\n    \"designers\": [\r\n      \"Kazuhiro Hamatani\"\r\n    ],\r\n    \"programmers\": [\r\n      \"Jun Ito\"\r\n    ],\r\n    \"artists\": [\r\n      \"Ryo Fujimaki\"\r\n    ],\r\n    \"composers\": [\r\n      \"Ryan Amon\",\r\n      \"Tsukasa Saitoh\",\r\n      \"Yuka Kitamura\",\r\n      \"Nobuyoshi Suzuki\",\r\n      \"Cris Velasco\",\r\n      \"Michael Wandmacher\"\r\n    ],\r\n    \"platforms\": [\r\n      \"Playstation 4\"\r\n    ],\r\n    \"date_released\": \"24th March 2015\"\r\n}"
+								},
+								"url": {
+									"raw": "http://{{host}}:{{port}}/video_games",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"video_games"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "400 Name Required",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", () => {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Content-Type header is text/plain\", () => {\r",
+											"    expect(pm.response.headers.get(\"Content-Type\")).to.eql(\"text/plain\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Body states bad request reason\", () => {\r",
+											"    pm.expect(pm.response.body).to.be.eql(\"A name is required for a video game.\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response time is less than 250ms\", () => {\r",
+											"    pm.expect(pm.responseTime).to.be.below(250);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"developers\": [\r\n      \"FromSoftware\"\r\n    ],\r\n    \"publishers\": [\r\n      \"Sony Computer Entertainment\"\r\n    ],\r\n    \"directors\": [\r\n      \"Hidetaka Miyazaki\"\r\n    ],\r\n    \"producers\": [\r\n      \"Masaaki Yamagiwa\",\r\n      \"Teruyuki Toriyama\"\r\n    ],\r\n    \"designers\": [\r\n      \"Kazuhiro Hamatani\"\r\n    ],\r\n    \"programmers\": [\r\n      \"Jun Ito\"\r\n    ],\r\n    \"artists\": [\r\n      \"Ryo Fujimaki\"\r\n    ],\r\n    \"composers\": [\r\n      \"Ryan Amon\",\r\n      \"Tsukasa Saitoh\",\r\n      \"Yuka Kitamura\",\r\n      \"Nobuyoshi Suzuki\",\r\n      \"Cris Velasco\",\r\n      \"Michael Wandmacher\"\r\n    ],\r\n    \"platforms\": [\r\n      \"Playstation 4\"\r\n    ],\r\n    \"date_released\": \"24/03/2015\"\r\n}"
+								},
+								"url": {
+									"raw": "http://{{host}}:{{port}}/video_games",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"video_games"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Update video game",
+					"item": [
+						{
+							"name": "200 OK",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"let expectedBody;\r",
+											"\r",
+											"getExpectedData(\"update_video_game/ok.json\", body => {\r",
+											"    expectedBody = body\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", () => {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Content-Type header is application/json\", () => {\r",
+											"    expect(pm.response.headers.get(\"Content-Type\")).to.eql(\"application/json\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Body includes updated version of video game\", () => {\r",
+											"    const body = pm.response.json();\r",
+											"    pm.expect(body).to.be.eql(expectedBody);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response time is less than 250ms\", () => {\r",
+											"    pm.expect(pm.responseTime).to.be.below(250);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"publishers\": [\r\n        \"Nintendo\",\r\n        \"Microsoft Game Studios\"\r\n    ],\r\n    \"platforms\": [\r\n        \"Nintendo 64\",\r\n        \"Xbox 360\"\r\n    ]\r\n}"
+								},
+								"url": {
+									"raw": "http://{{host}}:{{port}}/video_games/:id",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"video_games",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "400 Invalid Attribute",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", () => {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Content-Type header is text/plain\", () => {\r",
+											"    expect(pm.response.headers.get(\"Content-Type\")).to.eql(\"text/plain\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Body states bad request reason\", () => {\r",
+											"    pm.expect(pm.response.body).to.be.eql(\"The provided data has an invalid attribute 'testers'.\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response time is less than 250ms\", () => {\r",
+											"    pm.expect(pm.responseTime).to.be.below(250);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"testers\": [\r\n        \"Chris Sutherland\"\r\n    ]\r\n}"
+								},
+								"url": {
+									"raw": "http://{{host}}:{{port}}/video_games/:id",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"video_games",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "400 Invalid Body JSON",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", () => {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Content-Type header is text/plain\", () => {\r",
+											"    expect(pm.response.headers.get(\"Content-Type\")).to.eql(\"text/plain\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Body states bad request reason\", () => {\r",
+											"    pm.expect(pm.response.body).to.be.eql(\"Invalid JSON in body.\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response time is less than 250ms\", () => {\r",
+											"    pm.expect(pm.responseTime).to.be.below(250);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"publishers\": [\r\n        \"Nintendo\"\r\n        \"Microsoft Game Studios\"\r\n    ]\r\n}"
+								},
+								"url": {
+									"raw": "http://{{host}}:{{port}}/video_games/:id",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"video_games",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "400 Invalid Date Released",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", () => {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Content-Type header is text/plain\", () => {\r",
+											"    expect(pm.response.headers.get(\"Content-Type\")).to.eql(\"text/plain\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Body states bad request reason\", () => {\r",
+											"    pm.expect(pm.response.body).to.be.eql(\"The provided date_released '06/29/1998' is invalid.\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response time is less than 250ms\", () => {\r",
+											"    pm.expect(pm.responseTime).to.be.below(250);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"date_released\": \"06/29/1998\"\r\n}"
+								},
+								"url": {
+									"raw": "http://{{host}}:{{port}}/video_games/:id",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"video_games",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "400 Invalid Id",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", () => {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Content-Type header is text/plain\", () => {\r",
+											"    expect(pm.response.headers.get(\"Content-Type\")).to.eql(\"text/plain\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Body states bad request reason\", () => {\r",
+											"    pm.expect(pm.response.body).to.be.eql(\"The provided id 'invalid!' is invalid.\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response time is less than 250ms\", () => {\r",
+											"    pm.expect(pm.responseTime).to.be.below(250);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"publishers\": [\r\n        \"Nintendo\",\r\n        \"Microsoft Game Studios\"\r\n    ],\r\n    \"platforms\": [\r\n        \"Nintendo 64\",\r\n        \"Xbox 360\"\r\n    ]\r\n}"
+								},
+								"url": {
+									"raw": "http://{{host}}:{{port}}/video_games/:id",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"video_games",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "invalid!"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "404 Not Found",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", () => {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Content-Type header is text/plain\", () => {\r",
+											"    expect(pm.response.headers.get(\"Content-Type\")).to.eql(\"text/plain\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Body states video game was not found\", () => {\r",
+											"    pm.expect(pm.response.body).to.be.eql(\"No video game with id '99' could be found.\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response time is less than 250ms\", () => {\r",
+											"    pm.expect(pm.responseTime).to.be.below(250);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"publishers\": [\r\n        \"Nintendo\",\r\n        \"Microsoft Game Studios\"\r\n    ],\r\n    \"platforms\": [\r\n        \"Nintendo 64\",\r\n        \"Xbox 360\"\r\n    ]\r\n}"
+								},
+								"url": {
+									"raw": "http://{{host}}:{{port}}/video_games/:id",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"video_games",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "99"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Remove video game",
+					"item": [
+						{
+							"name": "200 OK",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", () => {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Content-Type header is text/plain\", () => {\r",
+											"    expect(pm.response.headers.get(\"Content-Type\")).to.eql(\"text/plain\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Body states the requested video game was deleted\", () => {\r",
+											"    pm.expect(pm.response.body).to.be.eql(\"Deleted video game with id '15'.\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response time is less than 250ms\", () => {\r",
+											"    pm.expect(pm.responseTime).to.be.below(250);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://{{host}}:{{port}}/video_games/:id",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"video_games",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "15"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "400 Invalid Id",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", () => {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Content-Type header is text/plain\", () => {\r",
+											"    expect(pm.response.headers.get(\"Content-Type\")).to.eql(\"text/plain\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Body states bad request reason\", () => {\r",
+											"    pm.expect(pm.response.body).to.be.eql(\"The provided id 'invalid!' is invalid.\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response time is less than 250ms\", () => {\r",
+											"    pm.expect(pm.responseTime).to.be.below(250);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://{{host}}:{{port}}/video_games/:id",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"video_games",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "invalid!"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "404 Not Found",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", () => {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Content-Type header is text/plain\", () => {\r",
+											"    expect(pm.response.headers.get(\"Content-Type\")).to.eql(\"text/plain\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Body states video game was not found\", () => {\r",
+											"    pm.expect(pm.response.body).to.be.eql(\"No video game with id '25' could be found.\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response time is less than 250ms\", () => {\r",
+											"    pm.expect(pm.responseTime).to.be.below(250);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://{{host}}:{{port}}/video_games/:id",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"video_games",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "99"
+										}
 									]
 								}
 							},
