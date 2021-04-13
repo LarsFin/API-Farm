@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative '../../lib/services/data_loader'
 
 describe DataLoader do
@@ -9,23 +11,23 @@ describe DataLoader do
         # Arrange
         contents_string = 'Data file contents'
         contents_item = double 'Data file resource'
-        contents_array = [ contents_item, contents_item, contents_item ]
+        contents_array = [contents_item, contents_item, contents_item]
         video_game = double 'Created video game instance'
         allow(File).to receive(:read).with(data_file_path).and_return contents_string
         allow(JSON).to receive(:parse).with(contents_string).and_return contents_array
         allow(video_game_class).to receive(:new).and_return video_game
-        
-        vg_name = "name of video game"
-        vg_developers = "developers of video game"
-        vg_publishers = "publishers of video game"
-        vg_directors = "directors of video game"
-        vg_producers = "producers of video game"
-        vg_designers = "designers of video game"
-        vg_programmers = "programmers of video game"
-        vg_artists = "artists of video game"
-        vg_composers = "composers of video game"
-        vg_platforms = "platforms of video game"
-        vg_date_released = "date released of video game"
+
+        vg_name = 'name of video game'
+        vg_developers = 'developers of video game'
+        vg_publishers = 'publishers of video game'
+        vg_directors = 'directors of video game'
+        vg_producers = 'producers of video game'
+        vg_designers = 'designers of video game'
+        vg_programmers = 'programmers of video game'
+        vg_artists = 'artists of video game'
+        vg_composers = 'composers of video game'
+        vg_platforms = 'platforms of video game'
+        vg_date_released = 'date released of video game'
 
         allow(contents_item).to receive(:[]).with('name').and_return vg_name
         allow(contents_item).to receive(:[]).with('developers').and_return vg_developers
