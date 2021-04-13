@@ -8,8 +8,7 @@ require_relative 'lib/services/video_games'
 require_relative 'lib/storage/in_memory'
 
 # environments; DEV, TEST, PROD
-environment = ENV['RUBY_SINATRA_ENV'] || 'DEV'
-environment.upcase!
+environment = (ENV['RUBY_SINATRA_ENV'] || 'DEV').upcase
 
 storage = InMemory.new
 service = VideoGames.new storage, VideoGame
