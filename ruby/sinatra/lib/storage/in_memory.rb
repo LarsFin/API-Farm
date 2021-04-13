@@ -2,7 +2,7 @@
 
 # in memory storage
 class InMemory
-    attr_accessor :video_games
+    attr_accessor :video_games, :counter
 
     def initialize
         @video_games = []
@@ -49,5 +49,9 @@ class InMemory
 
             i += 1
         end
+    end
+
+    def reset
+        
     end
 end
