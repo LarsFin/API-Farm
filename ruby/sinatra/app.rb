@@ -31,7 +31,7 @@ if environment == 'TEST'
     get '/api_tests/setup' do
         testing_controller.setup
 
-        "Successfully loaded data."
+        'Successfully loaded data.'
     end
 end
 
