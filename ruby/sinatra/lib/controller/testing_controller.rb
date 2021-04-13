@@ -9,10 +9,10 @@ class TestingController
 
     def setup
         @storage.reset
-        
+
         video_games = @data_loader.load
 
-        for video_game in video_games
+        video_games.each do |video_game|
             @storage.add video_game
         end
     end

@@ -21,7 +21,7 @@ describe TestingController do
             expect(storage).to receive(:add).with video_game1
             expect(storage).to receive(:add).with video_game2
             expect(storage).to receive(:add).with video_game3
-            
+
             # Act
             subject.setup
         end
