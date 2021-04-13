@@ -8,6 +8,12 @@ class TestingController
     end
 
     def setup
+        @storage.reset
         
+        video_games = @data_loader.load
+
+        for video_game in video_games
+            @storage.add video_game
+        end
     end
 end
