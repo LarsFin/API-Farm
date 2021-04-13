@@ -8,14 +8,11 @@ describe DataLoader do
     it 'should read and convert data file resources' do
         # Arrange
         contents_string = 'Data file contents'
-        contents_array = double 'Data file contents as array'
         contents_item = double 'Data file resource'
+        contents_array = [ contents_item, contents_item, contents_item ]
         video_game = double 'Created video game instance'
         allow(File).to receive(:read).with(data_file_path).and_return contents_string
         allow(JSON).to receive(:parse).with(contents_string).and_return contents_array
-        allow(contents_array).to receive(:map).and_yield(contents_item)
-                                              .and_yield(contents_item)
-                                              .and_yield contents_item
         allow(video_game_class).to receive(:new).and_return video_game
         
         vg_name = "name of video game"
