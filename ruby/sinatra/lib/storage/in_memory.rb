@@ -52,6 +52,7 @@ class InMemory
     end
 
     def reset
-        
+        @video_games = []
+        @counter = 0
     end
 end
