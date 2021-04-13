@@ -159,7 +159,7 @@ describe InMemory do
     describe '#reset' do
         it 'should reset store array and counter' do
             # Arrange
-            subject.video_games = [ 1, 2, 3, 4, 5 ]
+            subject.video_games = [1, 2, 3, 4, 5]
             subject.counter = 99
 
             # Act
