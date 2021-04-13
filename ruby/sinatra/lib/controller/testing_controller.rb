@@ -7,5 +7,7 @@ class TestingController
         @storage = storage
     end
 
-    def setup; end
+    def setup
+        
+    end
 end
