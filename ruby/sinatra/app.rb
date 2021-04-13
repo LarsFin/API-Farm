@@ -7,6 +7,9 @@ require_relative 'lib/models/video_game'
 require_relative 'lib/services/video_games'
 require_relative 'lib/storage/in_memory'
 
+# configure port
+set :port, 8080
+
 # environments; DEV, TEST, PROD
 environment = (ENV['RUBY_SINATRA_ENV'] || 'DEV').upcase
 
@@ -19,8 +22,16 @@ get '/' do
 end
 
 if environment == 'TEST'
+    require_relative 'lib/controller/testing_controller'
+    require_relative 'lib/services/data_loader'
+
+    data_loader = DataLoader.new 'data.json', VideoGame
+    testing_controller = TestingController.new data_loader, storage
+
     get '/api_tests/setup' do
-        'TBD'
+        testing_controller.setup
+
+        "Successfully loaded data."
     end
 end
 
