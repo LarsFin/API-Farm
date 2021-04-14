@@ -15,10 +15,11 @@ class Controller
 
     def get_video_game(request)
         id_retrieval = get_id request
-
         return bad_request id_retrieval[:fail_reason] if id_retrieval[:fail_reason]
 
         video_game = @video_games_service.get id_retrieval[:result]
+
+        p video_game
 
         determine_response video_game
     end
@@ -75,6 +76,8 @@ class Controller
     end
 
     def ok(result)
+        p "I am in ok"
+        p result
         [
             200,
             { 'Content-Type' => 'application/json' },

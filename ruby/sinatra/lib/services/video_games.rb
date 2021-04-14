@@ -14,9 +14,11 @@ class VideoGames
     end
 
     def get(id)
-        return { fail_reason: 'There is no video game with this id.' } unless id.is_a? Integer
+        video_game = @storage.get id
 
-        @storage.get id
+        return { fail_code: 404, fail_reason: "Could not find video game with id '#{id}'." } unless video_game
+
+        { result: video_game }
     end
 
     def add(video_game_data)
