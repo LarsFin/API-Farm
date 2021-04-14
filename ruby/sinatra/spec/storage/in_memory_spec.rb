@@ -47,10 +47,11 @@ describe InMemory do
         it 'should get video game from array with passed index' do
             # Arrange
             video_game2 = double 'second video game', id: 2
-            allow(video_game2).to receive(:to_hash).and_return video_game2
             subject.video_games << double('first video game', id: 1)
             subject.video_games << video_game2
             subject.video_games << double('third video game', id: 3)
+
+            allow(video_game2).to receive(:to_hash).and_return video_game2
 
             # Act
             retrieved_video_game = subject.get 2
