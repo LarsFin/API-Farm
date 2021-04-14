@@ -19,8 +19,6 @@ class Controller
 
         video_game = @video_games_service.get id_retrieval[:result]
 
-        p video_game
-
         determine_response video_game
     end
 
