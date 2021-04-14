@@ -155,4 +155,19 @@ describe InMemory do
             expect(deleted_video_game).to eq nil
         end
     end
+
+    describe '#reset' do
+        it 'should reset store array and counter' do
+            # Arrange
+            subject.video_games = [1, 2, 3, 4, 5]
+            subject.counter = 99
+
+            # Act
+            subject.reset
+
+            # Assert
+            expect(subject.video_games).to be_empty
+            expect(subject.counter).to be 0
+        end
+    end
 end
