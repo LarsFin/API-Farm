@@ -17,9 +17,9 @@ class Controller
         id_retrieval = get_id request
         return bad_request id_retrieval[:fail_reason] if id_retrieval[:fail_reason]
 
-        video_game = @video_games_service.get id_retrieval[:result]
+        video_game_query = @video_games_service.get id_retrieval[:result]
 
-        determine_response video_game
+        determine_response video_game_query
     end
 
     def add_video_game(request)
