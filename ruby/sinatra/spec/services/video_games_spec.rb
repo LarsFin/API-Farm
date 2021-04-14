@@ -21,6 +21,35 @@ describe VideoGames do
         end
     end
 
+    describe '#get' do
+        it 'should get a single specified video game from storage and return it' do
+            # Arrange
+            id = 1
+            video_game = double 'video game'
+            allow(storage).to receive(:get).and_return video_game
+
+            # Act
+            video_game_query = subject.get id
+
+            # Assert
+            expect(video_game_query[:result]).to be video_game
+        end
+
+        it 'should return failure when video game data has an invalid id, and return an error' do
+            # Arrange
+            id = 6
+
+            allow(storage).to receive(:get).with id
+
+            # Act
+            video_game_query = subject.get id
+
+            # Assert
+            expect(video_game_query[:fail_code]).to eq 404
+            expect(video_game_query[:fail_reason]).to eq "Could not find video game with id '#{id}'."
+        end
+    end
+
     describe '#add' do
         it 'should create and add video game to storage and return stored instance' do
             # Arrange
