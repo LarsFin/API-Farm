@@ -59,6 +59,14 @@ class VideoGames
         { result: updated_video_game }
     end
 
+    def delete(id)
+        video_game = @storage.delete id
+
+        return { fail_code: 404, fail_reason: "Could not find video game with id '#{id}'." } unless video_game
+
+        { result: video_game }
+    end
+
   private
 
     def validate_keys(video_game_data)

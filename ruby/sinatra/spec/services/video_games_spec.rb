@@ -258,4 +258,20 @@ describe VideoGames do
                                                ' is invalid.'
         end
     end
+
+    describe '#delete' do
+        it 'should remove existing video game from storage' do
+            # Arrange
+            id = 1
+            deleted_video_game = double 'deleted video game from storage'
+
+            allow(storage).to receive(:delete).and_return deleted_video_game
+
+            # Act
+            subtraction = subject.delete id
+
+            # Assert
+            expect(subtraction[:result]).to be deleted_video_game
+        end
+    end
 end
