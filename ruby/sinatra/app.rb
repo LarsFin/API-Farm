@@ -24,11 +24,18 @@ post '/video_games' do
 end
 
 get '/video_games/:id' do
-    params.each { |key, value| request.params[key] = value }
+    get_params
     controller.get_video_game request
 end
 
 put '/video_games/:id' do
-    params.each { |key, value| request.params[key] = value }
+    get_params
     controller.update_video_game request
 end
+
+    private
+
+    def get_params
+        params.each { |key, value| request.params[key] = value }
+    end
+
