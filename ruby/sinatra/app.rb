@@ -7,7 +7,8 @@ require_relative 'lib/models/video_game'
 require_relative 'lib/services/video_games'
 require_relative 'lib/storage/in_memory'
 
-# configure port
+# configure host and port
+set :bind, '0.0.0.0'
 set :port, 8080
 
 # environments; DEV, TEST, PROD
