@@ -54,7 +54,11 @@ put '/video_games/:id' do
     controller.update_video_game request
 end
 
+delete '/video_games/:id' do
+    get_params
+    controller.delete_video_game request
+end
+
 def get_params
     params.each { |key, value| request.params[key] = value }
 end
-
