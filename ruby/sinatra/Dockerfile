@@ -10,7 +10,7 @@ WORKDIR /usr/src
 COPY . .
 
 # Tune environment
-RUN . ./scripts/tune_env.sh $env
+RUN ./scripts/tune_env.sh $env
 
 # Run specified command
 ENTRYPOINT [ "scripts/launch.sh" ]
