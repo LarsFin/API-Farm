@@ -47,6 +47,15 @@ class Controller
         determine_response update
     end
 
+    def delete_video_game(request)
+        id_retrieval = get_id request
+        return bad_request id_retrieval[:fail_reason] if id_retrieval[:fail_reason]
+
+        subtraction = @video_games_service.delete id_retrieval[:result]
+
+        determine_response subtraction
+    end
+
   private
 
     def get_id(request)
