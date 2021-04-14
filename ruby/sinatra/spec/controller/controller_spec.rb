@@ -75,7 +75,7 @@ describe Controller do
             request_params = { 'id' => id }
             request = double 'request'
             video_game_query = double 'attempt to get video game'
-            fail_reason = double 'could not find video game with this id!'
+            fail_reason = 'could not find video game with this id!'
 
             allow(request).to receive(:params).and_return request_params
             allow(video_games_service).to receive(:get).with(id.to_i).and_return video_game_query
