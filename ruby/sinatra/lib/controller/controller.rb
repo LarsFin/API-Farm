@@ -76,7 +76,7 @@ class Controller
     end
 
     def ok(result)
-        p "I am in ok"
+        p 'I am in ok'
         p result
         [
             200,
