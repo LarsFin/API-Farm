@@ -2,6 +2,6 @@
 coverage
 
 # other
-.Dockerignore
+.dockerignore
 .gitignore
 README.md
