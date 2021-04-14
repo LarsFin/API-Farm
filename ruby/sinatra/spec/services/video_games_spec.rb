@@ -29,24 +29,24 @@ describe VideoGames do
             allow(storage).to receive(:get).and_return video_game
 
             # Act
-            retrieved_video_game = subject.get id
+            video_game_query = subject.get id
 
             # Assert
-            expect(retrieved_video_game[:result]).to be video_game
+            expect(video_game_query[:result]).to be video_game
         end
 
         it 'should return failure when video game data has an invalid id, and return an error' do
             # Arrange
             id = 6
 
-            allow(storage).to receive(:get).with(id)
+            allow(storage).to receive(:get).with id
 
             # Act
-            retrieved_video_game = subject.get id
+            video_game_query = subject.get id
 
             # Assert
-            expect(retrieved_video_game[:fail_code]).to eq 404
-            expect(retrieved_video_game[:fail_reason]).to eq "Could not find video game with id '#{id}'."
+            expect(video_game_query[:fail_code]).to eq 404
+            expect(video_game_query[:fail_reason]).to eq "Could not find video game with id '#{id}'."
         end
     end
 
