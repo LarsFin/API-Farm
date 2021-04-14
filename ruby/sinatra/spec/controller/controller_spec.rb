@@ -31,14 +31,14 @@ describe Controller do
             id = '1'
             request_params = { 'id' => id }
             request = double 'request'
-            get = double 'attempt to get video game'
+            video_game_query = double 'attempt to get video game'
             result = double 'video game obtained'
             json_result = double 'video game obtained as a json'
 
             allow(request).to receive(:params).and_return request_params
-            allow(video_games_service).to receive(:get).with(id.to_i).and_return get
-            allow(get).to receive(:[]).with(:fail_code)
-            allow(get).to receive(:[]).with(:result).and_return result
+            allow(video_games_service).to receive(:get).with(id.to_i).and_return video_game_query
+            allow(video_game_query).to receive(:[]).with :fail_code
+            allow(video_game_query).to receive(:[]).with(:result).and_return result
             allow(result).to receive(:to_json).and_return json_result
 
             # Act
@@ -74,13 +74,13 @@ describe Controller do
             id = '12'
             request_params = { 'id' => id }
             request = double 'request'
-            get = double 'attempt to get video game'
+            video_game_query = double 'attempt to get video game'
             fail_reason = double 'could not find video game with this id!'
 
             allow(request).to receive(:params).and_return request_params
-            allow(video_games_service).to receive(:get).with(id.to_i).and_return get
-            allow(get).to receive(:[]).with(:fail_code).and_return 404
-            allow(get).to receive(:[]).with(:fail_reason).and_return fail_reason
+            allow(video_games_service).to receive(:get).with(id.to_i).and_return video_game_query
+            allow(video_game_query).to receive(:[]).with(:fail_code).and_return 404
+            allow(video_game_query).to receive(:[]).with(:fail_reason).and_return fail_reason
 
             # Act
             response = subject.get_video_game request

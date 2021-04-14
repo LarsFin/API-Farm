@@ -35,7 +35,7 @@ end
 
     private
 
-    def get_params
-        params.each { |key, value| request.params[key] = value }
-    end
+def get_params
+    params.each { |key, value| request.params[key] = value }
+end
 
