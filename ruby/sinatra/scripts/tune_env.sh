@@ -13,19 +13,19 @@ fi
 case $ENV in
 
     dev)
-        echo "Dev environment selected!"
+        echo "Dev environment selected"
         echo "No files to remove."
         bundle install
         ;;
 
     test)
-        echo "Test environment selected!"
+        echo "Test environment selected"
         rm .rubocop.yml
         bundle install --without dev
         ;;
 
     prod)
-        echo "Prod environment selected!"
+        echo "Prod environment selected"
         rm .rubocop.yml
         rm .rspec
         rm -rf spec
