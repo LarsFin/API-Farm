@@ -25,6 +25,74 @@ describe Controller do
         end
     end
 
+    describe '#get_video_game' do
+        it 'Should return a specific video game via id given' do
+            # Arrange
+            id = '1'
+            request_params = { 'id' => id }
+            request = double 'request'
+            video_game_query = double 'attempt to get video game'
+            result = double 'video game obtained'
+            json_result = double 'video game obtained as a json'
+
+            allow(request).to receive(:params).and_return request_params
+            allow(video_games_service).to receive(:get).with(id.to_i).and_return video_game_query
+            allow(video_game_query).to receive(:[]).with :fail_code
+            allow(video_game_query).to receive(:[]).with(:result).and_return result
+            allow(result).to receive(:to_json).and_return json_result
+
+            # Act
+            response = subject.get_video_game request
+
+            # Assert
+            expect(response[0]).to eq 200
+            expected_headers = { 'Content-Type' => 'application/json' }
+            expect(response[1]).to eq expected_headers
+            expect(response[2]).to be json_result
+        end
+
+        it 'should return correct response with 400 status code' do
+            # Arrange
+            id = 'not a valid id!'
+            request_params = { 'id' => id }
+            request = double 'request'
+
+            allow(request).to receive(:params).and_return request_params
+
+            # Act
+            response = subject.get_video_game request
+
+            # Assert
+            expect(response[0]).to eq 400
+            expected_headers = { 'Content-Type' => 'text/plain' }
+            expect(response[1]).to eq expected_headers
+            expect(response[2]).to eq "The provided id '#{id}' is invalid."
+        end
+
+        it 'should return correct response with 404 status code' do
+            # Arrange
+            id = '12'
+            request_params = { 'id' => id }
+            request = double 'request'
+            video_game_query = double 'attempt to get video game'
+            fail_reason = 'could not find video game with this id!'
+
+            allow(request).to receive(:params).and_return request_params
+            allow(video_games_service).to receive(:get).with(id.to_i).and_return video_game_query
+            allow(video_game_query).to receive(:[]).with(:fail_code).and_return 404
+            allow(video_game_query).to receive(:[]).with(:fail_reason).and_return fail_reason
+
+            # Act
+            response = subject.get_video_game request
+
+            # Assert
+            expect(response[0]).to eq 404
+            expected_headers = { 'Content-Type' => 'text/plain' }
+            expect(response[1]).to eq expected_headers
+            expect(response[2]).to be fail_reason
+        end
+    end
+
     describe '#add_video_game' do
         it 'should return correct response with 201 status code' do
             # Arrange

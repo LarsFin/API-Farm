@@ -18,7 +18,7 @@ class InMemory
 
     def get(id)
         @video_games.each do |video_game|
-            return video_game if video_game.id == id
+            return video_game.to_hash if video_game.id == id
         end
 
         nil

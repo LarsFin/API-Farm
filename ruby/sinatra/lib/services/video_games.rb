@@ -13,6 +13,14 @@ class VideoGames
         @storage.get_all
     end
 
+    def get(id)
+        video_game = @storage.get id
+
+        return { fail_code: 404, fail_reason: "Could not find video game with id '#{id}'." } unless video_game
+
+        { result: video_game }
+    end
+
     def add(video_game_data)
         fail_result = validate_keys video_game_data
 
