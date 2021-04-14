@@ -2,11 +2,10 @@
 
 # in memory storage
 class InMemory
-    attr_accessor :video_games
+    attr_accessor :video_games, :counter
 
     def initialize
-        @video_games = []
-        @counter = 0
+        init
     end
 
     def add(video_game)
@@ -49,5 +48,16 @@ class InMemory
 
             i += 1
         end
+    end
+
+    def reset
+        init
+    end
+
+  private
+
+    def init
+        @video_games = []
+        @counter = 0
     end
 end
