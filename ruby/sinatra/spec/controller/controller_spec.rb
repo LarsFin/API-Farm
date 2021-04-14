@@ -301,4 +301,31 @@ describe Controller do
             expect(response[2]).to be fail_reason
         end
     end
+
+    describe '#delete_video_game' do
+        it 'should return correct response with 200 status code' do
+            # Arrange
+            id = '1'
+            request_params = { 'id' => id }
+            request = double 'request'
+            subtraction = double 'attempt to remove video game'
+            result = double 'deleted video game'
+            json_result = double 'deleted video game as json'
+
+            allow(request).to receive(:params).and_return request_params
+            allow(video_games_service).to receive(:delete).with(id.to_i).and_return subtraction
+            allow(subtraction).to receive(:[]).with :fail_code
+            allow(subtraction).to receive(:[]).with(:result).and_return result
+            allow(result).to receive(:to_json).and_return json_result
+
+            # Act
+            response = subject.delete_video_game request
+
+            # Assert
+            expect(response[0]).to eq 200
+            expected_headers = { 'Content-Type' => 'application/json' }
+            expect(response[1]).to eq expected_headers
+            expect(response[2]).to be json_result
+        end
+    end
 end
