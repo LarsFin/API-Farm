@@ -24,7 +24,7 @@ post '/video_games' do
 end
 
 get '/video_games/:id' do
-    params.each { |key, value| request.params[key] = value } 
+    params.each { |key, value| request.params[key] = value }
     controller.get_video_game request
 end
 
