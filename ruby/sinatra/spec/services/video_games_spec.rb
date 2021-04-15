@@ -263,7 +263,7 @@ describe VideoGames do
         it 'should remove existing video game from storage' do
             # Arrange
             id = 1
-            deleted_video_game_message = "Video game has been deleted"
+            deleted_video_game_message = 'Video game has been deleted'
 
             allow(storage).to receive(:delete).and_return deleted_video_game_message
 
