@@ -263,15 +263,15 @@ describe VideoGames do
         it 'should remove existing video game from storage' do
             # Arrange
             id = 1
-            deleted_video_game = double 'deleted video game from storage'
+            deleted_video_game_message = "Video game has been deleted"
 
-            allow(storage).to receive(:delete).and_return deleted_video_game
+            allow(storage).to receive(:delete).and_return deleted_video_game_message
 
             # Act
             subtraction = subject.delete id
 
             # Assert
-            expect(subtraction[:result]).to be deleted_video_game
+            expect(subtraction[:result]).to be deleted_video_game_message
         end
     end
 end
