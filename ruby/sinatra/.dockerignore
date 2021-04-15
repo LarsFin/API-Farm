@@ -1,0 +1,10 @@
+# image commands
+scripts/build_img.sh
+scripts/run_img.sh
+
+# ruby
+coverage
+
+# other
+.gitignore
+README.md
