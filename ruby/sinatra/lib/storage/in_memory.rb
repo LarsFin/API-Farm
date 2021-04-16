@@ -12,7 +12,7 @@ class InMemory
         @counter += 1
         video_game.id = @counter
         @video_games << video_game
-        video_game.to_hash
+        video_game
     end
 
     def get(id)
