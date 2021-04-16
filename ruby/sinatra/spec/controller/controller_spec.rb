@@ -35,13 +35,15 @@ describe Controller do
             request = double 'request'
             video_game_query = double 'attempt to get video game'
             result = double 'video game obtained'
+            hash_result = double 'video game obtained as a hash'
             json_result = double 'video game obtained as a json'
 
             allow(request).to receive(:params).and_return request_params
             allow(video_games_service).to receive(:get).with(id.to_i).and_return video_game_query
             allow(video_game_query).to receive(:[]).with :fail_code
             allow(video_game_query).to receive(:[]).with(:result).and_return result
-            allow(result).to receive(:to_json).and_return json_result
+            allow(result).to receive(:to_hash).and_return hash_result
+            allow(hash_result).to receive(:to_json).and_return json_result
 
             # Act
             response = subject.get_video_game request
