@@ -10,9 +10,11 @@ describe Controller do
         it 'should return correct response with 200 status code' do
             # Arrange
             video_games = double 'video games'
+            hash_video_games = double 'video games as hashes'
             json_video_games = double 'video games as json'
             allow(video_games_service).to receive(:get_all).and_return video_games
-            allow(video_games).to receive(:to_json).and_return json_video_games
+            allow(video_games).to receive(:map).and_return hash_video_games
+            allow(hash_video_games).to receive(:to_json).and_return json_video_games
 
             # Act
             response = subject.get_video_games
