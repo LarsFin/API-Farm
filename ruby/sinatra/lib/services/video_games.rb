@@ -64,7 +64,7 @@ class VideoGames
 
         return { fail_code: 404, fail_reason: "Could not find video game with id '#{id}'." } unless video_game
 
-        { result: 'Video game has been deleted' }
+        { result: "Deleted video game with id '#{id}'" }
     end
 
   private
