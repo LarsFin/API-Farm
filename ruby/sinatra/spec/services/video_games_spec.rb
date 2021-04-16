@@ -273,5 +273,19 @@ describe VideoGames do
             # Assert
             expect(subtraction[:result]).to eq deleted_video_game_message
         end
+
+        it 'should return failure when video game data has an invalid id, and return an error' do
+            # Arrange
+            id = 6
+
+            allow(storage).to receive(:delete).with id
+
+            # Act
+            subtraction = subject.delete id
+
+            # Assert
+            expect(subtraction[:fail_code]).to eq 404
+            expect(subtraction[:fail_reason]).to eq "Could not find video game with id '#{id}'."
+        end
     end
 end
