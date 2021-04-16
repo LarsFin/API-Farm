@@ -79,7 +79,7 @@ class Controller
         case attempt[:fail_code]
         when 400 then bad_request attempt[:fail_reason]
         when 404 then not_found attempt[:fail_reason]
-        else ok attempt[:result]
+        else ok attempt[:result].to_hash
         end
     end
 
