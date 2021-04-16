@@ -274,7 +274,7 @@ describe VideoGames do
             expect(subtraction[:result]).to eq deleted_video_game_message
         end
 
-        it 'should return failure when video game data has an invalid id, and return an error' do
+        it 'should return not found fail reason when video game does not exist, and return an error' do
             # Arrange
             id = 6
 
