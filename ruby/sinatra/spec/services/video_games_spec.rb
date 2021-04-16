@@ -258,4 +258,34 @@ describe VideoGames do
                                                ' is invalid.'
         end
     end
+
+    describe '#delete' do
+        it 'should remove existing video game from storage' do
+            # Arrange
+            id = 1
+            deleted_video_game_message = "Deleted video game with id '#{id}'"
+
+            allow(storage).to receive(:delete).and_return deleted_video_game_message
+
+            # Act
+            subtraction = subject.delete id
+
+            # Assert
+            expect(subtraction[:result]).to eq deleted_video_game_message
+        end
+
+        it 'should return not found fail reason when video game does not exist, and return an error' do
+            # Arrange
+            id = 6
+
+            allow(storage).to receive(:delete).with id
+
+            # Act
+            subtraction = subject.delete id
+
+            # Assert
+            expect(subtraction[:fail_code]).to eq 404
+            expect(subtraction[:fail_reason]).to eq "Could not find video game with id '#{id}'."
+        end
+    end
 end
