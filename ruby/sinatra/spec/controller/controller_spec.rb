@@ -10,7 +10,7 @@ describe Controller do
         it 'should return correct response with 200 status code' do
             # Arrange
             video_games = double 'video games'
-            hash_video_games = double 'video games as hashes'
+            hash_video_games = double 'video games as hash'
             json_video_games = double 'video games as json'
             allow(video_games_service).to receive(:get_all).and_return video_games
             allow(video_games).to receive(:map).and_return hash_video_games
@@ -104,6 +104,7 @@ describe Controller do
             video_game_data = double 'video game data'
             addition = double 'attempt to add video game'
             result = double 'created video game result'
+            hash_result = double 'created video game result as hash'
             json_result = double 'created video game result as json'
 
             allow(request).to receive(:body).and_return request_body
@@ -112,7 +113,8 @@ describe Controller do
             allow(video_games_service).to receive(:add).with(video_game_data).and_return addition
             allow(addition).to receive(:[]).with(:fail_reason)
             allow(addition).to receive(:[]).with(:result).and_return result
-            allow(result).to receive(:to_json).and_return json_result
+            allow(result).to receive(:to_hash).and_return hash_result
+            allow(hash_result).to receive(:to_json).and_return json_result
 
             # Act
             response = subject.add_video_game request

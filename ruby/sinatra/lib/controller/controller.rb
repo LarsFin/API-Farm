@@ -32,7 +32,7 @@ class Controller
         if addition[:fail_reason]
             bad_request addition[:fail_reason]
         else
-            created addition[:result]
+            created addition[:result].to_hash
         end
     end
 
