@@ -22,7 +22,7 @@ get '/' do
     'Hello World!'
 end
 
-if environment == 'TEST'
+if environment == 'TEST' || environment == 'DEV'
     require_relative 'lib/controller/testing_controller'
     require_relative 'lib/services/data_loader'
 
