@@ -10,7 +10,8 @@ class Controller
 
     def get_video_games
         video_games = @video_games_service.get_all
-        ok video_games
+        hashed_video_games = video_games.map(&:to_hash)
+        ok hashed_video_games
     end
 
     def get_video_game(request)
