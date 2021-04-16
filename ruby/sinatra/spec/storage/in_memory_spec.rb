@@ -76,19 +76,13 @@ describe InMemory do
         it 'should return all video games' do
             # Arrange
             video_game1 = double 'video game 1'
-            video_game1_hash = double 'video game 1 as hash'
             video_game2 = double 'video game 2'
-            video_game2_hash = double 'video game 2 as hash'
             video_game3 = double 'video game 3'
-            video_game3_hash = double 'video game 3 as hash'
-            allow(video_game1).to receive(:to_hash).and_return video_game1_hash
-            allow(video_game2).to receive(:to_hash).and_return video_game2_hash
-            allow(video_game3).to receive(:to_hash).and_return video_game3_hash
             subject.video_games << video_game1 << video_game2 << video_game3
             expected = [
-                video_game1_hash,
-                video_game2_hash,
-                video_game3_hash
+                video_game1,
+                video_game2,
+                video_game3
             ]
 
             # Act
