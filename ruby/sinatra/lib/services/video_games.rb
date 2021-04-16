@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'date'
+require 'Date'
 
 # service managing data from middleware, storage and the video game model
 class VideoGames

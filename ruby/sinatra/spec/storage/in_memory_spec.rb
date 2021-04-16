@@ -88,19 +88,17 @@ describe InMemory do
     end
 
     describe '#update' do
-        it 'should overwrite and return hashed video game with passed id' do
+        it 'should overwrite and return video game with passed id' do
             # Arrange
             updating_video_game = double 'video game used to update'
             subject.video_games << double('video game to pass', id: 1)
             subject.video_games << double('video game to update', id: 2)
-            updated_video_game_hash = double 'updated video game as hash'
-            allow(updating_video_game).to receive(:to_hash).and_return updated_video_game_hash
 
             # Act
             updated_video_game = subject.update 2, updating_video_game
 
             # Assert
-            expect(updated_video_game).to be updated_video_game_hash
+            expect(updated_video_game).to be updated_video_game
             expect(subject.video_games[1]).to be updating_video_game
         end
 
