@@ -33,7 +33,7 @@ class InMemory
         while i < @video_games.length
             if @video_games[i].id == id
                 @video_games[i] = video_game
-                return @video_games[i].to_hash
+                return @video_games[i]
             end
 
             i += 1
