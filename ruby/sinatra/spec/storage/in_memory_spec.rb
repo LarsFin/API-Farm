@@ -46,8 +46,6 @@ describe InMemory do
             subject.video_games << video_game2
             subject.video_games << double('third video game', id: 3)
 
-            allow(video_game2).to receive(:to_hash).and_return video_game2
-
             # Act
             retrieved_video_game = subject.get 2
 
