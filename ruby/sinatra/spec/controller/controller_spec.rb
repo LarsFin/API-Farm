@@ -186,6 +186,7 @@ describe Controller do
             video_game_data = double 'video game data'
             update = double 'attempt to update video game'
             result = double 'updated video game'
+            hash_result = double 'updated video game result as hash'
             json_result = double 'updated video game result as json'
 
             allow(request).to receive(:params).and_return request_params
@@ -195,7 +196,8 @@ describe Controller do
             allow(video_games_service).to receive(:update).with(id.to_i, video_game_data).and_return update
             allow(update).to receive(:[]).with(:fail_code)
             allow(update).to receive(:[]).with(:result).and_return result
-            allow(result).to receive(:to_json).and_return json_result
+            allow(result).to receive(:to_hash).and_return hash_result
+            allow(hash_result).to receive(:to_json).and_return json_result
 
             # Act
             response = subject.update_video_game request
@@ -316,13 +318,15 @@ describe Controller do
             request = double 'request'
             subtraction = double 'attempt to remove video game'
             result = double 'deleted video game'
+            hash_result = double 'deleted video game as hash'
             json_result = double 'deleted video game as json'
 
             allow(request).to receive(:params).and_return request_params
             allow(video_games_service).to receive(:delete).with(id.to_i).and_return subtraction
             allow(subtraction).to receive(:[]).with :fail_code
             allow(subtraction).to receive(:[]).with(:result).and_return result
-            allow(result).to receive(:to_json).and_return json_result
+            allow(result).to receive(:to_hash).and_return hash_result
+            allow(hash_result).to receive(:to_json).and_return json_result
 
             # Act
             response = subject.delete_video_game request
