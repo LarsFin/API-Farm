@@ -2274,7 +2274,7 @@
 					"script": {
 						"type": "text/javascript",
 						"exec": [
-							"const baseApiUrl = `http://${pm.environment.get(\"host\")}:${pm.collectionVariables.get(\"port\")}`;",
+							"const baseApiUrl = `http://${pm.environment.get(\"host\")}:${pm.environment.get(\"port\")}`;",
 							"",
 							"// setup api for testing",
 							"pm.sendRequest({",
@@ -2284,7 +2284,7 @@
 							"",
 							"// function for retrieving expected data",
 							"getExpectedData = (pm, expectedDataFileName, callback) => {",
-							"    let url = `http://${pm.collectionVariables.get(\"expected_data_api_host\")}:${pm.collectionVariables.get(\"expected_data_api_port\")}/${expectedDataFileName}`;",
+							"    let url = `http://${pm.environment.get(\"expectations_api_host\")}:${pm.environment.get(\"expectations_api_port\")}/${expectedDataFileName}`;",
 							"",
 							"    pm.sendRequest(url, (err, res) => {",
 							"        if (err) {",
@@ -2373,20 +2373,6 @@
 					""
 				]
 			}
-		}
-	],
-	"variable": [
-		{
-			"key": "port",
-			"value": "8080"
-		},
-		{
-			"key": "expected_data_api_host",
-			"value": "localhost"
-		},
-		{
-			"key": "expected_data_api_port",
-			"value": "3000"
 		}
 	]
 }
