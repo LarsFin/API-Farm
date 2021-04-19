@@ -318,15 +318,11 @@ describe Controller do
             request = double 'request'
             subtraction = double 'attempt to remove video game'
             result = double 'deleted video game'
-            hash_result = double 'deleted video game as hash'
-            json_result = double 'deleted video game as json'
 
             allow(request).to receive(:params).and_return request_params
             allow(video_games_service).to receive(:delete).with(id.to_i).and_return subtraction
             allow(subtraction).to receive(:[]).with :fail_code
             allow(subtraction).to receive(:[]).with(:result).and_return result
-            allow(result).to receive(:to_hash).and_return hash_result
-            allow(hash_result).to receive(:to_json).and_return json_result
 
             # Act
             response = subject.delete_video_game request
@@ -335,7 +331,7 @@ describe Controller do
             expect(response[0]).to eq 200
             expected_headers = { 'Content-Type' => 'application/json' }
             expect(response[1]).to eq expected_headers
-            expect(response[2]).to be json_result
+            expect(response[2]).to be result
         end
 
         it 'should return correct response with 400 status code' do

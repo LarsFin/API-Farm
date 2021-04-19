@@ -54,7 +54,7 @@ class Controller
 
         subtraction = @video_games_service.delete id_retrieval[:result]
 
-        determine_response subtraction
+        determine_delete_response subtraction
     end
 
   private
@@ -83,11 +83,27 @@ class Controller
         end
     end
 
+    def determine_delete_response(attempt)
+        case attempt[:fail_code]
+        when 400 then bad_request attempt[:fail_reason]
+        when 404 then not_found attempt[:fail_reason]
+        else delete_ok attempt[:result]
+        end
+    end
+
     def ok(result)
         [
             200,
             { 'Content-Type' => 'application/json' },
             result.to_json
+        ]
+    end
+
+    def delete_ok(result)
+        [
+            200,
+            { 'Content-Type' => 'application/json' },
+            result
         ]
     end
 
