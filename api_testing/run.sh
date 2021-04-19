@@ -9,6 +9,8 @@
 # > Copy file to local machine
 # > Stop and remove api testing container
 
+echo "🚀 Starting API Testing Process!";
+
 # Name of container running api
 API_CONTAINER=$1
 
@@ -22,14 +24,19 @@ fi
 # Delete api_testing image if it already exists
 if docker image inspect api_testing/newman >/dev/null 2>&1
     then
-        docker rmi api_testing/newman
+        echo "Removing old api testing image..."
+        docker rmi api_testing/newman >/dev/null 2>&1
+        echo "Old api testing image removed."
 fi
 
 # Build api_testing image
-docker build -t api_testing/newman .
+echo "Building api testing image..."
+docker build -t api_testing/newman . >/dev/null 2>&1
+echo "API testing image successfully created."
 
 # Query docker for containers running on api_farm_dev network
-DOCKER_QUERY_RESULT=$(docker ps -f status=running --format "{{.Names}}") # TODO: add network query!
+echo "Checking docker for required containers on api_farm_dev network; '${API_CONTAINER}' and 'api_expectations'..."
+DOCKER_QUERY_RESULT=$(docker ps -f status=running -f network=api_farm_dev --format "{{.Names}}")
 
 # Ensure api container is running on network
 if [[ $DOCKER_QUERY_RESULT != *$API_CONTAINER* ]]
@@ -41,18 +48,48 @@ fi
 # Ensure expectations api is running on network
 if [[ $DOCKER_QUERY_RESULT != *"expectations_api"* ]]
     then
-        echo "No running container for expectations api could be found with network api_farm_dev"
+        echo "No running container for expectations api could be found with network api_farm_dev."
         exit 1
 fi
 
+echo "Services located."
+
 # Define results output file name
 RESULTS_FILE=${API_CONTAINER}_api_test_results
+API_TESTS_CONTAINER=api_testing_$(date '+%d%m%Y%H%M')
+
+# Create results directory if it does not exist
+if ! dir results >/dev/null 2>&1
+    then
+        echo "No ./results directory. Creating one..."
+        mkdir results
+        echo "./results created."
+fi
 
 # Run api tests
-docker run --network=api_testing --name= -t api_testing/newman run API_farm.postman_collection.json \
-    --folder Tests -e ApiTesting.api_farm.json --env-var host=$API_CONTAINER --reporters=cli,json --reporter-json-export ${RESULTS_FILE}.json > ${RESULTS_FILE}.txt
-# TODO: Change network!
+echo "Running api testing image..."
+docker run --network=api_farm_dev --name=$API_TESTS_CONTAINER -t api_testing/newman run API_farm.postman_collection.json \
+    --folder Tests -e ApiTesting.api_farm.json --env-var host=$API_CONTAINER --reporters=cli,json --reporter-json-export ${RESULTS_FILE}.json > ./results/${RESULTS_FILE}.txt
 
-# 
+# Query docker for api tests container
+DOCKER_QUERY_RESULT=$(docker ps -f status=exited --format "{{.Names}}")
 
-# !!! All services for api testing should be on api_farm_dev network
+# If api tests container does not exist. Fail under assumption there was an issue running the container.
+if [[ $DOCKER_QUERY_RESULT != *$API_TESTS_CONTAINER* ]]
+    then
+        echo "There was an issue running the api tests container;"
+        cat ${RESULTS_FILE}.txt
+        exit 1
+fi
+
+# Copy output file from api tests
+docker cp $API_TESTS_CONTAINER:/etc/newman/${RESULTS_FILE}.json ./results/${RESULTS_FILE}.json
+
+echo "API testing image successfully run."
+
+# Delete api tests container
+echo "Removing api testing container..."
+docker rm $API_TESTS_CONTAINER >/dev/null 2>&1
+echo "API testing container removed."
+
+echo "API Testing Process Complete ✔️"
