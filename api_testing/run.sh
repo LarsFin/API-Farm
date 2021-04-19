@@ -21,17 +21,32 @@ if [ -z $API_CONTAINER ]
         exit 1
 fi
 
+# Setup logging
+DATE_TIME=$(date '+%d%m%Y%H%M')
+LOGGING_FILE=./logs/${DATE_TIME}_api_test_run.log
+
+# Create logs directory if it does not exist
+if ! dir logs >/dev/null 2>&1
+    then
+        echo "No ./logs directory. Creating one..."
+        mkdir logs
+        echo "./logs created."
+fi
+
+# Create log file
+touch $LOGGING_FILE
+
 # Delete api_testing image if it already exists
-if docker image inspect api_testing/newman >/dev/null 2>&1
+if docker image inspect api_testing/newman >>$LOGGING_FILE
     then
         echo "Removing old api testing image..."
-        docker rmi api_testing/newman >/dev/null 2>&1
+        docker rmi api_testing/newman >>$LOGGING_FILE 2>&1
         echo "Old api testing image removed."
 fi
 
 # Build api_testing image
 echo "Building api testing image..."
-docker build -t api_testing/newman . >/dev/null 2>&1
+docker build -t api_testing/newman . >>$LOGGING_FILE 2>&1
 echo "API testing image successfully created."
 
 # Query docker for containers running on api_farm_dev network
@@ -56,10 +71,10 @@ echo "Services located."
 
 # Define results output file name
 RESULTS_FILE=${API_CONTAINER}_api_test_results
-API_TESTS_CONTAINER=api_testing_$(date '+%d%m%Y%H%M')
+API_TESTS_CONTAINER=api_testing_$DATE_TIME
 
 # Create results directory if it does not exist
-if ! dir results >/dev/null 2>&1
+if ! dir results >>$LOGGING_FILE 2>&1
     then
         echo "No ./results directory. Creating one..."
         mkdir results
@@ -69,7 +84,7 @@ fi
 # Run api tests
 echo "Running api testing image..."
 docker run --network=api_farm_dev --name=$API_TESTS_CONTAINER -t api_testing/newman run API_farm.postman_collection.json \
-    --folder Tests -e ApiTesting.api_farm.json --env-var host=$API_CONTAINER --reporters=cli,json --reporter-json-export ${RESULTS_FILE}.json > ./results/${RESULTS_FILE}.txt
+    --folder Tests -e ApiTesting.api_farm.json --env-var host=$API_CONTAINER --reporters=cli,json --reporter-json-export ${RESULTS_FILE}.json >>$LOGGING_FILE 2>&1
 
 # Query docker for api tests container
 DOCKER_QUERY_RESULT=$(docker ps -f status=exited --format "{{.Names}}")
@@ -89,7 +104,7 @@ echo "API testing image successfully run."
 
 # Delete api tests container
 echo "Removing api testing container..."
-docker rm $API_TESTS_CONTAINER >/dev/null 2>&1
+docker rm $API_TESTS_CONTAINER >>$LOGGING_FILE 2>&1
 echo "API testing container removed."
 
 echo "API Testing Process Complete ✔️"

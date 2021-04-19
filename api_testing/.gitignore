@@ -1,2 +1,3 @@
-# results from api tests
+# collected data from api test runs
+logs/
 results/
