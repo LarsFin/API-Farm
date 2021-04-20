@@ -329,7 +329,7 @@ describe Controller do
 
             # Assert
             expect(response[0]).to eq 200
-            expected_headers = { 'Content-Type' => 'application/json' }
+            expected_headers = { 'Content-Type' => 'text/plain' }
             expect(response[1]).to eq expected_headers
             expect(response[2]).to be result
         end
