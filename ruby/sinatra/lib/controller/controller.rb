@@ -80,7 +80,6 @@ class Controller
         when 400 then bad_request attempt[:fail_reason]
         when 404 then not_found attempt[:fail_reason]
         else
-            p attempt[:result]
             if attempt[:result].is_a? String
                 ok_text attempt[:result]
             else
