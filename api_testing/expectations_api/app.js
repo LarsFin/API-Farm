@@ -9,5 +9,5 @@ app.get('/ping', (_, res) => {
 app.use(express.static('expected_data'));
 
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
+  console.log(`Expectations api listening @ http://localhost:${port}`)
 });
