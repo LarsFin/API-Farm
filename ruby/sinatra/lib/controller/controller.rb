@@ -83,7 +83,7 @@ class Controller
             p attempt[:result]
             if attempt[:result].is_a? String
                 ok_text attempt[:result]
-            else  
+            else
                 ok attempt[:result].to_hash
             end
         end
