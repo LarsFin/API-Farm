@@ -54,7 +54,7 @@ class Controller
 
         subtraction = @video_games_service.delete id_retrieval[:result]
 
-        determine_delete_response subtraction
+        determine_response subtraction
     end
 
   private
@@ -79,15 +79,13 @@ class Controller
         case attempt[:fail_code]
         when 400 then bad_request attempt[:fail_reason]
         when 404 then not_found attempt[:fail_reason]
-        else ok attempt[:result].to_hash
-        end
-    end
-
-    def determine_delete_response(attempt)
-        case attempt[:fail_code]
-        when 400 then bad_request attempt[:fail_reason]
-        when 404 then not_found attempt[:fail_reason]
-        else ok_text attempt[:result]
+        else
+            p attempt[:result]
+            if attempt[:result].is_a? String
+                ok_text attempt[:result]
+            else  
+                ok attempt[:result].to_hash
+            end
         end
     end
 
