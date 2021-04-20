@@ -87,7 +87,7 @@ class Controller
         case attempt[:fail_code]
         when 400 then bad_request attempt[:fail_reason]
         when 404 then not_found attempt[:fail_reason]
-        else delete_ok attempt[:result]
+        else ok_text attempt[:result]
         end
     end
 
@@ -99,10 +99,10 @@ class Controller
         ]
     end
 
-    def delete_ok(result)
+    def ok_text(result)
         [
             200,
-            { 'Content-Type' => 'application/json' },
+            { 'Content-Type' => 'text/plain' },
             result
         ]
     end
