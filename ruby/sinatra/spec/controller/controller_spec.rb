@@ -317,7 +317,7 @@ describe Controller do
             request_params = { 'id' => id }
             request = double 'request'
             subtraction = double 'attempt to remove video game'
-            result = double 'deleted video game'
+            result = 'deleted video game'
 
             allow(request).to receive(:params).and_return request_params
             allow(video_games_service).to receive(:delete).with(id.to_i).and_return subtraction
