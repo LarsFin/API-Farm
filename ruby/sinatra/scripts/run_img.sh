@@ -30,15 +30,29 @@ fi
 case $CMD in
 
     run_dev)
+        echo "Checking if api_farm_dev network is available."
+        if ! docker network inspect api_farm_dev >/dev/null 2>&1
+            then
+                echo "The network 'api_farm_dev' does not exist. Creating now..."
+                docker network create api_farm_dev
+        fi
+
         echo "Running container with run command for image 'ruby/sinatra:dev'"
         export RUBY_SINATRA_ENV=DEV
-        docker run --rm -p 8080:8080 --name ruby_sinatra ruby/sinatra:dev run
+        docker run --rm -p 8080:8080 --network=api_farm_dev --name ruby_sinatra ruby/sinatra:dev run
         ;;
         
     run_prod)
+        echo "Checking if api_farm_prod network is available."
+        if ! docker network inspect api_farm_prod >/dev/null 2>&1
+            then
+                echo "The network 'api_farm_prod' does not exist. Creating now..."
+                docker network create api_farm_prod
+        fi
+
         echo "Running container with run command for image 'ruby/sinatra:prod'"
         export RUBY_SINATRA_ENV=PROD
-        docker run --rm -p 8080:8080 --name ruby_sinatra ruby/sinatra:prod run
+        docker run --rm -p 8080:8080 --network=api_farm_dev --name ruby_sinatra ruby/sinatra:prod run
         ;;
 
     test)
