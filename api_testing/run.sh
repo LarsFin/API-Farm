@@ -84,7 +84,7 @@ fi
 # Run api tests
 echo "Running api testing image..."
 docker run --network=api_farm_dev --name=$API_TESTS_CONTAINER -t api_testing/newman run API_farm.postman_collection.json \
-    --folder Tests -e ApiTesting.api_farm.json --env-var host=$API_CONTAINER --reporters=cli,json --reporter-json-export ${RESULTS_FILE}.json >>$LOGGING_FILE 2>&1
+    --folder Tests -e ApiTesting.api_farm.json --env-var host=$API_CONTAINER --reporters=cli,json --reporter-json-export ${RESULTS_FILE}.json | tee -a $LOGGING_FILE
 
 # Query docker for api tests container
 DOCKER_QUERY_RESULT=$(docker ps -f status=exited --format "{{.Names}}")
