@@ -7,7 +7,6 @@ describe InMemory do
         it 'should add video game to array' do
             # Arrange
             video_game = double 'mock video game'
-            allow(video_game).to receive(:to_hash)
 
             # Assert
             expect(video_game).to receive(:id=).with 1
@@ -23,11 +22,7 @@ describe InMemory do
         it 'should return video game with id which increments' do
             # Arrange
             video_game1 = double 'first video game'
-            video_game1_hash = double 'first video game as hash'
             video_game2 = double 'second video game'
-            video_game2_hash = double 'second video game as hash'
-            allow(video_game1).to receive(:to_hash).and_return video_game1_hash
-            allow(video_game2).to receive(:to_hash).and_return video_game2_hash
 
             # Assert
             expect(video_game1).to receive(:id=).with 1
@@ -38,8 +33,8 @@ describe InMemory do
             created_video_game2 = subject.add video_game2
 
             # Assert
-            expect(created_video_game1).to be video_game1_hash
-            expect(created_video_game2).to be video_game2_hash
+            expect(created_video_game1).to be video_game1
+            expect(created_video_game2).to be video_game2
         end
     end
 
@@ -50,8 +45,6 @@ describe InMemory do
             subject.video_games << double('first video game', id: 1)
             subject.video_games << video_game2
             subject.video_games << double('third video game', id: 3)
-
-            allow(video_game2).to receive(:to_hash).and_return video_game2
 
             # Act
             retrieved_video_game = subject.get 2
@@ -76,19 +69,13 @@ describe InMemory do
         it 'should return all video games' do
             # Arrange
             video_game1 = double 'video game 1'
-            video_game1_hash = double 'video game 1 as hash'
             video_game2 = double 'video game 2'
-            video_game2_hash = double 'video game 2 as hash'
             video_game3 = double 'video game 3'
-            video_game3_hash = double 'video game 3 as hash'
-            allow(video_game1).to receive(:to_hash).and_return video_game1_hash
-            allow(video_game2).to receive(:to_hash).and_return video_game2_hash
-            allow(video_game3).to receive(:to_hash).and_return video_game3_hash
             subject.video_games << video_game1 << video_game2 << video_game3
             expected = [
-                video_game1_hash,
-                video_game2_hash,
-                video_game3_hash
+                video_game1,
+                video_game2,
+                video_game3
             ]
 
             # Act
@@ -101,19 +88,17 @@ describe InMemory do
     end
 
     describe '#update' do
-        it 'should overwrite and return hashed video game with passed id' do
+        it 'should overwrite and return video game with passed id' do
             # Arrange
             updating_video_game = double 'video game used to update'
             subject.video_games << double('video game to pass', id: 1)
             subject.video_games << double('video game to update', id: 2)
-            updated_video_game_hash = double 'updated video game as hash'
-            allow(updating_video_game).to receive(:to_hash).and_return updated_video_game_hash
 
             # Act
             updated_video_game = subject.update 2, updating_video_game
 
             # Assert
-            expect(updated_video_game).to be updated_video_game_hash
+            expect(updated_video_game).to be updated_video_game
             expect(subject.video_games[1]).to be updating_video_game
         end
 

@@ -12,19 +12,19 @@ class InMemory
         @counter += 1
         video_game.id = @counter
         @video_games << video_game
-        video_game.to_hash
+        video_game
     end
 
     def get(id)
         @video_games.each do |video_game|
-            return video_game.to_hash if video_game.id == id
+            return video_game if video_game.id == id
         end
 
         nil
     end
 
     def get_all
-        @video_games.map(&:to_hash)
+        @video_games
     end
 
     def update(id, video_game)
@@ -33,7 +33,7 @@ class InMemory
         while i < @video_games.length
             if @video_games[i].id == id
                 @video_games[i] = video_game
-                return @video_games[i].to_hash
+                return @video_games[i]
             end
 
             i += 1

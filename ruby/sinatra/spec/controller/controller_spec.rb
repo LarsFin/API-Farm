@@ -10,9 +10,11 @@ describe Controller do
         it 'should return correct response with 200 status code' do
             # Arrange
             video_games = double 'video games'
+            hash_video_games = double 'video games as hash'
             json_video_games = double 'video games as json'
             allow(video_games_service).to receive(:get_all).and_return video_games
-            allow(video_games).to receive(:to_json).and_return json_video_games
+            allow(video_games).to receive(:map).and_return hash_video_games
+            allow(hash_video_games).to receive(:to_json).and_return json_video_games
 
             # Act
             response = subject.get_video_games
@@ -33,13 +35,15 @@ describe Controller do
             request = double 'request'
             video_game_query = double 'attempt to get video game'
             result = double 'video game obtained'
+            hash_result = double 'video game obtained as a hash'
             json_result = double 'video game obtained as a json'
 
             allow(request).to receive(:params).and_return request_params
             allow(video_games_service).to receive(:get).with(id.to_i).and_return video_game_query
             allow(video_game_query).to receive(:[]).with :fail_code
             allow(video_game_query).to receive(:[]).with(:result).and_return result
-            allow(result).to receive(:to_json).and_return json_result
+            allow(result).to receive(:to_hash).and_return hash_result
+            allow(hash_result).to receive(:to_json).and_return json_result
 
             # Act
             response = subject.get_video_game request
@@ -102,6 +106,7 @@ describe Controller do
             video_game_data = double 'video game data'
             addition = double 'attempt to add video game'
             result = double 'created video game result'
+            hash_result = double 'created video game result as hash'
             json_result = double 'created video game result as json'
 
             allow(request).to receive(:body).and_return request_body
@@ -110,7 +115,8 @@ describe Controller do
             allow(video_games_service).to receive(:add).with(video_game_data).and_return addition
             allow(addition).to receive(:[]).with(:fail_reason)
             allow(addition).to receive(:[]).with(:result).and_return result
-            allow(result).to receive(:to_json).and_return json_result
+            allow(result).to receive(:to_hash).and_return hash_result
+            allow(hash_result).to receive(:to_json).and_return json_result
 
             # Act
             response = subject.add_video_game request
@@ -180,6 +186,7 @@ describe Controller do
             video_game_data = double 'video game data'
             update = double 'attempt to update video game'
             result = double 'updated video game'
+            hash_result = double 'updated video game result as hash'
             json_result = double 'updated video game result as json'
 
             allow(request).to receive(:params).and_return request_params
@@ -189,7 +196,8 @@ describe Controller do
             allow(video_games_service).to receive(:update).with(id.to_i, video_game_data).and_return update
             allow(update).to receive(:[]).with(:fail_code)
             allow(update).to receive(:[]).with(:result).and_return result
-            allow(result).to receive(:to_json).and_return json_result
+            allow(result).to receive(:to_hash).and_return hash_result
+            allow(hash_result).to receive(:to_json).and_return json_result
 
             # Act
             response = subject.update_video_game request
@@ -309,23 +317,21 @@ describe Controller do
             request_params = { 'id' => id }
             request = double 'request'
             subtraction = double 'attempt to remove video game'
-            result = double 'deleted video game'
-            json_result = double 'deleted video game as json'
+            result = 'deleted video game'
 
             allow(request).to receive(:params).and_return request_params
             allow(video_games_service).to receive(:delete).with(id.to_i).and_return subtraction
             allow(subtraction).to receive(:[]).with :fail_code
             allow(subtraction).to receive(:[]).with(:result).and_return result
-            allow(result).to receive(:to_json).and_return json_result
 
             # Act
             response = subject.delete_video_game request
 
             # Assert
             expect(response[0]).to eq 200
-            expected_headers = { 'Content-Type' => 'application/json' }
+            expected_headers = { 'Content-Type' => 'text/plain' }
             expect(response[1]).to eq expected_headers
-            expect(response[2]).to be json_result
+            expect(response[2]).to be result
         end
 
         it 'should return correct response with 400 status code' do

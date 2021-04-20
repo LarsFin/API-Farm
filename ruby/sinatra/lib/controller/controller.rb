@@ -10,7 +10,8 @@ class Controller
 
     def get_video_games
         video_games = @video_games_service.get_all
-        ok video_games
+        hashed_video_games = video_games.map(&:to_hash)
+        ok hashed_video_games
     end
 
     def get_video_game(request)
@@ -31,7 +32,7 @@ class Controller
         if addition[:fail_reason]
             bad_request addition[:fail_reason]
         else
-            created addition[:result]
+            created addition[:result].to_hash
         end
     end
 
@@ -78,7 +79,12 @@ class Controller
         case attempt[:fail_code]
         when 400 then bad_request attempt[:fail_reason]
         when 404 then not_found attempt[:fail_reason]
-        else ok attempt[:result]
+        else
+            if attempt[:result].is_a? String
+                ok_text attempt[:result]
+            else
+                ok attempt[:result].to_hash
+            end
         end
     end
 
@@ -87,6 +93,14 @@ class Controller
             200,
             { 'Content-Type' => 'application/json' },
             result.to_json
+        ]
+    end
+
+    def ok_text(result)
+        [
+            200,
+            { 'Content-Type' => 'text/plain' },
+            result
         ]
     end
 
