@@ -38,8 +38,7 @@ case $CMD in
         fi
 
         echo "Running container with run command for image 'ruby/sinatra:dev'"
-        export RUBY_SINATRA_ENV=DEV
-        docker run --rm -p 8080:8080 --network=api_farm_dev --name ruby_sinatra ruby/sinatra:dev run
+        docker run --rm -p 8080:8080 --network=api_farm_dev --name ruby_sinatra -e RUBY_SINATRA_ENV=DEV ruby/sinatra:dev run
         ;;
         
     run_prod)
@@ -52,7 +51,7 @@ case $CMD in
 
         echo "Running container with run command for image 'ruby/sinatra:prod'"
         export RUBY_SINATRA_ENV=PROD
-        docker run --rm -p 8080:8080 --network=api_farm_dev --name ruby_sinatra ruby/sinatra:prod run
+        docker run --rm -p 8080:8080 --network=api_farm_dev --name ruby_sinatra -e RUBY_SINATRA_ENV=PROD ruby/sinatra:prod run
         ;;
 
     test)
