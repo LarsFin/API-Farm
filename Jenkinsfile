@@ -1,4 +1,3 @@
-// Test
 pipeline {
     agent any
 
@@ -18,6 +17,13 @@ pipeline {
 
         stage('Prod Check') {
             steps {
+                when {
+                    env.CHANGE_TARGE == "master"
+                }
+                stage {
+                    echo "Running API Tests..."
+                }
+
                 echo 'Complete!'
             }
         }
