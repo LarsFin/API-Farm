@@ -16,14 +16,16 @@ pipeline {
         }
 
         stage('Prod Check') {
+            when {
+                branch 'ruby/sinatra_patch_env'
+            }
             steps {
-                when {
-                    env.CHANGE_TARGE == "master"
-                }
-                stage {
-                    echo "Running API Tests..."
-                }
+                echo 'Running API Tests!'
+            }
+        }
 
+        stage('Clean Up') {
+            steps {
                 echo 'Complete!'
             }
         }
