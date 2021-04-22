@@ -16,14 +16,18 @@ pipeline {
         }
 
         stage('Prod Check') {
+            when {
+                expression {
+                    return env.CHANGE_TARGET == 'master';
+                }
+            }
             steps {
-                when {
-                    env.CHANGE_TARGE == "master"
-                }
-                stage {
-                    echo "Running API Tests..."
-                }
+                echo "Running api tests..."
+            }
+        }
 
+        stage('Clean Up') {
+            steps {
                 echo 'Complete!'
             }
         }
