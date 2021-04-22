@@ -16,14 +16,13 @@ pipeline {
         }
 
         stage('Prod Check') {
-            steps {
-                script {
-                    if (env.CHANGE_TARGET == 'master') {
-                        echo "Running api tests..."
-                    } else {
-                        echo "Skipping api tests are target is not master."
-                    }   
+            when {
+                expression {
+                    return env.CHANGE_TARGET == 'master';
                 }
+            }
+            steps {
+                echo "Running api tests..."
             }
         }
 
