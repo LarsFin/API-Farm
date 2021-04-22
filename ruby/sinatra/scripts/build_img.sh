@@ -12,20 +12,30 @@ if [ -z $ENV ]
         ENV=dev
 fi
 
+IMG_REF="ruby/sinatra:$ENV"
+
 # check if image for environment already exists
-if [ "$ENV" == "prod" ]
+if docker image inspect $IMG_REF >/dev/null 2>&1
     then
-        if docker image inspect ruby/sinatra:prod >/dev/null 2>&1
-            then
-                echo "Image for ruby/sinatra prod already exists. Removing..."
-                docker rmi ruby/sinatra:prod
-        fi
-    else
-        if docker image inspect ruby/sinatra:dev >/dev/null 2>&1
-            then
-                echo "Image for ruby/sinatra dev already exists. Removing..."
-                docker rmi ruby/sinatra:dev
-        fi
+        # check for running containers with image to stop
+        CONTAINERS=$(docker ps --filter ancestor=$IMG_REF --filter status=running --format {{.ID}})
+
+        # stop all discovered containers
+        for CONTAINER in $CONTAINERS; do
+            echo "Container with id '$CONTAINER' running with old image. Stopping container."
+            docker stop $CONTAINER >/dev/null 2>&1
+        done
+
+        # check for any containers with image to remove
+        CONTAINERS=$(docker ps --filter ancestor=$IMG_REF --format {{.ID}})
+
+        # remove all containers with image
+        for CONTAINER in $CONTAINERS; do
+            docker rm $CONTAINER >/dev/null 2>&1
+        done
+
+        echo "Image $IMG_REF already exists. Removing..."
+        docker rmi $IMG_REF
 fi
 
 # begin docker build

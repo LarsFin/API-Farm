@@ -10,20 +10,43 @@ if [ -z $CMD ]
         CMD=run_dev
 fi
 
-# check if image exists for specified command
+# determine image reference
 if [ "$CMD" == "run_prod" ]
     then
-        if ! docker image inspect ruby/sinatra:prod >/dev/null 2>&1
-            then
-                echo "The required image 'ruby/sinatra:prod' does not exist."
-                exit 1
-        fi
+        IMG_REF="ruby/sinatra:prod"
     else
-        if ! docker image inspect ruby/sinatra:dev >/dev/null 2>&1
-            then
-                echo "The required image 'ruby/sinatra:dev' does not exist."
-                exit 1
-        fi
+        IMG_REF="ruby/sinatra:dev"
+fi
+
+case $CMD in
+
+    run_dev)
+        IMG_REF="ruby/sinatra:dev"
+        ;;
+    
+    run_prod)
+        IMG_REF="ruby/sinatra:prod"
+        ;;
+
+    test)
+        IMG_REF="ruby/sinatra:dev"
+        ;;
+
+    lint)
+        IMG_REF="ruby/sinatra:dev"
+        ;;
+
+    *)
+        echo "Unknown command given; '${CMD}'."
+        exit 1
+
+esac
+
+# check if image exists
+if ! docker image inspect $IMG_REF >/dev/null 2>&1
+    then
+        echo "The required image '$IMG_REF' does not exist."
+        exit 1
 fi
 
 # run image inside container with specified command
@@ -50,7 +73,6 @@ case $CMD in
         fi
 
         echo "Running container with run command for image 'ruby/sinatra:prod'"
-        export RUBY_SINATRA_ENV=PROD
         docker run --rm -p 8080:8080 --network=api_farm_dev --name ruby_sinatra -e RUBY_SINATRA_ENV=PROD ruby/sinatra:prod run
         ;;
 
@@ -63,8 +85,4 @@ case $CMD in
         echo "Running container with lint command for image 'ruby/sinatra:dev"
         docker run --rm ruby/sinatra:dev lint
         ;;
-    
-    *)
-        echo "Unknown command given; '${CMD}'."
-        exit 1
 esac
