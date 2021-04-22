@@ -16,11 +16,10 @@ pipeline {
         }
 
         stage('Prod Check') {
-            when {
-                branch 'ruby/sinatra_patch_env'
-            }
-            steps {
-                echo 'Running API Tests!'
+            if (env.CHANGE_TARGET == 'master') {
+                echo "Running api tests..."
+            } else {
+                echo "Skipping api tests are target is not master."
             }
         }
 
