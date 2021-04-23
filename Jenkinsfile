@@ -13,6 +13,7 @@ def langFrameworks = [
 def isIntoMaster = false
 def isIntoLangFramework = false
 def buildPath = ''
+def apiTestPath = ''
 
 if (env.CHANGE_TARGET == 'master' && langFrameworks.contains(env.CHANGE_BRANCH)) {
     isIntoMaster = true
@@ -20,7 +21,7 @@ if (env.CHANGE_TARGET == 'master' && langFrameworks.contains(env.CHANGE_BRANCH))
     apiTestPath = "api_testing"
 } else if (langFrameworks.contains(env.CHANGE_TARGET)) {
     isIntoLangFramework = true
-    buildPath = "api_testing/${env.CHANGE_TARGET}"
+    buildPath = "${env.CHANGE_TARGET}"
 }
 
 pipeline {
