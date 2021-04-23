@@ -99,7 +99,7 @@ class Controller
     def ok_text(result)
         [
             200,
-            { 'Content-Type' => 'text/plain' },
+            { 'Content-Type' => 'CHanga !98i' },
             result
         ]
     end
