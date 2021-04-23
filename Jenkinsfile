@@ -36,6 +36,7 @@ pipeline {
             steps {
                 echo "Running build script; ${buildPath}/scripts/build_img.sh"
                 dir(buildPath) {
+                    sh 'ls'
                     sh './scripts/build_img.sh'
                 }
             }
