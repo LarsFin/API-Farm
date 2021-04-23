@@ -57,10 +57,6 @@ class Controller
         determine_response subtraction
     end
 
-    def do_it
-        puts 'string output!'
-    end
-
   private
 
     def get_id(request)
