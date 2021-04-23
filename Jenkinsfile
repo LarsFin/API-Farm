@@ -16,11 +16,11 @@ def buildPath = ''
 
 if (env.CHANGE_TARGET == 'master' && langFrameworks.contains(env.CHANGE_BRANCH)) {
     isIntoMaster = true
-    buildPath = "API-Farm/${env.CHANGE_BRANCH}"
-    apiTestPath = "API-Farm/api_testing"
+    buildPath = "${env.CHANGE_BRANCH}"
+    apiTestPath = "api_testing"
 } else if (langFrameworks.contains(env.CHANGE_TARGET)) {
     isIntoLangFramework = true
-    buildPath = "API-Farm/api_testing/${env.CHANGE_TARGET}"
+    buildPath = "api_testing/${env.CHANGE_TARGET}"
 }
 
 pipeline {
@@ -35,7 +35,6 @@ pipeline {
             }
             steps {
                 echo "Running build script; ${buildPath}/scripts/build_img.sh"
-                sh 'ls'
                 dir(buildPath) {
                     sh './scripts/build_img.sh'
                 }
