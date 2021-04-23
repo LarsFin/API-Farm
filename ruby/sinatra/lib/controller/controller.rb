@@ -91,7 +91,7 @@ class Controller
     def ok(result)
         [
             200,
-            { 'Content-Type' => 'application/json' },
+            { 'Content-Type' => "application/json" },
             result.to_json
         ]
     end
