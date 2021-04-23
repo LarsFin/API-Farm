@@ -7,7 +7,8 @@ There are three scenarios the pipeline runs against;
 
 // Append new lang/framework branch names when ready for pipeline builds
 def langFrameworks = [
-    'ruby/sinatra'
+    'ruby/sinatra',
+    'ruby/sinatra_jenkins' // TODO: Remove obviously!
 ]
 
 def isIntoMaster = false
@@ -17,7 +18,7 @@ def apiTestPath = ''
 
 if (env.CHANGE_TARGET == 'master' && langFrameworks.contains(env.CHANGE_BRANCH)) {
     isIntoMaster = true
-    buildPath = "${env.CHANGE_BRANCH}"
+    buildPath = "ruby/sinatra" // "${env.CHANGE_BRANCH}" changing because of test branch name!
     apiTestPath = "api_testing"
 } else if (langFrameworks.contains(env.CHANGE_TARGET)) {
     isIntoLangFramework = true
