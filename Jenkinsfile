@@ -36,12 +36,8 @@ pipeline {
             }
             steps {
                 echo "Running build script; ${buildPath}/scripts/build_img.sh"
-                sh 'pwd'
-                sh 'ls'
                 dir(buildPath) {
-                    sh 'pwd'
-                    sh 'ls -l ./scripts'
-                    sh 'chmod 777 ./scripts/build_img.sh'
+                    sh 'chmod 700 -R ./scripts'
                     sh './scripts/build_img.sh'
                 }
             }
@@ -88,12 +84,14 @@ pipeline {
                 }
                 echo "Running expectations api build script; ${apiTestPath}/expectations_api/scripts/build_img.sh"
                 dir("${apiTestPath}/expectations_api") {
+                    sh 'chmod 700 -R ./scripts'
                     sh './scripts/build_img.sh'
                     echo "Running expectations api script; ${apiTestPath}/expectations_api/scripts/run_img.sh"
                     sh './scripts/run_img.sh'
                 }
                 echo "Running api tests!"
                 dir(apiTestPath) {
+                    sh 'chmod 700 ./run.sh'
                     sh './run.sh'
                 }
             }
