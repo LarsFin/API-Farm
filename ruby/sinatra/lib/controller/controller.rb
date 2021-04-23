@@ -57,6 +57,10 @@ class Controller
         determine_response subtraction
     end
 
+    def do_it
+        puts 'string output!'
+    end
+
   private
 
     def get_id(request)
@@ -99,7 +103,7 @@ class Controller
     def ok_text(result)
         [
             200,
-            { 'Content-Type' => 'TODO: CHANGE LATER!' },
+            { 'Content-Type' => 'text/plain' },
             result
         ]
     end
