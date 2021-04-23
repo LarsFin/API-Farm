@@ -40,7 +40,8 @@ pipeline {
                 sh 'ls'
                 dir(buildPath) {
                     sh 'pwd'
-                    sh 'ls'
+                    sh 'ls -l ./scripts'
+                    sh 'chmod 777 ./scripts/build_img.sh'
                     sh './scripts/build_img.sh'
                 }
             }
