@@ -14,11 +14,13 @@ def langFrameworks = [
 def isIntoMaster = false
 def isIntoLangFramework = false
 def buildPath = ''
+def buildService = ''
 def apiTestPath = ''
 
 if (env.CHANGE_TARGET == 'master' && langFrameworks.contains(env.CHANGE_BRANCH)) {
     isIntoMaster = true
     buildPath = "ruby/sinatra" // "${env.CHANGE_BRANCH}" changing because of test branch name!
+    buildService = buildPath.replace('/', '_')
     apiTestPath = "api_testing"
 } else if (langFrameworks.contains(env.CHANGE_TARGET)) {
     isIntoLangFramework = true
@@ -93,7 +95,7 @@ pipeline {
                 echo "Running api tests!"
                 dir(apiTestPath) {
                     sh 'chmod 700 ./run.sh'
-                    sh './run.sh'
+                    sh "./run.sh ${buildService}"
                 }
             }
         }
