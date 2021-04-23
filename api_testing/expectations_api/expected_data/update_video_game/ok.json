@@ -1,0 +1,39 @@
+{
+    "id": 2,
+    "name": "Banjo Kazooie",
+    "developers": [
+        "Rare"
+    ],
+    "publishers": [
+        "Nintendo",
+        "Microsoft Game Studios"
+    ],
+    "directors": [
+        "Gregg Mayles",
+        "George Andreas"
+    ],
+    "producers": [
+        "Tim Stamper",
+        "Chris Stamper"
+    ],
+    "designers": [
+        "Gregg Mayles"
+    ],
+    "programmers": [
+        "Chris Sutherland"
+    ],
+    "artists": [
+        "Steve Mayles",
+        "John Nash",
+        "Kevin Bayliss",
+        "Tim Stamper"
+    ],
+    "composers": [
+        "Grant Kirkhope"
+    ],
+    "platforms": [
+        "Nintendo 64",
+        "Xbox 360"
+    ],
+    "date_released": "29/06/1998"
+}
