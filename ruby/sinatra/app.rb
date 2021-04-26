@@ -22,7 +22,7 @@ get '/' do
     'Hello World!'
 end
 
-if environment == 'TEST'
+if %w[TEST DEV].include? environment
     require_relative 'lib/controller/testing_controller'
     require_relative 'lib/services/data_loader'
 

@@ -31,12 +31,12 @@ case $CMD in
 
     run_dev)
         echo "Running container with run command for image 'ruby/sinatra:dev'"
-        docker run --rm -dt -p 8080:8080 --name ruby_sinatra ruby/sinatra:dev run
+        docker run --rm -dt -p 8080:8080 --name ruby_sinatra --network=api_farm_dev -e RUBY_SINATRA_ENV=DEV ruby/sinatra:dev run
         ;;
         
     run_prod)
         echo "Running container with run command for image 'ruby/sinatra:prod'"
-        docker run --rm -dt -p 8080:8080 --name ruby_sinatra ruby/sinatra:prod run
+        docker run --rm -dt -p 8080:8080 --name ruby_sinatra --network=api_farm_dev -e RUBY_SINATRA_ENV=PROD ruby/sinatra:prod run
         ;;
 
     test)
