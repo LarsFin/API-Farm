@@ -37,7 +37,7 @@ fi
 touch $LOGGING_FILE
 
 # Delete api_testing image if it already exists
-if docker image inspect api_testing/newman >>$LOGGING_FILE
+if docker image inspect api_testing/newman >>$LOGGING_FILE 2>&1
     then
         echo "Removing old api testing image..."
         docker rmi api_testing/newman >>$LOGGING_FILE 2>&1
