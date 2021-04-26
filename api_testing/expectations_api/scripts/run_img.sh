@@ -35,4 +35,4 @@ if ! docker network inspect api_farm_dev >/dev/null 2>&1
         docker network create api_farm_dev
 fi
 
-docker run --rm -p 3000:3000 --name expectations_api --network api_farm_dev $IMG_REF
+docker run --rm -dt -p 3000:3000 --name expectations_api --network api_farm_dev $IMG_REF
