@@ -1,0 +1,38 @@
+{
+    "id": 26,
+    "name": "Bloodborne",
+    "developers": [
+      "FromSoftware"
+    ],
+    "publishers": [
+      "Sony Computer Entertainment"
+    ],
+    "directors": [
+      "Hidetaka Miyazaki"
+    ],
+    "producers": [
+      "Masaaki Yamagiwa",
+      "Teruyuki Toriyama"
+    ],
+    "designers": [
+      "Kazuhiro Hamatani"
+    ],
+    "programmers": [
+      "Jun Ito"
+    ],
+    "artists": [
+      "Ryo Fujimaki"
+    ],
+    "composers": [
+      "Ryan Amon",
+      "Tsukasa Saitoh",
+      "Yuka Kitamura",
+      "Nobuyoshi Suzuki",
+      "Cris Velasco",
+      "Michael Wandmacher"
+    ],
+    "platforms": [
+      "Playstation 4"
+    ],
+    "date_released": "24/03/2015"
+}

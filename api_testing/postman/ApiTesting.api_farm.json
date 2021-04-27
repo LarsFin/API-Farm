@@ -1,0 +1,29 @@
+{
+	"id": "96617b66-97a5-47cd-823c-68397204632d",
+	"name": "ApiTesting",
+	"values": [
+		{
+			"key": "host",
+			"value": "SET_WITH_APP_CONTAINER_NAME",
+			"enabled": true
+		},
+		{
+			"key": "port",
+			"value": "8080",
+			"enabled": true
+		},
+		{
+			"key": "expectations_api_host",
+			"value": "expectations_api",
+			"enabled": true
+		},
+		{
+			"key": "expectations_api_port",
+			"value": "3000",
+			"enabled": true
+		}
+	],
+	"_postman_variable_scope": "environment",
+	"_postman_exported_at": "2021-04-19T09:31:00.721Z",
+	"_postman_exported_using": "Postman/8.1.0"
+}
