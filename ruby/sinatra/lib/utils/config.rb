@@ -1,7 +1,13 @@
+require 'json'
+
 class Config
     attr_reader :settings
 
     def initialize environment
+        dev_file = File.read("config.dev.json")
+
+        settings = JSON.parse(dev_file)
+
         # read respective config file. E.g; if DEV; should read from config file 'config.dev.json'. This file will be at the root of the lang/framework dir.
         # convert read data into hash using json library
         # set converted data to settings attribute
