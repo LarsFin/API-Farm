@@ -1,0 +1,40 @@
+{
+    "id": 26,
+    "name": "Super Mario Sunshine",
+    "developers": [
+      "Nintendo EAD"
+    ],
+    "publishers": [
+      "Nintendo"
+    ],
+    "directors": [
+      "Yoshiaki Koizumi",
+      "Kenta Usui"
+    ],
+    "producers": [
+      "Shigeru Miyamoto",
+      "Takashi Tezuka"
+    ],
+    "designers": [
+      "Hiromu Takemura",
+      "Atsushi Miyagi",
+      "Taeko Suguwara",
+      "Kazumi Yamaguchi"
+    ],
+    "programmers": [
+      "Koichi Hayashida",
+      "Shunsaku Kitamura",
+      "Shinichi Sasaki"
+    ],
+    "artists": [
+
+    ],
+    "composers": [
+      "Koji Kondo",
+      "Shinobu Tanaka"
+    ],
+    "platforms": [
+      "GameCube"
+    ],
+    "date_released": "19/07/2002"
+}
