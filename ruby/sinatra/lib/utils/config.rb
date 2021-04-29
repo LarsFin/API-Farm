@@ -7,12 +7,21 @@ class Config
     attr_reader :settings
 
     def initialize(environment)
-        if environment == 'DEV'
-            dev_file = File.read 'config.dev.json'
+        case environment
+            when "DEV"
+                dev_file = File.read 'config.dev.json'
 
-            @settings = JSON.parse dev_file
-        else
-            abort "Given environment doesn't exist"
+                @settings = JSON.parse dev_file
+            when "PROD"
+                dev_file = File.read 'config.prod.json'
+
+                @settings = JSON.parse dev_file
+            when "TEST"
+                dev_file = File.read 'config.test.json'
+
+                @settings = JSON.parse dev_file
+            else
+                abort "Given environment doesn't exist"
         end
     end
 end

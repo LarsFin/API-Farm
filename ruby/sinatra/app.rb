@@ -13,8 +13,6 @@ environment = (ENV['RUBY_SINATRA_ENV'] || 'DEV').upcase
 
 config = Config.new environment
 
-p config.settings
-
 # configure host and port
 set :bind, config.settings['bind']
 set :port, config.settings['port']
