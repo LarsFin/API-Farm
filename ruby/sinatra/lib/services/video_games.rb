@@ -16,7 +16,7 @@ class VideoGames
     def get(id)
         video_game = @storage.get id
 
-        return { fail_code: 404, fail_reason: "Could not find video game with id '#{id}'." } unless video_game
+        return { fail_code: 404, fail_reason: not_found_msg(id) } unless video_game
 
         { result: video_game }
     end
@@ -48,7 +48,7 @@ class VideoGames
 
         video_game = @storage.get id
 
-        return { fail_code: 404, fail_reason: "Could not find video game with id '#{id}'." } unless video_game
+        return { fail_code: 404, fail_reason: not_found_msg(id) } unless video_game
 
         fail_result = set_properties video_game, video_game_data
 
@@ -62,12 +62,16 @@ class VideoGames
     def delete(id)
         video_game = @storage.delete id
 
-        return { fail_code: 404, fail_reason: "Could not find video game with id '#{id}'." } unless video_game
+        return { fail_code: 404, fail_reason: not_found_msg(id) } unless video_game
 
-        { result: "Deleted video game with id '#{id}'" }
+        { result: "Deleted video game with id '#{id}'." }
     end
 
   private
+
+    def not_found_msg(id)
+        "No video game with id '#{id}' could be found."
+    end
 
     def validate_keys(video_game_data)
         video_game_data.each_key do |key|
