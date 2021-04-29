@@ -72,7 +72,7 @@ class Controller
         body = JSON.parse request.body.read
         { result: body }
     rescue JSON::ParserError
-        { fail_reason: 'Invalid JSON in body' }
+        { fail_reason: 'Invalid JSON in body.' }
     end
 
     def determine_response(attempt)
