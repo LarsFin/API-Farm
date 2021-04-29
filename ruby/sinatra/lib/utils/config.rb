@@ -5,10 +5,13 @@ class Config
 
     def initialize environment
 
-        if environment == "DEV" 
-            dev_file = File.read("config.dev.json")
+        case environment
+            when "DEV"
+                dev_file = File.read("config.dev.json")
 
-            settings = JSON.parse(dev_file)
+                @settings = JSON.parse(dev_file)
+            else
+                abort "Given environment doesn't exist"
         end
 
         # read respective config file. E.g; if DEV; should read from config file 'config.dev.json'. This file will be at the root of the lang/framework dir.
