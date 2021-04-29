@@ -2349,7 +2349,7 @@
 											"});\r",
 											"\r",
 											"pm.test(\"Body states video game was not found\", () => {\r",
-											"    pm.expect(pm.response.text()).to.be.eql(\"No video game with id '25' could be found.\");\r",
+											"    pm.expect(pm.response.text()).to.be.eql(\"No video game with id '99' could be found.\");\r",
 											"});\r",
 											"\r",
 											"pm.test(\"Response time is less than 250ms\", () => {\r",
