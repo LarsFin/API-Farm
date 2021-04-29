@@ -9,19 +9,21 @@ class Config
     def initialize(environment)
         case environment
             when "DEV"
-                dev_file = File.read 'config.dev.json'
-
-                @settings = JSON.parse dev_file
+                set_file 'config.dev.json'
             when "PROD"
-                dev_file = File.read 'config.prod.json'
-
-                @settings = JSON.parse dev_file
+                set_file 'config.prod.json'
             when "TEST"
-                dev_file = File.read 'config.test.json'
-
-                @settings = JSON.parse dev_file
+                set_file 'config.dev.json'
             else
                 abort "Given environment doesn't exist"
         end
+    end
+
+    private
+
+    def set_file(file_path)
+        dev_file = File.read file_path
+
+        @settings = JSON.parse dev_file
     end
 end
