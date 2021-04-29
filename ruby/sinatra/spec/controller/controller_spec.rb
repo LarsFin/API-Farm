@@ -133,7 +133,7 @@ describe Controller do
             request = double 'request'
             request_body = double 'request body'
             json_video_game = double 'video game as json'
-            fail_reason = 'Invalid JSON in body'
+            fail_reason = 'Invalid JSON in body.'
 
             allow(request).to receive(:body).and_return request_body
             allow(request_body).to receive(:read).and_return json_video_game
@@ -234,7 +234,7 @@ describe Controller do
             request = double 'request'
             request_body = double 'request body'
             json_video_game = double 'video game as json'
-            fail_reason = 'Invalid JSON in body'
+            fail_reason = 'Invalid JSON in body.'
 
             allow(request).to receive(:params).and_return request_params
             allow(request).to receive(:body).and_return request_body

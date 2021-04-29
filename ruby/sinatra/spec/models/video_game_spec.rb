@@ -17,7 +17,11 @@ describe VideoGame do
             subject.artists = ['Jack Hopkins']
             subject.composers = ['Jack Hopkins']
             subject.platforms = ['Windows OS']
-            subject.date_released = '22/10/2022'
+
+            date_released = double 'date released'
+            subject.date_released = date_released
+            date_released_s = '04/12/2002'
+            allow(date_released).to receive(:strftime).with('%d/%m/%Y').and_return date_released_s
 
             # Act
             result = subject.to_hash
@@ -35,7 +39,7 @@ describe VideoGame do
             expect(result['artists']).to be subject.artists
             expect(result['composers']).to be subject.composers
             expect(result['platforms']).to be subject.platforms
-            expect(result['date_released']).to be subject.date_released
+            expect(result['date_released']).to be date_released_s
         end
     end
 end

@@ -46,7 +46,7 @@ describe VideoGames do
 
             # Assert
             expect(video_game_query[:fail_code]).to eq 404
-            expect(video_game_query[:fail_reason]).to eq "Could not find video game with id '#{id}'."
+            expect(video_game_query[:fail_reason]).to eq "No video game with id '#{id}' could be found."
         end
     end
 
@@ -74,18 +74,46 @@ describe VideoGames do
             allow(Date).to receive(:parse).with(video_game_data['date_released']).and_return converted_date_released
             allow(storage).to receive(:add).with(video_game).and_return stored_video_game
 
+            allow(video_game).to receive(:developers)
+            allow(video_game).to receive(:publishers)
+            allow(video_game).to receive(:directors)
+            allow(video_game).to receive(:producers)
+            allow(video_game).to receive(:designers)
+            allow(video_game).to receive(:programmers)
+            allow(video_game).to receive(:artists)
+            allow(video_game).to receive(:composers)
+            allow(video_game).to receive(:platforms)
+
             # Assert
             expect(video_game).to receive(:name=).with video_game_data['name']
             expect(video_game).to receive(:date_released=).with converted_date_released
+
             expect(video_game).to receive(:developers=).with video_game_data['developers']
+            expect(video_game).to receive(:developers=).with []
+
             expect(video_game).to receive(:publishers=).with video_game_data['publishers']
+            expect(video_game).to receive(:publishers=).with []
+
             expect(video_game).to receive(:directors=).with video_game_data['directors']
+            expect(video_game).to receive(:directors=).with []
+
             expect(video_game).to receive(:producers=).with video_game_data['producers']
+            expect(video_game).to receive(:producers=).with []
+
             expect(video_game).to receive(:designers=).with video_game_data['designers']
+            expect(video_game).to receive(:designers=).with []
+
             expect(video_game).to receive(:programmers=).with video_game_data['programmers']
+            expect(video_game).to receive(:programmers=).with []
+
             expect(video_game).to receive(:artists=).with video_game_data['artists']
+            expect(video_game).to receive(:artists=).with []
+
             expect(video_game).to receive(:composers=).with video_game_data['composers']
+            expect(video_game).to receive(:composers=).with []
+
             expect(video_game).to receive(:platforms=).with video_game_data['platforms']
+            expect(video_game).to receive(:platforms=).with []
 
             # Act
             addition = subject.add video_game_data
@@ -151,8 +179,28 @@ describe VideoGames do
             allow(video_game_class).to receive(:new).and_return video_game
             allow(Date).to receive(:parse).and_raise('Failed!')
 
+            allow(video_game).to receive(:developers)
+            allow(video_game).to receive(:publishers)
+            allow(video_game).to receive(:directors)
+            allow(video_game).to receive(:producers)
+            allow(video_game).to receive(:designers)
+            allow(video_game).to receive(:programmers)
+            allow(video_game).to receive(:artists)
+            allow(video_game).to receive(:composers)
+            allow(video_game).to receive(:platforms)
+
             # Assert
             expect(video_game).to receive(:name=).with video_game_data['name']
+
+            expect(video_game).to receive(:developers=).with []
+            expect(video_game).to receive(:publishers=).with []
+            expect(video_game).to receive(:directors=).with []
+            expect(video_game).to receive(:producers=).with []
+            expect(video_game).to receive(:designers=).with []
+            expect(video_game).to receive(:programmers=).with []
+            expect(video_game).to receive(:artists=).with []
+            expect(video_game).to receive(:composers=).with []
+            expect(video_game).to receive(:platforms=).with []
 
             # Act
             addition = subject.add video_game_data
@@ -173,7 +221,16 @@ describe VideoGames do
               'designers' => designers,
               'artists' => artists
             }
-            video_game = double 'existing video game'
+            video_game = double('existing video game',
+                                'developers' => [],
+                                'publishers' => [],
+                                'directors' => [],
+                                'producers' => [],
+                                'designers' => [],
+                                'programmers' => [],
+                                'artists' => [],
+                                'composers' => [],
+                                'platforms' => [])
             updated_video_game = double 'updated video game in storage'
             allow(video_game_class).to receive(:method_defined?).with(:designers).and_return true
             allow(video_game_class).to receive(:method_defined?).with(:artists).and_return true
@@ -229,7 +286,7 @@ describe VideoGames do
 
             # Assert
             expect(update[:fail_code]).to eq 404
-            expect(update[:fail_reason]).to eq "Could not find video game with id '#{id}'."
+            expect(update[:fail_reason]).to eq "No video game with id '#{id}' could be found."
         end
 
         it 'should return failure when provided date is invalid' do
@@ -240,7 +297,16 @@ describe VideoGames do
               'designers' => designers,
               'date_released' => 'Last Monday'
             }
-            video_game = double 'existing video game'
+            video_game = double('existing video game',
+                                'developers' => [],
+                                'publishers' => [],
+                                'directors' => [],
+                                'producers' => [],
+                                'designers' => [],
+                                'programmers' => [],
+                                'artists' => [],
+                                'composers' => [],
+                                'platforms' => [])
             allow(video_game_class).to receive(:method_defined?).with(:designers).and_return true
             allow(video_game_class).to receive(:method_defined?).with(:date_released).and_return true
             allow(storage).to receive(:get).with(id).and_return video_game
@@ -263,7 +329,7 @@ describe VideoGames do
         it 'should remove existing video game from storage' do
             # Arrange
             id = 1
-            deleted_video_game_message = "Deleted video game with id '#{id}'"
+            deleted_video_game_message = "Deleted video game with id '#{id}'."
 
             allow(storage).to receive(:delete).and_return deleted_video_game_message
 
@@ -285,7 +351,7 @@ describe VideoGames do
 
             # Assert
             expect(subtraction[:fail_code]).to eq 404
-            expect(subtraction[:fail_reason]).to eq "Could not find video game with id '#{id}'."
+            expect(subtraction[:fail_reason]).to eq "No video game with id '#{id}' could be found."
         end
     end
 end
