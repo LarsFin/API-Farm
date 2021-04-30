@@ -26,6 +26,10 @@ if (env.CHANGE_TARGET == 'master' && langFrameworks.contains(env.CHANGE_BRANCH))
     buildPath = "${env.CHANGE_TARGET}"
 }
 
+def formatMessage(msg) {
+    "```\n${msg.substring(0, Math.min(255, msg.length()))}\n```"
+}
+
 pipeline {
     agent any
 
@@ -45,7 +49,7 @@ pipeline {
                             sh './scripts/build_img.sh'
                         }
                     } catch (e) {
-                        pullRequest.comment("BUILD FAILED ❌. SEE ERROR MESSAGE BELOW:\n${e.message.substring(0, 255)}")
+                        pullRequest.comment("BUILD FAILED ❌. SEE ERROR MESSAGE BELOW:\n${formatMessage(e.message)}")
                         throw e
                     }
                 }
@@ -66,7 +70,7 @@ pipeline {
                             sh './scripts/run_img.sh lint'
                         }
                     } catch (e) {
-                        pullRequest.comment("LINTING FAILED ❌. SEE ERROR MESSAGE BELOW:\n${e.message.substring(0, 255)}")
+                        pullRequest.comment("LINTING FAILED ❌. SEE ERROR MESSAGE BELOW:\n${formatMessage(e.message)}")
                         throw e
                     }
                 }
@@ -87,7 +91,7 @@ pipeline {
                             sh './scripts/run_img.sh test'
                         }   
                     } catch (e) {
-                        pullRequest.comment("SRC TESTING FAILED ❌. SEE ERROR MESSAGE BELOW:\n${e.message.substring(0, 255)}")
+                        pullRequest.comment("SRC TESTING FAILED ❌. SEE ERROR MESSAGE BELOW:\n${formatMessage(e.message)}")
                         throw e
                     }
                 }
@@ -109,7 +113,7 @@ pipeline {
                         }
                         sh 'curl -f http://localhost:8080/ping'
                     } catch (e) {
-                        pullRequest.comment("HEALTH CHECK FAILED ❌. SEE ERROR MESSAGE BELOW:\n${e.message.substring(0, 255)}")
+                        pullRequest.comment("HEALTH CHECK FAILED ❌. SEE ERROR MESSAGE BELOW:\n${formatMessage(e.message)}")
                         throw e
                     }
                 }
@@ -138,7 +142,7 @@ pipeline {
                             sh "./run.sh ${buildService}"
                         }
                     } catch (e) {
-                        pullRequest.comment("API TESTS FAILED ❌. SEE ERROR MESSAGE BELOW:\n${e.message.substring(0, 255)}")
+                        pullRequest.comment("API TESTS FAILED ❌. SEE ERROR MESSAGE BELOW:\n${formatMessage(e.message)}")
                         throw e
                     }
                 }
