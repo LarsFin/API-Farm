@@ -50,7 +50,7 @@ pipeline {
                             sh './scripts/build_img.sh'
                         }
                     } catch (e) {
-                        pullRequest.comment("BUILD FAILED ❌. SEE ERROR MESSAGE BELOW:\n${formatMessage(e.message)}")
+                        pullRequest.comment("BUILD FAILED ❌. SEE ERROR DETAILS BELOW:\n${formatError(e)}")
                         throw e
                     }
                 }
@@ -71,7 +71,7 @@ pipeline {
                             sh './scripts/run_img.sh lint'
                         }
                     } catch (e) {
-                        pullRequest.comment("LINTING FAILED ❌. SEE ERROR MESSAGE BELOW:\n${formatMessage(e.message)}")
+                        pullRequest.comment("LINTING FAILED ❌. SEE ERROR DETAILS BELOW:\n${formatError(e)}")
                         throw e
                     }
                 }
@@ -92,7 +92,7 @@ pipeline {
                             sh './scripts/run_img.sh test'
                         }   
                     } catch (e) {
-                        pullRequest.comment("SRC TESTING FAILED ❌. SEE ERROR MESSAGE BELOW:\n${formatMessage(e.message)}")
+                        pullRequest.comment("SRC TESTING FAILED ❌. SEE ERROR DETAILS BELOW:\n${formatError(e)}")
                         throw e
                     }
                 }
@@ -115,7 +115,7 @@ pipeline {
                         sh 'curl -f http://localhost:8080/ping'
                     } catch (e) {
                         echo "${e.dump()}"
-                        pullRequest.comment("HEALTH CHECK FAILED ❌. SEE ERROR MESSAGE BELOW:\n${formatMessage(e.message)}")
+                        pullRequest.comment("HEALTH CHECK FAILED ❌. SEE ERROR DETAILS BELOW:\n${formatError(e)}")
                         throw e
                     }
                 }
@@ -144,7 +144,7 @@ pipeline {
                             sh "./run.sh ${buildService}"
                         }
                     } catch (e) {
-                        pullRequest.comment("API TESTS FAILED ❌. SEE ERROR MESSAGE BELOW:\n${formatMessage(e.message)}")
+                        pullRequest.comment("API TESTS FAILED ❌. SEE ERROR DETAILS BELOW:\n${formatError(e)}")
                         throw e
                     }
                 }
