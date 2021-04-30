@@ -18,8 +18,8 @@ storage = InMemory.new
 service = VideoGames.new storage, VideoGame
 controller = Controller.new service
 
-get '/' do
-    'Hello World!'
+get '/ping' do
+    'pong'
 end
 
 if %w[TEST DEV].include? environment
