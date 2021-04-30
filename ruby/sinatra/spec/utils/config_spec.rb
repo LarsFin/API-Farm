@@ -20,14 +20,10 @@ describe Config do
         # Assert
         expect(result).to be config_array
     end
-end
 
-describe Config do
-    environment = 'N/A'
-    subject { Config.new environment }
-
-    it 'should read and convert environment dev file' do
+    it 'should read file and give error message' do
         # Arrange
+        environment = 'N/A'
         dev_file = double 'DEV file path'
         config_item = double 'Data file resource'
         config_array = [config_item]
