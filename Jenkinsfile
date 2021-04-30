@@ -31,8 +31,10 @@ pipeline {
 
     stages {
         stage('Init') {
-            script {
-                pullRequest.comment("From Jenkins.")
+            steps {
+                script {
+                    pullRequest.comment("From Jenkins.")
+                }
             }
         }
 
@@ -47,11 +49,6 @@ pipeline {
                 dir(buildPath) {
                     sh 'chmod 700 -R ./scripts'
                     sh './scripts/build_img.sh'
-                }
-            }
-            post {
-                failure {
-
                 }
             }
         }
