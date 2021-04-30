@@ -28,7 +28,8 @@ if (env.CHANGE_TARGET == 'master' && langFrameworks.contains(env.CHANGE_BRANCH))
 }
 
 def formatError(e) {
-    "```\nMessage: ${e.message.substring(0, Math.min(255, e.message.length()))}\nStack Trace: ${e.stackTrace.substring(0, Math.min(255, e.stackTrace.length()))}\n```"
+    def stackTraceBound = e.stackTrace.size() > 10 ? e.stackTrace.size() - 10 : 0
+    "```\nMessage: ${e.message.substring(0, Math.min(255, e.message.length()))}\nStack Trace: ${e.stackTrace[stackTraceBound..-1]}\n```"
 }
 
 pipeline {
