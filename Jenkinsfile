@@ -73,10 +73,10 @@ pipeline {
             }
         }
 
-        stage('API Testing') {
+        stage('Health Check') {
             when {
                 expression {
-                    return isIntoMaster
+                    return isIntoMaster || isIntoLangFramework
                 }
             }
             steps {
@@ -84,6 +84,17 @@ pipeline {
                 dir(buildPath) {
                     sh './scripts/run_img.sh'
                 }
+                sh 'curl -f http://localhost:8080/ping'
+            }
+        }
+
+        stage('API Testing') {
+            when {
+                expression {
+                    return isIntoMaster
+                }
+            }
+            steps {
                 echo "Running expectations api build script; ${apiTestPath}/expectations_api/scripts/build_img.sh"
                 dir("${apiTestPath}/expectations_api") {
                     sh 'chmod 700 -R ./scripts'
