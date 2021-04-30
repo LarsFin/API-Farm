@@ -30,6 +30,12 @@ pipeline {
     agent any
 
     stages {
+        stage('Init') {
+            script {
+                pullRequest.comment("From Jenkins.")
+            }
+        }
+
         stage('Build') {
             when {
                 expression {
@@ -41,6 +47,11 @@ pipeline {
                 dir(buildPath) {
                     sh 'chmod 700 -R ./scripts'
                     sh './scripts/build_img.sh'
+                }
+            }
+            post {
+                failure {
+
                 }
             }
         }
