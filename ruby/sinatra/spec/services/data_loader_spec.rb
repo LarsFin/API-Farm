@@ -30,6 +30,9 @@ describe DataLoader do
             vg_platforms = 'platforms of video game'
             vg_date_released = 'date released of video game'
 
+            parsed_date_released = double 'date released as Date'
+            allow(Date).to receive(:parse).with(vg_date_released).and_return parsed_date_released
+
             allow(contents_item).to receive(:[]).with('name').and_return vg_name
             allow(contents_item).to receive(:[]).with('developers').and_return vg_developers
             allow(contents_item).to receive(:[]).with('publishers').and_return vg_publishers
@@ -53,7 +56,7 @@ describe DataLoader do
             expect(video_game).to receive(:artists=).with(vg_artists).exactly(3).times
             expect(video_game).to receive(:composers=).with(vg_composers).exactly(3).times
             expect(video_game).to receive(:platforms=).with(vg_platforms).exactly(3).times
-            expect(video_game).to receive(:date_released=).with(vg_date_released).exactly(3).times
+            expect(video_game).to receive(:date_released=).with(parsed_date_released).exactly(3).times
 
             # Act
             result = subject.load

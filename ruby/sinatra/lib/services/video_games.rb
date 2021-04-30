@@ -16,7 +16,7 @@ class VideoGames
     def get(id)
         video_game = @storage.get id
 
-        return { fail_code: 404, fail_reason: "Could not find video game with id '#{id}'." } unless video_game
+        return { fail_code: 404, fail_reason: not_found_msg(id) } unless video_game
 
         { result: video_game }
     end
@@ -48,7 +48,7 @@ class VideoGames
 
         video_game = @storage.get id
 
-        return { fail_code: 404, fail_reason: "Could not find video game with id '#{id}'." } unless video_game
+        return { fail_code: 404, fail_reason: not_found_msg(id) } unless video_game
 
         fail_result = set_properties video_game, video_game_data
 
@@ -62,12 +62,16 @@ class VideoGames
     def delete(id)
         video_game = @storage.delete id
 
-        return { fail_code: 404, fail_reason: "Could not find video game with id '#{id}'." } unless video_game
+        return { fail_code: 404, fail_reason: not_found_msg(id) } unless video_game
 
-        { result: "Deleted video game with id '#{id}'" }
+        { result: "Deleted video game with id '#{id}'." }
     end
 
   private
+
+    def not_found_msg(id)
+        "No video game with id '#{id}' could be found."
+    end
 
     def validate_keys(video_game_data)
         video_game_data.each_key do |key|
@@ -108,38 +112,47 @@ class VideoGames
 
     def set_developers(video_game, video_game_data)
         video_game.developers = video_game_data['developers'] if video_game_data['developers']
+        video_game.developers ||= []
     end
 
     def set_publishers(video_game, video_game_data)
         video_game.publishers = video_game_data['publishers'] if video_game_data['publishers']
+        video_game.publishers ||= []
     end
 
     def set_directors(video_game, video_game_data)
         video_game.directors = video_game_data['directors'] if video_game_data['directors']
+        video_game.directors ||= []
     end
 
     def set_producers(video_game, video_game_data)
         video_game.producers = video_game_data['producers'] if video_game_data['producers']
+        video_game.producers ||= []
     end
 
     def set_designers(video_game, video_game_data)
         video_game.designers = video_game_data['designers'] if video_game_data['designers']
+        video_game.designers ||= []
     end
 
     def set_programmers(video_game, video_game_data)
         video_game.programmers = video_game_data['programmers'] if video_game_data['programmers']
+        video_game.programmers ||= []
     end
 
     def set_artists(video_game, video_game_data)
         video_game.artists = video_game_data['artists'] if video_game_data['artists']
+        video_game.artists ||= []
     end
 
     def set_composers(video_game, video_game_data)
         video_game.composers = video_game_data['composers'] if video_game_data['composers']
+        video_game.composers ||= []
     end
 
     def set_platforms(video_game, video_game_data)
         video_game.platforms = video_game_data['platforms'] if video_game_data['platforms']
+        video_game.platforms ||= []
     end
 
     def set_date(video_game, video_game_data)

@@ -79,6 +79,6 @@ class DataLoader
     end
 
     def set_date_released(video_game, video_game_hash)
-        video_game.date_released = video_game_hash['date_released']
+        video_game.date_released = Date.parse video_game_hash['date_released']
     end
 end
