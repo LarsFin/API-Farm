@@ -17,7 +17,7 @@ class Config
             when "TEST"
                 set_file 'config.dev.json'
             else
-                raise EnvironmentError.new("Given environment doesn't exist")
+                raise "Given environment doesn't exist"
         end
     end
 

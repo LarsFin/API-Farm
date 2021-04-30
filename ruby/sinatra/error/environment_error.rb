@@ -1,5 +1,5 @@
 class EnvironmentError < StandardError 
     def initialize(message)
-        super()
+        super
     end
 end

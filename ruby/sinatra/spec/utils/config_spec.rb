@@ -24,16 +24,8 @@ describe Config do
     it 'should read file and give error message' do
         # Arrange
         environment = 'N/A'
-        dev_file = double 'DEV file path'
-        config_item = double 'Data file resource'
-        config_array = [config_item]
-        allow(File).to receive(:read).with('config.dev.json').and_return dev_file
-        allow(JSON).to receive(:parse).with(dev_file).and_return config_array
-
-        # Act
-        result = subject.settings
 
         # Assert
-        expect(result).to eq "Given environment doesn't exist"
+        expect { subject }.to raise_error("Given environment doesn't exist")
     end
 end
