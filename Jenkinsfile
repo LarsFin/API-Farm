@@ -19,8 +19,8 @@ def apiTestPath = ''
 
 if (env.CHANGE_TARGET == 'master' && langFrameworks.contains(env.CHANGE_BRANCH)) {
     isIntoMaster = true
-    buildPath = "${env.CHANGE_BRANCH}"
-    buildService = buildPath.replace('/', '_')
+    buildPath = 'ruby/sinatra' // "${env.CHANGE_BRANCH}"
+    buildService = 'ruby_sinatra' // buildPath.replace('/', '_')
     apiTestPath = "api_testing"
 } else if (langFrameworks.contains(env.CHANGE_TARGET)) {
     isIntoLangFramework = true
