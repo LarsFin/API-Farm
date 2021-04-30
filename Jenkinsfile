@@ -37,15 +37,17 @@ pipeline {
                 }
             }
             steps {
-                try {
-                    echo "Running build script; ${buildPath}/scripts/build_img.sh"
-                    dir(buildPath) {
-                        sh 'chmod 700 -R ./scripts'
-                        sh './scripts/build_img.sh'
+                script {
+                    try {
+                        echo "Running build script; ${buildPath}/scripts/build_img.sh"
+                        dir(buildPath) {
+                            sh 'chmod 700 -R ./scripts'
+                            sh './scripts/build_img.sh'
+                        }
+                    } catch (e) {
+                        pullRequest.comment("BUILD FAILED ❌. SEE ERROR MESSAGE BELOW:\n${e.message.substring(0, 255)}")
+                        throw e
                     }
-                } catch (e) {
-                    pullRequest.comment("BUILD FAILED ❌. SEE ERROR MESSAGE BELOW:\n${e.message.substring(0, 255)}")
-                    throw e
                 }
             }
         }
@@ -57,14 +59,16 @@ pipeline {
                 }
             }
             steps {
-                try {
-                    echo "Running lint script; ${buildPath}/scripts/run_img.sh lint"
-                    dir(buildPath) {
-                        sh './scripts/run_img.sh lint'
+                script {
+                    try {
+                        echo "Running lint script; ${buildPath}/scripts/run_img.sh lint"
+                        dir(buildPath) {
+                            sh './scripts/run_img.sh lint'
+                        }
+                    } catch (e) {
+                        pullRequest.comment("LINTING FAILED ❌. SEE ERROR MESSAGE BELOW:\n${e.message.substring(0, 255)}")
+                        throw e
                     }
-                } catch (e) {
-                    pullRequest.comment("LINTING FAILED ❌. SEE ERROR MESSAGE BELOW:\n${e.message.substring(0, 255)}")
-                    throw e
                 }
             }
         }
@@ -76,14 +80,16 @@ pipeline {
                 }
             }
             steps {
-                try {
-                    echo "Running src test script; ${buildPath}/scripts/run_img.sh test"
-                    dir(buildPath) {
-                        sh './scripts/run_img.sh test'
-                    }   
-                } catch (e) {
-                    pullRequest.comment("SRC TESTING FAILED ❌. SEE ERROR MESSAGE BELOW:\n${e.message.substring(0, 255)}")
-                    throw e
+                script {
+                    try {
+                        echo "Running src test script; ${buildPath}/scripts/run_img.sh test"
+                        dir(buildPath) {
+                            sh './scripts/run_img.sh test'
+                        }   
+                    } catch (e) {
+                        pullRequest.comment("SRC TESTING FAILED ❌. SEE ERROR MESSAGE BELOW:\n${e.message.substring(0, 255)}")
+                        throw e
+                    }
                 }
             }
         }
@@ -95,15 +101,17 @@ pipeline {
                 }
             }
             steps {
-                try {
-                    echo "Running api script; ${buildPath}/scripts/run_img.sh"
-                    dir(buildPath) {
-                        sh './scripts/run_img.sh'
+                script {
+                     try {
+                        echo "Running api script; ${buildPath}/scripts/run_img.sh"
+                        dir(buildPath) {
+                            sh './scripts/run_img.sh'
+                        }
+                        sh 'curl -f http://localhost:8080/ping'
+                    } catch (e) {
+                        pullRequest.comment("HEALTH CHECK FAILED ❌. SEE ERROR MESSAGE BELOW:\n${e.message.substring(0, 255)}")
+                        throw e
                     }
-                    sh 'curl -f http://localhost:8080/ping'
-                } catch (e) {
-                    pullRequest.comment("HEALTH CHECK FAILED ❌. SEE ERROR MESSAGE BELOW:\n${e.message.substring(0, 255)}")
-                    throw e
                 }
             }
         }
@@ -115,30 +123,33 @@ pipeline {
                 }
             }
             steps {
-                try {
-                    echo "Running expectations api build script; ${apiTestPath}/expectations_api/scripts/build_img.sh"
-                    dir("${apiTestPath}/expectations_api") {
-                        sh 'chmod 700 -R ./scripts'
-                        sh './scripts/build_img.sh'
-                        echo "Running expectations api script; ${apiTestPath}/expectations_api/scripts/run_img.sh"
-                        sh './scripts/run_img.sh'
+                script {
+                    try {
+                        echo "Running expectations api build script; ${apiTestPath}/expectations_api/scripts/build_img.sh"
+                        dir("${apiTestPath}/expectations_api") {
+                            sh 'chmod 700 -R ./scripts'
+                            sh './scripts/build_img.sh'
+                            echo "Running expectations api script; ${apiTestPath}/expectations_api/scripts/run_img.sh"
+                            sh './scripts/run_img.sh'
+                        }
+                        echo "Running api tests!"
+                        dir(apiTestPath) {
+                            sh 'chmod 700 ./run.sh'
+                            sh "./run.sh ${buildService}"
+                        }
+                    } catch (e) {
+                        pullRequest.comment("API TESTS FAILED ❌. SEE ERROR MESSAGE BELOW:\n${e.message.substring(0, 255)}")
+                        throw e
                     }
-                    echo "Running api tests!"
-                    dir(apiTestPath) {
-                        sh 'chmod 700 ./run.sh'
-                        sh "./run.sh ${buildService}"
-                    }
-                } catch (e) {
-                    pullRequest.comment("API TESTS FAILED ❌. SEE ERROR MESSAGE BELOW:\n${e.message.substring(0, 255)}")
-                    throw e
                 }
             }
         }
 
         stage('Finish') {
             steps {
-                echo "Complete!"
-                pullRequest.comment("BUILD SUCCESSFUL ✔️")
+                script {
+                    pullRequest.comment("BUILD SUCCESSFUL ✔️")
+                }
             }
         }
     }
