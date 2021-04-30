@@ -27,9 +27,8 @@ if (env.CHANGE_TARGET == 'master' && langFrameworks.contains(env.CHANGE_BRANCH))
     buildPath = "${env.CHANGE_TARGET}"
 }
 
-def formatError(e) {
-    def stackTraceBound = e.stackTrace.size() > 10 ? e.stackTrace.size() - 10 : 0
-    "```\nMessage: ${e.message.substring(0, Math.min(255, e.message.length()))}\nStack Trace: ${e.stackTrace[stackTraceBound..-1]}\n```"
+def formatMessage(msg) {
+    "```\n${msg.substring(0, Math.min(255, msg.length()))}\n```"
 }
 
 pipeline {
@@ -51,7 +50,7 @@ pipeline {
                             sh './scripts/build_img.sh'
                         }
                     } catch (e) {
-                        pullRequest.comment("BUILD FAILED ❌. SEE ERROR DETAILS BELOW:\n${formatError(e)}")
+                        pullRequest.comment("BUILD FAILED ❌. SEE ERROR MESSAGE BELOW:\n${formatMessage(e.message)}")
                         throw e
                     }
                 }
@@ -72,7 +71,7 @@ pipeline {
                             sh './scripts/run_img.sh lint'
                         }
                     } catch (e) {
-                        pullRequest.comment("LINTING FAILED ❌. SEE ERROR DETAILS BELOW:\n${formatError(e)}")
+                        pullRequest.comment("LINTING FAILED ❌. SEE ERROR MESSAGE BELOW:\n${formatMessage(e.message)}")
                         throw e
                     }
                 }
@@ -93,7 +92,7 @@ pipeline {
                             sh './scripts/run_img.sh test'
                         }   
                     } catch (e) {
-                        pullRequest.comment("SRC TESTING FAILED ❌. SEE ERROR DETAILS BELOW:\n${formatError(e)}")
+                        pullRequest.comment("SRC TESTING FAILED ❌. SEE ERROR MESSAGE BELOW:\n${formatMessage(e.message)}")
                         throw e
                     }
                 }
@@ -116,7 +115,7 @@ pipeline {
                         sh 'curl -f http://localhost:8080/ping'
                     } catch (e) {
                         echo "${e.dump()}"
-                        pullRequest.comment("HEALTH CHECK FAILED ❌. SEE ERROR DETAILS BELOW:\n${formatError(e)}")
+                        pullRequest.comment("HEALTH CHECK FAILED ❌. SEE ERROR MESSAGE BELOW:\n${formatMessage(e.message)}")
                         throw e
                     }
                 }
@@ -145,7 +144,7 @@ pipeline {
                             sh "./run.sh ${buildService}"
                         }
                     } catch (e) {
-                        pullRequest.comment("API TESTS FAILED ❌. SEE ERROR DETAILS BELOW:\n${formatError(e)}")
+                        pullRequest.comment("API TESTS FAILED ❌. SEE ERROR MESSAGE BELOW:\n${formatMessage(e.message)}")
                         throw e
                     }
                 }
