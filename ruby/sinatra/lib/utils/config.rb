@@ -2,8 +2,6 @@
 
 require 'json'
 
-# require_relative 'error/environment_error'
-
 # loads and transforms all data resources into in settings hash
 class Config
     attr_reader :settings
