@@ -27,8 +27,8 @@ if (env.CHANGE_TARGET == 'master' && langFrameworks.contains(env.CHANGE_BRANCH))
     buildPath = "${env.CHANGE_TARGET}"
 }
 
-def formatMessage(msg) {
-    "```\nmsg.substring(0, Math.min(255, msg.length()))\n```"
+def formatError(e) {
+    "```\nMessage: ${e.message.substring(0, Math.min(255, e.message.length()))}\nStack Trace: ${e.stackTrace.substring(0, Math.min(255, e.stackTrace.length()))}\n```"
 }
 
 pipeline {
