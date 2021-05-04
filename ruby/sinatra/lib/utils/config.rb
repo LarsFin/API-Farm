@@ -8,10 +8,8 @@ class Config
     attr_reader :settings
 
     def initialize(environment)
-        dup_environment = environment.dup
-        dup_environment.upcase!
 
-        case dup_environment
+        case environment.upcase
         when 'DEV'
             set_file 'config.dev.json'
         when 'PROD'
