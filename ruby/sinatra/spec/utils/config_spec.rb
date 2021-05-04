@@ -25,6 +25,6 @@ describe Config do
         environment = 'N/A'
 
         # Assert
-        expect { subject }.to raise_error("Given environment #{environment} doesn't exist")
+        expect { subject }.to raise_error(InvalidEnvironmentError, "Given environment #{environment} doesn't exist")
     end
 end
