@@ -6,13 +6,16 @@ require_relative 'lib/controller/controller'
 require_relative 'lib/models/video_game'
 require_relative 'lib/services/video_games'
 require_relative 'lib/storage/in_memory'
-
-# configure host and port
-set :bind, '0.0.0.0'
-set :port, 8080
+require_relative 'lib/utils/config'
 
 # environments; DEV, TEST, PROD
 environment = (ENV['RUBY_SINATRA_ENV'] || 'DEV').upcase
+
+config = Config.new environment
+
+# configure host and port
+set :bind, config.settings['bind']
+set :port, config.settings['port']
 
 storage = InMemory.new
 service = VideoGames.new storage, VideoGame
