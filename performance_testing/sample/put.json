@@ -1,0 +1,32 @@
+{
+    "name": "i0",
+    "developers": [
+        "i1"
+    ],
+    "publishers": [
+        "i2"
+    ],
+    "producers": [
+        "i3"
+    ],
+    "designers": [
+        "i4",
+        "i5",
+        "i6",
+        "i7"
+    ],
+    "programmers": [
+        "i8",
+        "i9"
+    ],
+    "artists": [
+        "iA"
+    ],
+    "composers": [
+        "iB",
+        "iC",
+        "iD",
+        "iE"
+    ],
+    "date_released": "18/10/2005"
+}
