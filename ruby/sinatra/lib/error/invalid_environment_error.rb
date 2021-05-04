@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Unique error message for when an environment doesn't exist
 class InvalidEnvironmentError < StandardError
     attr_reader :environment
 

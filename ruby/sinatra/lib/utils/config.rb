@@ -19,7 +19,7 @@ class Config
         when 'TEST'
             set_file 'config.test.json'
         else
-            raise InvalidEnvironmentError.new environment
+            raise InvalidEnvironmentError, environment
         end
     end
 
