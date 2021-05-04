@@ -1,0 +1,35 @@
+AllCops:
+  NewCops: enable
+
+Layout/FirstArrayElementIndentation:
+  Enabled: false
+
+Layout/EndOfLine:
+  Enabled: false
+
+Layout/TrailingEmptyLines:
+  Enabled: false
+
+Layout/IndentationWidth:
+  Enabled: false
+
+Metrics/BlockLength:
+  Enabled: true
+  Exclude: 
+    - spec/**/*
+
+Metrics/MethodLength:
+  Enabled: true
+  Max: 15
+
+Metrics/ClassLength:
+  Enabled: true
+  Max: 150
+
+Naming/AccessorMethodName:
+  Enabled: false
+
+Style/MethodCallWithArgsParentheses:
+  Enabled: true
+  EnforcedStyle: omit_parentheses
+  AllowParenthesesInMultilineCall: true
