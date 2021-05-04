@@ -8,7 +8,6 @@ class Config
     attr_reader :settings
 
     def initialize(environment)
-
         case environment.upcase
         when 'DEV'
             set_file 'config.dev.json'
