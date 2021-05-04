@@ -9,8 +9,7 @@ describe Config do
     it 'should read and convert environment dev file' do
         # Arrange
         dev_file = double 'DEV file path'
-        config_item = double 'Data file resource'
-        config_array = [config_item]
+        config_array = []
         allow(File).to receive(:read).with('config.dev.json').and_return dev_file
         allow(JSON).to receive(:parse).with(dev_file).and_return config_array
 
