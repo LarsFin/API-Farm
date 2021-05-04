@@ -26,6 +26,10 @@ if (env.CHANGE_TARGET == 'master' && langFrameworks.contains(env.CHANGE_BRANCH))
     buildPath = "${env.CHANGE_TARGET}"
 }
 
+def formatMessage(msg) {
+    "```\n${msg.substring(0, Math.min(255, msg.length()))}\n```"
+}
+
 pipeline {
     agent any
 
@@ -37,10 +41,17 @@ pipeline {
                 }
             }
             steps {
-                echo "Running build script; ${buildPath}/scripts/build_img.sh"
-                dir(buildPath) {
-                    sh 'chmod 700 -R ./scripts'
-                    sh './scripts/build_img.sh'
+                script {
+                    try {
+                        echo "Running build script; ${buildPath}/scripts/build_img.sh"
+                        dir(buildPath) {
+                            sh 'chmod 700 -R ./scripts'
+                            sh './scripts/build_img.sh'
+                        }
+                    } catch (e) {
+                        pullRequest.comment("BUILD FAILED ❌. SEE ERROR MESSAGE BELOW:\n${formatMessage(e.message)}")
+                        throw e
+                    }
                 }
             }
         }
@@ -52,9 +63,16 @@ pipeline {
                 }
             }
             steps {
-                echo "Running lint script; ${buildPath}/scripts/run_img.sh lint"
-                dir(buildPath) {
-                    sh './scripts/run_img.sh lint'
+                script {
+                    try {
+                        echo "Running lint script; ${buildPath}/scripts/run_img.sh lint"
+                        dir(buildPath) {
+                            sh './scripts/run_img.sh lint'
+                        }
+                    } catch (e) {
+                        pullRequest.comment("LINTING FAILED ❌. SEE ERROR MESSAGE BELOW:\n${formatMessage(e.message)}")
+                        throw e
+                    }
                 }
             }
         }
@@ -66,9 +84,38 @@ pipeline {
                 }
             }
             steps {
-                echo "Running src test script; ${buildPath}/scripts/run_img.sh test"
-                dir(buildPath) {
-                    sh './scripts/run_img.sh test'
+                script {
+                    try {
+                        echo "Running src test script; ${buildPath}/scripts/run_img.sh test"
+                        dir(buildPath) {
+                            sh './scripts/run_img.sh test'
+                        }   
+                    } catch (e) {
+                        pullRequest.comment("SRC TESTING FAILED ❌. SEE ERROR MESSAGE BELOW:\n${formatMessage(e.message)}")
+                        throw e
+                    }
+                }
+            }
+        }
+
+        stage('Health Check') {
+            when {
+                expression {
+                    return isIntoMaster || isIntoLangFramework
+                }
+            }
+            steps {
+                script {
+                     try {
+                        echo "Running api script; ${buildPath}/scripts/run_img.sh"
+                        dir(buildPath) {
+                            sh './scripts/run_img.sh'
+                        }
+                        sh 'curl -f http://localhost:8080/ping'
+                    } catch (e) {
+                        pullRequest.comment("HEALTH CHECK FAILED ❌. SEE ERROR MESSAGE BELOW:\n${formatMessage(e.message)}")
+                        throw e
+                    }
                 }
             }
         }
@@ -80,28 +127,33 @@ pipeline {
                 }
             }
             steps {
-                echo "Running api script; ${buildPath}/scripts/run_img.sh"
-                dir(buildPath) {
-                    sh './scripts/run_img.sh'
-                }
-                echo "Running expectations api build script; ${apiTestPath}/expectations_api/scripts/build_img.sh"
-                dir("${apiTestPath}/expectations_api") {
-                    sh 'chmod 700 -R ./scripts'
-                    sh './scripts/build_img.sh'
-                    echo "Running expectations api script; ${apiTestPath}/expectations_api/scripts/run_img.sh"
-                    sh './scripts/run_img.sh'
-                }
-                echo "Running api tests!"
-                dir(apiTestPath) {
-                    sh 'chmod 700 ./run.sh'
-                    sh "./run.sh ${buildService}"
+                script {
+                    try {
+                        echo "Running expectations api build script; ${apiTestPath}/expectations_api/scripts/build_img.sh"
+                        dir("${apiTestPath}/expectations_api") {
+                            sh 'chmod 700 -R ./scripts'
+                            sh './scripts/build_img.sh'
+                            echo "Running expectations api script; ${apiTestPath}/expectations_api/scripts/run_img.sh"
+                            sh './scripts/run_img.sh'
+                        }
+                        echo "Running api tests!"
+                        dir(apiTestPath) {
+                            sh 'chmod 700 ./run.sh'
+                            sh "./run.sh ${buildService}"
+                        }
+                    } catch (e) {
+                        pullRequest.comment("API TESTS FAILED ❌. SEE ERROR MESSAGE BELOW:\n${formatMessage(e.message)}")
+                        throw e
+                    }
                 }
             }
         }
 
         stage('Finish') {
             steps {
-                echo "Complete!"
+                script {
+                    pullRequest.comment("BUILD SUCCESSFUL ✔️")
+                }
             }
         }
     }
