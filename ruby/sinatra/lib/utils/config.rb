@@ -8,16 +8,9 @@ class Config
     attr_reader :settings
 
     def initialize(environment)
-        case environment.upcase
-        when 'DEV'
-            set_file 'config.dev.json'
-        when 'PROD'
-            set_file 'config.prod.json'
-        when 'TEST'
-            set_file 'config.test.json'
-        else
-            raise InvalidEnvironmentError, environment
-        end
+        raise InvalidEnvironmentError, environment unless %w[DEV TEST PROD].include? environment.upcase
+
+        set_file "config.#{environment.downcase}.json"
     end
 
   private
