@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "lint": "./node_modules/.bin/eslint app.js",
+    "lint": "./node_modules/.bin/eslint lib/** app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js"
   },
