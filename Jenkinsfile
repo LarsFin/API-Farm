@@ -43,11 +43,9 @@ pipeline {
             steps {
                 script {
                     try {
-                        echo "Running build script; ${buildPath}/scripts/build_img.sh"
-                        dir(buildPath) {
-                            sh 'chmod 700 -R ./scripts'
-                            sh './scripts/build_img.sh'
-                        }
+                        echo "Running build script; ./scripts/build.sh ${buildPath}"
+                        sh 'chmod 700 -R ./scripts'
+                        sh "./scripts/build.sh ${buildPath}"
                     } catch (e) {
                         pullRequest.comment("BUILD FAILED ❌. SEE ERROR MESSAGE BELOW:\n${formatMessage(e.message)}")
                         throw e
@@ -65,10 +63,8 @@ pipeline {
             steps {
                 script {
                     try {
-                        echo "Running lint script; ${buildPath}/scripts/run_img.sh lint"
-                        dir(buildPath) {
-                            sh './scripts/run_img.sh lint'
-                        }
+                        echo "Running lint script; ./scripts/run.sh ${buildPath} lint"
+                        sh "./scripts/run.sh ${buildPath} lint"
                     } catch (e) {
                         pullRequest.comment("LINTING FAILED ❌. SEE ERROR MESSAGE BELOW:\n${formatMessage(e.message)}")
                         throw e
@@ -86,10 +82,8 @@ pipeline {
             steps {
                 script {
                     try {
-                        echo "Running src test script; ${buildPath}/scripts/run_img.sh test"
-                        dir(buildPath) {
-                            sh './scripts/run_img.sh test'
-                        }   
+                        echo "Running src test script; ./scripts/run.sh ${buildPath} test"
+                        sh "./scripts/run.sh ${buildPath} test"
                     } catch (e) {
                         pullRequest.comment("SRC TESTING FAILED ❌. SEE ERROR MESSAGE BELOW:\n${formatMessage(e.message)}")
                         throw e
@@ -107,10 +101,8 @@ pipeline {
             steps {
                 script {
                      try {
-                        echo "Running api script; ${buildPath}/scripts/run_img.sh"
-                        dir(buildPath) {
-                            sh './scripts/run_img.sh'
-                        }
+                        echo "Running api script; ./scripts/run.sh ${buildPath}"
+                        sh "./scripts/run.sh ${buildPath}"
                         sh 'curl -f http://localhost:8080/ping'
                     } catch (e) {
                         pullRequest.comment("HEALTH CHECK FAILED ❌. SEE ERROR MESSAGE BELOW:\n${formatMessage(e.message)}")
@@ -153,6 +145,16 @@ pipeline {
             steps {
                 script {
                     pullRequest.comment("BUILD SUCCESSFUL ✔️")
+                }
+            }
+        }
+    }
+    post {
+        always {
+            script {
+                if (isIntoMaster || isIntoLangFramework) {
+                    echo "Running clean up script; ./scripts/clean.sh ${buildPath}"
+                    sh "./scripts/clean.sh ${buildPath}"
                 }
             }
         }
