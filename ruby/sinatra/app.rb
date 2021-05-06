@@ -9,7 +9,7 @@ require_relative 'lib/storage/in_memory'
 require_relative 'lib/utils/config'
 
 # environments; DEV, TEST, PROD
-environment = (ENV['RUBY_SINATRA_ENV'] || 'DEV').upcase
+environment = (ENV['API_ENV'] || 'DEV').upcase
 
 config = Config.new environment
 

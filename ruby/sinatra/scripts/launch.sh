@@ -4,8 +4,8 @@
 CMD=$1
 
 # if cmd is null; assume run
-if [ -z $ENV ]
-    then ENV=run
+if [ -z $CMD ]
+    then CMD=run
 fi
 
 # run process correlating to command
