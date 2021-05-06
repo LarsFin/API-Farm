@@ -1,13 +1,17 @@
 FROM node:slim
 
+# Get environment argument
+ARG env
+
 # Set work dir
 WORKDIR /usr/src
 
 # Copy source fil
 COPY . .
 
-# Install app dependencies
-RUN npm install
+# Tune environment
+RUN ./scripts/tune_env.sh $env
 
 # Run API
-CMD [ "npm", "run", "start" ]
+ENTRYPOINT [ "scripts/launch.sh" ]
+CMD [ "run" ]

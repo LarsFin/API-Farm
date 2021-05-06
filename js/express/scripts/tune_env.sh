@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # tunes necessary dependencies against the build environment
 
 # environments; dev, test, prod
@@ -20,9 +22,10 @@ case $ENV in
   prod)
     echo "Prod environment selected"
     rm .eslintrc.json
-    npm install --no-optional
+    rm -rf spec
+    npm install --only=prod
     ;;
-    
+
   *)
     echo "Invalid environment selected!"
     exit 1
