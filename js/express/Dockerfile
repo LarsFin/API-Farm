@@ -1,15 +1,13 @@
-FROM node:14
+FROM node:slim
 
 # Set work dir
 WORKDIR /usr/src
 
-# App dependencies
-COPY package*.json ./
-
-RUN npm install
-
-# Bundle app source
+# Copy source fil
 COPY . .
 
-EXPOSE 8080
-CMD [ "node", "server.js"]
+# Install app dependencies
+RUN npm install
+
+# Run API
+CMD [ "npm", "run", "start" ]
