@@ -6,5 +6,8 @@ exports.success = result => {
 };
 
 exports.fail = (code, result) => {
-    
+    return {
+        code,
+        result
+    };
 };
