@@ -45,6 +45,7 @@ pipeline {
                     try {
                         dir(buildPath) {
                             sh "chmod 700 -R ./scripts"
+                            sh "find . -name \"*.json\" -exec chmod 600 {} \\;"
                         }
 
                         echo "Running build script; ./scripts/build.sh ${buildPath}"
