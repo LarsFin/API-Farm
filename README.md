@@ -90,11 +90,44 @@ The `./scripts/build.sh` script takes two arguments. The first instructs which l
 ./scripts/build.sh ruby/sinatra dev
 ```
 
+Running the command above will build the image `ruby/sinatra:dev`. The tag would be suffixed with `prod` if it were built for a production environment.
+
 Not providing an environment will result in an image being built for the dev environment by default. It should be noted that this script will overwrite existing built images for the target lang/framework with the environment. As part of this, it will stop and remove any containers using older versions of the image.
 
 ### Running an Image
 
-TODO
+Docker images for an api can be run using the `./scripts/run.sh` script. Like the build script, a lang/framework must be specified as the first argument. The second argument is the way in which you wish to run the image, these are listed below;
+
+- **lint:** uses language tools to comb the api code base for code smells and unwanted syntax styles.
+- **test:** runs the unit tests for the api src code.
+- **run_dev:** runs the api using the `dev` environment image.
+- **run_prod:** runs the api using the `prod` environment image.
+
+The `lint` and `test` commands use the `dev` image as the necessary tools should have been stripped from the production image. If the required image for the command cannot be found; the script process return a non zero exit code.
+
+If no command is passed as an argument to the `run.sh` script, it will assumes the `run_dev` command.
+
+Below, is an example of how to run the `run.sh` script.
+
+```shell
+./scripts/run.sh ruby/sinatra test
+```
+
+Containers started for linting and testing will be temporary and removed after the process has finished. When running the api, the containers will continue to run in a detached state. To stop these containers, read the following section.
+
+### Stopping Containers
+
+The script `./scripts/clean.sh` stops containers for the passed lang/framework. Below, is an example of how to run the script;
+
+```shell
+./scripts/clean.sh ruby/sinatra
+```
+
+There is no harm in using docker directly to stop containers. This script has a check to ensure a container exists for the lang/framework before stopping it (this functionality is beneficial in the post stage of the pipeline).
+
+```shell
+docker stop ruby_sinatra
+```
 
 ## CI ⚙️
 
