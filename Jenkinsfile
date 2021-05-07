@@ -43,6 +43,10 @@ pipeline {
             steps {
                 script {
                     try {
+                        dir(buildPath) {
+                            sh "chmod 700 -R ./scripts"
+                        }
+
                         echo "Running build script; ./scripts/build.sh ${buildPath}"
                         sh 'chmod 700 -R ./scripts'
                         sh "./scripts/build.sh ${buildPath}"
