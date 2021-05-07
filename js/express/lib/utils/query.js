@@ -4,3 +4,7 @@ exports.success = result => {
         result
     };
 };
+
+exports.fail = (code, result) => {
+    
+};
