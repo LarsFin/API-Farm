@@ -1,6 +1,6 @@
 const Query = require('../../lib/utils/query');
 
-test("success should return object with passed result and code of 0", () => {
+test('success should return object with passed result and code of 0', () => {
     // Arrange
     const result = {};
 
@@ -12,7 +12,7 @@ test("success should return object with passed result and code of 0", () => {
     expect(query.result).toBe(result);
 });
 
-test("fail should return object with passed code and result", () => {
+test('fail should return object with passed code and result', () => {
     // Arrange
     const code = 404;
     const result = {};

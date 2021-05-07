@@ -1,3 +1,5 @@
+const Query = require('../utils/query');
+
 function VideoGamesService (storage) {
     this._storage = storage;
 }
@@ -5,10 +7,7 @@ function VideoGamesService (storage) {
 VideoGamesService.prototype.getAll = function () {
     const videoGames = this._storage.getAllVideoGames();
 
-    return {
-        code: 0,
-        result: videoGames
-    };
+    return Query.success(videoGames);
 };
 
 module.exports = VideoGamesService;
