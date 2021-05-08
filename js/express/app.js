@@ -2,6 +2,8 @@ const express = require('express');
 const app = express();
 const port = 8080;
 
+require('./lib/extensions/response');
+
 const Controller = require('./lib/controllers/controller');
 const VideoGamesService = require('./lib/services/video-games');
 const InMemory = require('./lib/storage/in-memory');

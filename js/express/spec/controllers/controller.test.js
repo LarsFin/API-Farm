@@ -11,9 +11,7 @@ beforeEach(() => {
 test('getAll should retrieve video games from service and respond 200', () => {
     // Arrange
     const mockRes = {};
-    mockRes.status = jest.fn();
-    mockRes.header = jest.fn();
-    mockRes.json = jest.fn();
+    mockRes.ok = jest.fn();
     const videoGames = [];
     const query = {
         result: videoGames
@@ -24,12 +22,6 @@ test('getAll should retrieve video games from service and respond 200', () => {
     controller.getAll(mockRes);
 
     // Assert
-    expect(mockRes.status).toHaveBeenCalledTimes(1);
-    expect(mockRes.status).toHaveBeenCalledWith(200);
-
-    expect(mockRes.header).toHaveBeenCalledTimes(1);
-    expect(mockRes.header).toHaveBeenCalledWith('Content-Type', 'application/json');
-
-    expect(mockRes.json).toHaveBeenCalledTimes(1);
-    expect(mockRes.json).toHaveBeenCalledWith(videoGames);
+    expect(mockRes.ok).toHaveBeenCalledTimes(1);
+    expect(mockRes.ok).toHaveBeenCalledWith(videoGames);
 });
