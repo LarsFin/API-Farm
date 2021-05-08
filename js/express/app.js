@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const port = 8080;
+const hostname = '0.0.0.0';
 
 require('./lib/extensions/response');
 
@@ -20,6 +21,6 @@ app.get('/video_games', (_, res) => {
     controller.getAll(res);
 });
 
-app.listen(port, () => {
+app.listen(port, hostname, () => {
     console.log(`Example app listening at http://localhost:${port}`);
 });
