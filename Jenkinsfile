@@ -7,16 +7,16 @@ There are three scenarios the pipeline runs against;
 
 // Append new lang/framework branch names when ready for pipeline builds
 def langFrameworks = [
-    'ruby/sinatra'
+    "ruby/sinatra"
 ]
 
 def isIntoMaster = false
 def isIntoLangFramework = false
-def buildPath = ''
-def buildService = ''
-def apiTestPath = ''
+def buildPath = ""
+def buildService = ""
+def apiTestPath = ""
 
-if (env.CHANGE_TARGET == 'master' && langFrameworks.contains(env.CHANGE_BRANCH)) {
+if (env.CHANGE_TARGET == "master" && langFrameworks.contains(env.CHANGE_BRANCH)) {
     isIntoMaster = true
     buildPath = "${env.CHANGE_BRANCH}"
     buildService = buildPath.replace('/', '_')
@@ -34,7 +34,7 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
+        stage("Build") {
             when {
                 expression {
                     return isIntoMaster || isIntoLangFramework
@@ -49,7 +49,7 @@ pipeline {
                         }
 
                         echo "Running build script; ./scripts/build.sh ${buildPath}"
-                        sh 'chmod 700 -R ./scripts'
+                        sh "chmod 700 -R ./scripts"
                         sh "./scripts/build.sh ${buildPath}"
                     } catch (e) {
                         pullRequest.comment("BUILD FAILED ❌. SEE ERROR MESSAGE BELOW:\n${formatMessage(e.message)}")
@@ -59,7 +59,7 @@ pipeline {
             }
         }
 
-        stage('Linting') {
+        stage("Linting") {
             when {
                 expression {
                     return isIntoMaster || isIntoLangFramework
@@ -78,7 +78,7 @@ pipeline {
             }
         }
 
-        stage('Src Testing') {
+        stage("Src Testing") {
             when {
                 expression {
                     return isIntoMaster || isIntoLangFramework
@@ -97,7 +97,7 @@ pipeline {
             }
         }
 
-        stage('Health Check') {
+        stage("Health Check") {
             when {
                 expression {
                     return isIntoMaster || isIntoLangFramework
@@ -108,7 +108,8 @@ pipeline {
                      try {
                         echo "Running api script; ./scripts/run.sh ${buildPath}"
                         sh "./scripts/run.sh ${buildPath}"
-                        sh 'curl -f http://localhost:8080/ping'
+                        sh "sleep 2"
+                        sh "curl -f http://localhost:8080/ping"
                     } catch (e) {
                         pullRequest.comment("HEALTH CHECK FAILED ❌. SEE ERROR MESSAGE BELOW:\n${formatMessage(e.message)}")
                         throw e
@@ -117,7 +118,7 @@ pipeline {
             }
         }
 
-        stage('API Testing') {
+        stage("API Testing") {
             when {
                 expression {
                     return isIntoMaster
@@ -128,14 +129,14 @@ pipeline {
                     try {
                         echo "Running expectations api build script; ${apiTestPath}/expectations_api/scripts/build_img.sh"
                         dir("${apiTestPath}/expectations_api") {
-                            sh 'chmod 700 -R ./scripts'
-                            sh './scripts/build_img.sh'
+                            sh "chmod 700 -R ./scripts"
+                            sh "./scripts/build_img.sh"
                             echo "Running expectations api script; ${apiTestPath}/expectations_api/scripts/run_img.sh"
-                            sh './scripts/run_img.sh'
+                            sh "./scripts/run_img.sh"
                         }
                         echo "Running api tests!"
                         dir(apiTestPath) {
-                            sh 'chmod 700 ./run.sh'
+                            sh "chmod 700 ./run.sh"
                             sh "./run.sh ${buildService}"
                         }
                     } catch (e) {
@@ -146,7 +147,7 @@ pipeline {
             }
         }
 
-        stage('Finish') {
+        stage("Finish") {
             steps {
                 script {
                     pullRequest.comment("BUILD SUCCESSFUL ✔️")
