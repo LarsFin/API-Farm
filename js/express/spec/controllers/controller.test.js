@@ -8,13 +8,13 @@ beforeEach(() => {
     controller = new Controller(mockVideoGamesService);
 });
 
-test("getAll should retrieve video games from service and respond 200", () => {
+test('getAll should retrieve video games from service and respond 200', () => {
     // Arrange
-    let mockRes = {};
+    const mockRes = {};
     mockRes.status = jest.fn();
     mockRes.header = jest.fn();
     mockRes.json = jest.fn();
-    let videoGames = [];
+    const videoGames = [];
     mockVideoGamesService.getAll = jest.fn(() => videoGames);
 
     // Act
