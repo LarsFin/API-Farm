@@ -15,7 +15,10 @@ test('getAll should retrieve video games from service and respond 200', () => {
     mockRes.header = jest.fn();
     mockRes.json = jest.fn();
     const videoGames = [];
-    mockVideoGamesService.getAll = jest.fn(() => videoGames);
+    const query = {
+        result: videoGames
+    };
+    mockVideoGamesService.getAll = jest.fn(() => query);
 
     // Act
     controller.getAll(mockRes);

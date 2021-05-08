@@ -3,11 +3,11 @@ function Controller (videoGamesService) {
 }
 
 Controller.prototype.getAll = function (res) {
-    const videoGames = this._videoGamesService.getAll();
+    const query = this._videoGamesService.getAll();
 
     res.status(200);
     res.header('Content-Type', 'application/json');
-    res.json(videoGames);
+    res.json(query.result);
 };
 
 module.exports = Controller;
