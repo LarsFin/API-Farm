@@ -46,7 +46,7 @@ test('add should add body data to service and respond 200', () => {
     mockVideoGamesService.add = jest.fn(() => query);
 
     // Act
-    controller.add(req, res)
+    controller.add(req, res);
 
     // Assert
     expect(mockVideoGamesService.add).toHaveBeenCalledTimes(1);
@@ -72,7 +72,7 @@ test('add should add body data to service and respond 400', () => {
     mockVideoGamesService.add = jest.fn(() => query);
 
     // Act
-    controller.add(req, res)
+    controller.add(req, res);
 
     // Assert
     expect(mockVideoGamesService.add).toHaveBeenCalledTimes(1);
