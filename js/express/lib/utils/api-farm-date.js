@@ -6,4 +6,4 @@ exports.isValid = date => {
         return false;
 
     return !isNaN(new Date(`${dateElements[1]}/${dateElements[0]}/${dateElements[2]}`));
-}
+};
