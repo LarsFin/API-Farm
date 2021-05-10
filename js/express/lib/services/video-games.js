@@ -1,3 +1,4 @@
+const ApiFarmDate = require('../utils/api-farm-date');
 const Query = require('../utils/query');
 
 function VideoGamesService (storage) {
@@ -20,16 +21,6 @@ const newVideoGame = (name, dateReleased) => {
     };
 };
 
-// date should always be in format DD/MM/YYYY
-const isValidDate = dateReleased => {
-    const dateElements = dateReleased.split('/');
-
-    if (dateElements.length !== 3)
-        return false;
-
-    return !isNaN(new Date(`${dateElements[1]}/${dateElements[0]}/${dateElements[2]}`));
-};
-
 VideoGamesService.prototype.getAll = function () {
     const videoGames = this._storage.getAllVideoGames();
 
@@ -47,7 +38,7 @@ VideoGamesService.prototype.add = function (data) {
     if (!videoGameDateReleased)
         return Query.fail(400, 'A date_released is required for a video game.');
 
-    if (!isValidDate(videoGameDateReleased))
+    if (!ApiFarmDate.isValid(videoGameDateReleased))
         return Query.fail(400, `The provided date_released '${videoGameDateReleased}' is invalid.`);
 
     let videoGame = newVideoGame(videoGameName, videoGameDateReleased);
