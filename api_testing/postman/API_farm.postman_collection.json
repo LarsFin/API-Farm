@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "9dc037cd-b244-4d5e-bca9-8f4a989ab8ae",
+		"_postman_id": "43f977a4-cdfb-459b-a07b-c72ad6034b88",
 		"name": "API_farm",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -123,44 +123,6 @@
 							"body": "No video game with id '25' could be found."
 						},
 						{
-							"name": "400 Invalid Id",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "http://{{host}}:{{port}}/video_games/:id",
-									"protocol": "http",
-									"host": [
-										"{{host}}"
-									],
-									"port": "{{port}}",
-									"path": [
-										"video_games",
-										":id"
-									],
-									"variable": [
-										{
-											"key": "id",
-											"value": "invalid!"
-										}
-									]
-								}
-							},
-							"status": "Bad Request",
-							"code": 400,
-							"_postman_previewlanguage": "Text",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "text/plain",
-									"description": "",
-									"type": "text"
-								}
-							],
-							"cookie": [],
-							"body": "The provided id 'invalid!' is invalid."
-						},
-						{
 							"name": "200 OK",
 							"originalRequest": {
 								"method": "GET",
@@ -197,6 +159,44 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"name\": \"Banjo Kazooie\",\n    \"developers\": [\n        \"Rare\"\n    ],\n    \"publishers\": [\n        \"Nintendo\"\n    ],\n    \"directors\": [\n        \"Gregg Mayles\",\n        \"George Andreas\"\n    ],\n    \"producers\": [\n        \"Tim Stamper\",\n        \"Chris Stamper\"\n    ],\n    \"designers\": [\n        \"Gregg Mayles\"\n    ],\n    \"programmers\": [\n        \"Chris Sutherland\"\n    ],\n    \"artists\": [\n        \"Steve Mayles\",\n        \"John Nash\",\n        \"Kevin Bayliss\",\n        \"Tim Stamper\"\n    ],\n    \"composers\": [\n        \"Grant Kirkhope\"\n    ],\n    \"platforms\": [\n        \"Nintendo 64\"\n    ],\n    \"date_released\": \"29/06/1998\"\n}"
+						},
+						{
+							"name": "400 Invalid Id",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{host}}:{{port}}/video_games/:id",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"video_games",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "invalid!"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "Text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "The provided id 'invalid!' is invalid."
 						}
 					]
 				},
@@ -228,6 +228,100 @@
 						}
 					},
 					"response": [
+						{
+							"name": "201 Created",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Banjo Kazooie\",\r\n    \"developers\": [\r\n        \"Rare\"\r\n    ],\r\n    \"publishers\": [\r\n        \"Nintendo\"\r\n    ],\r\n    \"directors\": [\r\n        \"Gregg Mayles\",\r\n        \"George Andreas\"\r\n    ],\r\n    \"producers\": [\r\n        \"Tim Stamper\",\r\n        \"Chris Stamper\"\r\n    ],\r\n    \"designers\": [\r\n        \"Gregg Mayles\"\r\n    ],\r\n    \"programmers\": [\r\n        \"Chris Sutherland\"\r\n    ],\r\n    \"artists\": [\r\n        \"Steve Mayles\",\r\n        \"John Nash\",\r\n        \"Kevin Bayliss\",\r\n        \"Tim Stamper\"\r\n    ],\r\n    \"composers\": [\r\n        \"Grant Kirkhope\"\r\n    ],\r\n    \"platforms\": [\r\n        \"Nintendo 64\"\r\n    ],\r\n    \"date_released\": \"29/06/1998\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{host}}:{{port}}/video_games",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"video_games"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\r\n    \"id\": 1,\r\n    \"name\": \"Banjo Kazooie\",\r\n    \"developers\": [\r\n        \"Rare\"\r\n    ],\r\n    \"publishers\": [\r\n        \"Nintendo\"\r\n    ],\r\n    \"directors\": [\r\n        \"Gregg Mayles\",\r\n        \"George Andreas\"\r\n    ],\r\n    \"producers\": [\r\n        \"Tim Stamper\",\r\n        \"Chris Stamper\"\r\n    ],\r\n    \"designers\": [\r\n        \"Gregg Mayles\"\r\n    ],\r\n    \"programmers\": [\r\n        \"Chris Sutherland\"\r\n    ],\r\n    \"artists\": [\r\n        \"Steve Mayles\",\r\n        \"John Nash\",\r\n        \"Kevin Bayliss\",\r\n        \"Tim Stamper\"\r\n    ],\r\n    \"composers\": [\r\n        \"Grant Kirkhope\"\r\n    ],\r\n    \"platforms\": [\r\n        \"Nintendo 64\"\r\n    ],\r\n    \"date_released\": \"29/06/1998\"\r\n}"
+						},
+						{
+							"name": "400 Invalid Date Released",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Banjo Kazooie\",\r\n    \"developers\": [\r\n        \"Rare\"\r\n    ],\r\n    \"publishers\": [\r\n        \"Nintendo\"\r\n    ],\r\n    \"directors\": [\r\n        \"Gregg Mayles\",\r\n        \"George Andreas\"\r\n    ],\r\n    \"producers\": [\r\n        \"Tim Stamper\",\r\n        \"Chris Stamper\"\r\n    ],\r\n    \"designers\": [\r\n        \"Gregg Mayles\"\r\n    ],\r\n    \"programmers\": [\r\n        \"Chris Sutherland\"\r\n    ],\r\n    \"artists\": [\r\n        \"Steve Mayles\",\r\n        \"John Nash\",\r\n        \"Kevin Bayliss\",\r\n        \"Tim Stamper\"\r\n    ],\r\n    \"composers\": [\r\n        \"Grant Kirkhope\"\r\n    ],\r\n    \"platforms\": [\r\n        \"Nintendo 64\"\r\n    ],\r\n    \"date_released\": \"29th June 1998\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{host}}:{{port}}/video_games",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"video_games"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "Text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "The provided date_released '29th June 1998' is invalid."
+						},
 						{
 							"name": "400 Invalid Body JSON",
 							"originalRequest": {
@@ -276,7 +370,7 @@
 							"body": "Invalid JSON in body."
 						},
 						{
-							"name": "201 Created",
+							"name": "400 Invalid Attribute",
 							"originalRequest": {
 								"method": "POST",
 								"header": [
@@ -289,7 +383,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"name\": \"Banjo Kazooie\",\r\n    \"developers\": [\r\n        \"Rare\"\r\n    ],\r\n    \"publishers\": [\r\n        \"Nintendo\"\r\n    ],\r\n    \"directors\": [\r\n        \"Gregg Mayles\",\r\n        \"George Andreas\"\r\n    ],\r\n    \"producers\": [\r\n        \"Tim Stamper\",\r\n        \"Chris Stamper\"\r\n    ],\r\n    \"designers\": [\r\n        \"Gregg Mayles\"\r\n    ],\r\n    \"programmers\": [\r\n        \"Chris Sutherland\"\r\n    ],\r\n    \"artists\": [\r\n        \"Steve Mayles\",\r\n        \"John Nash\",\r\n        \"Kevin Bayliss\",\r\n        \"Tim Stamper\"\r\n    ],\r\n    \"composers\": [\r\n        \"Grant Kirkhope\"\r\n    ],\r\n    \"platforms\": [\r\n        \"Nintendo 64\"\r\n    ],\r\n    \"date_released\": \"29/06/1998\"\r\n}",
+									"raw": "{\r\n    \"name\": \"Banjo Kazooie\",\r\n    \"developers\": [\r\n        \"Rare\"\r\n    ],\r\n    \"publishers\": [\r\n        \"Nintendo\"\r\n    ],\r\n    \"directors\": [\r\n        \"Gregg Mayles\",\r\n        \"George Andreas\"\r\n    ],\r\n    \"producers\": [\r\n        \"Tim Stamper\",\r\n        \"Chris Stamper\"\r\n    ],\r\n    \"designers\": [\r\n        \"Gregg Mayles\"\r\n    ],\r\n    \"programmers\": [\r\n        \"Chris Sutherland\"\r\n    ],\r\n    \"testers\": [\r\n        \"Chris Sutherland\"\r\n    ],\r\n    \"artists\": [\r\n        \"Steve Mayles\",\r\n        \"John Nash\",\r\n        \"Kevin Bayliss\",\r\n        \"Tim Stamper\"\r\n    ],\r\n    \"composers\": [\r\n        \"Grant Kirkhope\"\r\n    ],\r\n    \"platforms\": [\r\n        \"Nintendo 64\"\r\n    ],\r\n    \"date_released\": \"29/06/1998\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -308,19 +402,19 @@
 									]
 								}
 							},
-							"status": "Created",
-							"code": 201,
-							"_postman_previewlanguage": "json",
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "Text",
 							"header": [
 								{
 									"key": "Content-Type",
-									"value": "application/json",
+									"value": "text/plain",
 									"description": "",
 									"type": "text"
 								}
 							],
 							"cookie": [],
-							"body": "{\r\n    \"id\": 1,\r\n    \"name\": \"Banjo Kazooie\",\r\n    \"developers\": [\r\n        \"Rare\"\r\n    ],\r\n    \"publishers\": [\r\n        \"Nintendo\"\r\n    ],\r\n    \"directors\": [\r\n        \"Gregg Mayles\",\r\n        \"George Andreas\"\r\n    ],\r\n    \"producers\": [\r\n        \"Tim Stamper\",\r\n        \"Chris Stamper\"\r\n    ],\r\n    \"designers\": [\r\n        \"Gregg Mayles\"\r\n    ],\r\n    \"programmers\": [\r\n        \"Chris Sutherland\"\r\n    ],\r\n    \"artists\": [\r\n        \"Steve Mayles\",\r\n        \"John Nash\",\r\n        \"Kevin Bayliss\",\r\n        \"Tim Stamper\"\r\n    ],\r\n    \"composers\": [\r\n        \"Grant Kirkhope\"\r\n    ],\r\n    \"platforms\": [\r\n        \"Nintendo 64\"\r\n    ],\r\n    \"date_released\": \"29/06/1998\"\r\n}"
+							"body": "The provided data has an invalid attribute 'testers'."
 						},
 						{
 							"name": "400 Date Released Required",
@@ -415,100 +509,6 @@
 							],
 							"cookie": [],
 							"body": "A name is required for a video game."
-						},
-						{
-							"name": "400 Invalid Attribute",
-							"originalRequest": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"name": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"name\": \"Banjo Kazooie\",\r\n    \"developers\": [\r\n        \"Rare\"\r\n    ],\r\n    \"publishers\": [\r\n        \"Nintendo\"\r\n    ],\r\n    \"directors\": [\r\n        \"Gregg Mayles\",\r\n        \"George Andreas\"\r\n    ],\r\n    \"producers\": [\r\n        \"Tim Stamper\",\r\n        \"Chris Stamper\"\r\n    ],\r\n    \"designers\": [\r\n        \"Gregg Mayles\"\r\n    ],\r\n    \"programmers\": [\r\n        \"Chris Sutherland\"\r\n    ],\r\n    \"testers\": [\r\n        \"Chris Sutherland\"\r\n    ],\r\n    \"artists\": [\r\n        \"Steve Mayles\",\r\n        \"John Nash\",\r\n        \"Kevin Bayliss\",\r\n        \"Tim Stamper\"\r\n    ],\r\n    \"composers\": [\r\n        \"Grant Kirkhope\"\r\n    ],\r\n    \"platforms\": [\r\n        \"Nintendo 64\"\r\n    ],\r\n    \"date_released\": \"29/06/1998\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://{{host}}:{{port}}/video_games",
-									"protocol": "http",
-									"host": [
-										"{{host}}"
-									],
-									"port": "{{port}}",
-									"path": [
-										"video_games"
-									]
-								}
-							},
-							"status": "Bad Request",
-							"code": 400,
-							"_postman_previewlanguage": "Text",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "text/plain",
-									"description": "",
-									"type": "text"
-								}
-							],
-							"cookie": [],
-							"body": "The provided data has an invalid attribute 'testers'."
-						},
-						{
-							"name": "400 Invalid Date Released",
-							"originalRequest": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"name": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"name\": \"Banjo Kazooie\",\r\n    \"developers\": [\r\n        \"Rare\"\r\n    ],\r\n    \"publishers\": [\r\n        \"Nintendo\"\r\n    ],\r\n    \"directors\": [\r\n        \"Gregg Mayles\",\r\n        \"George Andreas\"\r\n    ],\r\n    \"producers\": [\r\n        \"Tim Stamper\",\r\n        \"Chris Stamper\"\r\n    ],\r\n    \"designers\": [\r\n        \"Gregg Mayles\"\r\n    ],\r\n    \"programmers\": [\r\n        \"Chris Sutherland\"\r\n    ],\r\n    \"artists\": [\r\n        \"Steve Mayles\",\r\n        \"John Nash\",\r\n        \"Kevin Bayliss\",\r\n        \"Tim Stamper\"\r\n    ],\r\n    \"composers\": [\r\n        \"Grant Kirkhope\"\r\n    ],\r\n    \"platforms\": [\r\n        \"Nintendo 64\"\r\n    ],\r\n    \"date_released\": \"29th June 1998\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://{{host}}:{{port}}/video_games",
-									"protocol": "http",
-									"host": [
-										"{{host}}"
-									],
-									"port": "{{port}}",
-									"path": [
-										"video_games"
-									]
-								}
-							},
-							"status": "Bad Request",
-							"code": 400,
-							"_postman_previewlanguage": "Text",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "text/plain",
-									"description": "",
-									"type": "text"
-								}
-							],
-							"cookie": [],
-							"body": "The provided date_released '29th June 1998' is invalid."
 						}
 					]
 				},
@@ -548,7 +548,7 @@
 					},
 					"response": [
 						{
-							"name": "400 Invalid Date Released",
+							"name": "200 OK",
 							"originalRequest": {
 								"method": "PUT",
 								"header": [
@@ -561,7 +561,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"date_released\": \"Last Monday\"\r\n}",
+									"raw": "{\r\n    \"publishers\": [\r\n        \"Nintendo\",\r\n        \"Microsoft Game Studios\"\r\n    ],\r\n    \"platforms\": [\r\n        \"Nintendo 64\",\r\n        \"Xbox 360\"\r\n    ]\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -587,19 +587,19 @@
 									]
 								}
 							},
-							"status": "Bad Request",
-							"code": 400,
-							"_postman_previewlanguage": "Text",
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
 							"header": [
 								{
 									"key": "Content-Type",
-									"value": "text/plain",
+									"value": "application/json",
 									"description": "",
 									"type": "text"
 								}
 							],
 							"cookie": [],
-							"body": "The provided date_released 'Last Monday' is invalid."
+							"body": "{\n    \"id\": 1,\n    \"name\": \"Banjo Kazooie\",\n    \"developers\": [\n        \"Rare\"\n    ],\n    \"publishers\": [\n        \"Nintendo\",\n        \"Microsoft Game Studios\"\n    ],\n    \"directors\": [\n        \"Gregg Mayles\",\n        \"George Andreas\"\n    ],\n    \"producers\": [\n        \"Tim Stamper\",\n        \"Chris Stamper\"\n    ],\n    \"designers\": [\n        \"Gregg Mayles\"\n    ],\n    \"programmers\": [\n        \"Chris Sutherland\"\n    ],\n    \"artists\": [\n        \"Steve Mayles\",\n        \"John Nash\",\n        \"Kevin Bayliss\",\n        \"Tim Stamper\"\n    ],\n    \"composers\": [\n        \"Grant Kirkhope\"\n    ],\n    \"platforms\": [\n        \"Nintendo 64\",\n        \"Xbox 360\"\n    ],\n    \"date_released\": \"29/06/1998\"\n}"
 						},
 						{
 							"name": "400 Invalid Body JSON",
@@ -656,7 +656,7 @@
 							"body": "Invalid JSON in body."
 						},
 						{
-							"name": "200 OK",
+							"name": "400 Invalid Id",
 							"originalRequest": {
 								"method": "PUT",
 								"header": [
@@ -690,24 +690,78 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "1"
+											"value": "invalid!"
 										}
 									]
 								}
 							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "Text",
 							"header": [
 								{
 									"key": "Content-Type",
-									"value": "application/json",
+									"value": "text/plain",
 									"description": "",
 									"type": "text"
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"id\": 1,\n    \"name\": \"Banjo Kazooie\",\n    \"developers\": [\n        \"Rare\"\n    ],\n    \"publishers\": [\n        \"Nintendo\",\n        \"Microsoft Game Studios\"\n    ],\n    \"directors\": [\n        \"Gregg Mayles\",\n        \"George Andreas\"\n    ],\n    \"producers\": [\n        \"Tim Stamper\",\n        \"Chris Stamper\"\n    ],\n    \"designers\": [\n        \"Gregg Mayles\"\n    ],\n    \"programmers\": [\n        \"Chris Sutherland\"\n    ],\n    \"artists\": [\n        \"Steve Mayles\",\n        \"John Nash\",\n        \"Kevin Bayliss\",\n        \"Tim Stamper\"\n    ],\n    \"composers\": [\n        \"Grant Kirkhope\"\n    ],\n    \"platforms\": [\n        \"Nintendo 64\",\n        \"Xbox 360\"\n    ],\n    \"date_released\": \"29/06/1998\"\n}"
+							"body": "The provided id 'invalid!' is invalid."
+						},
+						{
+							"name": "404 Not Found",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"publishers\": [\r\n        \"Nintendo\",\r\n        \"Microsoft Game Studios\"\r\n    ],\r\n    \"platforms\": [\r\n        \"Nintendo 64\",\r\n        \"Xbox 360\"\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{host}}:{{port}}/video_games/:id",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"video_games",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "25"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "Text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "No video game with id '25' could be found."
 						},
 						{
 							"name": "400 Invalid Attribute",
@@ -764,7 +818,7 @@
 							"body": "The provided data has an invalid attribute 'testers'."
 						},
 						{
-							"name": "400 Invalid Id",
+							"name": "400 Invalid Date Released",
 							"originalRequest": {
 								"method": "PUT",
 								"header": [
@@ -777,7 +831,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"publishers\": [\r\n        \"Nintendo\",\r\n        \"Microsoft Game Studios\"\r\n    ],\r\n    \"platforms\": [\r\n        \"Nintendo 64\",\r\n        \"Xbox 360\"\r\n    ]\r\n}",
+									"raw": "{\r\n    \"date_released\": \"Last Monday\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -798,7 +852,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "invalid!"
+											"value": "1"
 										}
 									]
 								}
@@ -815,61 +869,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "The provided id 'invalid!' is invalid."
-						},
-						{
-							"name": "404 Not Found",
-							"originalRequest": {
-								"method": "PUT",
-								"header": [
-									{
-										"key": "Content-Type",
-										"name": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"publishers\": [\r\n        \"Nintendo\",\r\n        \"Microsoft Game Studios\"\r\n    ],\r\n    \"platforms\": [\r\n        \"Nintendo 64\",\r\n        \"Xbox 360\"\r\n    ]\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://{{host}}:{{port}}/video_games/:id",
-									"protocol": "http",
-									"host": [
-										"{{host}}"
-									],
-									"port": "{{port}}",
-									"path": [
-										"video_games",
-										":id"
-									],
-									"variable": [
-										{
-											"key": "id",
-											"value": "25"
-										}
-									]
-								}
-							},
-							"status": "Not Found",
-							"code": 404,
-							"_postman_previewlanguage": "Text",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "text/plain",
-									"description": "",
-									"type": "text"
-								}
-							],
-							"cookie": [],
-							"body": "No video game with id '25' could be found."
+							"body": "The provided date_released 'Last Monday' is invalid."
 						}
 					]
 				},
@@ -898,82 +898,6 @@
 						}
 					},
 					"response": [
-						{
-							"name": "404 Not Found",
-							"originalRequest": {
-								"method": "DELETE",
-								"header": [],
-								"url": {
-									"raw": "http://{{host}}:{{port}}/video_games/:id",
-									"protocol": "http",
-									"host": [
-										"{{host}}"
-									],
-									"port": "{{port}}",
-									"path": [
-										"video_games",
-										":id"
-									],
-									"variable": [
-										{
-											"key": "id",
-											"value": "25"
-										}
-									]
-								}
-							},
-							"status": "Not Found",
-							"code": 404,
-							"_postman_previewlanguage": "Text",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "text/plain",
-									"description": "",
-									"type": "text"
-								}
-							],
-							"cookie": [],
-							"body": "No video game with id '25' could be found."
-						},
-						{
-							"name": "400 Invalid Id",
-							"originalRequest": {
-								"method": "DELETE",
-								"header": [],
-								"url": {
-									"raw": "http://{{host}}:{{port}}/video_games/:id",
-									"protocol": "http",
-									"host": [
-										"{{host}}"
-									],
-									"port": "{{port}}",
-									"path": [
-										"video_games",
-										":id"
-									],
-									"variable": [
-										{
-											"key": "id",
-											"value": "invalid!"
-										}
-									]
-								}
-							},
-							"status": "Bad Request",
-							"code": 400,
-							"_postman_previewlanguage": "Text",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "text/plain",
-									"description": "",
-									"type": "text"
-								}
-							],
-							"cookie": [],
-							"body": "The provided id 'invalid!' is invalid."
-						},
 						{
 							"name": "200 OK",
 							"originalRequest": {
@@ -1011,6 +935,82 @@
 							],
 							"cookie": [],
 							"body": "Deleted video game with id '1'."
+						},
+						{
+							"name": "404 Not Found",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://{{host}}:{{port}}/video_games/:id",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"video_games",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "25"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "Text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "No video game with id '25' could be found."
+						},
+						{
+							"name": "400 Invalid Id",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://{{host}}:{{port}}/video_games/:id",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"video_games",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "invalid!"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "Text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "The provided id 'invalid!' is invalid."
 						}
 					]
 				},
@@ -1053,7 +1053,7 @@
 							},
 							"status": "OK",
 							"code": 200,
-							"_postman_previewlanguage": null,
+							"_postman_previewlanguage": "Text",
 							"header": [
 								{
 									"key": "Content-Type",
@@ -1098,7 +1098,7 @@
 											"});\r",
 											"\r",
 											"pm.test(\"Content-Type header is application/json\", () => {\r",
-											"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.eql(\"application/json\");\r",
+											"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.contain(\"application/json\");\r",
 											"});\r",
 											"\r",
 											"pm.test(\"Body includes all initial video games\", () => {\r",
@@ -1159,7 +1159,7 @@
 											"});\r",
 											"\r",
 											"pm.test(\"Content-Type header is application/json\", () => {\r",
-											"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.eql(\"application/json\");\r",
+											"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.contain(\"application/json\");\r",
 											"});\r",
 											"\r",
 											"pm.test(\"Body includes requested video game\", () => {\r",
@@ -1220,7 +1220,7 @@
 											"});\r",
 											"\r",
 											"pm.test(\"Content-Type header is text/plain\", () => {\r",
-											"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.eql(\"text/plain\");\r",
+											"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.contain(\"text/plain\");\r",
 											"});\r",
 											"\r",
 											"pm.test(\"Body states bad request reason\", () => {\r",
@@ -1280,7 +1280,7 @@
 											"});\r",
 											"\r",
 											"pm.test(\"Content-Type header is text/plain\", () => {\r",
-											"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.eql(\"text/plain\");\r",
+											"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.contain(\"text/plain\");\r",
 											"});\r",
 											"\r",
 											"pm.test(\"Body states video game was not found\", () => {\r",
@@ -1347,7 +1347,7 @@
 											"});\r",
 											"\r",
 											"pm.test(\"Content-Type header is application/json\", () => {\r",
-											"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.eql(\"application/json\");\r",
+											"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.contain(\"application/json\");\r",
 											"});\r",
 											"\r",
 											"pm.test(\"Body includes newly created video game\", () => {\r",
@@ -1413,7 +1413,7 @@
 											"});\r",
 											"\r",
 											"pm.test(\"Content-Type header is application/json\", () => {\r",
-											"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.eql(\"application/json\");\r",
+											"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.contain(\"application/json\");\r",
 											"});\r",
 											"\r",
 											"pm.test(\"Body includes newly created video game\", () => {\r",
@@ -1477,7 +1477,7 @@
 											"});\r",
 											"\r",
 											"pm.test(\"Content-Type header is text/plain\", () => {\r",
-											"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.eql(\"text/plain\");\r",
+											"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.contain(\"text/plain\");\r",
 											"});\r",
 											"\r",
 											"pm.test(\"Body states bad request reason\", () => {\r",
@@ -1540,7 +1540,7 @@
 											"});\r",
 											"\r",
 											"pm.test(\"Content-Type header is text/plain\", () => {\r",
-											"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.eql(\"text/plain\");\r",
+											"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.contain(\"text/plain\");\r",
 											"});\r",
 											"\r",
 											"pm.test(\"Body states bad request reason\", () => {\r",
@@ -1603,7 +1603,7 @@
 											"});\r",
 											"\r",
 											"pm.test(\"Content-Type header is text/plain\", () => {\r",
-											"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.eql(\"text/plain\");\r",
+											"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.contain(\"text/plain\");\r",
 											"});\r",
 											"\r",
 											"pm.test(\"Body states bad request reason\", () => {\r",
@@ -1666,7 +1666,7 @@
 											"});\r",
 											"\r",
 											"pm.test(\"Content-Type header is text/plain\", () => {\r",
-											"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.eql(\"text/plain\");\r",
+											"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.contain(\"text/plain\");\r",
 											"});\r",
 											"\r",
 											"pm.test(\"Body includes all initial video games\", () => {\r",
@@ -1729,7 +1729,7 @@
 											"});\r",
 											"\r",
 											"pm.test(\"Content-Type header is text/plain\", () => {\r",
-											"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.eql(\"text/plain\");\r",
+											"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.contain(\"text/plain\");\r",
 											"});\r",
 											"\r",
 											"pm.test(\"Body states bad request reason\", () => {\r",
@@ -1799,7 +1799,7 @@
 											"});\r",
 											"\r",
 											"pm.test(\"Content-Type header is application/json\", () => {\r",
-											"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.eql(\"application/json\");\r",
+											"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.contain(\"application/json\");\r",
 											"});\r",
 											"\r",
 											"pm.test(\"Body includes updated version of video game\", () => {\r",
@@ -1870,7 +1870,7 @@
 											"});\r",
 											"\r",
 											"pm.test(\"Content-Type header is text/plain\", () => {\r",
-											"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.eql(\"text/plain\");\r",
+											"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.contain(\"text/plain\");\r",
 											"});\r",
 											"\r",
 											"pm.test(\"Body states bad request reason\", () => {\r",
@@ -1940,7 +1940,7 @@
 											"});\r",
 											"\r",
 											"pm.test(\"Content-Type header is text/plain\", () => {\r",
-											"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.eql(\"text/plain\");\r",
+											"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.contain(\"text/plain\");\r",
 											"});\r",
 											"\r",
 											"pm.test(\"Body states bad request reason\", () => {\r",
@@ -2010,7 +2010,7 @@
 											"});\r",
 											"\r",
 											"pm.test(\"Content-Type header is text/plain\", () => {\r",
-											"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.eql(\"text/plain\");\r",
+											"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.contain(\"text/plain\");\r",
 											"});\r",
 											"\r",
 											"pm.test(\"Body states bad request reason\", () => {\r",
@@ -2080,7 +2080,7 @@
 											"});\r",
 											"\r",
 											"pm.test(\"Content-Type header is text/plain\", () => {\r",
-											"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.eql(\"text/plain\");\r",
+											"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.contain(\"text/plain\");\r",
 											"});\r",
 											"\r",
 											"pm.test(\"Body states bad request reason\", () => {\r",
@@ -2150,7 +2150,7 @@
 											"});\r",
 											"\r",
 											"pm.test(\"Content-Type header is text/plain\", () => {\r",
-											"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.eql(\"text/plain\");\r",
+											"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.contain(\"text/plain\");\r",
 											"});\r",
 											"\r",
 											"pm.test(\"Body states video game was not found\", () => {\r",
@@ -2225,7 +2225,7 @@
 											"});\r",
 											"\r",
 											"pm.test(\"Content-Type header is text/plain\", () => {\r",
-											"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.eql(\"text/plain\");\r",
+											"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.contain(\"text/plain\");\r",
 											"});\r",
 											"\r",
 											"pm.test(\"Body states the requested video game was deleted\", () => {\r",
@@ -2285,7 +2285,7 @@
 											"});\r",
 											"\r",
 											"pm.test(\"Content-Type header is text/plain\", () => {\r",
-											"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.eql(\"text/plain\");\r",
+											"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.contain(\"text/plain\");\r",
 											"});\r",
 											"\r",
 											"pm.test(\"Body states bad request reason\", () => {\r",
@@ -2345,7 +2345,7 @@
 											"});\r",
 											"\r",
 											"pm.test(\"Content-Type header is text/plain\", () => {\r",
-											"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.eql(\"text/plain\");\r",
+											"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.contain(\"text/plain\");\r",
 											"});\r",
 											"\r",
 											"pm.test(\"Body states video game was not found\", () => {\r",
