@@ -4,7 +4,7 @@ function VideoGamesService (storage) {
     this._storage = storage;
 }
 
-const newVideoGame = (name, date_released) => {
+const newVideoGame = (name, dateReleased) => {
     return {
         name,
         developers: [],
@@ -16,13 +16,13 @@ const newVideoGame = (name, date_released) => {
         artists: [],
         composers: [],
         platforms: [],
-        date_released
-    }
+        date_released: dateReleased
+    };
 };
 
 // date should always be in format DD/MM/YYYY
-const isValidDate = date_released => {
-    dateElements = date_released.split('/');
+const isValidDate = dateReleased => {
+    const dateElements = dateReleased.split('/');
 
     if (dateElements.length !== 3)
         return false;
@@ -37,12 +37,12 @@ VideoGamesService.prototype.getAll = function () {
 };
 
 VideoGamesService.prototype.add = function (data) {
-    const videoGameName = data['name'];
+    const videoGameName = data.name;
 
     if (!videoGameName)
         return Query.fail(400, 'A name is required for a video game.');
 
-    const videoGameDateReleased = data['date_released'];
+    const videoGameDateReleased = data.date_released;
 
     if (!videoGameDateReleased)
         return Query.fail(400, 'A date_released is required for a video game.');
@@ -56,9 +56,9 @@ VideoGamesService.prototype.add = function (data) {
         if (['name', 'date_released'].includes(key))
             continue;
 
-        if (!videoGame.hasOwnProperty(key))
+        if (!Object.prototype.hasOwnProperty.call(videoGame, key))
             return Query.fail(400, `The provided data has an invalid attribute '${key}'.`);
-        
+
         videoGame[key] = value;
     }
 
