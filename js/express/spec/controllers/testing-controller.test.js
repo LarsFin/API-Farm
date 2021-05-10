@@ -14,7 +14,7 @@ test('setup should load data into storage and respond success', async () => {
     // Arrange
     const videoGame1 = {};
     const videoGame2 = {};
-    const videoGames = [ videoGame1, videoGame2 ];
+    const videoGames = [videoGame1, videoGame2];
     DataLoader.load = jest.fn(() => Promise.resolve(videoGames));
     mockStorage.constructor = jest.fn();
     mockStorage.addVideoGame = jest.fn();

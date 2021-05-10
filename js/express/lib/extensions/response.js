@@ -12,7 +12,7 @@ express.response.okText = function (message) {
     this.status(200);
     this.header('Content-Type', 'text/plain');
     this.send(message);
-}
+};
 
 express.response.created = function (body) {
     this.status(201);

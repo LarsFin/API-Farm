@@ -1,6 +1,6 @@
 const DataLoader = require('../utils/data-loader');
 
-function TestingController(storage) {
+function TestingController (storage) {
     this._storage = storage;
 }
 
@@ -18,6 +18,6 @@ TestingController.prototype.setup = async function (res) {
         console.error(error);
         res.internalServerError();
     }
-}
+};
 
 module.exports = TestingController;
