@@ -40,7 +40,7 @@ test('add should instance a video game object and add to storage', () => {
     const artists = ['VG ARTISTS'];
     const composers = ['VG COMPS'];
     const platforms = ['PLATFORM X'];
-    const date_released = '15/04/2004';
+    const dateReleased = '15/04/2004';
     const data = {
         name,
         developers,
@@ -49,7 +49,7 @@ test('add should instance a video game object and add to storage', () => {
         artists,
         composers,
         platforms,
-        date_released
+        date_released: dateReleased
     };
     const storedVideoGame = {};
     mockStorage.add = jest.fn(() => storedVideoGame);
@@ -73,7 +73,7 @@ test('add should instance a video game object and add to storage', () => {
             artists,
             composers,
             platforms,
-            date_released
+            date_released: dateReleased
         })
     );
 
@@ -91,7 +91,7 @@ test('add should fail when data has no name', () => {
     const artists = ['VG ARTISTS'];
     const composers = ['VG COMPS'];
     const platforms = ['PLATFORM X'];
-    const date_released = '15/04/2004';
+    const dateReleased = '15/04/2004';
     const data = {
         developers,
         publishers,
@@ -99,7 +99,7 @@ test('add should fail when data has no name', () => {
         artists,
         composers,
         platforms,
-        date_released
+        date_released: dateReleased
     };
     const failedQuery = {};
     Query.fail = jest.fn(() => failedQuery);
@@ -154,7 +154,7 @@ test('add should fail when data has an invalid date_released (1)', () => {
     const artists = ['VG ARTISTS'];
     const composers = ['VG COMPS'];
     const platforms = ['PLATFORM X'];
-    const date_released = '04/15/2004';
+    const dateReleased = '04/15/2004';
     const data = {
         name,
         developers,
@@ -163,7 +163,7 @@ test('add should fail when data has an invalid date_released (1)', () => {
         artists,
         composers,
         platforms,
-        date_released
+        date_released: dateReleased
     };
     const failedQuery = {};
     Query.fail = jest.fn(() => failedQuery);
@@ -173,7 +173,7 @@ test('add should fail when data has an invalid date_released (1)', () => {
 
     // Assert
     expect(Query.fail).toHaveBeenCalledTimes(1);
-    expect(Query.fail).toHaveBeenCalledWith(400, `The provided date_released '${date_released}' is invalid.`);
+    expect(Query.fail).toHaveBeenCalledWith(400, `The provided date_released '${dateReleased}' is invalid.`);
 
     expect(query).toBe(failedQuery);
 });
@@ -187,7 +187,7 @@ test('add should fail when data has an invalid date_released (2)', () => {
     const artists = ['VG ARTISTS'];
     const composers = ['VG COMPS'];
     const platforms = ['PLATFORM X'];
-    const date_released = 'Last Monday';
+    const dateReleased = 'Last Monday';
     const data = {
         name,
         developers,
@@ -196,7 +196,7 @@ test('add should fail when data has an invalid date_released (2)', () => {
         artists,
         composers,
         platforms,
-        date_released
+        date_released: dateReleased
     };
     const failedQuery = {};
     Query.fail = jest.fn(() => failedQuery);
@@ -206,7 +206,7 @@ test('add should fail when data has an invalid date_released (2)', () => {
 
     // Assert
     expect(Query.fail).toHaveBeenCalledTimes(1);
-    expect(Query.fail).toHaveBeenCalledWith(400, `The provided date_released '${date_released}' is invalid.`);
+    expect(Query.fail).toHaveBeenCalledWith(400, `The provided date_released '${dateReleased}' is invalid.`);
 
     expect(query).toBe(failedQuery);
 });
@@ -221,7 +221,7 @@ test('add should fail when data has an invalid attribute', () => {
     const composers = ['VG COMPS'];
     const platforms = ['PLATFORM X'];
     const testers = ['VG TESTERS'];
-    const date_released = '15/04/2004';
+    const dateReleased = '15/04/2004';
     const data = {
         name,
         developers,
@@ -231,7 +231,7 @@ test('add should fail when data has an invalid attribute', () => {
         composers,
         platforms,
         testers,
-        date_released
+        date_released: dateReleased
     };
     const failedQuery = {};
     Query.fail = jest.fn(() => failedQuery);
