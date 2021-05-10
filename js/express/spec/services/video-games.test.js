@@ -54,7 +54,7 @@ test('add should instance a video game object and add to storage', () => {
     };
     ApiFarmDate.isValid = jest.fn(() => true);
     const storedVideoGame = {};
-    mockStorage.add = jest.fn(() => storedVideoGame);
+    mockStorage.addVideoGame = jest.fn(() => storedVideoGame);
     const successfulQuery = {};
     Query.success = jest.fn(() => successfulQuery);
 
@@ -62,8 +62,8 @@ test('add should instance a video game object and add to storage', () => {
     const query = videoGamesService.add(data);
 
     // Assert
-    expect(mockStorage.add).toHaveBeenCalledTimes(1);
-    expect(mockStorage.add).toHaveBeenCalledWith(
+    expect(mockStorage.addVideoGame).toHaveBeenCalledTimes(1);
+    expect(mockStorage.addVideoGame).toHaveBeenCalledWith(
         expect.objectContaining({
             name,
             developers,

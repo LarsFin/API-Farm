@@ -5,6 +5,16 @@ const hostname = '0.0.0.0';
 
 require('./lib/extensions/response');
 
+app.use(express.json({
+    verify: (_, res, buf, __) => {
+        try {
+            JSON.parse(buf);
+        } catch {
+            res.badRequest('Invalid JSON in body.');
+        }
+    }
+}));
+
 const Controller = require('./lib/controllers/controller');
 const VideoGamesService = require('./lib/services/video-games');
 const InMemory = require('./lib/storage/in-memory');
@@ -19,6 +29,10 @@ app.get('/ping', (_, res) => {
 
 app.get('/video_games', (_, res) => {
     controller.getAll(res);
+});
+
+app.post('/video_games', (req, res) => {
+    controller.add(req, res);
 });
 
 app.listen(port, hostname, () => {

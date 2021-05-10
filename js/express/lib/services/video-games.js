@@ -53,7 +53,7 @@ VideoGamesService.prototype.add = function (data) {
         videoGame[key] = value;
     }
 
-    videoGame = this._storage.add(videoGame);
+    videoGame = this._storage.addVideoGame(videoGame);
 
     return Query.success(videoGame);
 };
