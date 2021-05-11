@@ -1,4 +1,3 @@
-const { expect } = require('@jest/globals');
 const Controller = require('../../lib/controllers/controller');
 
 let controller;
@@ -13,14 +12,13 @@ beforeEach(() => {
 
 test('get should retrieve video game with parametised id and respond 200', () => {
     // Arrange
-    const rawId = '5'
+    const rawId = '5';
     const req = { params: { id: rawId } };
     const id = 5;
-    parseInt = jest.fn(() => id);
     const videoGame = {};
     const query = {
         result: videoGame
-    }
+    };
     mockVideoGamesService.get = jest.fn(() => query);
     const res = {};
     res.ok = jest.fn();
@@ -32,18 +30,14 @@ test('get should retrieve video game with parametised id and respond 200', () =>
     expect(res.ok).toHaveBeenCalledTimes(1);
     expect(res.ok).toHaveBeenCalledWith(videoGame);
 
-    expect(parseInt).toHaveBeenCalledTimes(1);
-    expect(parseInt).toHaveBeenCalledWith(rawId);
-
     expect(mockVideoGamesService.get).toHaveBeenCalledTimes(1);
     expect(mockVideoGamesService.get).toHaveBeenCalledWith(id);
 });
 
 test('get should not accept invalid id values and respond 400', () => {
     // Arrange
-    const rawId = 'invalid!'
+    const rawId = 'invalid!';
     const req = { params: { id: rawId } };
-    parseInt = jest.fn(() => NaN);
     const res = {};
     res.badRequest = jest.fn();
 
@@ -53,22 +47,18 @@ test('get should not accept invalid id values and respond 400', () => {
     // Assert
     expect(res.badRequest).toHaveBeenCalledTimes(1);
     expect(res.badRequest).toHaveBeenCalledWith(`The provided id '${rawId}' is invalid.`);
-
-    expect(parseInt).toHaveBeenCalledTimes(1);
-    expect(parseInt).toHaveBeenCalledWith(rawId);
 });
 
 test('get should check for when a video game could not be found and respond 404', () => {
     // Arrange
-    const rawId = '99'
+    const rawId = '99';
     const req = { params: { id: rawId } };
     const id = 99;
-    parseInt = jest.fn(() => id);
-    const failReason = "FAILED TO FIND VIDEO GAME!";
+    const failReason = 'FAILED TO FIND VIDEO GAME!';
     const query = {
         code: 404,
         result: failReason
-    }
+    };
     mockVideoGamesService.get = jest.fn(() => query);
     const res = {};
     res.notFound = jest.fn();
@@ -79,9 +69,6 @@ test('get should check for when a video game could not be found and respond 404'
     // Assert
     expect(res.notFound).toHaveBeenCalledTimes(1);
     expect(res.notFound).toHaveBeenCalledWith(failReason);
-
-    expect(parseInt).toHaveBeenCalledTimes(1);
-    expect(parseInt).toHaveBeenCalledWith(rawId);
 
     expect(mockVideoGamesService.get).toHaveBeenCalledTimes(1);
     expect(mockVideoGamesService.get).toHaveBeenCalledWith(id);
