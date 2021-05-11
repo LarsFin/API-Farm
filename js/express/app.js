@@ -31,6 +31,10 @@ app.get('/video_games', (_, res) => {
     controller.getAll(res);
 });
 
+app.get('/video_games/:id', (req, res) => {
+    controller.get(req, res);
+});
+
 app.post('/video_games', (req, res) => {
     controller.add(req, res);
 });
