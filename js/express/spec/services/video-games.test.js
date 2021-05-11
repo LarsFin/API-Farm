@@ -11,6 +11,50 @@ beforeEach(() => {
     videoGamesService = new VideoGamesService(mockStorage);
 });
 
+// Get
+
+test('get should query storage and return video game', () => {
+    // Arrange
+    const id = 5;
+    const videoGame = {};
+    mockStorage.getVideoGame = jest.fn(() => videoGame);
+    const successfulQuery = {};
+    Query.success = jest.fn(() => successfulQuery);
+
+    // Act
+    const query = videoGamesService.get(id);
+
+    // Assert
+    expect(query).toBe(successfulQuery);
+
+    expect(mockStorage.getVideoGame).toHaveBeenCalledTimes(1);
+    expect(mockStorage.getVideoGame).toHaveBeenCalledWith(id);
+
+    expect(Query.success).toHaveBeenCalledTimes(1);
+    expect(Query.success).toHaveBeenCalledWith(videoGame);
+});
+
+test('get should query storage and return failure when video game not found', () => {
+    // Arrange
+    const id = 99;
+    const videoGame = {};
+    mockStorage.getVideoGame = jest.fn();
+    const failedQuery = {};
+    Query.fail = jest.fn(() => failedQuery);
+
+    // Act
+    const query = videoGamesService.get(id);
+
+    // Assert
+    expect(query).toBe(failedQuery);
+
+    expect(mockStorage.getVideoGame).toHaveBeenCalledTimes(1);
+    expect(mockStorage.getVideoGame).toHaveBeenCalledWith(id);
+
+    expect(Query.fail).toHaveBeenCalledTimes(1);
+    expect(Query.fail).toHaveBeenCalledWith(404, `No video game with id '${id}' could be found.`);
+});
+
 // Get All
 
 test('getAll should query storage and return video games', () => {

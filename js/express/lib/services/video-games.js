@@ -21,6 +21,15 @@ const newVideoGame = (name, dateReleased) => {
     };
 };
 
+VideoGamesService.prototype.get = function (id) {
+    const videoGame = this._storage.getVideoGame(id);
+
+    if (!videoGame)
+        return Query.fail(404, `No video game with id '${id}' could be found.`);
+
+    return Query.success(videoGame);
+};
+
 VideoGamesService.prototype.getAll = function () {
     const videoGames = this._storage.getAllVideoGames();
 
