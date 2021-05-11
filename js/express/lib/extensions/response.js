@@ -21,3 +21,9 @@ express.response.badRequest = function (reason) {
     this.header('Content-Type', 'text/plain');
     this.send(reason);
 };
+
+express.response.notFound = function (reason) {
+    this.status(404);
+    this.header('Content-Type', 'text/plain');
+    this.send(reason);
+};
