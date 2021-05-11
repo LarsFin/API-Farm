@@ -37,7 +37,6 @@ test('get should query storage and return video game', () => {
 test('get should query storage and return failure when video game not found', () => {
     // Arrange
     const id = 99;
-    const videoGame = {};
     mockStorage.getVideoGame = jest.fn();
     const failedQuery = {};
     Query.fail = jest.fn(() => failedQuery);
