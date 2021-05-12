@@ -39,6 +39,10 @@ app.post('/video_games', (req, res) => {
     controller.add(req, res);
 });
 
+app.put('/video_games/:id', (req, res) => {
+    controller.put(req, res);
+});
+
 app.listen(port, hostname, () => {
     console.log(`Example app listening at http://localhost:${port}`);
 });
