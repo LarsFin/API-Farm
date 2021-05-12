@@ -5,9 +5,9 @@ function VideoGamesService (storage) {
     this._storage = storage;
 }
 
-const newVideoGame = (name, dateReleased) => {
+const initVideoGame = () => {
     return {
-        name,
+        name: '',
         developers: [],
         publishers: [],
         directors: [],
@@ -17,8 +17,22 @@ const newVideoGame = (name, dateReleased) => {
         artists: [],
         composers: [],
         platforms: [],
-        date_released: dateReleased
+        date_released: ''
     };
+};
+
+const mapProperties = (videoGame, data) => {
+    const validProperties = Object.keys(initVideoGame());
+
+    for (const [key, value] of Object.entries(data)) {
+        if (!validProperties.includes(key))
+            return Query.fail(400, `The provided data has an invalid attribute '${key}'.`);
+
+        if (key === 'date_released' && !ApiFarmDate.isValid(value))
+            return Query.fail(400, `The provided date_released '${value}' is invalid.`);
+
+        videoGame[key] = value;
+    }
 };
 
 VideoGamesService.prototype.get = function (id) {
@@ -37,30 +51,18 @@ VideoGamesService.prototype.getAll = function () {
 };
 
 VideoGamesService.prototype.add = function (data) {
-    const videoGameName = data.name;
-
-    if (!videoGameName)
+    if (!data.name)
         return Query.fail(400, 'A name is required for a video game.');
 
-    const videoGameDateReleased = data.date_released;
-
-    if (!videoGameDateReleased)
+    if (!data.date_released)
         return Query.fail(400, 'A date_released is required for a video game.');
 
-    if (!ApiFarmDate.isValid(videoGameDateReleased))
-        return Query.fail(400, `The provided date_released '${videoGameDateReleased}' is invalid.`);
+    let videoGame = initVideoGame();
 
-    let videoGame = newVideoGame(videoGameName, videoGameDateReleased);
+    const mappingIssue = mapProperties(videoGame, data);
 
-    for (const [key, value] of Object.entries(data)) {
-        if (['name', 'date_released'].includes(key))
-            continue;
-
-        if (!Object.prototype.hasOwnProperty.call(videoGame, key))
-            return Query.fail(400, `The provided data has an invalid attribute '${key}'.`);
-
-        videoGame[key] = value;
-    }
+    if (mappingIssue)
+        return mappingIssue
 
     videoGame = this._storage.addVideoGame(videoGame);
 
@@ -75,15 +77,10 @@ VideoGamesService.prototype.update = function (id, data) {
 
     let videoGame = query.result;
 
-    for (const [key, value] of Object.entries(data)) {
-        if (!Object.prototype.hasOwnProperty.call(videoGame, key))
-            return Query.fail(400, `The provided data has an invalid attribute '${key}'.`);
+    const mappingIssue = mapProperties(videoGame, data);
 
-        if (key === 'date_released' && !ApiFarmDate.isValid(value))
-            return Query.fail(400, `The provided date_released '${value}' is invalid.`);
-
-        videoGame[key] = value;
-    }
+    if (mappingIssue)
+        return mappingIssue
 
     videoGame = this._storage.updateVideoGame(id, videoGame);
 
