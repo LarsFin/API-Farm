@@ -1,8 +1,8 @@
-const clone = require('../../lib/utils/clone');
+const Clone = require('../../lib/utils/clone');
 
 test('clone should return copy of object', () => {
     // Arrange
-    const originalObj = {
+    const original = {
         k1: {
             k1: 'v',
             k2: [1, 2, 3]
@@ -15,9 +15,12 @@ test('clone should return copy of object', () => {
     };
 
     // Act
-    const cloneObj = clone(originalObj);
+    const clone = Clone.object(original);
 
     // Assert
-    expect(cloneObj).not.toBe(originalObj);
-    expect(cloneObj).toMatchObject(originalObj);
+    expect(clone).not.toBe(original);
+    expect(clone.k1).not.toBe(original.k1);
+    expect(clone.k3).not.toBe(original.k3);
+
+    expect(clone).toMatchObject(original);
 });

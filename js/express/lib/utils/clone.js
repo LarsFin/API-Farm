@@ -1,10 +1,8 @@
-const clone = (originalObj) => {
-    const cloneObj = (originalObj instanceof Array ? [] : {});
+exports.object = cloneObject = original => {
+    const clone = (original instanceof Array ? [] : {});
 
-    for (const [k, v] of Object.entries(originalObj))
-        cloneObj[k] = (v instanceof Object ? clone(v) : v);
+    for (const [k, v] of Object.entries(original))
+        clone[k] = (v instanceof Object ? cloneObject(v) : v);
 
-    return cloneObj;
+    return clone;
 };
-
-module.exports = clone;
