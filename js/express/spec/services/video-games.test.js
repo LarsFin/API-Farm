@@ -259,3 +259,183 @@ test('add should fail when data has an invalid attribute', () => {
 
     expect(query).toBe(failedQuery);
 });
+
+// Update
+
+test('update should update video game properties in storage and return successful query', () => {
+    // Arrange
+    const name = 'Video Game to Update';
+    const developers = ['VG DEVS'];
+    const publishers = ['VG PUBS'];
+    const directors = ['VG DIR'];
+    const dateReleased = '15/04/2004';
+    const videoGame = {
+        name,
+        developers,
+        publishers,
+        directors,
+        date_released: dateReleased
+    };
+    const id = 3;
+    const updatedName = 'Updated Video Game';
+    const updatedDirectors = ['NEW DIR'];
+    const updatedDateReleased = '04/06/2004';
+    const data = {
+        name: updatedName,
+        directors: updatedDirectors,
+        date_released: updatedDateReleased
+    };
+    const successfulQuery1 = {
+        code: 0,
+        result: videoGame
+    };
+    videoGamesService.get = jest.fn(() => successfulQuery1);
+    ApiFarmDate.isValid = jest.fn(() => true);
+    const updatedVideoGame = {};
+    mockStorage.updateVideoGame = jest.fn(() => updatedVideoGame);
+    const successfulQuery2 = {
+        code: 0,
+        result: updatedVideoGame
+    };
+    Query.success = jest.fn(() => successfulQuery2);
+
+    // Act
+    const query = videoGamesService.update(id, data);
+
+    // Assert
+    expect(query).toBe(successfulQuery2);
+
+    expect(videoGamesService.get).toHaveBeenCalledTimes(1);
+    expect(videoGamesService.get).toHaveBeenCalledWith(id);
+
+    expect(ApiFarmDate.isValid).toHaveBeenCalledTimes(1);
+    expect(ApiFarmDate.isValid).toHaveBeenCalledWith(updatedDateReleased);
+
+    expect(mockStorage.updateVideoGame).toHaveBeenCalledTimes(1);
+    expect(mockStorage.updateVideoGame).toHaveBeenCalledWith(
+        id,
+        expect.objectContaining({
+            name: updatedName,
+            developers,
+            publishers,
+            directors: updatedDirectors,
+            date_released: updatedDateReleased
+        })
+    );
+
+    expect(Query.success).toHaveBeenCalledTimes(1);
+    expect(Query.success).toHaveBeenCalledWith(updatedVideoGame);
+});
+
+test('update should return failed query when does not exist in storage', () => {
+    // Arrange
+    const id = 99;
+    const failedQuery = {
+        code: 404,
+        result: 'Could not find video game!'
+    };
+    videoGamesService.get = jest.fn(() => failedQuery);
+
+    // Act
+    const query = videoGamesService.update(id, {});
+
+    // Assert
+    expect(query).toBe(failedQuery);
+
+    expect(videoGamesService.get).toHaveBeenCalledTimes(1);
+    expect(videoGamesService.get).toHaveBeenCalledWith(id);
+});
+
+test('update should return failed query when data contains invalid attribute', () => {
+    // Arrange
+    const name = 'Video Game to Update';
+    const developers = ['VG DEVS'];
+    const publishers = ['VG PUBS'];
+    const directors = ['VG DIR'];
+    const dateReleased = '15/04/2004';
+    const videoGame = {
+        name,
+        developers,
+        publishers,
+        directors,
+        date_released: dateReleased
+    };
+    const id = 3;
+    const updatedName = 'Updated Video Game';
+    const updatedDirectors = ['NEW DIR'];
+    const updatedTesters = ['INVALID TESTERS'];
+    const updatedDateReleased = '04/06/2004';
+    const data = {
+        name: updatedName,
+        directors: updatedDirectors,
+        testers: updatedTesters,
+        date_released: updatedDateReleased
+    };
+    const successfulQuery1 = {
+        code: 0,
+        result: videoGame
+    };
+    videoGamesService.get = jest.fn(() => successfulQuery1);
+    const failedQuery = {};
+    Query.fail = jest.fn(() => failedQuery);
+
+    // Act
+    const query = videoGamesService.update(id, data);
+
+    // Assert
+    expect(query).toBe(failedQuery);
+
+    expect(videoGamesService.get).toHaveBeenCalledTimes(1);
+    expect(videoGamesService.get).toHaveBeenCalledWith(id);
+
+    expect(Query.fail).toHaveBeenCalledTimes(1);
+    expect(Query.fail).toHaveBeenCalledWith(400, 'The provided data has an invalid attribute \'testers\'.');
+});
+
+test('update should return failed query when provided date_released is invalid', () => {
+    // Arrange
+    const name = 'Video Game to Update';
+    const developers = ['VG DEVS'];
+    const publishers = ['VG PUBS'];
+    const directors = ['VG DIR'];
+    const dateReleased = '15/04/2004';
+    const videoGame = {
+        name,
+        developers,
+        publishers,
+        directors,
+        date_released: dateReleased
+    };
+    const id = 3;
+    const updatedName = 'Updated Video Game';
+    const updatedDirectors = ['NEW DIR'];
+    const updatedDateReleased = '12/30/2004';
+    const data = {
+        name: updatedName,
+        directors: updatedDirectors,
+        date_released: updatedDateReleased
+    };
+    const successfulQuery1 = {
+        code: 0,
+        result: videoGame
+    };
+    videoGamesService.get = jest.fn(() => successfulQuery1);
+    ApiFarmDate.isValid = jest.fn(() => false);
+    const failedQuery = {};
+    Query.fail = jest.fn(() => failedQuery);
+
+    // Act
+    const query = videoGamesService.update(id, data);
+
+    // Assert
+    expect(query).toBe(failedQuery);
+
+    expect(videoGamesService.get).toHaveBeenCalledTimes(1);
+    expect(videoGamesService.get).toHaveBeenCalledWith(id);
+
+    expect(ApiFarmDate.isValid).toHaveBeenCalledTimes(1);
+    expect(ApiFarmDate.isValid).toHaveBeenCalledWith(updatedDateReleased);
+
+    expect(Query.fail).toHaveBeenCalledTimes(1);
+    expect(Query.fail).toHaveBeenCalledWith(400, `The provided date_released '${updatedDateReleased}' is invalid.`);
+});

@@ -67,4 +67,27 @@ VideoGamesService.prototype.add = function (data) {
     return Query.success(videoGame);
 };
 
+VideoGamesService.prototype.update = function (id, data) {
+    const query = this.get(id);
+
+    if (query.code === 404)
+        return query;
+
+    let videoGame = query.result;
+
+    for (const [key, value] of Object.entries(data)) {
+        if (!Object.prototype.hasOwnProperty.call(videoGame, key))
+            return Query.fail(400, `The provided data has an invalid attribute '${key}'.`);
+
+        if (key === 'date_released' && !ApiFarmDate.isValid(value))
+            return Query.fail(400, `The provided date_released '${value}' is invalid.`);
+
+        videoGame[key] = value;
+    }
+
+    videoGame = this._storage.updateVideoGame(id, videoGame);
+
+    return Query.success(videoGame);
+};
+
 module.exports = VideoGamesService;
