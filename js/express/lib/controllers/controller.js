@@ -38,4 +38,29 @@ Controller.prototype.add = function (req, res) {
     res.created(query.result);
 };
 
+Controller.prototype.put = function (req, res) {
+    const rawId = req.params.id;
+    const id = parseInt(rawId);
+
+    if (isNaN(id)) {
+        res.badRequest(`The provided id '${rawId}' is invalid.`);
+        return;
+    }
+
+    const query = this._videoGamesService.update(id, req.body);
+
+    switch (query.code) {
+    case 400:
+        res.badRequest(query.result);
+        break;
+
+    case 404:
+        res.notFound(query.result);
+        break;
+
+    default:
+        res.ok(query.result);
+    }
+};
+
 module.exports = Controller;

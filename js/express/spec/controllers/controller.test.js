@@ -147,3 +147,108 @@ test('add should add body data to service and respond 400', () => {
     expect(res.badRequest).toHaveBeenCalledTimes(1);
     expect(res.badRequest).toHaveBeenCalledWith(failReason);
 });
+
+// Put
+
+test('put should make an update query and respond 200', () => {
+    // Arrange
+    const rawId = '5';
+    const body = {};
+    const req = {
+        params: { id: rawId },
+        body
+    };
+    const videoGame = {};
+    const query = {
+        code: 0,
+        result: videoGame
+    };
+    mockVideoGamesService.update = jest.fn(() => query);
+    const res = {};
+    res.ok = jest.fn();
+
+    // Act
+    controller.put(req, res);
+
+    // Assert
+    expect(mockVideoGamesService.update).toHaveBeenCalledTimes(1);
+    expect(mockVideoGamesService.update).toHaveBeenCalledWith(5, body);
+
+    expect(res.ok).toHaveBeenCalledTimes(1);
+    expect(res.ok).toHaveBeenCalledWith(videoGame);
+});
+
+test('put should not accept an invalid id and respond 400', () => {
+    // Arrange
+    const rawId = 'invalid!';
+    const body = {};
+    const req = {
+        params: { id: rawId },
+        body
+    };
+    const res = {};
+    res.badRequest = jest.fn();
+
+    // Act
+    controller.put(req, res);
+
+    // Assert
+    expect(res.badRequest).toHaveBeenCalledTimes(1);
+    expect(res.badRequest).toHaveBeenCalledWith(`The provided id '${rawId}' is invalid.`);
+});
+
+test('put should fail when invalid data is provided and respond 400', () => {
+    // Arrange
+    const rawId = '5';
+    const body = {};
+    const req = {
+        params: { id: rawId },
+        body
+    };
+    const failReason = 'Invalid data provided!';
+    const query = {
+        code: 400,
+        result: failReason
+    };
+    mockVideoGamesService.update = jest.fn(() => query);
+    const res = {};
+    res.badRequest = jest.fn();
+
+    // Act
+    controller.put(req, res);
+
+    // Assert
+    expect(mockVideoGamesService.update).toHaveBeenCalledTimes(1);
+    expect(mockVideoGamesService.update).toHaveBeenCalledWith(5, body);
+
+    expect(res.badRequest).toHaveBeenCalledTimes(1);
+    expect(res.badRequest).toHaveBeenCalledWith(failReason);
+});
+
+test('put should fail when video game not found and respond 404', () => {
+    // Arrange
+    const rawId = '5';
+    const body = {};
+    const req = {
+        params: { id: rawId },
+        body
+    };
+    const failReason = 'Video Game could not be found!';
+    const query = {
+        code: 404,
+        result: failReason
+    };
+    mockVideoGamesService.update = jest.fn(() => query);
+    const res = {};
+    res.notFound = jest.fn();
+
+    // Act
+    controller.put(req, res);
+
+    // Assert
+    expect(mockVideoGamesService.update).toHaveBeenCalledTimes(1);
+    expect(mockVideoGamesService.update).toHaveBeenCalledWith(5, body);
+
+    expect(res.notFound).toHaveBeenCalledTimes(1);
+    expect(res.notFound).toHaveBeenCalledWith(failReason);
+});
