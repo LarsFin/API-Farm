@@ -2,12 +2,14 @@ function Controller (videoGamesService) {
     this._videoGamesService = videoGamesService;
 }
 
+const invalidIdMessage = id => `The provided id '${id}' is invalid.`;
+
 Controller.prototype.get = function (req, res) {
     const rawId = req.params.id;
     const id = parseInt(rawId);
 
     if (isNaN(id)) {
-        res.badRequest(`The provided id '${rawId}' is invalid.`);
+        res.badRequest(invalidIdMessage(rawId));
         return;
     }
 
@@ -43,7 +45,7 @@ Controller.prototype.put = function (req, res) {
     const id = parseInt(rawId);
 
     if (isNaN(id)) {
-        res.badRequest(`The provided id '${rawId}' is invalid.`);
+        res.badRequest(invalidIdMessage(rawId));
         return;
     }
 
