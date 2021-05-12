@@ -54,3 +54,21 @@ test('addVideoGame should increment and set id, then push to video games array',
     expect(inMemory._videoGames[0]).toBe(videoGame);
     expect(storedVideoGame.id).toBe(1);
 });
+
+// Update Video Game
+
+test('updateVideoGame should find video game with passed id and replace with updated version', () => {
+    // Arrange
+    const videoGame1 = { id: 1 };
+    const videoGame2 = { id: 4 };
+    const videoGame3 = { id: 8 };
+    inMemory._videoGames = [videoGame1, videoGame2, videoGame3];
+    const updatedVideoGame = {};
+
+    // Act
+    const storedUpdatedVideoGame = inMemory.updateVideoGame(4, updatedVideoGame);
+
+    // Assert
+    expect(storedUpdatedVideoGame).toBe(updatedVideoGame);
+    expect(inMemory._videoGames[1]).toBe(updatedVideoGame);
+});
