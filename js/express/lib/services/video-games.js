@@ -62,7 +62,7 @@ VideoGamesService.prototype.add = function (data) {
     const mappingIssue = mapProperties(videoGame, data);
 
     if (mappingIssue)
-        return mappingIssue
+        return mappingIssue;
 
     videoGame = this._storage.addVideoGame(videoGame);
 
@@ -80,7 +80,7 @@ VideoGamesService.prototype.update = function (id, data) {
     const mappingIssue = mapProperties(videoGame, data);
 
     if (mappingIssue)
-        return mappingIssue
+        return mappingIssue;
 
     videoGame = this._storage.updateVideoGame(id, videoGame);
 
