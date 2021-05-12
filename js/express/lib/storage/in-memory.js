@@ -23,4 +23,12 @@ InMemory.prototype.addVideoGame = function (videoGame) {
     return videoGame;
 };
 
+InMemory.prototype.updateVideoGame = function (id, updatedVideoGame) {
+    for (const index in this._videoGames)
+        if (this._videoGames[index].id === id)
+            this._videoGames[index] = updatedVideoGame;
+
+    return updatedVideoGame;
+};
+
 module.exports = InMemory;
