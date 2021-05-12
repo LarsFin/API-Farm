@@ -1,4 +1,4 @@
-exports.object = cloneObject = original => {
+const cloneObject = original => {
     const clone = (original instanceof Array ? [] : {});
 
     for (const [k, v] of Object.entries(original))
@@ -6,3 +6,5 @@ exports.object = cloneObject = original => {
 
     return clone;
 };
+
+exports.object = cloneObject;
