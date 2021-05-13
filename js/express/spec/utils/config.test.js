@@ -43,5 +43,5 @@ test('fromEnvironment should reject an invalid environmnet error', () => {
     const configPromise = Config.fromEnvironment(invalidEnvironment);
 
     // Assert
-    expect(configPromise).rejects.toMatchObject(expectedError);    
+    expect(configPromise).rejects.toMatchObject(expectedError);
 });

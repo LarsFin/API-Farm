@@ -3,7 +3,7 @@ const fs = require('fs');
 
 test('load should read, parse and resolve data', async () => {
     // Arrange
-    const dataPath = './path/to/data-file.json'
+    const dataPath = './path/to/data-file.json';
     const data = {};
     fs.readFile = jest.fn((_, __, callback) => callback(null, data));
     const sampleData = {};
@@ -24,7 +24,7 @@ test('load should read, parse and resolve data', async () => {
 
 test('load should reject a file reading error', async () => {
     // Arrange
-    const dataPath = './path/to/data-file.json'
+    const dataPath = './path/to/data-file.json';
     const err = {};
     fs.readFile = jest.fn((_, __, callback) => callback(err));
 
@@ -40,7 +40,7 @@ test('load should reject a file reading error', async () => {
 
 test('load should reject a JSON parsing error', async () => {
     // Arrange
-    const dataPath = './path/to/data-file.json'
+    const dataPath = './path/to/data-file.json';
     const data = {};
     fs.readFile = jest.fn((_, __, callback) => callback(null, data));
     const err = {};
