@@ -6,8 +6,8 @@ exports.load = () => new Promise((resolve, reject) => {
             reject(err);
         else
             try {
-                const sampleData = JSON.parse(data);
-                resolve(sampleData);
+                const jsonData = JSON.parse(data);
+                resolve(jsonData);
             } catch (err) {
                 reject(err);
             }
