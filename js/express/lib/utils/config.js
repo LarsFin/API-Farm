@@ -3,9 +3,9 @@ const InvalidEnvironmentError = require('../errors/invalid-environment');
 
 const buildPath = env => `config.${env.toLowerCase()}.json`;
 
-exports.fromEnvironment = env => {
+exports.fromEnvironment = env => new Promise((res, rej) => {
     if (['dev', 'prod'].includes(env.toLowerCase()))
-        return DataLoader.load(buildPath(env));
-
-    throw new InvalidEnvironmentError(env);
-};
+        DataLoader.load(buildPath(env)).then(res).catch(rej);
+    else
+        rej(new InvalidEnvironmentError(env));
+});
