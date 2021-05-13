@@ -6,7 +6,7 @@ function TestingController (storage) {
 
 TestingController.prototype.setup = async function (res) {
     try {
-        const videoGames = await DataLoader.load();
+        const videoGames = await DataLoader.load('./data.json');
 
         this._storage.constructor();
 
