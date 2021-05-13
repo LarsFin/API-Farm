@@ -1,7 +1,7 @@
 const fs = require('fs');
 
-exports.load = () => new Promise((resolve, reject) => {
-    fs.readFile('./data.json', 'utf8', (err, data) => {
+exports.load = dataSource => new Promise((resolve, reject) => {
+    fs.readFile(dataSource, 'utf8', (err, data) => {
         if (err)
             reject(err);
         else

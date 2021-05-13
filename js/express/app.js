@@ -1,7 +1,5 @@
 const express = require('express');
 const app = express();
-const port = 8080;
-const hostname = '0.0.0.0';
 
 require('./lib/extensions/response');
 
@@ -55,6 +53,15 @@ if (env === 'DEV') {
     });
 }
 
-app.listen(port, hostname, () => {
-    console.log(`Example app listening at http://localhost:${port}`);
-});
+const Config = require('./lib/utils/config');
+
+Config.fromEnvironment(env)
+    .then(config => {
+        const hostname = config.hostname;
+        const port = config.port;
+
+        app.listen(port, hostname, () => {
+            console.log(`API Farm listening on http://${hostname}:${port}`);
+        });
+    })
+    .catch(console.error);
