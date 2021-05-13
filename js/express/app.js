@@ -43,6 +43,18 @@ app.put('/video_games/:id', (req, res) => {
     controller.put(req, res);
 });
 
+let env = process.env.API_ENV;
+env = (env ? env.toUpperCase() : 'DEV');
+
+if (env === 'DEV') {
+    const TestingController = require('./lib/controllers/testing-controller');
+    const testingController = new TestingController(storage);
+
+    app.get('/api_tests/setup', (_, res) => {
+        testingController.setup(res);
+    });
+}
+
 app.listen(port, hostname, () => {
     console.log(`Example app listening at http://localhost:${port}`);
 });
