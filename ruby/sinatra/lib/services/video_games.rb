@@ -75,9 +75,9 @@ class VideoGames
 
     def validate_keys(video_game_data)
         video_game_data.each_key do |key|
-            unless @video_game_class.method_defined? key.to_sym
-              return { fail_code: 400,
-                       fail_reason: "The provided data has an invalid attribute '#{key}'." }
+            if key == 'id' || !@video_game_class.method_defined?(key.to_sym)
+                return { fail_code: 400,
+                         fail_reason: "The provided data has an invalid attribute '#{key}'." }
             end
         end
 
