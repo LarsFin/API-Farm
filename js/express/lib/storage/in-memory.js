@@ -35,4 +35,10 @@ InMemory.prototype.updateVideoGame = function (id, updatedVideoGame) {
     return updatedVideoGame;
 };
 
+InMemory.prototype.deleteVideoGame = function (id) {
+    for (const index in this._videoGames)
+        if (this._videoGames[index].id === id)
+            return this._videoGames.splice(index, 1)[0];
+};
+
 module.exports = InMemory;
