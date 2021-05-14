@@ -1520,7 +1520,7 @@
 							"response": []
 						},
 						{
-							"name": "400 Invalid Attribute",
+							"name": "400 Invalid Attribute (1)",
 							"event": [
 								{
 									"listen": "prerequest",
@@ -1567,6 +1567,69 @@
 								"body": {
 									"mode": "raw",
 									"raw": "{\r\n    \"name\": \"Bloodborne\",\r\n    \"developers\": [\r\n      \"FromSoftware\"\r\n    ],\r\n    \"publishers\": [\r\n      \"Sony Computer Entertainment\"\r\n    ],\r\n    \"directors\": [\r\n      \"Hidetaka Miyazaki\"\r\n    ],\r\n    \"producers\": [\r\n      \"Masaaki Yamagiwa\",\r\n      \"Teruyuki Toriyama\"\r\n    ],\r\n    \"designers\": [\r\n      \"Kazuhiro Hamatani\"\r\n    ],\r\n    \"programmers\": [\r\n      \"Jun Ito\"\r\n    ],\r\n    \"artists\": [\r\n      \"Ryo Fujimaki\"\r\n    ],\r\n    \"composers\": [\r\n      \"Ryan Amon\",\r\n      \"Tsukasa Saitoh\",\r\n      \"Yuka Kitamura\",\r\n      \"Nobuyoshi Suzuki\",\r\n      \"Cris Velasco\",\r\n      \"Michael Wandmacher\"\r\n    ],\r\n    \"platforms\": [\r\n      \"Playstation 4\"\r\n    ],\r\n    \"date_released\": \"24/03/2015\",\r\n    \"testers\": [\r\n      \"Jun Ito\"\r\n    ]\r\n}"
+								},
+								"url": {
+									"raw": "http://{{host}}:{{port}}/video_games",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"video_games"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "400 Invalid Attribute (2)",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", () => {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Content-Type header is text/plain\", () => {\r",
+											"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.contain(\"text/plain\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Body states bad request reason\", () => {\r",
+											"    pm.expect(pm.response.text()).to.be.eql(\"The provided data has an invalid attribute 'id'.\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response time is less than 250ms\", () => {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(250);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": 50,\r\n    \"name\": \"Bloodborne\",\r\n    \"developers\": [\r\n      \"FromSoftware\"\r\n    ],\r\n    \"publishers\": [\r\n      \"Sony Computer Entertainment\"\r\n    ],\r\n    \"directors\": [\r\n      \"Hidetaka Miyazaki\"\r\n    ],\r\n    \"producers\": [\r\n      \"Masaaki Yamagiwa\",\r\n      \"Teruyuki Toriyama\"\r\n    ],\r\n    \"designers\": [\r\n      \"Kazuhiro Hamatani\"\r\n    ],\r\n    \"programmers\": [\r\n      \"Jun Ito\"\r\n    ],\r\n    \"artists\": [\r\n      \"Ryo Fujimaki\"\r\n    ],\r\n    \"composers\": [\r\n      \"Ryan Amon\",\r\n      \"Tsukasa Saitoh\",\r\n      \"Yuka Kitamura\",\r\n      \"Nobuyoshi Suzuki\",\r\n      \"Cris Velasco\",\r\n      \"Michael Wandmacher\"\r\n    ],\r\n    \"platforms\": [\r\n      \"Playstation 4\"\r\n    ],\r\n    \"date_released\": \"24/03/2015\"\r\n}"
 								},
 								"url": {
 									"raw": "http://{{host}}:{{port}}/video_games",
@@ -1850,7 +1913,7 @@
 							"response": []
 						},
 						{
-							"name": "400 Invalid Attribute",
+							"name": "400 Invalid Attribute (1)",
 							"event": [
 								{
 									"listen": "prerequest",
@@ -1897,6 +1960,76 @@
 								"body": {
 									"mode": "raw",
 									"raw": "{\r\n    \"testers\": [\r\n        \"Chris Sutherland\"\r\n    ]\r\n}"
+								},
+								"url": {
+									"raw": "http://{{host}}:{{port}}/video_games/:id",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"video_games",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "400 Invalid Attribute (2)",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", () => {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Content-Type header is text/plain\", () => {\r",
+											"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.contain(\"text/plain\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Body states bad request reason\", () => {\r",
+											"    pm.expect(pm.response.text()).to.be.eql(\"The provided data has an invalid attribute 'id'.\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response time is less than 250ms\", () => {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(250);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": 50\r\n}"
 								},
 								"url": {
 									"raw": "http://{{host}}:{{port}}/video_games/:id",
