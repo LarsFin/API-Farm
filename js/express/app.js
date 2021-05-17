@@ -41,6 +41,10 @@ app.put('/video_games/:id', (req, res) => {
     controller.put(req, res);
 });
 
+app.delete('/video_games/:id', (req, res) => {
+    controller.delete(req, res);
+});
+
 let env = process.env.API_ENV;
 env = (env ? env.toUpperCase() : 'DEV');
 

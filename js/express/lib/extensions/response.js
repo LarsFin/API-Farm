@@ -14,6 +14,12 @@ express.response.okText = function (message) {
     this.send(message);
 };
 
+express.response.okDelete = function (reason) {
+    this.status(200);
+    this.header('Content-Type', 'text/plain');
+    this.send(reason);
+};
+
 express.response.created = function (body) {
     this.status(201);
     this.header('Content-Type', 'application/json');

@@ -93,7 +93,7 @@ VideoGamesService.prototype.delete = function (id) {
     if (!videoGame)
         return Query.fail(404, `No video game with id '${id}' could be found.`);
 
-    return Query.success(videoGame);
+    return Query.success(`Deleted video game with id '${id}'.`);
 }
 
 module.exports = VideoGamesService;

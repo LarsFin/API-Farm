@@ -83,7 +83,7 @@ Controller.prototype.delete = function (req, res) {
         return;
     }
 
-    res.ok(query.result);
+    res.okDelete(query.result);
 };
 
 module.exports = Controller;

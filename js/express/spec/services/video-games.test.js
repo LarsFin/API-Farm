@@ -460,7 +460,7 @@ test('delete should query storage and remove video game', () => {
     expect(mockStorage.deleteVideoGame).toHaveBeenCalledWith(id);
 
     expect(Query.success).toHaveBeenCalledTimes(1);
-    expect(Query.success).toHaveBeenCalledWith(videoGame);
+    expect(Query.success).toHaveBeenCalledWith(`Deleted video game with id '${id}'.`);
 });
 
 test('delete should query storage and return failure when video game not found', () => {
