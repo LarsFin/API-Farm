@@ -252,3 +252,29 @@ test('put should fail when video game not found and respond 404', () => {
     expect(res.notFound).toHaveBeenCalledTimes(1);
     expect(res.notFound).toHaveBeenCalledWith(failReason);
 });
+
+// Delete
+
+test('delete should say removed videogame with parametised id and respond 200', () => {
+    // Arrange
+    const rawId = '5';
+    const req = { params: { id: rawId } };
+    const id = 5;
+    const videoGame = {};
+    const query = {
+        result: "Removed videogame"
+    };
+    mockVideoGamesService.delete = jest.fn(() => query);
+    const res = {};
+    res.ok = jest.fn();
+
+    // Act
+    controller.delete(req, res);
+
+    // Assert
+    expect(res.ok).toHaveBeenCalledTimes(1);
+    expect(res.ok).toHaveBeenCalledWith("Removed videogame");
+
+    expect(mockVideoGamesService.delete).toHaveBeenCalledTimes(1);
+    expect(mockVideoGamesService.delete).toHaveBeenCalledWith(id);
+});

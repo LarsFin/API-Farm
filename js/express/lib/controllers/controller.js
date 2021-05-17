@@ -1,3 +1,5 @@
+const { query } = require("express");
+
 function Controller (videoGamesService) {
     this._videoGamesService = videoGamesService;
 }
@@ -63,6 +65,15 @@ Controller.prototype.put = function (req, res) {
     default:
         res.ok(query.result);
     }
+};
+
+Controller.prototype.delete = function (req, res) {
+    const rawId = req.params.id;
+    const id = parseInt(rawId);
+
+    const query = this._videoGamesService.delete(id);
+
+    res.ok(query.result);
 };
 
 module.exports = Controller;
