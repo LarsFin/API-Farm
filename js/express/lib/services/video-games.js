@@ -87,4 +87,10 @@ VideoGamesService.prototype.update = function (id, data) {
     return Query.success(videoGame);
 };
 
+VideoGamesService.prototype.delete = function (id) {
+    const videoGame = this._storage.deleteVideoGame(id); 
+
+    return Query.success(videoGame);
+}
+
 module.exports = VideoGamesService;

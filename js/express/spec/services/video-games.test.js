@@ -439,3 +439,23 @@ test('update should return failed query when provided date_released is invalid',
     expect(Query.fail).toHaveBeenCalledTimes(1);
     expect(Query.fail).toHaveBeenCalledWith(400, `The provided date_released '${updatedDateReleased}' is invalid.`);
 });
+
+// Delete
+
+test('delete should query storage and remove video game', () => {
+    // Arrange
+    const id = 2;
+    const videoGame = {};
+    mockStorage.deleteVideoGame = jest.fn(() => videoGame);
+    const successfulQuery = {};
+    Query.success = jest.fn(() => successfulQuery);
+
+    // Act
+    const query = videoGamesService.delete(id);
+
+    // Assert
+    expect(query).toBe(successfulQuery)
+
+    expect(Query.success).toHaveBeenCalledTimes(1);
+    expect(Query.success).toHaveBeenCalledWith(videoGame)
+});
