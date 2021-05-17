@@ -101,3 +101,27 @@ test('updateVideoGame should find video game with passed id and replace with upd
     expect(Clone.object).toHaveBeenCalledTimes(1);
     expect(Clone.object).toHaveBeenCalledWith(updatedVideoGame);
 });
+
+test('deleteVideoGame should find video game with passed id and delete it', () => {
+    // Arrange
+    const videoGame1 = { id: 1 };
+    const videoGame2 = { id: 2 };
+    const videoGame3 = { id: 3 };
+    inMemory._videoGames = [videoGame1, videoGame2, videoGame3];
+
+    // Act
+    const videoGame = inMemory.deleteVideoGame(2);
+
+    // Assert
+    expect(videoGame).toBe(videoGame2);
+
+    expect(inMemory._videoGames).not.toContain(videoGame2);
+});
+
+test('deleteVideoGame should return null when the video game with id could not be deleted', () => {
+    // Act
+    const videoGame = inMemory.deleteVideoGame(3);
+
+    // Assert
+    expect(videoGame).toBe(undefined);
+});

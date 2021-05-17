@@ -87,4 +87,13 @@ VideoGamesService.prototype.update = function (id, data) {
     return Query.success(videoGame);
 };
 
+VideoGamesService.prototype.delete = function (id) {
+    const videoGame = this._storage.deleteVideoGame(id);
+
+    if (!videoGame)
+        return Query.fail(404, `No video game with id '${id}' could be found.`);
+
+    return Query.success(`Deleted video game with id '${id}'.`);
+};
+
 module.exports = VideoGamesService;

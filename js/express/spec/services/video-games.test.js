@@ -439,3 +439,46 @@ test('update should return failed query when provided date_released is invalid',
     expect(Query.fail).toHaveBeenCalledTimes(1);
     expect(Query.fail).toHaveBeenCalledWith(400, `The provided date_released '${updatedDateReleased}' is invalid.`);
 });
+
+// Delete
+
+test('delete should query storage and remove video game', () => {
+    // Arrange
+    const id = 2;
+    const videoGame = {};
+    mockStorage.deleteVideoGame = jest.fn(() => videoGame);
+    const successfulQuery = {};
+    Query.success = jest.fn(() => successfulQuery);
+
+    // Act
+    const query = videoGamesService.delete(id);
+
+    // Assert
+    expect(query).toBe(successfulQuery);
+
+    expect(mockStorage.deleteVideoGame).toHaveBeenCalledTimes(1);
+    expect(mockStorage.deleteVideoGame).toHaveBeenCalledWith(id);
+
+    expect(Query.success).toHaveBeenCalledTimes(1);
+    expect(Query.success).toHaveBeenCalledWith(`Deleted video game with id '${id}'.`);
+});
+
+test('delete should query storage and return failure when video game not found', () => {
+    // Arrange
+    const id = 99;
+    mockStorage.deleteVideoGame = jest.fn();
+    const failedQuery = {};
+    Query.fail = jest.fn(() => failedQuery);
+
+    // Act
+    const query = videoGamesService.delete(id);
+
+    // Assert
+    expect(query).toBe(failedQuery);
+
+    expect(mockStorage.deleteVideoGame).toHaveBeenCalledTimes(1);
+    expect(mockStorage.deleteVideoGame).toHaveBeenCalledWith(id);
+
+    expect(Query.fail).toHaveBeenCalledTimes(1);
+    expect(Query.fail).toHaveBeenCalledWith(404, `No video game with id '${id}' could be found.`);
+});

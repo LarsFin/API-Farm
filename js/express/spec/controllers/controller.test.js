@@ -252,3 +252,68 @@ test('put should fail when video game not found and respond 404', () => {
     expect(res.notFound).toHaveBeenCalledTimes(1);
     expect(res.notFound).toHaveBeenCalledWith(failReason);
 });
+
+// Delete
+
+test('delete should say removed videogame with parametised id and respond 200', () => {
+    // Arrange
+    const rawId = '5';
+    const req = { params: { id: rawId } };
+    const id = 5;
+    const query = {
+        result: `Deleted video game with id '${rawId}'.`
+    };
+    mockVideoGamesService.delete = jest.fn(() => query);
+    const res = {};
+    res.okText = jest.fn();
+
+    // Act
+    controller.delete(req, res);
+
+    // Assert
+    expect(res.okText).toHaveBeenCalledTimes(1);
+    expect(res.okText).toHaveBeenCalledWith(`Deleted video game with id '${rawId}'.`);
+
+    expect(mockVideoGamesService.delete).toHaveBeenCalledTimes(1);
+    expect(mockVideoGamesService.delete).toHaveBeenCalledWith(id);
+});
+
+test('delete should not accept invalid id values and respond 400', () => {
+    // Arrange
+    const rawId = 'invalid!';
+    const req = { params: { id: rawId } };
+    const res = {};
+    res.badRequest = jest.fn();
+
+    // Act
+    controller.delete(req, res);
+
+    // Assert
+    expect(res.badRequest).toHaveBeenCalledTimes(1);
+    expect(res.badRequest).toHaveBeenCalledWith(`The provided id '${rawId}' is invalid.`);
+});
+
+test('delete should check for when a video game could not be found and respond 404', () => {
+    // Arrange
+    const rawId = '99';
+    const req = { params: { id: rawId } };
+    const id = 99;
+    const failReason = 'FAILED TO FIND VIDEO GAME!';
+    const query = {
+        code: 404,
+        result: failReason
+    };
+    mockVideoGamesService.delete = jest.fn(() => query);
+    const res = {};
+    res.notFound = jest.fn();
+
+    // Act
+    controller.delete(req, res);
+
+    // Assert
+    expect(res.notFound).toHaveBeenCalledTimes(1);
+    expect(res.notFound).toHaveBeenCalledWith(failReason);
+
+    expect(mockVideoGamesService.delete).toHaveBeenCalledTimes(1);
+    expect(mockVideoGamesService.delete).toHaveBeenCalledWith(id);
+});
