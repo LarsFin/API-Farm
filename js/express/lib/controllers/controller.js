@@ -71,7 +71,17 @@ Controller.prototype.delete = function (req, res) {
     const rawId = req.params.id;
     const id = parseInt(rawId);
 
+    if (isNaN(id)) {
+        res.badRequest(invalidIdMessage(rawId));
+        return;
+    }
+
     const query = this._videoGamesService.delete(id);
+
+    if (query.code === 404) {
+        res.notFound(query.result);
+        return;
+    }
 
     res.ok(query.result);
 };
