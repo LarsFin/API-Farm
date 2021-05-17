@@ -454,8 +454,31 @@ test('delete should query storage and remove video game', () => {
     const query = videoGamesService.delete(id);
 
     // Assert
-    expect(query).toBe(successfulQuery)
+    expect(query).toBe(successfulQuery);
+
+    expect(mockStorage.deleteVideoGame).toHaveBeenCalledTimes(1);
+    expect(mockStorage.deleteVideoGame).toHaveBeenCalledWith(id);
 
     expect(Query.success).toHaveBeenCalledTimes(1);
-    expect(Query.success).toHaveBeenCalledWith(videoGame)
+    expect(Query.success).toHaveBeenCalledWith(videoGame);
+});
+
+test('delete should query storage and return failure when video game not found', () => {
+    // Arrange
+    const id = 99;
+    mockStorage.deleteVideoGame = jest.fn();
+    const failedQuery = {};
+    Query.fail = jest.fn(() => failedQuery);
+
+    // Act
+    const query = videoGamesService.delete(id);
+
+    // Assert
+    expect(query).toBe(failedQuery);
+
+    expect(mockStorage.deleteVideoGame).toHaveBeenCalledTimes(1);
+    expect(mockStorage.deleteVideoGame).toHaveBeenCalledWith(id);
+
+    expect(Query.fail).toHaveBeenCalledTimes(1);
+    expect(Query.fail).toHaveBeenCalledWith(404, `No video game with id '${id}' could be found.`);
 });
