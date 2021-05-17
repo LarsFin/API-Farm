@@ -265,14 +265,14 @@ test('delete should say removed videogame with parametised id and respond 200', 
     };
     mockVideoGamesService.delete = jest.fn(() => query);
     const res = {};
-    res.okDelete = jest.fn();
+    res.okText = jest.fn();
 
     // Act
     controller.delete(req, res);
 
     // Assert
-    expect(res.okDelete).toHaveBeenCalledTimes(1);
-    expect(res.okDelete).toHaveBeenCalledWith(`Deleted video game with id '${rawId}'.`);
+    expect(res.okText).toHaveBeenCalledTimes(1);
+    expect(res.okText).toHaveBeenCalledWith(`Deleted video game with id '${rawId}'.`);
 
     expect(mockVideoGamesService.delete).toHaveBeenCalledTimes(1);
     expect(mockVideoGamesService.delete).toHaveBeenCalledWith(id);
