@@ -112,7 +112,7 @@ test('deleteVideoGame should find video game with passed id and delete it', () =
     // Act
     const videoGame = inMemory.deleteVideoGame(2);
 
-    //Assert
+    // Assert
     expect(videoGame).toBe(videoGame2);
 
     expect(inMemory._videoGames.includes(videoGame2)).toBe(false);

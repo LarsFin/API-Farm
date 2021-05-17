@@ -298,10 +298,10 @@ test('delete should check for when a video game could not be found and respond 4
     const rawId = '99';
     const req = { params: { id: rawId } };
     const id = 99;
-    const failReason = 'FAILED TO FIND VIDEO GAME!'
+    const failReason = 'FAILED TO FIND VIDEO GAME!';
     const query = {
         code: 404,
-        result: failReason 
+        result: failReason
     };
     mockVideoGamesService.delete = jest.fn(() => query);
     const res = {};

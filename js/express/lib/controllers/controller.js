@@ -1,5 +1,3 @@
-const { query } = require("express");
-
 function Controller (videoGamesService) {
     this._videoGamesService = videoGamesService;
 }
