@@ -144,3 +144,11 @@ Below, is an image of the bot user account in action.
 ![GitHub PR](./img/github-pr.JPG)
 
 The AWS EC2 instance running Jenkins uses Docker to run its stages. This prevents disk space on the EC2 instance getting cramp from language dependencies.
+
+### Stage Details
+
+Below, is an illustration of the pipeline stages with a little more information on what exactly each stage includes.
+
+![API Farm Pipeline](./img/api-farm-pipeline.jpg)
+
+As mentioned in the image above, check out the API Testing [README](api_testing/README.md) for more info on API Testing.
