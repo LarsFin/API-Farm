@@ -115,7 +115,7 @@ test('deleteVideoGame should find video game with passed id and delete it', () =
     // Assert
     expect(videoGame).toBe(videoGame2);
 
-    expect(inMemory._videoGames.includes(videoGame2)).toBe(false);
+    expect(inMemory._videoGames).not.toContain(videoGame2);
 });
 
 test('deleteVideoGame should return null when the video game with id could not be deleted', () => {
