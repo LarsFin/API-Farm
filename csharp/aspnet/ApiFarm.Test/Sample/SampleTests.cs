@@ -1,9 +1,9 @@
-using ApiFarm.test_sample;
-using NUnit.Framework;
-using Shouldly;
-
 namespace Tests.SampleTests
 {
+    using ApiFarm.Sample;
+    using NUnit.Framework;
+    using Shouldly;
+
     public class SampleTests
     {
         [Test]

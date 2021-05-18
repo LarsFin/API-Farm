@@ -1,8 +1,9 @@
-﻿using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Hosting;
-
+﻿#pragma warning disable
 namespace ApiFarm
 {
+    using Microsoft.AspNetCore;
+    using Microsoft.AspNetCore.Hosting;
+
     public class Program
     {
         public static void Main(string[] args)

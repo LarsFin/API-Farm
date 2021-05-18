@@ -1,16 +1,17 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-
+﻿#pragma warning disable
 namespace ApiFarm
 {
+    using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
+
     public class Startup
     {
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            this.Configuration = configuration;
         }
 
         public IConfiguration Configuration { get; }
@@ -23,7 +24,9 @@ namespace ApiFarm
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
+            {
                 app.UseDeveloperExceptionPage();
+            }
 
             app.UseMvc();
         }
