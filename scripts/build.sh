@@ -56,17 +56,31 @@ if docker image inspect $IMG_REF >/dev/null 2>&1
         docker rmi $IMG_REF
 fi
 
+# check if language/framework has compilation stage
+if [ -f "$LANG_FRAME/.compile" ]
+    then
+        # set target stage for docker build
+        if [ $ENV -eq "prod" ]
+            then
+                $TARGET_FLAG="--target prod-env"
+            else
+                $TARGET_FLAG="--target dev-env"
+        fi
+    else
+        $TARGET_FLAG=""
+fi
+
 # begin docker build
 case $ENV in
 
     dev)
         echo "Building docker image: $LANG_FRAME:dev"
-        docker build -t $IMG_REF $LANG_FRAME
+        docker build $TARGET_FLAG -t $IMG_REF $LANG_FRAME
         ;;
 
     prod)
         echo "Building docker image: $LANG_FRAME:prod"
-        docker build -t $IMG_REF --build-arg env=prod $LANG_FRAME
+        docker build $TARGET_FLAG -t $IMG_REF --build-arg env=prod $LANG_FRAME
         ;;
 
     *)
