@@ -18,7 +18,7 @@ case $CMD in
 
   test)
     echo "Running test suite..."
-    pytest
+    pytest --cov=spec ./spec --cov-fail-under=100
     ;;
 
   lint)
