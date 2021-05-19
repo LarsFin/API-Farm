@@ -1,11 +1,17 @@
 FROM python:3.8-slim-buster
 
+# Get environment argument
+ARG env
+
+# Set work dir
 WORKDIR /usr/src
 
-COPY requirements.txt requirements.txt
-
-RUN pip3 install -r requirements.txt
-
+# Copy files to work dir
 COPY . .
 
-CMD [ "python3", "-m", "flask", "run", "--host=0.0.0.0" ]
+# Tune environment
+RUN ./scripts/tune_env.sh $env
+
+# Run specified command
+ENTRYPOINT [ "scripts/launch.sh" ]
+CMD [ "run" ]
