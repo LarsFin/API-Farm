@@ -1,12 +1,12 @@
 ﻿#pragma warning disable
-namespace ApiFarm
-{
-    using Microsoft.AspNetCore.Builder;
-    using Microsoft.AspNetCore.Hosting;
-    using Microsoft.AspNetCore.Mvc;
-    using Microsoft.Extensions.Configuration;
-    using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
+namespace ApiFarm.Scaffolding
+{
     public class Startup
     {
         public Startup(IConfiguration configuration)

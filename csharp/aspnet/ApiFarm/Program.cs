@@ -1,9 +1,9 @@
 ﻿#pragma warning disable
-namespace ApiFarm
-{
-    using Microsoft.AspNetCore;
-    using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore;
+using Microsoft.AspNetCore.Hosting;
 
+namespace ApiFarm.Scaffolding
+{
     public class Program
     {
         public static void Main(string[] args)
