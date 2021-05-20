@@ -60,14 +60,12 @@ fi
 if [ -f "$LANG_FRAME/.compile" ]
     then
         # set target stage for docker build
-        if [ $ENV -eq "prod" ]
+        if [ "$ENV" = "prod" ]
             then
-                $TARGET_FLAG="--target prod-env"
+                TARGET_FLAG="--target prod-env"
             else
-                $TARGET_FLAG="--target dev-env"
+                TARGET_FLAG="--target build-env"
         fi
-    else
-        $TARGET_FLAG=""
 fi
 
 # begin docker build

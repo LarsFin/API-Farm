@@ -13,7 +13,7 @@ case $CMD in
 
   run)
     echo "Running app..."
-    dotnet run ApiFarm
+    dotnet run --project ApiFarm
     ;;
 
   test)
