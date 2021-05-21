@@ -8,6 +8,7 @@ There are three scenarios the pipeline runs against;
 // Append new lang/framework branch names when ready for pipeline builds
 def langFrameworks = [
     "js/express",
+    "python/flask",
     "ruby/sinatra"
 ]
 
