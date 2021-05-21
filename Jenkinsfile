@@ -109,8 +109,7 @@ pipeline {
                      try {
                         echo "Running api script; ./scripts/run.sh ${buildPath}"
                         sh "./scripts/run.sh ${buildPath}"
-                        sh "sleep 2"
-                        sh "curl -f http://localhost:8080/ping"
+                        sh "./scripts/health_check.sh"
                     } catch (e) {
                         pullRequest.comment("HEALTH CHECK FAILED ❌. SEE ERROR MESSAGE BELOW:\n${formatMessage(e.message)}")
                         throw e
