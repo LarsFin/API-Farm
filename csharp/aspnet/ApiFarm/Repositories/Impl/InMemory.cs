@@ -32,9 +32,6 @@ namespace ApiFarm.Repositories
         /// Returns private list of stored entities.
         /// </summary>
         /// <returns>List of stored entities.</returns>
-        public IEnumerable<T> GetAll()
-        {
-            return default;
-        }
+        public IEnumerable<T> GetAll() => this.videoGames;
     }
 }
