@@ -1,7 +1,7 @@
-﻿namespace ApiFarm.Controllers
-{
-    using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
+namespace ApiFarm.Controllers
+{
     /// <summary>
     /// Controller for consuming requests to get, add, update or delete video game entities from storage.
     /// </summary>
@@ -14,7 +14,7 @@
         /// </summary>
         /// <returns>All video games in an array as JSON.</returns>
         [HttpGet]
-        public ActionResult<string> GetAll()
+        public string GetAll()
         {
             return "Hello World!";
         }
