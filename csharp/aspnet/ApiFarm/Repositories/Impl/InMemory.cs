@@ -2,7 +2,7 @@
 using System.Runtime.CompilerServices;
 using ApiFarm.Models;
 
-[assembly: InternalsVisibleTo("ApiFarm.Tests")]
+[assembly: InternalsVisibleTo("ApiFarm.Test")]
 
 namespace ApiFarm.Repositories
 {

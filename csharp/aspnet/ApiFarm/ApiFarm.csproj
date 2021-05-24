@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\" />
-    <InternalsVisibleTo Include="ApiFarm.Test" />
   </ItemGroup>
 
   <ItemGroup>
