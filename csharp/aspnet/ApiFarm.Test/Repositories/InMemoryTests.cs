@@ -22,7 +22,21 @@ namespace ApiFarm.Test.Repositories
         private class GetAllShould : InMemoryTests
         {
             [Test]
-            public void ReturnModelsList()
+            public void ReturnEmptyModelsList()
+            {
+                // Arrange
+                subject = new InMemory<Model>();
+
+                // Act
+                var retrievedModels = subject.GetAll();
+
+                // Assert
+                retrievedModels.ShouldBeOfType<List<Model>>();
+                retrievedModels.ShouldBeEmpty();
+            }
+
+            [Test]
+            public void ReturnStubbedModelsList()
             {
                 // Act
                 var retrievedModels = subject.GetAll();
