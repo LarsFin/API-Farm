@@ -30,7 +30,8 @@ namespace ApiFarm.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<VideoGame>> GetAll()
         {
-            return default;
+            var query = this.videoGameService.GetAll();
+            return this.Ok(query.Result);
         }
     }
 }

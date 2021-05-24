@@ -2,6 +2,7 @@
 using ApiFarm.Controllers;
 using ApiFarm.Models.Impl;
 using ApiFarm.Services;
+using ApiFarm.Test.Helpers;
 using ApiFarm.Utils;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
@@ -37,11 +38,11 @@ namespace ApiFarm.Test.Controllers
                 mockQuery.Setup(m => m.Result).Returns(storedVideoGames.Object);
 
                 // Act
-                var actionResult = subject.GetAll();
+                var objectResult = subject.GetAll().AsObjectResult();
 
                 // Assert
-                actionResult.ShouldBeOfType<OkObjectResult>();
-                actionResult.Value.ShouldBe(storedVideoGames.Object);
+                objectResult.StatusCode.ShouldBe(200);
+                objectResult.Value.ShouldBe(storedVideoGames.Object);
             }
         }
     }
