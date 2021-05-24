@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Collections.Generic;
+using ApiFarm.Models.Impl;
+using ApiFarm.Services;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ApiFarm.Controllers
 {
@@ -9,14 +12,25 @@ namespace ApiFarm.Controllers
     [ApiController]
     public class VideoGamesController : ControllerBase
     {
+        private IService<VideoGame> videoGameService;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="VideoGamesController"/> class.
+        /// </summary>
+        /// <param name="videoGameService">Service to query for creating, reading, updating and deleting <see cref="VideoGame"/> resources.</param>
+        public VideoGamesController(IService<VideoGame> videoGameService)
+        {
+            this.videoGameService = videoGameService;
+        }
+
         /// <summary>
         /// Endpoint to retrieve all video games from storage.
         /// </summary>
         /// <returns>All video games in an array as JSON.</returns>
         [HttpGet]
-        public string GetAll()
+        public ActionResult<IEnumerable<VideoGame>> GetAll()
         {
-            return "Hello World!";
+            return default;
         }
     }
 }
