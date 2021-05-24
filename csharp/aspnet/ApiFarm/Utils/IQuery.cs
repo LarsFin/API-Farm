@@ -7,7 +7,7 @@
     public interface IQuery<out T>
     {
         /// <summary>
-        /// Gets the status of the query (e.g; 200: ok, 404: not found).
+        /// Gets the status of the query (e.g; 0: successful, 404: not found).
         /// </summary>
         uint Code { get; }
 

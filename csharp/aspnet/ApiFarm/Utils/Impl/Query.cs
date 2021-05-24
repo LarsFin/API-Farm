@@ -20,7 +20,7 @@
         }
 
         /// <summary>
-        /// Gets the status code of the query (e.g; 200: successful or 404: not found).
+        /// Gets the status code of the query (e.g; 0: successful or 404: not found).
         /// </summary>
         public uint Code { get; }
 

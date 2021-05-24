@@ -33,13 +33,11 @@ namespace ApiFarm.Test.Services
             public void RetrieveVideoGamesFromStorageAndReturnQuery()
             {
                 // Arrange
-                var expectedCode = 200u;
-
                 var storedVideoGames = new Mock<IEnumerable<VideoGame>>();
                 var expected = new Mock<IQuery<IEnumerable<VideoGame>>>();
 
                 mockVideoGameStorage.Setup(m => m.GetAll()).Returns(storedVideoGames.Object);
-                mockQueryFactory.Setup(m => m.Build<IEnumerable<VideoGame>>(expectedCode, default, storedVideoGames.Object))
+                mockQueryFactory.Setup(m => m.Build(default, default, storedVideoGames.Object))
                     .Returns(expected.Object);
 
                 // Act

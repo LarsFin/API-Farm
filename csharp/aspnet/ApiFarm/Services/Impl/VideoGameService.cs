@@ -32,7 +32,9 @@ namespace ApiFarm.Services.Impl
         /// <returns><see cref="VideoGame"/> elements as enumerable series.</returns>
         public IQuery<IEnumerable<VideoGame>> GetAll()
         {
-            return default;
+            var storedVideoGames = this.videoGameStorage.GetAll();
+
+            return this.queryFactory.Build(result: storedVideoGames);
         }
     }
 }
