@@ -1,13 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ApiFarm.Models
+namespace ApiFarm.Models.Impl
 {
     /// <summary>
     /// Resembles a video game with its relevant properties.
     /// </summary>
-    public struct VideoGame
+    public class VideoGame : IModel
     {
+        /// <summary>
+        /// Gets identifier of video game.
+        /// </summary>
+        public uint Id { get; }
+
         /// <summary>
         /// Gets or sets name of video game.
         /// </summary>

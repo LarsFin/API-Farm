@@ -18,7 +18,7 @@ case $CMD in
 
   test)
     echo "Running test suite..."
-    dotnet test /p:Exclude=\"[*]ApiFarm.Scaffolding.*,[*]ApiFarm.Models.*\" /p:CollectCoverage=true /p:Threshold=100
+    dotnet test /p:Exclude=\"[*]ApiFarm.Scaffolding.*,[*]ApiFarm.Models.*,[*]ApiFarm.Utils.*\" /p:CollectCoverage=true /p:Threshold=100
     ;;
 
   lint)
