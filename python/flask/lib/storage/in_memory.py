@@ -1,4 +1,5 @@
 ''' in memory storage '''
-class InMemory:
-    ''' In memory '''
-    video_games = []
+class InMemory():
+    ''' init '''
+    def __init__(self):
+        self.video_games = []
