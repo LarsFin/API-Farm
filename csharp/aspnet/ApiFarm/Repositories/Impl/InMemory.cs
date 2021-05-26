@@ -11,7 +11,7 @@ namespace ApiFarm.Repositories
     /// </summary>
     /// <typeparam name="T">Type of in memory stored elemnt.</typeparam>
     public class InMemory<T> : IRepository<T>
-         where T : IModel, new()
+         where T : IModel
     {
         private List<T> videoGames;
 

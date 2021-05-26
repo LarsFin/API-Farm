@@ -8,7 +8,7 @@ namespace ApiFarm.Repositories
     /// </summary>
     /// <typeparam name="T">Type of stored element.</typeparam>
     public interface IRepository<out T>
-        where T : IModel, new()
+        where T : IModel
     {
         /// <summary>
         /// Retrieves enumerator containing all stored elements.
