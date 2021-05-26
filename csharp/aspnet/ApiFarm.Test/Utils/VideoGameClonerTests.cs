@@ -44,16 +44,17 @@ namespace ApiFarm.Test.Utils
                 // Assert
                 clone.ShouldBeEquivalentTo(original);
 
-                clone.ShouldNotBe(original);
-                clone.Developers.ShouldNotBe(original.Developers);
-                clone.Publishers.ShouldNotBe(original.Publishers);
-                clone.Directors.ShouldNotBe(original.Directors);
-                clone.Producers.ShouldNotBe(original.Producers);
-                clone.Designers.ShouldNotBe(original.Designers);
-                clone.Programmers.ShouldNotBe(original.Programmers);
-                clone.Artists.ShouldNotBe(original.Artists);
-                clone.Composers.ShouldNotBe(original.Composers);
-                clone.Platforms.ShouldNotBe(original.Platforms);
+                clone.ShouldNotBeSameAs(original);
+                clone.Developers.ShouldNotBeSameAs(original.Developers);
+                clone.Publishers.ShouldNotBeSameAs(original.Publishers);
+                clone.Directors.ShouldNotBeSameAs(original.Directors);
+                clone.Producers.ShouldNotBeSameAs(original.Producers);
+                clone.Designers.ShouldNotBeSameAs(original.Designers);
+                clone.Programmers.ShouldNotBeSameAs(original.Programmers);
+                clone.Artists.ShouldNotBeSameAs(original.Artists);
+                clone.Composers.ShouldNotBeSameAs(original.Composers);
+                clone.Platforms.ShouldNotBeSameAs(original.Platforms);
+                clone.DateReleased.ShouldNotBeSameAs(original.DateReleased);
             }
         }
     }
