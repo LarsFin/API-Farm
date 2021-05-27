@@ -15,8 +15,9 @@ namespace ApiFarm.Repositories
     public class InMemory<T> : IRepository<T>
          where T : IModel
     {
+        private uint id = 0;
         private ICloner<T> cloner;
-        private List<T> videoGames;
+        private List<T> models;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="InMemory{T}"/> class.
@@ -25,13 +26,13 @@ namespace ApiFarm.Repositories
         public InMemory(ICloner<T> cloner)
         {
             this.cloner = cloner;
-            this.videoGames = new List<T>();
+            this.models = new List<T>();
         }
 
-        internal InMemory(ICloner<T> cloner, List<T> presetVideoGames)
+        internal InMemory(ICloner<T> cloner, List<T> presetModels)
         {
             this.cloner = cloner;
-            this.videoGames = presetVideoGames;
+            this.models = presetModels;
         }
 
         /// <summary>
@@ -40,7 +41,7 @@ namespace ApiFarm.Repositories
         /// <returns>List of stored entities.</returns>
         public IEnumerable<T> GetAll()
         {
-            return this.videoGames.Select(q => this.cloner.Clone(q));
+            return this.models.Select(q => this.cloner.Clone(q));
         }
 
         /// <summary>
@@ -50,7 +51,10 @@ namespace ApiFarm.Repositories
         /// <returns>A clone of the model to avoid mutating stored instances.</returns>
         public T Add(T model)
         {
-            return default;
+            model.Id = ++this.id;
+            var modelToStore = this.cloner.Clone(model);
+            this.models.Add(modelToStore);
+            return model;
         }
     }
 }

@@ -84,9 +84,6 @@ namespace ApiFarm.Test.Repositories
                 models.ShouldContain(cloneModel1);
                 models.ShouldContain(cloneModel2);
 
-                cloneModel1.Id.ShouldBe(1u);
-                cloneModel2.Id.ShouldBe(2u);
-
                 addedModel1.ShouldBe(originalModel1);
                 addedModel2.ShouldBe(originalModel2);
 
