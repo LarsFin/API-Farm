@@ -7,7 +7,7 @@ namespace ApiFarm.Repositories
     /// Captures required behaviours of a storage facilitator.
     /// </summary>
     /// <typeparam name="T">Type of stored element.</typeparam>
-    public interface IRepository<out T>
+    public interface IRepository<T>
         where T : IModel
     {
         /// <summary>
@@ -15,5 +15,12 @@ namespace ApiFarm.Repositories
         /// </summary>
         /// <returns>Stored elements for enumeration.</returns>
         IEnumerable<T> GetAll();
+
+        /// <summary>
+        /// Adds a model to the internal storage.
+        /// </summary>
+        /// <param name="model">The model to be added.</param>
+        /// <returns>The model added with an amended identifier value.</returns>
+        T Add(T model);
     }
 }

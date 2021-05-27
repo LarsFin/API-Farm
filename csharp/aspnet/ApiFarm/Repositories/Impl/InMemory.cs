@@ -42,5 +42,15 @@ namespace ApiFarm.Repositories
         {
             return this.videoGames.Select(q => this.cloner.Clone(q));
         }
+
+        /// <summary>
+        /// Adds a clone of the model to private list.
+        /// </summary>
+        /// <param name="model">The model to add.</param>
+        /// <returns>A clone of the model to avoid mutating stored instances.</returns>
+        public T Add(T model)
+        {
+            return default;
+        }
     }
 }

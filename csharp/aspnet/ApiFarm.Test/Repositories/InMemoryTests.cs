@@ -61,5 +61,38 @@ namespace ApiFarm.Test.Repositories
                 retrievedModels.ShouldContain(cloneModel);
             }
         }
+
+        private class AddShould : InMemoryTests
+        {
+            [Test]
+            public void SetIncrementedIdOfModelAndAddToList()
+            {
+                // Arrange
+                var originalModel1 = new Model();
+                var cloneModel1 = new Model();
+                var originalModel2 = new Model();
+                var cloneModel2 = new Model();
+
+                mockCloner.Setup(m => m.Clone(originalModel1)).Returns(cloneModel1);
+                mockCloner.Setup(m => m.Clone(originalModel2)).Returns(cloneModel2);
+
+                // Act
+                var addedModel1 = subject.Add(originalModel1);
+                var addedModel2 = subject.Add(originalModel2);
+
+                // Assert
+                models.ShouldContain(cloneModel1);
+                models.ShouldContain(cloneModel2);
+
+                cloneModel1.Id.ShouldBe(1u);
+                cloneModel2.Id.ShouldBe(2u);
+
+                addedModel1.ShouldBe(originalModel1);
+                addedModel2.ShouldBe(originalModel2);
+
+                addedModel1.Id.ShouldBe(1u);
+                addedModel2.Id.ShouldBe(2u);
+            }
+        }
     }
 }
