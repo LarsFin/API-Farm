@@ -9,18 +9,9 @@ namespace ApiFarm.Models.Impl
     public class VideoGame : IModel
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="VideoGame"/> class.
+        /// Gets or sets identifier of video game.
         /// </summary>
-        /// <param name="id">The identifier of the <see cref="VideoGame"/>.</param>
-        public VideoGame(uint id)
-        {
-            this.Id = id;
-        }
-
-        /// <summary>
-        /// Gets identifier of video game.
-        /// </summary>
-        public uint Id { get; }
+        public uint Id { get; set; }
 
         /// <summary>
         /// Gets or sets name of video game.

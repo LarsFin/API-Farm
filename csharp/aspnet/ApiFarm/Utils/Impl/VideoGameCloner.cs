@@ -15,8 +15,9 @@ namespace ApiFarm.Utils.Impl
         /// <returns>The copied <see cref="VideoGame"/>.</returns>
         public VideoGame Clone(VideoGame original)
         {
-            var clone = new VideoGame(original.Id)
+            var clone = new VideoGame
             {
+                Id = original.Id,
                 Name = original.Name,
                 Developers = this.CloneList(original.Developers),
                 Publishers = this.CloneList(original.Publishers),

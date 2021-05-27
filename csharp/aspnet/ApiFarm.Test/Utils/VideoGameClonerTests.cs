@@ -23,8 +23,9 @@ namespace ApiFarm.Test.Utils
             public void ReturnDeepCloneWithDifferentReferences()
             {
                 // Arrange
-                var original = new VideoGame(5)
+                var original = new VideoGame
                 {
+                    Id = 5,
                     Name = "Vikings at Sea II",
                     Developers = new List<string> { "A" },
                     Publishers = new List<string> { "A", "B" },
