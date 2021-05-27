@@ -46,12 +46,12 @@ namespace ApiFarm.Services.Impl
         {
             if (videoGame.Name is null)
             {
-                return this.queryFactory.Build<VideoGame>(code: 400, message: "A name is required for a video game.");
+                return this.queryFactory.Build<VideoGame>(400, QueryMessages.VideoGame.RequiresName);
             }
 
             if (videoGame.DateReleased == default)
             {
-                return this.queryFactory.Build<VideoGame>(code: 400, message: "A date_released is required for a video game.");
+                return this.queryFactory.Build<VideoGame>(400, QueryMessages.VideoGame.RequiresDateReleased);
             }
 
             var storedVideoGame = this.videoGameStorage.Add(videoGame);

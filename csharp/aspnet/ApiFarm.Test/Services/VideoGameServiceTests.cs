@@ -83,7 +83,7 @@ namespace ApiFarm.Test.Services
                 };
                 var expectedQuery = new Mock<IQuery<VideoGame>>();
 
-                mockQueryFactory.Setup(m => m.Build(400, "A name is required for a video game.", default(VideoGame))).Returns(expectedQuery.Object);
+                mockQueryFactory.Setup(m => m.Build(400, QueryMessages.VideoGame.RequiresName, default(VideoGame))).Returns(expectedQuery.Object);
 
                 // Act
                 var actual = subject.Add(videoGame);
@@ -102,7 +102,7 @@ namespace ApiFarm.Test.Services
                 };
                 var expectedQuery = new Mock<IQuery<VideoGame>>();
 
-                mockQueryFactory.Setup(m => m.Build(400, "A date_released is required for a video game.", default(VideoGame))).Returns(expectedQuery.Object);
+                mockQueryFactory.Setup(m => m.Build(400, QueryMessages.VideoGame.RequiresDateReleased, default(VideoGame))).Returns(expectedQuery.Object);
 
                 // Act
                 var actual = subject.Add(videoGame);
