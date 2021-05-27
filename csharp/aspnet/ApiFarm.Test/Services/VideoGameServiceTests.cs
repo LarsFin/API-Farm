@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using ApiFarm.Models.Impl;
 using ApiFarm.Repositories;
 using ApiFarm.Services.Impl;
@@ -45,6 +46,69 @@ namespace ApiFarm.Test.Services
 
                 // Assert
                 actual.ShouldBe(expected.Object);
+            }
+        }
+
+        private class AddShould : VideoGameServiceTests
+        {
+            [Test]
+            public void AddVideoGameToStorageAndReturnQuery()
+            {
+                // Arrange
+                var videoGame = new VideoGame
+                {
+                    Name = "Vikings at Sea IV",
+                    DateReleased = DateTime.Now,
+                };
+                var expectedQuery = new Mock<IQuery<VideoGame>>();
+
+                mockVideoGameStorage.Setup(m => m.Add(videoGame)).Returns(videoGame);
+                mockQueryFactory.Setup(m => m.Build(default, default, videoGame)).Returns(expectedQuery.Object);
+
+                // Act
+                var actual = subject.Add(videoGame);
+
+                // Assert
+                actual.ShouldBe(expectedQuery.Object);
+                mockVideoGameStorage.Verify(m => m.Add(videoGame));
+            }
+
+            [Test]
+            public void ReturnUnsuccessfulQueryWhenVideoGameHasNoName()
+            {
+                // Arrange
+                var videoGame = new VideoGame
+                {
+                    DateReleased = DateTime.Now,
+                };
+                var expectedQuery = new Mock<IQuery<VideoGame>>();
+
+                mockQueryFactory.Setup(m => m.Build(400, "A name is required for a video game.", default(VideoGame))).Returns(expectedQuery.Object);
+
+                // Act
+                var actual = subject.Add(videoGame);
+
+                // Assert
+                actual.ShouldBe(expectedQuery.Object);
+            }
+
+            [Test]
+            public void ReturnUnsuccessfulQueryWhenVideoGameHasNoDateReleased()
+            {
+                // Arrange
+                var videoGame = new VideoGame
+                {
+                    Name = "Vikings at Sea IV",
+                };
+                var expectedQuery = new Mock<IQuery<VideoGame>>();
+
+                mockQueryFactory.Setup(m => m.Build(400, "A date_released is required for a video game.", default(VideoGame))).Returns(expectedQuery.Object);
+
+                // Act
+                var actual = subject.Add(videoGame);
+
+                // Assert
+                actual.ShouldBe(expectedQuery.Object);
             }
         }
     }

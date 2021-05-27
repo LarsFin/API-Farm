@@ -16,5 +16,12 @@ namespace ApiFarm.Services
         /// </summary>
         /// <returns>Enumerable sequence of relevant models.</returns>
         IQuery<IEnumerable<T>> GetAll();
+
+        /// <summary>
+        /// Requests to add a model to storage.
+        /// </summary>
+        /// <param name="model">The model to add.</param>
+        /// <returns>The model which was added.</returns>
+        IQuery<T> Add(T model);
     }
 }
