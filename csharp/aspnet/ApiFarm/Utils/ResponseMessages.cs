@@ -3,7 +3,7 @@
     /// <summary>
     /// Static definitions of messages for queries made.
     /// </summary>
-    public struct QueryMessages
+    public struct ResponseMessages
     {
         /// <summary>
         /// Messages relating to <see cref="Models.Impl.VideoGame"/> queries.
@@ -19,6 +19,13 @@
             /// Bad request message when a <see cref="Models.Impl.VideoGame"/> is added but without a Name value.
             /// </summary>
             public static string RequiresName = "A name is required for a video game.";
+
+            /// <summary>
+            /// Bad request message when a <see cref="Models.Impl.VideoGame"/> is added but its date is not in the form 'dd/MM/yyyy'.
+            /// </summary>
+            /// <param name="invalidDate">The invalid date.</param>
+            /// <returns>Message relating to an unsupported date format.</returns>
+            public static string InvalidDateReleased(string invalidDate) => $"The provided date_released '{invalidDate}' is invalid.";
         }
     }
 }

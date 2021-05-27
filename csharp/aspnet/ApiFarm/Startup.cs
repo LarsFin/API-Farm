@@ -26,11 +26,13 @@ namespace ApiFarm.Scaffolding
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            services.AddTransient<IRepository<VideoGame>, InMemory<VideoGame>>();
+            services.AddSingleton<IRepository<VideoGame>, InMemory<VideoGame>>();
 
-            services.AddTransient<IService<VideoGame>, VideoGameService>();
+            services.AddSingleton<IService<VideoGame>, VideoGameService>();
 
-            services.AddTransient<IQueryFactory, QueryFactory>();
+            services.AddSingleton<IQueryFactory, QueryFactory>();
+
+            services.AddSingleton<ICloner<VideoGame>, VideoGameCloner>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

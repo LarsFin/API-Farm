@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using ApiFarm.Utils.Impl;
+using Newtonsoft.Json;
 
 namespace ApiFarm.Models.Impl
 {
@@ -66,6 +68,8 @@ namespace ApiFarm.Models.Impl
         /// <summary>
         /// Gets or sets the date at which the video game was released.
         /// </summary>
+        [JsonProperty(PropertyName = "date_released")]
+        [JsonConverter(typeof(VideoGameDateTimeConverter))]
         public DateTime DateReleased { get; set; }
     }
 }
