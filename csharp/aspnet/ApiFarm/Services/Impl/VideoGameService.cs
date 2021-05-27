@@ -44,7 +44,18 @@ namespace ApiFarm.Services.Impl
         /// <returns>The <see cref="VideoGame"/> which was added.</returns>
         public IQuery<VideoGame> Add(VideoGame videoGame)
         {
-            return default;
+            if (videoGame.Name is null)
+            {
+                return this.queryFactory.Build<VideoGame>(code: 400, message: "A name is required for a video game.");
+            }
+
+            if (videoGame.DateReleased == default)
+            {
+                return this.queryFactory.Build<VideoGame>(code: 400, message: "A date_released is required for a video game.");
+            }
+
+            var storedVideoGame = this.videoGameStorage.Add(videoGame);
+            return this.queryFactory.Build(result: storedVideoGame);
         }
     }
 }
