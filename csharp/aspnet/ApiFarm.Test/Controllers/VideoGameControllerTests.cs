@@ -61,7 +61,7 @@ namespace ApiFarm.Test.Controllers
                 mockQuery.Setup(m => m.Result).Returns(storedVideoGame);
 
                 // Act
-                var objectResult = subject.Add(videoGame);
+                var objectResult = subject.Post(videoGame);
 
                 // Assert
                 objectResult.StatusCode.ShouldBe(StatusCodes.Status201Created);
@@ -81,7 +81,7 @@ namespace ApiFarm.Test.Controllers
                 mockQuery.Setup(m => m.Message).Returns(queryMessage);
 
                 // Act
-                var objectResult = subject.Add(videoGame);
+                var objectResult = subject.Post(videoGame);
 
                 // Assert
                 objectResult.StatusCode.ShouldBe(StatusCodes.Status400BadRequest);

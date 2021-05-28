@@ -43,7 +43,7 @@ namespace ApiFarm.Controllers
         /// <returns>The video game which was added.</returns>
         [HttpPost]
         [JsonResourceFilter]
-        public ObjectResult Add(VideoGame videoGame)
+        public ObjectResult Post(VideoGame videoGame)
         {
             var query = this.videoGameService.Add(videoGame);
 
