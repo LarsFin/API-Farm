@@ -42,6 +42,7 @@ namespace ApiFarm.Controllers
         /// <param name="videoGame">The <see cref="VideoGame"/> extracted from request body to be added to storage.</param>
         /// <returns>The video game which was added.</returns>
         [HttpPost]
+        [JsonResourceFilter]
         public ActionResult Add(VideoGame videoGame)
         {
             var query = this.videoGameService.Add(videoGame);
@@ -52,7 +53,7 @@ namespace ApiFarm.Controllers
             }
 
             videoGame = query.Result;
-            return this.Created($"video_games/{videoGame.Id}", videoGame);
+            return this.Created($"{this.Request.Path}/{videoGame.Id}", videoGame);
         }
     }
 }

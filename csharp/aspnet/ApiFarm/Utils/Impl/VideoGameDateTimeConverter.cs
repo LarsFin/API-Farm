@@ -35,7 +35,7 @@ namespace ApiFarm.Utils.Impl
                 return dateTime;
             }
 
-            throw new NotSupportedException($"The provided date_released '{stringValue}' is invalid.");
+            throw new NotSupportedException(ResponseMessages.VideoGame.InvalidDateReleased(stringValue));
         }
 
         /// <summary>

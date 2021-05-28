@@ -6,6 +6,17 @@
     public struct ResponseMessages
     {
         /// <summary>
+        /// Messages relating to JSON concerns.
+        /// </summary>
+        public struct JSON
+        {
+            /// <summary>
+            /// Bad request message when JSON could not be serialized.
+            /// </summary>
+            public static string IsInvalid = "Invalid JSON in body.";
+        }
+
+        /// <summary>
         /// Messages relating to <see cref="Models.Impl.VideoGame"/> queries.
         /// </summary>
         public struct VideoGame
