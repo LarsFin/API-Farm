@@ -53,7 +53,7 @@ namespace ApiFarm.Controllers
             }
 
             videoGame = query.Result;
-            return this.Created($"{this.Request?.Path}/{videoGame.Id}", videoGame);
+            return this.Created($"video_games/{videoGame.Id}", videoGame);
         }
     }
 }

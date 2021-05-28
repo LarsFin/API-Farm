@@ -54,7 +54,7 @@ namespace ApiFarm.Test.Controllers
             {
                 // Arrange
                 var videoGame = new VideoGame();
-                var storedVideoGame = new VideoGame();
+                var storedVideoGame = new VideoGame { Id = 5 };
                 var mockQuery = new Mock<IQuery<VideoGame>>();
 
                 mockVideoGameService.Setup(m => m.Add(videoGame)).Returns(mockQuery.Object);
@@ -66,6 +66,8 @@ namespace ApiFarm.Test.Controllers
                 // Assert
                 objectResult.StatusCode.ShouldBe(StatusCodes.Status201Created);
                 objectResult.Value.ShouldBe(storedVideoGame);
+                objectResult.ShouldBeOfType<CreatedResult>();
+                (objectResult as CreatedResult).Location.ShouldBe("video_games/5");
             }
 
             [Test]
