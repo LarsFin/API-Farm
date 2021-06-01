@@ -36,5 +36,26 @@ namespace ApiFarm.Services.Impl
 
             return this.queryFactory.Build(result: storedVideoGames);
         }
+
+        /// <summary>
+        /// Adds <see cref="VideoGame"/> to storage.
+        /// </summary>
+        /// <param name="videoGame">The <see cref="VideoGame"/> to add to storage.</param>
+        /// <returns>The <see cref="VideoGame"/> which was added.</returns>
+        public IQuery<VideoGame> Add(VideoGame videoGame)
+        {
+            if (videoGame.Name is null)
+            {
+                return this.queryFactory.Build<VideoGame>(400, ResponseMessages.VideoGame.RequiresName);
+            }
+
+            if (videoGame.DateReleased == default)
+            {
+                return this.queryFactory.Build<VideoGame>(400, ResponseMessages.VideoGame.RequiresDateReleased);
+            }
+
+            var storedVideoGame = this.videoGameStorage.Add(videoGame);
+            return this.queryFactory.Build(result: storedVideoGame);
+        }
     }
 }

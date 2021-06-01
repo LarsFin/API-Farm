@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using ApiFarm.Models.Impl;
 using ApiFarm.Services;
+using ApiFarm.Utils.Impl;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ApiFarm.Controllers
@@ -8,6 +9,7 @@ namespace ApiFarm.Controllers
     /// <summary>
     /// Controller for consuming requests to get, add, update or delete video game entities from storage.
     /// </summary>
+    [NotSupportedExceptionFilter]
     [Route("video_games")]
     [ApiController]
     public class VideoGamesController : ControllerBase
@@ -24,7 +26,7 @@ namespace ApiFarm.Controllers
         }
 
         /// <summary>
-        /// Endpoint to retrieve all video games from storage.
+        /// Endpoint to retrieve all <see cref="VideoGame"/> models from storage.
         /// </summary>
         /// <returns>All video games in an array as JSON.</returns>
         [HttpGet]
@@ -32,6 +34,26 @@ namespace ApiFarm.Controllers
         {
             var query = this.videoGameService.GetAll();
             return this.Ok(query.Result);
+        }
+
+        /// <summary>
+        /// Endpoint to add a <see cref="VideoGame"/> to storage.
+        /// </summary>
+        /// <param name="videoGame">The <see cref="VideoGame"/> extracted from request body to be added to storage.</param>
+        /// <returns>The video game which was added.</returns>
+        [HttpPost]
+        [JsonResourceFilter]
+        public ObjectResult Post(VideoGame videoGame)
+        {
+            var query = this.videoGameService.Add(videoGame);
+
+            if (query.Code != 0)
+            {
+                return this.BadRequest(query.Message);
+            }
+
+            videoGame = query.Result;
+            return this.Created($"video_games/{videoGame.Id}", videoGame);
         }
     }
 }

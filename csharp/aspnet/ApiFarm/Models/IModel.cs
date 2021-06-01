@@ -6,8 +6,8 @@
     public interface IModel
     {
         /// <summary>
-        /// Gets unsigned integer acting as identifier of model.
+        /// Gets or sets identifier of model.
         /// </summary>
-        uint Id { get; }
+        uint Id { get; set; }
     }
 }
