@@ -45,6 +45,16 @@ namespace ApiFarm.Repositories
         }
 
         /// <summary>
+        /// Returns clone of model with passed Id.
+        /// </summary>
+        /// <param name="id">The identifier of the model to retrieve.</param>
+        /// <returns>A clone of the desired model.</returns>
+        public T Get(uint id)
+        {
+            return default;
+        }
+
+        /// <summary>
         /// Returns private list of stored entities.
         /// </summary>
         /// <returns>List of stored entities.</returns>

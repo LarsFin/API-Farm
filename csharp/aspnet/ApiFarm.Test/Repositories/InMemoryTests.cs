@@ -46,6 +46,39 @@ namespace ApiFarm.Test.Repositories
             }
         }
 
+        private class GetShould : InMemoryTests
+        {
+            [Test]
+            public void ReturnCloneOfModelWithId()
+            {
+                // Arrange
+                var id = 5u;
+                var desiredModel = new Model { Id = id };
+                models.Add(new Model { Id = 2 });
+                models.Add(desiredModel);
+                models.Add(new Model { Id = 9 });
+                var expected = new Model();
+
+                mockCloner.Setup(m => m.Clone(desiredModel)).Returns(expected);
+
+                // Act
+                var actual = subject.Get(id);
+
+                // Assert
+                actual.ShouldBe(expected);
+            }
+
+            [Test]
+            public void ReturnDefaultWhenNoModelWithIdExists()
+            {
+                // Act
+                var actual = subject.Get(5);
+
+                // Assert
+                actual.ShouldBeNull();
+            }
+        }
+
         private class GetAllShould : InMemoryTests
         {
             [Test]
