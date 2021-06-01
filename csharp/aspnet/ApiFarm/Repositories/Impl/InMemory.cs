@@ -51,7 +51,14 @@ namespace ApiFarm.Repositories
         /// <returns>A clone of the desired model.</returns>
         public T Get(uint id)
         {
-            return default;
+            var model = this.models.FirstOrDefault(q => q.Id == id);
+
+            if (EqualityComparer<T>.Default.Equals(model, default))
+            {
+                return default;
+            }
+
+            return this.cloner.Clone(model);
         }
 
         /// <summary>
