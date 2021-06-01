@@ -1,5 +1,7 @@
+'''TODO'''
 class VideoGame():
-    def __init__(self, name, developers, publishers, directors, 
+    '''TODO'''
+    def __init__(self, name, developers, publishers, directors,
         producers, designers, programmers, artists, composers, platforms, date_released):
         self.name = name
         self.developers = developers

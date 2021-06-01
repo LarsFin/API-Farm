@@ -13,6 +13,5 @@ class InMemory():
         '''Gets a video game object from the video games list'''
         for self.video_game in self.video_games:
             if self.video_game.id == index:
-                print("I am in get")
                 return self.video_game
         
