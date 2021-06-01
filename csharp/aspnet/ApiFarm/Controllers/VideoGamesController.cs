@@ -26,6 +26,18 @@ namespace ApiFarm.Controllers
         }
 
         /// <summary>
+        /// Endpoint to retrieve <see cref="VideoGame"/> model from storage.
+        /// </summary>
+        /// <param name="id">Identifier for <see cref="VideoGame"/> to retrieve.</param>
+        /// <returns>Successful result with queried <see cref="VideoGame"/> or a Not Found response.</returns>
+        [HttpGet]
+        [Route("{id}")]
+        public ObjectResult Get(uint id)
+        {
+            return default;
+        }
+
+        /// <summary>
         /// Endpoint to retrieve all <see cref="VideoGame"/> models from storage.
         /// </summary>
         /// <returns>All video games in an array as JSON.</returns>

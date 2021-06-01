@@ -26,6 +26,48 @@ namespace ApiFarm.Test.Controllers
             subject = new VideoGamesController(mockVideoGameService.Object);
         }
 
+        private class GetShould : VideoGameControllerTests
+        {
+            [Test]
+            public void ReturnOkResponse()
+            {
+                // Arrange
+                var id = 12u;
+                var storedVideoGame = new VideoGame();
+                var mockQuery = new Mock<IQuery<VideoGame>>();
+
+                mockVideoGameService.Setup(m => m.Get(id)).Returns(mockQuery.Object);
+                mockQuery.Setup(m => m.Result).Returns(storedVideoGame);
+
+                // Act
+                var objectResult = subject.Get(id);
+
+                // Assert
+                objectResult.StatusCode.ShouldBe(200);
+                objectResult.Value.ShouldBe(storedVideoGame);
+            }
+
+            [Test]
+            public void ReturnNotFoundResponse()
+            {
+                // Arrange
+                var id = 99u;
+                var mockQuery = new Mock<IQuery<VideoGame>>();
+                var queryMessage = "NOT FOUND!";
+
+                mockVideoGameService.Setup(m => m.Get(id)).Returns(mockQuery.Object);
+                mockQuery.Setup(m => m.Code).Returns(404);
+                mockQuery.Setup(m => m.Message).Returns(queryMessage);
+
+                // Act
+                var objectResult = subject.Get(id);
+
+                // Assert
+                objectResult.StatusCode.ShouldBe(404);
+                objectResult.Value.ShouldBe(queryMessage);
+            }
+        }
+
         private class GetAllShould : VideoGameControllerTests
         {
             [Test]
