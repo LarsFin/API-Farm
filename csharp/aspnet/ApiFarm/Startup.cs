@@ -33,6 +33,9 @@ namespace ApiFarm.Scaffolding
             services.AddSingleton<IQueryFactory, QueryFactory>();
 
             services.AddSingleton<ICloner<VideoGame>, VideoGameCloner>();
+
+            // Add only in dev
+            services.AddSingleton<IDataLoader<VideoGame>, VideoGameDataLoader>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
