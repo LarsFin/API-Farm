@@ -12,6 +12,9 @@ fi
 case $CMD in
 
   run)
+    echo "Setting ASPNETCORE_ENVIRONMENT."
+    export ASPNETCORE_ENVIRONMENT=$API_ENV
+    
     echo "Running app..."
     dotnet run --project ApiFarm
     ;;

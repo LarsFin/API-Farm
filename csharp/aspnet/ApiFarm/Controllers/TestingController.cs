@@ -2,6 +2,7 @@
 using ApiFarm.Repositories;
 using ApiFarm.Utils;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.FeatureManagement.Mvc;
 
 namespace ApiFarm.Controllers
 {
@@ -9,6 +10,7 @@ namespace ApiFarm.Controllers
     /// Responsible for exposing an endpoint for setting up sample data for API testing.
     /// </summary>
     [ApiController]
+    [FeatureGate(ApiFarmFeatures.ApiTesting)]
     public class TestingController : ControllerBase
     {
         /// <summary>
