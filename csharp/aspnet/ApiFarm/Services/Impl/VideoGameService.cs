@@ -33,7 +33,14 @@ namespace ApiFarm.Services.Impl
         /// <returns><see cref="VideoGame"/> element with queried identifier.</returns>
         public IQuery<VideoGame> Get(uint id)
         {
-            return default;
+            var storedVideoGame = this.videoGameStorage.Get(id);
+
+            if (storedVideoGame is null)
+            {
+                return this.queryFactory.Build<VideoGame>(404, ResponseMessages.VideoGame.NotFound(id));
+            }
+
+            return this.queryFactory.Build(result: storedVideoGame);
         }
 
         /// <summary>
