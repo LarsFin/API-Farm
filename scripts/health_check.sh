@@ -6,7 +6,7 @@
 sleep 1
 
 # set variables
-MAX_RETRY_COUNT=4
+MAX_RETRY_COUNT=5
 RETRY_COUNT=0
 
 # make curl request
@@ -22,7 +22,7 @@ until curl http://localhost:8080/ping
                 exit 1
         fi
 
-        sleep 3
+        sleep $(expr $RETRY_COUNT \* $RETRY_COUNT)
 done
 
 # success message
