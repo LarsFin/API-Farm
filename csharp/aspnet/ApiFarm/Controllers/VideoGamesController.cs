@@ -34,7 +34,14 @@ namespace ApiFarm.Controllers
         [Route("{id}")]
         public ObjectResult Get(uint id)
         {
-            return default;
+            var query = this.videoGameService.Get(id);
+
+            if (query.Code != 0)
+            {
+                return this.NotFound(query.Message);
+            }
+
+            return this.Ok(query.Result);
         }
 
         /// <summary>
