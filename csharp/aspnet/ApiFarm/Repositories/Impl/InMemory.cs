@@ -53,7 +53,7 @@ namespace ApiFarm.Repositories
         {
             var model = this.models.FirstOrDefault(q => q.Id == id);
 
-            if (EqualityComparer<T>.Default.Equals(model, default))
+            if (model.IsDefault())
             {
                 return default;
             }
