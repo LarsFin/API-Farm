@@ -17,10 +17,12 @@ def test_should_add_game_to_array():
 
 def test_should_get_video_game_from_array():
     # Arrange
-    mock = Mock()
-    video_game_1 = mock
-    video_game_2 = mock
-    video_game_3 = mock
+    mock_1 = Mock(id = 1)
+    mock_2 = Mock(id = 2)
+    mock_3 = Mock(id = 3)
+    video_game_1 = mock_1
+    video_game_2 = mock_2
+    video_game_3 = mock_3
     video_games = [video_game_1, video_game_2, video_game_3]
     in_memory = InMemory(video_games)
 
