@@ -37,6 +37,13 @@
             /// <param name="invalidDate">The invalid date.</param>
             /// <returns>Message relating to an unsupported date format.</returns>
             public static string InvalidDateReleased(string invalidDate) => $"The provided date_released '{invalidDate}' is invalid.";
+
+            /// <summary>
+            /// Not found request message when a <see cref="Models.Impl.VideoGame"/> could not be found in storage.
+            /// </summary>
+            /// <param name="id">The identifier for which a <see cref="Models.Impl.VideoGame"/> could not be found.</param>
+            /// <returns>Message relating to not found <see cref="Models.Impl.VideoGame"/>.</returns>
+            public static string NotFound(uint id) => $"No video game with id '{id}' could be found.";
         }
     }
 }

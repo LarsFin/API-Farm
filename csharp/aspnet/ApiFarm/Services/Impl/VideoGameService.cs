@@ -27,6 +27,16 @@ namespace ApiFarm.Services.Impl
         }
 
         /// <summary>
+        /// Retrieves <see cref="VideoGame"/> with passed identifier.
+        /// </summary>
+        /// <param name="id">The identifier of the <see cref="VideoGame"/>.</param>
+        /// <returns><see cref="VideoGame"/> element with queried identifier.</returns>
+        public IQuery<VideoGame> Get(uint id)
+        {
+            return default;
+        }
+
+        /// <summary>
         /// Retrieves all <see cref="VideoGame"/> elements from storage.
         /// </summary>
         /// <returns><see cref="VideoGame"/> elements as enumerable series.</returns>

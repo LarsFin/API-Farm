@@ -12,6 +12,13 @@ namespace ApiFarm.Services
         where T : IModel
     {
         /// <summary>
+        /// Requests model with identifier passed.
+        /// </summary>
+        /// <param name="id">The identifier of the model to retrieve.</param>
+        /// <returns>The model retrieved.</returns>
+        IQuery<T> Get(uint id);
+
+        /// <summary>
         /// Requests all models from storage.
         /// </summary>
         /// <returns>Enumerable sequence of relevant models.</returns>
