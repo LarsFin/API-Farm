@@ -6,6 +6,19 @@
     public struct ResponseMessages
     {
         /// <summary>
+        /// Messages relating to Id concerns.
+        /// </summary>
+        public struct Id
+        {
+            /// <summary>
+            /// Bad request message when the specified Id in URL is not a positive integer.
+            /// </summary>
+            /// <param name="invalidId">The Id which could not be parsed.</param>
+            /// <returns>Message relating to the invalid Id.</returns>
+            public static string IsInvalid(string invalidId) => $"The provided id '{invalidId}' is invalid.";
+        }
+
+        /// <summary>
         /// Messages relating to JSON concerns.
         /// </summary>
         public struct JSON

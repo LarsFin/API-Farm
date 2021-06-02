@@ -32,6 +32,7 @@ namespace ApiFarm.Test.Controllers
             public void ReturnOkResponse()
             {
                 // Arrange
+                var strId = "12";
                 var id = 12u;
                 var storedVideoGame = new VideoGame();
                 var mockQuery = new Mock<IQuery<VideoGame>>();
@@ -40,17 +41,32 @@ namespace ApiFarm.Test.Controllers
                 mockQuery.Setup(m => m.Result).Returns(storedVideoGame);
 
                 // Act
-                var objectResult = subject.Get(id);
+                var objectResult = subject.Get(strId);
 
                 // Assert
-                objectResult.StatusCode.ShouldBe(200);
+                objectResult.StatusCode.ShouldBe(StatusCodes.Status200OK);
                 objectResult.Value.ShouldBe(storedVideoGame);
+            }
+
+            [Test]
+            public void ReturnBadRequestResponse()
+            {
+                // Arrange
+                var strId = "invalid!";
+
+                // Act
+                var objectResult = subject.Get(strId);
+
+                // Assert
+                objectResult.StatusCode.ShouldBe(StatusCodes.Status400BadRequest);
+                objectResult.Value.ShouldBe(ResponseMessages.Id.IsInvalid(strId));
             }
 
             [Test]
             public void ReturnNotFoundResponse()
             {
                 // Arrange
+                var strId = "99";
                 var id = 99u;
                 var mockQuery = new Mock<IQuery<VideoGame>>();
                 var queryMessage = "NOT FOUND!";
@@ -60,10 +76,10 @@ namespace ApiFarm.Test.Controllers
                 mockQuery.Setup(m => m.Message).Returns(queryMessage);
 
                 // Act
-                var objectResult = subject.Get(id);
+                var objectResult = subject.Get(strId);
 
                 // Assert
-                objectResult.StatusCode.ShouldBe(404);
+                objectResult.StatusCode.ShouldBe(StatusCodes.Status404NotFound);
                 objectResult.Value.ShouldBe(queryMessage);
             }
         }
