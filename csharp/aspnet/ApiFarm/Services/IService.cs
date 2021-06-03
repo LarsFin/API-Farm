@@ -30,5 +30,14 @@ namespace ApiFarm.Services
         /// <param name="model">The model to add.</param>
         /// <returns>The model which was added.</returns>
         IQuery<T> Add(T model);
+
+        /// <summary>
+        /// Retrieves model with specified identifier from storage. Then updates fields using the passed model instance.
+        /// The updated model is then requested to be updated in storage.
+        /// </summary>
+        /// <param name="id">The identifier of the model to update.</param>
+        /// <param name="updateModelValues">A model which can be partially valued. The fields with values set are used to update the original instance.</param>
+        /// <returns>The updated model in storage.</returns>
+        IQuery<T> Update(uint id, T updateModelValues);
     }
 }

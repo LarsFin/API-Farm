@@ -61,18 +61,30 @@ namespace ApiFarm.Services.Impl
         /// <returns>The <see cref="VideoGame"/> which was added.</returns>
         public IQuery<VideoGame> Add(VideoGame videoGame)
         {
-            if (videoGame.Name is null)
+            if (string.IsNullOrEmpty(videoGame.Name))
             {
                 return this.queryFactory.Build<VideoGame>(400, ResponseMessages.VideoGame.RequiresName);
             }
 
-            if (videoGame.DateReleased == default)
+            if (videoGame.DateReleased.IsDefault())
             {
                 return this.queryFactory.Build<VideoGame>(400, ResponseMessages.VideoGame.RequiresDateReleased);
             }
 
             var storedVideoGame = this.videoGameStorage.Add(videoGame);
             return this.queryFactory.Build(result: storedVideoGame);
+        }
+
+        /// <summary>
+        /// Updates <see cref="VideoGame"/> from storage with set fields on passed instance. The updated <see cref="VideoGame"/> is
+        /// requested to be updated in storage.
+        /// </summary>
+        /// <param name="id">The identifier of the <see cref="VideoGame"/> to update.</param>
+        /// <param name="updateVideoGameValues">The <see cref="VideoGame"/> with fields to update the original instance with.</param>
+        /// <returns>Updated <see cref="VideoGame"/> instance.</returns>
+        public IQuery<VideoGame> Update(uint id, VideoGame updateVideoGameValues)
+        {
+            return default;
         }
     }
 }
