@@ -36,6 +36,14 @@ namespace ApiFarm.Repositories
         }
 
         /// <summary>
+        /// Clears list of models and resets id counter.
+        /// </summary>
+        public void Reset()
+        {
+
+        }
+
+        /// <summary>
         /// Returns private list of stored entities.
         /// </summary>
         /// <returns>List of stored entities.</returns>

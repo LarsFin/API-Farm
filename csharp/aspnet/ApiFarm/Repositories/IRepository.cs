@@ -11,6 +11,11 @@ namespace ApiFarm.Repositories
         where T : IModel
     {
         /// <summary>
+        /// Resets storage so primary key is zero'd and stored models are wiped.
+        /// </summary>
+        void Reset();
+
+        /// <summary>
         /// Retrieves enumerator containing all stored elements.
         /// </summary>
         /// <returns>Stored elements for enumeration.</returns>
