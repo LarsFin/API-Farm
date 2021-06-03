@@ -40,7 +40,8 @@ namespace ApiFarm.Repositories
         /// </summary>
         public void Reset()
         {
-
+            this.id = 0;
+            this.models.Clear();
         }
 
         /// <summary>
