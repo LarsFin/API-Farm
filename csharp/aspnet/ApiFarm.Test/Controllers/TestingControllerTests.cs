@@ -49,6 +49,7 @@ namespace ApiFarm.Test.Controllers
                 objectResult.StatusCode.ShouldBe(StatusCodes.Status200OK);
                 objectResult.Value.ShouldBe(TestingController.SuccessMessage);
 
+                mockVideoGameStorage.Verify(m => m.Reset());
                 mockVideoGameStorage.Verify(m => m.Add(sampleVideoGame1));
                 mockVideoGameStorage.Verify(m => m.Add(sampleVideoGame2));
             }

@@ -49,6 +49,8 @@ namespace ApiFarm.Controllers
         {
             var sampleVideoGames = this.videoGameDataLoader.Load(DataSamplePath);
 
+            this.videoGameStorage.Reset();
+
             foreach (var videoGame in sampleVideoGames)
             {
                 this.videoGameStorage.Add(videoGame);
