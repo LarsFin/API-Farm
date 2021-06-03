@@ -38,8 +38,8 @@ namespace ApiFarm.Repositories
         /// <summary>
         /// Updates a model in internal storage.
         /// </summary>
-        /// <param name="model">The updated model to replace the original with.</param>
+        /// <param name="updatedModel">The updated model to replace the original with.</param>
         /// <returns>The updated model instance.</returns>
-        T Update(T model);
+        T Update(T updatedModel);
     }
 }
