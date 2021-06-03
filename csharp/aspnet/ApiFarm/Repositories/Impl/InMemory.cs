@@ -82,5 +82,15 @@ namespace ApiFarm.Repositories
             this.models.Add(modelToStore);
             return model;
         }
+
+        /// <summary>
+        /// Replaces the model in list with a cloned updated instance with the same identifier.
+        /// </summary>
+        /// <param name="model">The model to replace the original with.</param>
+        /// <returns>A clone of the updated entity.</returns>
+        public T Update(T model)
+        {
+            return default;
+        }
     }
 }

@@ -142,5 +142,46 @@ namespace ApiFarm.Test.Repositories
                 addedModel2.Id.ShouldBe(2u);
             }
         }
+
+        private class UpdateShould : InMemoryTests
+        {
+            [Test]
+            public void ReplaceIdentifiedModelWithClonedUpdatedVersion()
+            {
+                // Arrange
+                var modelToUpdate = new Model { Id = 3 };
+                models.Add(new Model { Id = 1 });
+                models.Add(modelToUpdate);
+                models.Add(new Model { Id = 9 });
+                var updatedModel = new Model { Id = 3 };
+                var updatedModelToStore = new Model();
+
+                mockCloner.Setup(m => m.Clone(updatedModel)).Returns(updatedModelToStore);
+
+                // Act
+                var actual = subject.Update(updatedModel);
+
+                // Assert
+                actual.ShouldBe(updatedModel);
+
+                models.ShouldNotContain(modelToUpdate);
+                models.ShouldContain(updatedModelToStore);
+            }
+
+            [Test]
+            public void ReturnNullWhenNoIdentifiedInstanceToUpdateCouldBeFound()
+            {
+                // Arrange
+                var updatedModel = new Model { Id = 5 };
+
+                // Act
+                var actual = subject.Update(updatedModel);
+
+                // Assert
+                actual.ShouldBeNull();
+
+                mockCloner.Verify(m => m.Clone(It.IsAny<Model>()), Times.Never);
+            }
+        }
     }
 }
