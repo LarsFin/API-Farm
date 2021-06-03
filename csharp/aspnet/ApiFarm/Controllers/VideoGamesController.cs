@@ -92,7 +92,19 @@ namespace ApiFarm.Controllers
         [JsonResourceFilter]
         public ObjectResult Put(string strId, VideoGame videoGameUpdateValues)
         {
-            return default;
+            if (!uint.TryParse(strId, out var id))
+            {
+                return this.BadRequest(ResponseMessages.Id.IsInvalid(strId));
+            }
+
+            var query = this.videoGameService.Update(id, videoGameUpdateValues);
+
+            if (query.Code != 0)
+            {
+                return this.NotFound(query.Message);
+            }
+
+            return this.Ok(query.Result);
         }
     }
 }
