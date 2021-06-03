@@ -101,5 +101,15 @@ namespace ApiFarm.Repositories
 
             return default;
         }
+
+        /// <summary>
+        /// Removes the model with the specified identifier from list.
+        /// </summary>
+        /// <param name="id">The identifier of the model to remove.</param>
+        /// <returns>The model which was removed.</returns>
+        public T Delete(uint id)
+        {
+            return default;
+        }
     }
 }

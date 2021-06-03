@@ -183,5 +183,37 @@ namespace ApiFarm.Test.Repositories
                 mockCloner.Verify(m => m.Clone(It.IsAny<Model>()), Times.Never);
             }
         }
+
+        private class DeleteShould : InMemoryTests
+        {
+            [Test]
+            public void ReturnModelWhichWasRemovedFromList()
+            {
+                // Arrange
+                var id = 7u;
+                var modelToDelete = new Model { Id = id };
+                models.Add(new Model { Id = 1 });
+                models.Add(modelToDelete);
+                models.Add(new Model { Id = 15 });
+
+                // Act
+                var deletedModel = subject.Delete(id);
+
+                // Assert
+                deletedModel.ShouldBe(modelToDelete);
+                models.ShouldNotContain(modelToDelete);
+                models.Count.ShouldBe(2);
+            }
+
+            [Test]
+            public void ReturnNullWhenModelWithIdentifierNotFound()
+            {
+                // Act
+                var deletedModel = subject.Delete(99u);
+
+                // Assert
+                deletedModel.ShouldBeNull();
+            }
+        }
     }
 }

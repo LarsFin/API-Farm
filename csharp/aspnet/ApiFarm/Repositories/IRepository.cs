@@ -41,5 +41,12 @@ namespace ApiFarm.Repositories
         /// <param name="updatedModel">The updated model to replace the original with.</param>
         /// <returns>The updated model instance.</returns>
         T Update(T updatedModel);
+
+        /// <summary>
+        /// Deletes a model from internal storage.
+        /// </summary>
+        /// <param name="id">The identifier of the model to remove.</param>
+        /// <returns>The model which was deleted.</returns>
+        T Delete(uint id);
     }
 }
