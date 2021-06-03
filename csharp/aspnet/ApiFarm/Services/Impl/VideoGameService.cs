@@ -84,7 +84,75 @@ namespace ApiFarm.Services.Impl
         /// <returns>Updated <see cref="VideoGame"/> instance.</returns>
         public IQuery<VideoGame> Update(uint id, VideoGame updateVideoGameValues)
         {
-            return default;
+            var videoGameToUpdate = this.videoGameStorage.Get(id);
+
+            if (videoGameToUpdate is null)
+            {
+                return this.queryFactory.Build<VideoGame>(404, ResponseMessages.VideoGame.NotFound(id));
+            }
+
+            UpdateWithSetValues(videoGameToUpdate, updateVideoGameValues);
+
+            var updatedVideoGame = this.videoGameStorage.Update(videoGameToUpdate);
+            return this.queryFactory.Build(result: updatedVideoGame);
+        }
+
+        private static void UpdateWithSetValues(VideoGame videoGameToUpdate, VideoGame updateVideoGameValues)
+        {
+            if (!string.IsNullOrEmpty(updateVideoGameValues.Name))
+            {
+                videoGameToUpdate.Name = updateVideoGameValues.Name;
+            }
+
+            if (!updateVideoGameValues.Developers.IsDefault())
+            {
+                videoGameToUpdate.Developers = updateVideoGameValues.Developers;
+            }
+
+            if (!updateVideoGameValues.Publishers.IsDefault())
+            {
+                videoGameToUpdate.Publishers = updateVideoGameValues.Publishers;
+            }
+
+            if (!updateVideoGameValues.Directors.IsDefault())
+            {
+                videoGameToUpdate.Directors = updateVideoGameValues.Directors;
+            }
+
+            if (!updateVideoGameValues.Producers.IsDefault())
+            {
+                videoGameToUpdate.Producers = updateVideoGameValues.Producers;
+            }
+
+            if (!updateVideoGameValues.Designers.IsDefault())
+            {
+                videoGameToUpdate.Designers = updateVideoGameValues.Designers;
+            }
+
+            if (!updateVideoGameValues.Programmers.IsDefault())
+            {
+                videoGameToUpdate.Programmers = updateVideoGameValues.Programmers;
+            }
+
+            if (!updateVideoGameValues.Artists.IsDefault())
+            {
+                videoGameToUpdate.Artists = updateVideoGameValues.Artists;
+            }
+
+            if (!updateVideoGameValues.Composers.IsDefault())
+            {
+                videoGameToUpdate.Composers = updateVideoGameValues.Composers;
+            }
+
+            if (!updateVideoGameValues.Platforms.IsDefault())
+            {
+                videoGameToUpdate.Platforms = updateVideoGameValues.Platforms;
+            }
+
+            if (!updateVideoGameValues.DateReleased.IsDefault())
+            {
+                videoGameToUpdate.DateReleased = updateVideoGameValues.DateReleased;
+            }
         }
     }
 }
