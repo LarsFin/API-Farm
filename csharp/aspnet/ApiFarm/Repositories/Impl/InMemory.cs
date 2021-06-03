@@ -109,6 +109,16 @@ namespace ApiFarm.Repositories
         /// <returns>The model which was removed.</returns>
         public T Delete(uint id)
         {
+            for (var i = 0; i < this.models.Count; i++)
+            {
+                if (this.models[i].Id == id)
+                {
+                    var modelToDelete = this.models[i];
+                    this.models.RemoveAt(i);
+                    return modelToDelete;
+                }
+            }
+
             return default;
         }
     }
