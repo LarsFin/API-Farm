@@ -116,7 +116,19 @@ namespace ApiFarm.Controllers
         [Route("{strId}")]
         public ObjectResult Delete(string strId)
         {
-            return default;
+            if (!uint.TryParse(strId, out var id))
+            {
+                return this.BadRequest(ResponseMessages.Id.IsInvalid(strId));
+            }
+
+            var query = this.videoGameService.Delete(id);
+
+            if (query.Code != 0)
+            {
+                return this.NotFound(query.Message);
+            }
+
+            return this.Ok(query.Message);
         }
     }
 }
