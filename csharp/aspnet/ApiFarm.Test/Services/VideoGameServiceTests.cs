@@ -28,6 +28,43 @@ namespace ApiFarm.Test.Services
                 mockQueryFactory.Object);
         }
 
+        private class GetShould : VideoGameServiceTests
+        {
+            [Test]
+            public void RetrieveVideoGameAndReturnQuery()
+            {
+                // Arrange
+                var id = 6u;
+                var storedVideoGame = new VideoGame();
+                var expected = new Mock<IQuery<VideoGame>>();
+
+                mockVideoGameStorage.Setup(m => m.Get(id)).Returns(storedVideoGame);
+                mockQueryFactory.Setup(m => m.Build(default, default, storedVideoGame)).Returns(expected.Object);
+
+                // Act
+                var actual = subject.Get(id);
+
+                // Assert
+                actual.ShouldBe(expected.Object);
+            }
+
+            [Test]
+            public void ReturnUnsuccessfulQueryWhenVideoGameNotFound()
+            {
+                // Arrange
+                var id = 99u;
+                var expected = new Mock<IQuery<VideoGame>>();
+
+                mockQueryFactory.Setup(m => m.Build<VideoGame>(404, ResponseMessages.VideoGame.NotFound(id), default)).Returns(expected.Object);
+
+                // Act
+                var actual = subject.Get(id);
+
+                // Assert
+                actual.ShouldBe(expected.Object);
+            }
+        }
+
         private class GetAllShould : VideoGameServiceTests
         {
             [Test]

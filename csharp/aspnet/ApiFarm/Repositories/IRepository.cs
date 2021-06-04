@@ -16,6 +16,13 @@ namespace ApiFarm.Repositories
         void Reset();
 
         /// <summary>
+        /// Retrieves model with identifier passed.
+        /// </summary>
+        /// <param name="id">The identifier of the model to retrieve.</param>
+        /// <returns>The desired model or its default when not in storage.</returns>
+        T Get(uint id);
+
+        /// <summary>
         /// Retrieves enumerator containing all stored elements.
         /// </summary>
         /// <returns>Stored elements for enumeration.</returns>

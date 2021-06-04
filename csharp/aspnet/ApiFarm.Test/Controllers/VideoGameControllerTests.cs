@@ -26,6 +26,64 @@ namespace ApiFarm.Test.Controllers
             subject = new VideoGamesController(mockVideoGameService.Object);
         }
 
+        private class GetShould : VideoGameControllerTests
+        {
+            [Test]
+            public void ReturnOkResponse()
+            {
+                // Arrange
+                var strId = "12";
+                var id = 12u;
+                var storedVideoGame = new VideoGame();
+                var mockQuery = new Mock<IQuery<VideoGame>>();
+
+                mockVideoGameService.Setup(m => m.Get(id)).Returns(mockQuery.Object);
+                mockQuery.Setup(m => m.Result).Returns(storedVideoGame);
+
+                // Act
+                var objectResult = subject.Get(strId);
+
+                // Assert
+                objectResult.StatusCode.ShouldBe(StatusCodes.Status200OK);
+                objectResult.Value.ShouldBe(storedVideoGame);
+            }
+
+            [Test]
+            public void ReturnBadRequestResponse()
+            {
+                // Arrange
+                var strId = "invalid!";
+
+                // Act
+                var objectResult = subject.Get(strId);
+
+                // Assert
+                objectResult.StatusCode.ShouldBe(StatusCodes.Status400BadRequest);
+                objectResult.Value.ShouldBe(ResponseMessages.Id.IsInvalid(strId));
+            }
+
+            [Test]
+            public void ReturnNotFoundResponse()
+            {
+                // Arrange
+                var strId = "99";
+                var id = 99u;
+                var mockQuery = new Mock<IQuery<VideoGame>>();
+                var queryMessage = "NOT FOUND!";
+
+                mockVideoGameService.Setup(m => m.Get(id)).Returns(mockQuery.Object);
+                mockQuery.Setup(m => m.Code).Returns(404);
+                mockQuery.Setup(m => m.Message).Returns(queryMessage);
+
+                // Act
+                var objectResult = subject.Get(strId);
+
+                // Assert
+                objectResult.StatusCode.ShouldBe(StatusCodes.Status404NotFound);
+                objectResult.Value.ShouldBe(queryMessage);
+            }
+        }
+
         private class GetAllShould : VideoGameControllerTests
         {
             [Test]

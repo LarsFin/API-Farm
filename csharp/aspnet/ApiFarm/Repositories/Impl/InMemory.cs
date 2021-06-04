@@ -45,6 +45,23 @@ namespace ApiFarm.Repositories
         }
 
         /// <summary>
+        /// Returns clone of model with passed Id.
+        /// </summary>
+        /// <param name="id">The identifier of the model to retrieve.</param>
+        /// <returns>A clone of the desired model.</returns>
+        public T Get(uint id)
+        {
+            var model = this.models.FirstOrDefault(q => q.Id == id);
+
+            if (model.IsDefault())
+            {
+                return default;
+            }
+
+            return this.cloner.Clone(model);
+        }
+
+        /// <summary>
         /// Returns private list of stored entities.
         /// </summary>
         /// <returns>List of stored entities.</returns>

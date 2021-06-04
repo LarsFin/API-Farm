@@ -6,6 +6,19 @@
     public struct ResponseMessages
     {
         /// <summary>
+        /// Messages relating to Id concerns.
+        /// </summary>
+        public struct Id
+        {
+            /// <summary>
+            /// Bad request message when the specified Id in URL is not a positive integer.
+            /// </summary>
+            /// <param name="invalidId">The Id which could not be parsed.</param>
+            /// <returns>Message relating to the invalid Id.</returns>
+            public static string IsInvalid(string invalidId) => $"The provided id '{invalidId}' is invalid.";
+        }
+
+        /// <summary>
         /// Messages relating to JSON concerns.
         /// </summary>
         public struct JSON
@@ -37,6 +50,13 @@
             /// <param name="invalidDate">The invalid date.</param>
             /// <returns>Message relating to an unsupported date format.</returns>
             public static string InvalidDateReleased(string invalidDate) => $"The provided date_released '{invalidDate}' is invalid.";
+
+            /// <summary>
+            /// Not found request message when a <see cref="Models.Impl.VideoGame"/> could not be found in storage.
+            /// </summary>
+            /// <param name="id">The identifier for which a <see cref="Models.Impl.VideoGame"/> could not be found.</param>
+            /// <returns>Message relating to not found <see cref="Models.Impl.VideoGame"/>.</returns>
+            public static string NotFound(uint id) => $"No video game with id '{id}' could be found.";
         }
     }
 }

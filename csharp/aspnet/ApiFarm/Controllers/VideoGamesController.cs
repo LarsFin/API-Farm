@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using ApiFarm.Models.Impl;
 using ApiFarm.Services;
+using ApiFarm.Utils;
 using ApiFarm.Utils.Impl;
 using Microsoft.AspNetCore.Mvc;
 
@@ -23,6 +24,30 @@ namespace ApiFarm.Controllers
         public VideoGamesController(IService<VideoGame> videoGameService)
         {
             this.videoGameService = videoGameService;
+        }
+
+        /// <summary>
+        /// Endpoint to retrieve <see cref="VideoGame"/> model from storage.
+        /// </summary>
+        /// <param name="strId">Identifier for <see cref="VideoGame"/> to retrieve as a string.</param>
+        /// <returns>Successful result with queried <see cref="VideoGame"/> or a Not Found response.</returns>
+        [HttpGet]
+        [Route("{strId}")]
+        public ObjectResult Get(string strId)
+        {
+            if (!uint.TryParse(strId, out var id))
+            {
+                return this.BadRequest(ResponseMessages.Id.IsInvalid(strId));
+            }
+
+            var query = this.videoGameService.Get(id);
+
+            if (query.Code != 0)
+            {
+                return this.NotFound(query.Message);
+            }
+
+            return this.Ok(query.Result);
         }
 
         /// <summary>
