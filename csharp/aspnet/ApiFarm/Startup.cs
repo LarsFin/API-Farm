@@ -8,23 +8,30 @@ using ApiFarm.Utils.Impl;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.FeatureManagement;
 
 namespace ApiFarm.Scaffolding
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IHostingEnvironment env)
         {
             this.Configuration = configuration;
+            this.HostingEnvironment = env;
         }
 
         public IConfiguration Configuration { get; }
+        public IHostingEnvironment HostingEnvironment { get; }
+
 
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddFeatureManagement();
 
             services.AddSingleton<IRepository<VideoGame>, InMemory<VideoGame>>();
 
@@ -33,11 +40,13 @@ namespace ApiFarm.Scaffolding
             services.AddSingleton<IQueryFactory, QueryFactory>();
 
             services.AddSingleton<ICloner<VideoGame>, VideoGameCloner>();
+
+            services.AddSingleton<IDataLoader<VideoGame>, VideoGameDataLoader>();
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app)
         {
-            if (env.IsDevelopment())
+            if (HostingEnvironment.IsEnvironment("dev"))
             {
                 app.UseDeveloperExceptionPage();
             }

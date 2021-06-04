@@ -28,6 +28,24 @@ namespace ApiFarm.Test.Repositories
             public uint Id { get; set; }
         }
 
+        private class ResetShould : InMemoryTests
+        {
+            [Test]
+            public void ClearModelsList()
+            {
+                // Arrange
+                models.Add(new Model());
+                models.Add(new Model());
+                models.Add(new Model());
+
+                // Act
+                subject.Reset();
+
+                // Assert
+                models.ShouldBeEmpty();
+            }
+        }
+
         private class GetAllShould : InMemoryTests
         {
             [Test]
