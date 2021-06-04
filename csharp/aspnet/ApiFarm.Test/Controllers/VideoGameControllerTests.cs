@@ -149,7 +149,7 @@ namespace ApiFarm.Test.Controllers
             }
         }
 
-        private class UpdateShould : VideoGameControllerTests
+        private class PutShould : VideoGameControllerTests
         {
             [Test]
             public void ReturnOkResponse()
@@ -200,6 +200,62 @@ namespace ApiFarm.Test.Controllers
 
                 // Act
                 var objectResult = subject.Put(strId, videoGameUpdateValues);
+
+                // Assert
+                objectResult.StatusCode.ShouldBe(StatusCodes.Status404NotFound);
+                objectResult.Value.ShouldBe(queryMessage);
+            }
+        }
+
+        private class DeleteShould : VideoGameControllerTests
+        {
+            [Test]
+            public void ReturnOkResponse()
+            {
+                // Arrange
+                var strId = "5";
+                var mockQuery = new Mock<IQuery<VideoGame>>();
+                var queryMessage = "DELETED!";
+
+                mockVideoGameService.Setup(m => m.Delete(5)).Returns(mockQuery.Object);
+                mockQuery.Setup(m => m.Message).Returns(queryMessage);
+
+                // Act
+                var objectResult = subject.Delete(strId);
+
+                // Assert
+                objectResult.StatusCode.ShouldBe(StatusCodes.Status200OK);
+                objectResult.Value.ShouldBe(queryMessage);
+            }
+
+            [Test]
+            public void ReturnBadRequestResponse()
+            {
+                // Arrange
+                var strId = "invalid!";
+
+                // Act
+                var objectResult = subject.Delete(strId);
+
+                // Assert
+                objectResult.StatusCode.ShouldBe(StatusCodes.Status400BadRequest);
+                objectResult.Value.ShouldBe(ResponseMessages.Id.IsInvalid(strId));
+            }
+
+            [Test]
+            public void ReturnNotFoundResponse()
+            {
+                // Arrange
+                var strId = "5";
+                var mockQuery = new Mock<IQuery<VideoGame>>();
+                var queryMessage = "NOT FOUND!";
+
+                mockVideoGameService.Setup(m => m.Delete(5)).Returns(mockQuery.Object);
+                mockQuery.Setup(m => m.Code).Returns(404);
+                mockQuery.Setup(m => m.Message).Returns(queryMessage);
+
+                // Act
+                var objectResult = subject.Delete(strId);
 
                 // Assert
                 objectResult.StatusCode.ShouldBe(StatusCodes.Status404NotFound);
