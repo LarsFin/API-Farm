@@ -152,7 +152,69 @@ namespace ApiFarm.Test.Services
         private class UpdateShould : VideoGameServiceTests
         {
             [Test]
-            public void UpdateVideoGameInStorageWithSetFields()
+            public void UpdateVideoGameInStorageWithAllSetFields()
+            {
+                // Arrange
+                var id = 5u;
+                var videoGameToUpdate = new VideoGame
+                {
+                    Id = id,
+                    Name = "Vikings at Sea IV",
+                    Developers = new List<string> { "A", "B" },
+                    Publishers = new List<string> { "A", "B", "C" },
+                    Directors = new List<string> { "A" },
+                    Producers = new List<string> { "A" },
+                    Designers = new List<string> { "A", "B" },
+                    Programmers = new List<string> { "A", "B", "C", "D" },
+                    Artists = new List<string> { "A", "B" },
+                    Composers = new List<string> { "A", "B", "C" },
+                    Platforms = new List<string> { "A", "B", "C", "D" },
+                    DateReleased = DateTime.Now,
+                };
+                var videoGameUpdateValues = new VideoGame
+                {
+                    Name = "Vinkings on the Ocean 4",
+                    Developers = new List<string> { "1", "2", "3" },
+                    Publishers = new List<string> { "1", "2" },
+                    Directors = new List<string> { "1" },
+                    Producers = new List<string> { "1", "2" },
+                    Designers = new List<string> { "1", "2", "3" },
+                    Programmers = new List<string> { "1", "2" },
+                    Artists = new List<string> { "1", "2", "3" },
+                    Composers = new List<string> { "1", "2" },
+                    Platforms = new List<string> { "1", "2" },
+                    DateReleased = DateTime.Now,
+                };
+                var updatedVideoGame = new VideoGame();
+                var expectedQuery = new Mock<IQuery<VideoGame>>();
+
+                mockVideoGameStorage.Setup(m => m.Get(id)).Returns(videoGameToUpdate);
+                mockVideoGameStorage.Setup(m => m.Update(videoGameToUpdate)).Returns(updatedVideoGame);
+                mockQueryFactory.Setup(m => m.Build(default, default, updatedVideoGame)).Returns(expectedQuery.Object);
+
+                // Act
+                var actual = subject.Update(id, videoGameUpdateValues);
+
+                // Assert
+                actual.ShouldBe(expectedQuery.Object);
+
+                mockVideoGameStorage.Verify(
+                    m => m.Update(It.Is<VideoGame>(q =>
+                    q.Name == videoGameUpdateValues.Name &&
+                    q.Developers == videoGameUpdateValues.Developers &&
+                    q.Publishers == videoGameUpdateValues.Publishers &&
+                    q.Directors == videoGameUpdateValues.Directors &&
+                    q.Producers == videoGameUpdateValues.Producers &&
+                    q.Designers == videoGameUpdateValues.Designers &&
+                    q.Programmers == videoGameUpdateValues.Programmers &&
+                    q.Artists == videoGameUpdateValues.Artists &&
+                    q.Composers == videoGameUpdateValues.Composers &&
+                    q.Platforms == videoGameUpdateValues.Platforms &&
+                    q.DateReleased == videoGameUpdateValues.DateReleased)), Times.Once);
+            }
+
+            [Test]
+            public void UpdateVideoGameInStorageWithSomeSetFields()
             {
                 // Arrange
                 var id = 5u;
