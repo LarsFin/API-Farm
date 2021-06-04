@@ -104,7 +104,14 @@ namespace ApiFarm.Services.Impl
         /// <returns>The <see cref="VideoGame"/> removed, with a deletion message.</returns>
         public IQuery<VideoGame> Delete(uint id)
         {
-            return default;
+            var deletedVideoGame = this.videoGameStorage.Delete(id);
+
+            if (deletedVideoGame is null)
+            {
+                return this.queryFactory.Build<VideoGame>(404, ResponseMessages.VideoGame.NotFound(id));
+            }
+
+            return this.queryFactory.Build(message: ResponseMessages.VideoGame.Deleted(id), result: deletedVideoGame);
         }
 
         private static void UpdateWithSetValues(VideoGame videoGameToUpdate, VideoGame updateVideoGameValues)
