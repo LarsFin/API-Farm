@@ -149,7 +149,7 @@ namespace ApiFarm.Test.Services
             }
         }
 
-        public class UpdateShould : VideoGameServiceTests
+        private class UpdateShould : VideoGameServiceTests
         {
             [Test]
             public void UpdateVideoGameInStorageWithSetFields()
