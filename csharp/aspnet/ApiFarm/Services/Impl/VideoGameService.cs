@@ -76,7 +76,7 @@ namespace ApiFarm.Services.Impl
         }
 
         /// <summary>
-        /// Updates <see cref="VideoGame"/> from storage with set fields on passed instance. The updated <see cref="VideoGame"/> is
+        /// Updates a <see cref="VideoGame"/> from storage with set fields on passed instance. The updated <see cref="VideoGame"/> is
         /// requested to be updated in storage.
         /// </summary>
         /// <param name="id">The identifier of the <see cref="VideoGame"/> to update.</param>
@@ -95,6 +95,16 @@ namespace ApiFarm.Services.Impl
 
             var updatedVideoGame = this.videoGameStorage.Update(videoGameToUpdate);
             return this.queryFactory.Build(result: updatedVideoGame);
+        }
+
+        /// <summary>
+        /// Deletes a <see cref="VideoGame"/> from storage. Successfully deleting it, will set a message on the query.
+        /// </summary>
+        /// <param name="id">The identifier of the <see cref="VideoGame"/> to remove.</param>
+        /// <returns>The <see cref="VideoGame"/> removed, with a deletion message.</returns>
+        public IQuery<VideoGame> Delete(uint id)
+        {
+            return default;
         }
 
         private static void UpdateWithSetValues(VideoGame videoGameToUpdate, VideoGame updateVideoGameValues)

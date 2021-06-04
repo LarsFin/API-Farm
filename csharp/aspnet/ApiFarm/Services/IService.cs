@@ -39,5 +39,12 @@ namespace ApiFarm.Services
         /// <param name="updateModelValues">A model which can be partially valued. The fields with values set are used to update the original instance.</param>
         /// <returns>The updated model in storage.</returns>
         IQuery<T> Update(uint id, T updateModelValues);
+
+        /// <summary>
+        /// Requests to remove the model with passed identifier from storage.
+        /// </summary>
+        /// <param name="id">The identifier of the model to remove.</param>
+        /// <returns>The model which was removed.</returns>
+        IQuery<T> Delete(uint id);
     }
 }

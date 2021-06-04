@@ -45,6 +45,13 @@
             public static string RequiresName = "A name is required for a video game.";
 
             /// <summary>
+            /// Ok message when a <see cref="Models.Impl.VideoGame"/> is successfully deleted from storage.
+            /// </summary>
+            /// <param name="id">The identifier of the <see cref="Models.Impl.VideoGame"/> removed.</param>
+            /// <returns>Message of deletion confirmation.</returns>
+            public static string Deleted(uint id) => $"Deleted video game with id '{id}'.";
+
+            /// <summary>
             /// Bad request message when a <see cref="Models.Impl.VideoGame"/> is added but its date is not in the form 'dd/MM/yyyy'.
             /// </summary>
             /// <param name="invalidDate">The invalid date.</param>
