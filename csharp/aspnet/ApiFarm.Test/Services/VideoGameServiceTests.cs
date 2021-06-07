@@ -16,16 +16,19 @@ namespace ApiFarm.Test.Services
 
         private Mock<IRepository<VideoGame>> mockVideoGameStorage;
         private Mock<IQueryFactory> mockQueryFactory;
+        private Mock<Action<VideoGame>> mockPrepVideoGame;
 
         [SetUp]
         protected void SetUp()
         {
             mockVideoGameStorage = new Mock<IRepository<VideoGame>>();
             mockQueryFactory = new Mock<IQueryFactory>();
+            mockPrepVideoGame = new Mock<Action<VideoGame>>();
 
             subject = new VideoGameService(
                 mockVideoGameStorage.Object,
-                mockQueryFactory.Object);
+                mockQueryFactory.Object,
+                mockPrepVideoGame.Object);
         }
 
         private class GetShould : VideoGameServiceTests
@@ -108,6 +111,7 @@ namespace ApiFarm.Test.Services
                 // Assert
                 actual.ShouldBe(expectedQuery.Object);
                 mockVideoGameStorage.Verify(m => m.Add(videoGame));
+                mockPrepVideoGame.Verify(m => m.Invoke(videoGame));
             }
 
             [Test]

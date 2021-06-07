@@ -33,7 +33,7 @@ namespace ApiFarm.Test.Utils
                     Producers = new List<string> { "A" },
                     Designers = new List<string> { "A", "B", "C" },
                     Programmers = new List<string> { "A", "B", "C", "D" },
-                    Artists = new List<string> { "A", "B", "C" },
+                    Artists = null,
                     Composers = new List<string> { "A", "B" },
                     Platforms = new List<string> { "A", "B", "C" },
                     DateReleased = DateTime.Now,
@@ -52,7 +52,6 @@ namespace ApiFarm.Test.Utils
                 clone.Producers.ShouldNotBeSameAs(original.Producers);
                 clone.Designers.ShouldNotBeSameAs(original.Designers);
                 clone.Programmers.ShouldNotBeSameAs(original.Programmers);
-                clone.Artists.ShouldNotBeSameAs(original.Artists);
                 clone.Composers.ShouldNotBeSameAs(original.Composers);
                 clone.Platforms.ShouldNotBeSameAs(original.Platforms);
                 clone.DateReleased.ShouldNotBeSameAs(original.DateReleased);

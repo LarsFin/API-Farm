@@ -36,6 +36,11 @@ namespace ApiFarm.Utils.Impl
 
         private List<T> CloneList<T>(List<T> original)
         {
+            if (original is null)
+            {
+                return null;
+            }
+
             var clone = new List<T>();
 
             foreach (var element in original)
