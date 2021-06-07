@@ -1,5 +1,7 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
+using System.Reflection;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
@@ -13,6 +15,29 @@ namespace ApiFarm.Utils.Impl
     /// </summary>
     public class JsonResourceFilterAttribute : Attribute, IResourceFilter
     {
+        private static Func<PropertyInfo, string> getJsonName = propertyInfo =>
+        {
+            var jsonPropertyAttribute = propertyInfo.GetCustomAttributes(typeof(JsonPropertyAttribute), false).FirstOrDefault() as JsonPropertyAttribute;
+
+            if (jsonPropertyAttribute is null)
+            {
+                return propertyInfo.Name.ToLower();
+            }
+
+            return jsonPropertyAttribute.PropertyName;
+        };
+
+        private Type targetModelType;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="JsonResourceFilterAttribute"/> class.
+        /// </summary>
+        /// <param name="targetModelType">The model type to which the Json is being unmarshalled to.</param>
+        public JsonResourceFilterAttribute(Type targetModelType)
+        {
+            this.targetModelType = targetModelType;
+        }
+
         /// <summary>
         /// Called after the mvc pipeline.
         /// </summary>
@@ -31,8 +56,19 @@ namespace ApiFarm.Utils.Impl
             {
                 context.HttpContext.Request.EnableBuffering();
                 var streamReader = new StreamReader(context.HttpContext.Request.Body);
-                JObject.Parse(streamReader.ReadToEnd());
+                var parsedBody = JObject.Parse(streamReader.ReadToEnd());
                 context.HttpContext.Request.Body.Position = 0;
+
+                var validKeys = this.targetModelType.GetProperties().Select(getJsonName);
+                var usedKeys = parsedBody.Children().Select(q => q.Path);
+
+                foreach (var usedKey in usedKeys)
+                {
+                    if (usedKey == "id" || !validKeys.Contains(usedKey))
+                    {
+                        context.Result = new BadRequestObjectResult($"The provided data has an invalid attribute '{usedKey}'.");
+                    }
+                }
             }
             catch (JsonReaderException)
             {
