@@ -148,5 +148,63 @@ namespace ApiFarm.Test.Controllers
                 objectResult.Value.ShouldBe(queryMessage);
             }
         }
+
+        private class UpdateShould : VideoGameControllerTests
+        {
+            [Test]
+            public void ReturnOkResponse()
+            {
+                // Arrange
+                var strId = "5";
+                var videoGameUpdateValues = new VideoGame();
+                var mockQuery = new Mock<IQuery<VideoGame>>();
+                var updatedVideoGame = new VideoGame();
+
+                mockVideoGameService.Setup(m => m.Update(5, videoGameUpdateValues)).Returns(mockQuery.Object);
+                mockQuery.Setup(m => m.Result).Returns(updatedVideoGame);
+
+                // Act
+                var objectResult = subject.Put(strId, videoGameUpdateValues);
+
+                // Assert
+                objectResult.StatusCode.ShouldBe(StatusCodes.Status200OK);
+                objectResult.Value.ShouldBe(updatedVideoGame);
+            }
+
+            [Test]
+            public void ReturnBadRequestResponse()
+            {
+                // Arrange
+                var strId = "invalid!";
+
+                // Act
+                var objectResult = subject.Put(strId, new VideoGame());
+
+                // Assert
+                objectResult.StatusCode.ShouldBe(StatusCodes.Status400BadRequest);
+                objectResult.Value.ShouldBe(ResponseMessages.Id.IsInvalid(strId));
+            }
+
+            [Test]
+            public void ReturnNotFoundResponse()
+            {
+                // Arrange
+                var strId = "99";
+                var videoGameUpdateValues = new VideoGame();
+                var mockQuery = new Mock<IQuery<VideoGame>>();
+                var queryMessage = "NOT FOUND!";
+
+                mockVideoGameService.Setup(m => m.Update(99, videoGameUpdateValues)).Returns(mockQuery.Object);
+                mockQuery.Setup(m => m.Code).Returns(404);
+                mockQuery.Setup(m => m.Message).Returns(queryMessage);
+
+                // Act
+                var objectResult = subject.Put(strId, videoGameUpdateValues);
+
+                // Assert
+                objectResult.StatusCode.ShouldBe(StatusCodes.Status404NotFound);
+                objectResult.Value.ShouldBe(queryMessage);
+            }
+        }
     }
 }

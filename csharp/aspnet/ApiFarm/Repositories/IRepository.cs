@@ -34,5 +34,12 @@ namespace ApiFarm.Repositories
         /// <param name="model">The model to be added.</param>
         /// <returns>The model added with an amended identifier value.</returns>
         T Add(T model);
+
+        /// <summary>
+        /// Updates a model in internal storage.
+        /// </summary>
+        /// <param name="updatedModel">The updated model to replace the original with.</param>
+        /// <returns>The updated model instance.</returns>
+        T Update(T updatedModel);
     }
 }

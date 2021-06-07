@@ -80,5 +80,31 @@ namespace ApiFarm.Controllers
             videoGame = query.Result;
             return this.Created($"video_games/{videoGame.Id}", videoGame);
         }
+
+        /// <summary>
+        /// Endpoint to update a <see cref="VideoGame"/> in storage.
+        /// </summary>
+        /// <param name="strId">Identifier of <see cref="VideoGame"/> to update in storage as string.</param>
+        /// <param name="videoGameUpdateValues"><see cref="VideoGame"/> with set fields to be updated in storage.</param>
+        /// <returns>Successful query with updated <see cref="VideoGame"/>.</returns>
+        [HttpPut]
+        [Route("{strId}")]
+        [JsonResourceFilter]
+        public ObjectResult Put(string strId, VideoGame videoGameUpdateValues)
+        {
+            if (!uint.TryParse(strId, out var id))
+            {
+                return this.BadRequest(ResponseMessages.Id.IsInvalid(strId));
+            }
+
+            var query = this.videoGameService.Update(id, videoGameUpdateValues);
+
+            if (query.Code != 0)
+            {
+                return this.NotFound(query.Message);
+            }
+
+            return this.Ok(query.Result);
+        }
     }
 }
