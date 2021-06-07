@@ -45,6 +45,8 @@ namespace ApiFarm.Services.Impl
                 return this.queryFactory.Build<VideoGame>(404, ResponseMessages.VideoGame.NotFound(id));
             }
 
+            this.prepVideoGame(storedVideoGame);
+
             return this.queryFactory.Build(result: storedVideoGame);
         }
 
@@ -56,7 +58,13 @@ namespace ApiFarm.Services.Impl
         {
             var storedVideoGames = this.videoGameStorage.GetAll();
 
-            return this.queryFactory.Build(result: storedVideoGames);
+            foreach (var storedVideoGame in storedVideoGames)
+            {
+                this.prepVideoGame(storedVideoGame);
+            }
+
+            var x = this.queryFactory.Build(result: storedVideoGames);
+            return x;
         }
 
         /// <summary>
@@ -101,6 +109,9 @@ namespace ApiFarm.Services.Impl
             UpdateWithSetValues(videoGameToUpdate, updateVideoGameValues);
 
             var updatedVideoGame = this.videoGameStorage.Update(videoGameToUpdate);
+
+            this.prepVideoGame(updatedVideoGame);
+
             return this.queryFactory.Build(result: updatedVideoGame);
         }
 

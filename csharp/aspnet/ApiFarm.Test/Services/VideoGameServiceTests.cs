@@ -49,6 +49,7 @@ namespace ApiFarm.Test.Services
 
                 // Assert
                 actual.ShouldBe(expected.Object);
+                mockPrepVideoGame.Verify(m => m.Invoke(storedVideoGame));
             }
 
             [Test]
@@ -70,15 +71,20 @@ namespace ApiFarm.Test.Services
 
         private class GetAllShould : VideoGameServiceTests
         {
+            private readonly VideoGame storedVideoGame1 = new VideoGame();
+            private readonly VideoGame storedVideoGame2 = new VideoGame();
+            private readonly VideoGame storedVideoGame3 = new VideoGame();
+
             [Test]
             public void RetrieveVideoGamesFromStorageAndReturnQuery()
             {
                 // Arrange
-                var storedVideoGames = new Mock<IEnumerable<VideoGame>>();
+                var mockStoredVideoGames = new Mock<IEnumerable<VideoGame>>();
                 var expected = new Mock<IQuery<IEnumerable<VideoGame>>>();
 
-                mockVideoGameStorage.Setup(m => m.GetAll()).Returns(storedVideoGames.Object);
-                mockQueryFactory.Setup(m => m.Build(default, default, storedVideoGames.Object))
+                mockStoredVideoGames.Setup(m => m.GetEnumerator()).Returns(StoredVideoGames());
+                mockVideoGameStorage.Setup(m => m.GetAll()).Returns(mockStoredVideoGames.Object);
+                mockQueryFactory.Setup(m => m.Build(default, default, mockStoredVideoGames.Object))
                     .Returns(expected.Object);
 
                 // Act
@@ -86,6 +92,17 @@ namespace ApiFarm.Test.Services
 
                 // Assert
                 actual.ShouldBe(expected.Object);
+
+                mockPrepVideoGame.Verify(m => m.Invoke(storedVideoGame1));
+                mockPrepVideoGame.Verify(m => m.Invoke(storedVideoGame2));
+                mockPrepVideoGame.Verify(m => m.Invoke(storedVideoGame3));
+            }
+
+            private IEnumerator<VideoGame> StoredVideoGames()
+            {
+                yield return storedVideoGame1;
+                yield return storedVideoGame2;
+                yield return storedVideoGame3;
             }
         }
 
@@ -215,6 +232,8 @@ namespace ApiFarm.Test.Services
                     q.Composers == videoGameUpdateValues.Composers &&
                     q.Platforms == videoGameUpdateValues.Platforms &&
                     q.DateReleased == videoGameUpdateValues.DateReleased)), Times.Once);
+
+                mockPrepVideoGame.Verify(m => m.Invoke(updatedVideoGame));
             }
 
             [Test]
@@ -273,6 +292,8 @@ namespace ApiFarm.Test.Services
                     q.Composers == videoGameUpdateValues.Composers &&
                     q.Platforms != videoGameUpdateValues.Platforms &&
                     q.DateReleased != videoGameUpdateValues.DateReleased)), Times.Once);
+
+                mockPrepVideoGame.Verify(m => m.Invoke(updatedVideoGame));
             }
 
             [Test]
