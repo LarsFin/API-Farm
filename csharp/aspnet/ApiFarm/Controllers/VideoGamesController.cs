@@ -106,5 +106,29 @@ namespace ApiFarm.Controllers
 
             return this.Ok(query.Result);
         }
+
+        /// <summary>
+        /// Endpoint to delete a <see cref="VideoGame"/> from storage.
+        /// </summary>
+        /// <param name="strId">Identifier of <see cref="VideoGame"/> to delete from storage as string.</param>
+        /// <returns>Successful query with confirmation of deletion.</returns>
+        [HttpDelete]
+        [Route("{strId}")]
+        public ObjectResult Delete(string strId)
+        {
+            if (!uint.TryParse(strId, out var id))
+            {
+                return this.BadRequest(ResponseMessages.Id.IsInvalid(strId));
+            }
+
+            var query = this.videoGameService.Delete(id);
+
+            if (query.Code != 0)
+            {
+                return this.NotFound(query.Message);
+            }
+
+            return this.Ok(query.Message);
+        }
     }
 }

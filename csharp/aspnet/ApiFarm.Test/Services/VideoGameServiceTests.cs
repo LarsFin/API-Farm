@@ -287,5 +287,42 @@ namespace ApiFarm.Test.Services
                 actual.ShouldBe(expectedQuery.Object);
             }
         }
+
+        private class DeleteShould : VideoGameServiceTests
+        {
+            [Test]
+            public void DeleteVideoGameInStorageAndReturnQuery()
+            {
+                // Arrange
+                var id = 5u;
+                var deletedVideoGame = new VideoGame();
+                var expectedQuery = new Mock<IQuery<VideoGame>>();
+
+                mockVideoGameStorage.Setup(m => m.Delete(id)).Returns(deletedVideoGame);
+                mockQueryFactory.Setup(m => m.Build(default, ResponseMessages.VideoGame.Deleted(id), deletedVideoGame)).Returns(expectedQuery.Object);
+
+                // Act
+                var actual = subject.Delete(id);
+
+                // Assert
+                actual.ShouldBe(expectedQuery.Object);
+            }
+
+            [Test]
+            public void ReturnUnsuccessfulQueryWhenVideoGameNotFound()
+            {
+                // Arrange
+                var id = 99u;
+                var expectedQuery = new Mock<IQuery<VideoGame>>();
+
+                mockQueryFactory.Setup(m => m.Build<VideoGame>(404, ResponseMessages.VideoGame.NotFound(id), default)).Returns(expectedQuery.Object);
+
+                // Act
+                var actual = subject.Delete(id);
+
+                // Assert
+                actual.ShouldBe(expectedQuery.Object);
+            }
+        }
     }
 }
