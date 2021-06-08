@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using ApiFarm.Models.Impl;
 using ApiFarm.Repositories;
 using ApiFarm.Utils;
@@ -12,18 +13,22 @@ namespace ApiFarm.Services.Impl
     {
         private IRepository<VideoGame> videoGameStorage;
         private IQueryFactory queryFactory;
+        private Action<VideoGame> prepVideoGame;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="VideoGameService"/> class.
         /// </summary>
         /// <param name="videoGameStorage">Storage interface for managing <see cref="VideoGame"/> models.</param>
         /// <param name="queryFactory">Factory responsible for initialising Queries with <see cref="VideoGame"/> related results.</param>
+        /// <param name="prepVideoGame">Responsible for preparing <see cref="VideoGame"/> instances for query responses.</param>
         public VideoGameService(
             IRepository<VideoGame> videoGameStorage,
-            IQueryFactory queryFactory)
+            IQueryFactory queryFactory,
+            Action<VideoGame> prepVideoGame)
         {
             this.videoGameStorage = videoGameStorage;
             this.queryFactory = queryFactory;
+            this.prepVideoGame = prepVideoGame;
         }
 
         /// <summary>
@@ -40,6 +45,8 @@ namespace ApiFarm.Services.Impl
                 return this.queryFactory.Build<VideoGame>(404, ResponseMessages.VideoGame.NotFound(id));
             }
 
+            this.prepVideoGame(storedVideoGame);
+
             return this.queryFactory.Build(result: storedVideoGame);
         }
 
@@ -51,7 +58,13 @@ namespace ApiFarm.Services.Impl
         {
             var storedVideoGames = this.videoGameStorage.GetAll();
 
-            return this.queryFactory.Build(result: storedVideoGames);
+            foreach (var storedVideoGame in storedVideoGames)
+            {
+                this.prepVideoGame(storedVideoGame);
+            }
+
+            var x = this.queryFactory.Build(result: storedVideoGames);
+            return x;
         }
 
         /// <summary>
@@ -72,6 +85,8 @@ namespace ApiFarm.Services.Impl
             }
 
             var storedVideoGame = this.videoGameStorage.Add(videoGame);
+            this.prepVideoGame(storedVideoGame);
+
             return this.queryFactory.Build(result: storedVideoGame);
         }
 
@@ -94,6 +109,9 @@ namespace ApiFarm.Services.Impl
             UpdateWithSetValues(videoGameToUpdate, updateVideoGameValues);
 
             var updatedVideoGame = this.videoGameStorage.Update(videoGameToUpdate);
+
+            this.prepVideoGame(updatedVideoGame);
+
             return this.queryFactory.Build(result: updatedVideoGame);
         }
 

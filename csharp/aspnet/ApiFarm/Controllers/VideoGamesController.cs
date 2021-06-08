@@ -67,7 +67,7 @@ namespace ApiFarm.Controllers
         /// <param name="videoGame">The <see cref="VideoGame"/> extracted from request body to be added to storage.</param>
         /// <returns>The video game which was added.</returns>
         [HttpPost]
-        [JsonResourceFilter]
+        [JsonResourceFilter(typeof(VideoGame))]
         public ObjectResult Post(VideoGame videoGame)
         {
             var query = this.videoGameService.Add(videoGame);
@@ -89,7 +89,7 @@ namespace ApiFarm.Controllers
         /// <returns>Successful query with updated <see cref="VideoGame"/>.</returns>
         [HttpPut]
         [Route("{strId}")]
-        [JsonResourceFilter]
+        [JsonResourceFilter(typeof(VideoGame))]
         public ObjectResult Put(string strId, VideoGame videoGameUpdateValues)
         {
             if (!uint.TryParse(strId, out var id))

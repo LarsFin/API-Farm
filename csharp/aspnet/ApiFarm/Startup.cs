@@ -1,4 +1,5 @@
 ﻿#pragma warning disable
+using System;
 using ApiFarm.Models.Impl;
 using ApiFarm.Repositories;
 using ApiFarm.Services;
@@ -42,6 +43,8 @@ namespace ApiFarm.Scaffolding
             services.AddSingleton<ICloner<VideoGame>, VideoGameCloner>();
 
             services.AddSingleton<IDataLoader<VideoGame>, VideoGameDataLoader>();
+
+            services.AddSingleton<Action<VideoGame>>(ResultPreparers.PrepVideoGame);
         }
 
         public void Configure(IApplicationBuilder app)
