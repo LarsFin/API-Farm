@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29102.190
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiFarm", "ApiFarm\ApiFarm.csproj", "{959E1B20-A60F-4419-B355-265030DDD24F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiFarm.Test", "ApiFarm.Test\ApiFarm.Test.csproj", "{00DFD615-30BE-48E6-A7F6-4EF2CFA3B695}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{959E1B20-A60F-4419-B355-265030DDD24F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{959E1B20-A60F-4419-B355-265030DDD24F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{959E1B20-A60F-4419-B355-265030DDD24F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{959E1B20-A60F-4419-B355-265030DDD24F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00DFD615-30BE-48E6-A7F6-4EF2CFA3B695}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00DFD615-30BE-48E6-A7F6-4EF2CFA3B695}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00DFD615-30BE-48E6-A7F6-4EF2CFA3B695}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00DFD615-30BE-48E6-A7F6-4EF2CFA3B695}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {18835971-6CEF-4A73-848A-BF5A0EE43FF2}
+	EndGlobalSection
+EndGlobal

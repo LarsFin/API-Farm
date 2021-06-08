@@ -1,0 +1,14 @@
+# root resources
+.gitignore
+.vs/
+
+# src resources
+ApiFarm/.vs/
+ApiFarm/bin/
+ApiFarm/obj/
+
+# test resources
+ApiFarm.Test/bin
+ApiFarm.Test/obj
+ApiFarm.Test/TestResults/
+ApiFarm.Test/coverage.json
