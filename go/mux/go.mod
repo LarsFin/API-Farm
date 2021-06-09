@@ -1,4 +1,4 @@
-module api_farm
+module apifarm
 
 go 1.16
 
