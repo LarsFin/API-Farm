@@ -8,7 +8,11 @@ import (
 )
 
 func pingHandler(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("pong"))
+	_, err := w.Write([]byte("pong"))
+
+	if err != nil {
+		panic(err)
+	}
 }
 
 func main() {
