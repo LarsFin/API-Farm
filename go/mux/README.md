@@ -13,5 +13,6 @@ golangci-lint run
 
 *Test*
 ```shell
-go test apifarm/src
+go test -coverprofile=coverage.out apifarm/src
+goverreport -sort=block -order=desc -threshold=100
 ```
