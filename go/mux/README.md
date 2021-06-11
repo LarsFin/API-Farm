@@ -13,6 +13,7 @@ golangci-lint run
 
 *Test*
 ```shell
+go get -u github.com/mcubik/goverreport
 go test -coverprofile=coverage.out apifarm/src
 goverreport -sort=block -order=desc -threshold=100
 ```

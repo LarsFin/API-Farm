@@ -22,17 +22,13 @@ func squareHandler(w http.ResponseWriter, r *http.Request) {
 
 	ns := vars["number"]
 
-	i, err := strconv.Atoi(ns)
-
-	if err != nil {
-		panic(err)
-	}
+	i := strToInt(ns)
 
 	i = apifarm.Square(i)
 
 	o := strconv.Itoa(i)
 
-	_, err = w.Write([]byte(o))
+	_, err := w.Write([]byte(o))
 
 	if err != nil {
 		panic(err)
@@ -45,4 +41,14 @@ func main() {
 	r.HandleFunc("/square/{number:[0-9]+}", squareHandler)
 
 	log.Fatal(http.ListenAndServe(":8080", r))
+}
+
+func strToInt(s string) int {
+	i, err := strconv.Atoi(s)
+
+	if err != nil {
+		panic(err)
+	}
+
+	return i
 }
