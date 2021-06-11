@@ -10,37 +10,37 @@ import (
 	gomock "github.com/golang/mock/gomock"
 )
 
-// Mockresponse is a mock of response interface.
-type Mockresponse struct {
+// MockResponse is a mock of Response interface.
+type MockResponse struct {
 	ctrl     *gomock.Controller
-	recorder *MockresponseMockRecorder
+	recorder *MockResponseMockRecorder
 }
 
-// MockresponseMockRecorder is the mock recorder for Mockresponse.
-type MockresponseMockRecorder struct {
-	mock *Mockresponse
+// MockResponseMockRecorder is the mock recorder for MockResponse.
+type MockResponseMockRecorder struct {
+	mock *MockResponse
 }
 
-// NewMockresponse creates a new mock instance.
-func NewMockresponse(ctrl *gomock.Controller) *Mockresponse {
-	mock := &Mockresponse{ctrl: ctrl}
-	mock.recorder = &MockresponseMockRecorder{mock}
+// NewMockResponse creates a new mock instance.
+func NewMockResponse(ctrl *gomock.Controller) *MockResponse {
+	mock := &MockResponse{ctrl: ctrl}
+	mock.recorder = &MockResponseMockRecorder{mock}
 	return mock
 }
 
 // EXPECT returns an object that allows the caller to indicate expected use.
-func (m *Mockresponse) EXPECT() *MockresponseMockRecorder {
+func (m *MockResponse) EXPECT() *MockResponseMockRecorder {
 	return m.recorder
 }
 
 // OkText mocks base method.
-func (m *Mockresponse) OkText(arg0 string) {
+func (m *MockResponse) OkText(arg0 string) {
 	m.ctrl.T.Helper()
 	m.ctrl.Call(m, "OkText", arg0)
 }
 
 // OkText indicates an expected call of OkText.
-func (mr *MockresponseMockRecorder) OkText(arg0 interface{}) *gomock.Call {
+func (mr *MockResponseMockRecorder) OkText(arg0 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "OkText", reflect.TypeOf((*Mockresponse)(nil).OkText), arg0)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "OkText", reflect.TypeOf((*MockResponse)(nil).OkText), arg0)
 }

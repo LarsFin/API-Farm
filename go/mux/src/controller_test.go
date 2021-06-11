@@ -13,7 +13,7 @@ func TestHandlePing(t *testing.T) {
 
 	defer ctrl.Finish()
 
-	m := mock.NewMockresponse(ctrl)
+	m := mock.NewMockResponse(ctrl)
 
 	c := apifarm.Controller{}
 

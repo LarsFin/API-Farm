@@ -2,21 +2,21 @@ package apifarm
 
 import "net/http"
 
-type response interface {
+type Response interface {
 	OkText(string)
 }
 
-type httpResponse struct {
+type HTTPResponse struct {
 	w *http.ResponseWriter
 }
 
-func NewHttpResponse(w *http.ResponseWriter) *httpResponse {
-	return &httpResponse{
+func NewHTTPResponse(w *http.ResponseWriter) *HTTPResponse {
+	return &HTTPResponse{
 		w,
 	}
 }
 
-func (r *httpResponse) OkText(text string) {
+func (r *HTTPResponse) OkText(text string) {
 	_, err := (*r.w).Write([]byte(text))
 
 	if err != nil {
