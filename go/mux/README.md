@@ -17,3 +17,8 @@ go get -u github.com/mcubik/goverreport
 go test -coverprofile=coverage.out apifarm/src
 goverreport -sort=block -order=desc -threshold=100
 ```
+
+*Mocking*
+```shell
+mockgen -source <file-path> -destination mocks/<file-name>_mock.go
+```
