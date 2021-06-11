@@ -20,5 +20,5 @@ goverreport -sort=block -order=desc -threshold=100
 
 *Mocking*
 ```shell
-mockgen -source <file-path> -destination mocks/<file-name>_mock.go
+mockgen -source <file-path> -destination mock/<file-name>_mock.go
 ```

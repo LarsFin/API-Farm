@@ -33,14 +33,14 @@ func (m *Mockresponse) EXPECT() *MockresponseMockRecorder {
 	return m.recorder
 }
 
-// okText mocks base method.
-func (m *Mockresponse) okText(arg0 string) {
+// OkText mocks base method.
+func (m *Mockresponse) OkText(arg0 string) {
 	m.ctrl.T.Helper()
-	m.ctrl.Call(m, "okText", arg0)
+	m.ctrl.Call(m, "OkText", arg0)
 }
 
-// okText indicates an expected call of okText.
-func (mr *MockresponseMockRecorder) okText(arg0 interface{}) *gomock.Call {
+// OkText indicates an expected call of OkText.
+func (mr *MockresponseMockRecorder) OkText(arg0 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "okText", reflect.TypeOf((*Mockresponse)(nil).okText), arg0)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "OkText", reflect.TypeOf((*Mockresponse)(nil).OkText), arg0)
 }
