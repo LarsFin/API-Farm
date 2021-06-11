@@ -1,3 +1,5 @@
+github.com/LarsFin/API-Farm v0.0.0-20210608122924-ec437245d86d h1:jBLstwku0SDq92/b73n0uDWlUPQSX2bkqyRjEj5URcg=
+github.com/LarsFin/API-Farm v0.0.0-20210608122924-ec437245d86d/go.mod h1:XCieLgIIr6uEG8Fas2tPofJCbhNzCxFCuSVO2VprYy8=
 github.com/golang/mock v1.5.0 h1:jlYHihg//f7RRwuPfptm04yp4s7O6Kw8EZiVYIGcH0g=
 github.com/golang/mock v1.5.0/go.mod h1:CWnOUgYIOo4TcNZ0wHX3YZCqsaM1I1Jvs6v3mP3KVu8=
 github.com/gorilla/mux v1.8.0 h1:i40aqfkR1h2SlN9hojwV5ZA91wcXFOvkdNIeFDP5koI=
