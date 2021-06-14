@@ -1,26 +1,21 @@
 package apifarm_test
 
 import (
-	mock "apifarm/mock"
+	mocks "apifarm/mocks/src"
 	apifarm "apifarm/src"
 	"testing"
-
-	"github.com/golang/mock/gomock"
 )
 
 func TestHandlePing(t *testing.T) {
 	// Arrange
-	ctrl := gomock.NewController(t)
+	mockResponse := new(mocks.Response)
+	mockResponse.On("OkText", "pong")
 
-	defer ctrl.Finish()
-
-	m := mock.NewMockResponse(ctrl)
-
-	c := apifarm.Controller{}
-
-	// Assert
-	m.EXPECT().OkText("pong")
+	subject := apifarm.Controller{}
 
 	// Act
-	c.HandlePing(m)
+	subject.HandlePing(mockResponse)
+
+	// Assert
+	mockResponse.AssertExpectations(t)
 }

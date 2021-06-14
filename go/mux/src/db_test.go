@@ -2,8 +2,9 @@ package apifarm_test
 
 import (
 	apifarm "apifarm/src"
-	"reflect"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func TestInMemoryGetAllVideoGames(t *testing.T) {
@@ -15,7 +16,5 @@ func TestInMemoryGetAllVideoGames(t *testing.T) {
 	got := subject.GetAllVideoGames()
 
 	// Assert
-	if !reflect.DeepEqual(got, expected) {
-		t.Errorf("InMemory::GetAllVideoGames failed, expected %v, got %v", expected, got)
-	}
+	assert.Equal(t, expected, got, "they should be equal")
 }
