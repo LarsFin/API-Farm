@@ -9,6 +9,7 @@ import (
 )
 
 func TestHandlePing(t *testing.T) {
+	// Arrange
 	ctrl := gomock.NewController(t)
 
 	defer ctrl.Finish()
@@ -17,7 +18,9 @@ func TestHandlePing(t *testing.T) {
 
 	c := apifarm.Controller{}
 
+	// Assert
 	m.EXPECT().OkText("pong")
 
+	// Act
 	c.HandlePing(m)
 }
