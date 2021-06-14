@@ -36,7 +36,7 @@ func TestHandleGetAll200(t *testing.T) {
 	}
 
 	mockService.On("GetAll").Return(query)
-	mockResponse.On("OkJson", result)
+	mockResponse.On("OkJSON", result)
 
 	// Act
 	subject.HandleGetAll(mockResponse)
