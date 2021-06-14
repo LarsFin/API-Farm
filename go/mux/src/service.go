@@ -13,7 +13,7 @@ type VideoGameService struct {
 func NewVideoGameService(db DB) *VideoGameService {
 	return &VideoGameService{
 		db,
-		&Json{},
+		&JSON{},
 		&queryFactory{},
 	}
 }

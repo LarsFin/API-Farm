@@ -14,17 +14,17 @@ import (
 func TestVideoGameServiceGetAllSuccessful(t *testing.T) {
 	// Arrange
 	mockStorage := new(mocks.DB)
-	mockJson := new(mocks.DataUtils)
+	mockJSON := new(mocks.DataUtils)
 	mockQueryFactory := new(mocks.QueryFactory)
 
-	subject := apifarm.NewVideoGameServiceWithUtils(mockStorage, mockJson, mockQueryFactory)
+	subject := apifarm.NewVideoGameServiceWithUtils(mockStorage, mockJSON, mockQueryFactory)
 
 	storedVideoGames := []apifarm.VideoGame{{Name: "Lady's Quest 3"}}
 	serializedVideoGames := []byte{42, 42, 42}
 	expectedQuery := apifarm.Query{}
 
 	mockStorage.On("GetAllVideoGames").Return(storedVideoGames)
-	mockJson.On("Serialize", storedVideoGames).Return(serializedVideoGames, nil)
+	mockJSON.On("Serialize", storedVideoGames).Return(serializedVideoGames, nil)
 	mockQueryFactory.On("Build", serializedVideoGames, uint(0)).Return(expectedQuery)
 
 	// Act
@@ -33,24 +33,24 @@ func TestVideoGameServiceGetAllSuccessful(t *testing.T) {
 	// Assert
 	assert.Equal(t, expectedQuery, actualQuery, "they should be equal")
 	mockStorage.AssertExpectations(t)
-	mockJson.AssertExpectations(t)
+	mockJSON.AssertExpectations(t)
 	mockQueryFactory.AssertExpectations(t)
 }
 
 func TestVideoGameServiceGetAllSerializationFailure(t *testing.T) {
 	// Arrange
 	mockStorage := new(mocks.DB)
-	mockJson := new(mocks.DataUtils)
+	mockJSON := new(mocks.DataUtils)
 	mockQueryFactory := new(mocks.QueryFactory)
 
-	subject := apifarm.NewVideoGameServiceWithUtils(mockStorage, mockJson, mockQueryFactory)
+	subject := apifarm.NewVideoGameServiceWithUtils(mockStorage, mockJSON, mockQueryFactory)
 
 	storedVideoGames := []apifarm.VideoGame{{Name: "Lady's Quest 3"}}
-	err := errors.New("Failed to serialize Json!")
+	err := errors.New("failed to serialize to json")
 	expectedQuery := apifarm.Query{}
 
 	mockStorage.On("GetAllVideoGames").Return(storedVideoGames)
-	mockJson.On("Serialize", storedVideoGames).Return(nil, err)
+	mockJSON.On("Serialize", storedVideoGames).Return(nil, err)
 	mockQueryFactory.On("Error", err).Return(expectedQuery)
 
 	// Act
@@ -59,6 +59,6 @@ func TestVideoGameServiceGetAllSerializationFailure(t *testing.T) {
 	// Assert
 	assert.Equal(t, expectedQuery, actualQuery, "they should be equal")
 	mockStorage.AssertExpectations(t)
-	mockJson.AssertExpectations(t)
+	mockJSON.AssertExpectations(t)
 	mockQueryFactory.AssertExpectations(t)
 }

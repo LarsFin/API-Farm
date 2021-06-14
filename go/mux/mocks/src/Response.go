@@ -14,8 +14,8 @@ func (_m *Response) Error(_a0 error) {
 	_m.Called(_a0)
 }
 
-// OkJson provides a mock function with given fields: _a0
-func (_m *Response) OkJson(_a0 []byte) {
+// OkJSON provides a mock function with given fields: _a0
+func (_m *Response) OkJSON(_a0 []byte) {
 	_m.Called(_a0)
 }
 

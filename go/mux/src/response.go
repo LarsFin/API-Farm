@@ -3,7 +3,7 @@ package apifarm
 import "net/http"
 
 type Response interface {
-	OkJson([]byte)
+	OkJSON([]byte)
 	OkText(string)
 	Error(error)
 }
@@ -18,7 +18,7 @@ func NewHTTPResponse(w *http.ResponseWriter) *HTTPResponse {
 	}
 }
 
-func (r *HTTPResponse) OkJson(data []byte) {
+func (r *HTTPResponse) OkJSON(data []byte) {
 	_, err := (*r.w).Write(data)
 
 	if err != nil {

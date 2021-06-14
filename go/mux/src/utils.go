@@ -6,10 +6,10 @@ type DataUtils interface {
 	Serialize(interface{}) ([]byte, error)
 }
 
-type Json struct {
+type JSON struct {
 }
 
-func (*Json) Serialize(obj interface{}) ([]byte, error) {
+func (*JSON) Serialize(obj interface{}) ([]byte, error) {
 	return json.Marshal(obj)
 }
 

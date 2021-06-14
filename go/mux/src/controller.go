@@ -1,5 +1,7 @@
 package apifarm
 
+import "net/http"
+
 type Controller struct {
 	s Service
 }
@@ -19,10 +21,8 @@ func (c *Controller) HandleGetAll(res Response) {
 
 	switch query.Code {
 	case 0:
-		res.OkJson(query.Result)
-		break
-	case 500:
+		res.OkJSON(query.Result)
+	case http.StatusInternalServerError:
 		res.Error(query.Error)
-		break
 	}
 }

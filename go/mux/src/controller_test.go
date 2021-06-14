@@ -53,7 +53,7 @@ func TestHandleGetAll500(t *testing.T) {
 
 	subject := apifarm.NewController(mockService)
 
-	err := errors.New("Query failed!")
+	err := errors.New("query failed")
 	query := apifarm.Query{
 		nil,
 		500,
