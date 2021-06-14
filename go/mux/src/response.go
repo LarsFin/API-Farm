@@ -3,7 +3,9 @@ package apifarm
 import "net/http"
 
 type Response interface {
+	OkJson([]byte)
 	OkText(string)
+	Error(error)
 }
 
 type HTTPResponse struct {

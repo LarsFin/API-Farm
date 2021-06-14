@@ -9,6 +9,16 @@ type Response struct {
 	mock.Mock
 }
 
+// Error provides a mock function with given fields: _a0
+func (_m *Response) Error(_a0 error) {
+	_m.Called(_a0)
+}
+
+// OkJson provides a mock function with given fields: _a0
+func (_m *Response) OkJson(_a0 []byte) {
+	_m.Called(_a0)
+}
+
 // OkText provides a mock function with given fields: _a0
 func (_m *Response) OkText(_a0 string) {
 	_m.Called(_a0)
