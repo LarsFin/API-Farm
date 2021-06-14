@@ -3,6 +3,7 @@ package apifarm_test
 import (
 	mocks "apifarm/mocks/src"
 	apifarm "apifarm/src"
+	"errors"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -24,7 +25,7 @@ func TestVideoGameServiceGetAllSuccessful(t *testing.T) {
 
 	mockStorage.On("GetAllVideoGames").Return(storedVideoGames)
 	mockJson.On("Serialize", storedVideoGames).Return(serializedVideoGames, nil)
-	mockQueryFactory.On("Build", serializedVideoGames, 0).Return(expectedQuery)
+	mockQueryFactory.On("Build", serializedVideoGames, uint(0)).Return(expectedQuery)
 
 	// Act
 	actualQuery := subject.GetAll()
@@ -45,7 +46,7 @@ func TestVideoGameServiceGetAllSerializationFailure(t *testing.T) {
 	subject := apifarm.NewVideoGameServiceWithUtils(mockStorage, mockJson, mockQueryFactory)
 
 	storedVideoGames := []apifarm.VideoGame{{Name: "Lady's Quest 3"}}
-	err := new(error)
+	err := errors.New("Failed to serialize Json!")
 	expectedQuery := apifarm.Query{}
 
 	mockStorage.On("GetAllVideoGames").Return(storedVideoGames)

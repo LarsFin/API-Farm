@@ -27,5 +27,13 @@ func NewVideoGameServiceWithUtils(db DB, json DataUtils, qf QueryFactory) *Video
 }
 
 func (s *VideoGameService) GetAll() Query {
-	return Query{}
+	storedVideoGames := s.db.GetAllVideoGames()
+
+	b, err := s.json.Serialize(storedVideoGames)
+
+	if err != nil {
+		return s.qf.Error(err)
+	}
+
+	return s.qf.Build(b, uint(0))
 }
