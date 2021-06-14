@@ -21,5 +21,5 @@ func NewInMemoryWithVideoGames(videoGames *[]VideoGame) *InMemory {
 }
 
 func (db InMemory) GetAllVideoGames() []VideoGame {
-	return nil
+	return *db.videoGames
 }
