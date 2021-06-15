@@ -19,5 +19,6 @@ go test apifarm/src
 
 *Mocking*
 ```shell
-mockgen -source <file-path> -destination mock/<file-name>_mock.go
+go get github.com/vektra/mockery/v2/.../
+mockery --all --keeptree
 ```
