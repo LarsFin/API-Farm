@@ -18,8 +18,7 @@ case $CMD in
 
     test)
         echo "Running test suite..."
-        go test -coverprofile=coverage.out apifarm/src
-        goverreport -sort=block -order=desc -threshold=100
+        go test apifarm/src
         ;;
 
     lint)
