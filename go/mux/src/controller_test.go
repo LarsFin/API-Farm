@@ -102,7 +102,7 @@ func TestHandlePost400(t *testing.T) {
 
 	mockRequest.On("GetBody").Return(body, nil)
 	mockService.On("Add", body).Return(query)
-	mockResponse.On("BadRequest", queryMessage)
+	mockResponse.On("BadRequestText", queryMessage)
 
 	// Act
 	subject.HandlePost(mockRequest, mockResponse)

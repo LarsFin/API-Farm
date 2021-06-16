@@ -32,5 +32,10 @@ func (c *Controller) HandlePost(req Request, res Response) {
 
 	query := c.s.Add(body)
 
-	res.CreatedJSON(query.Result)
+	switch query.Code {
+	case 0:
+		res.CreatedJSON(query.Result)
+	case http.StatusBadRequest:
+		res.BadRequestText(query.Message)
+	}
 }
