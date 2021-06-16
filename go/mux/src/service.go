@@ -41,6 +41,10 @@ func (s *VideoGameService) GetAll() Query {
 func (s *VideoGameService) Add(data []byte) Query {
 	vg, _ := s.json.DeserializeVideoGame(data)
 
+	if len(vg.Name) == 0 {
+		return s.qf.BuildMessage(VideoGameNameRequired, uint(400))
+	}
+
 	svg := s.db.AddVideoGame(*vg)
 
 	b, err := s.json.Serialize(svg)
