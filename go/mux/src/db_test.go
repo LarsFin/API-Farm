@@ -22,10 +22,11 @@ func TestInMemoryGetAllVideoGames(t *testing.T) {
 func TestInMemoryAddVideoGame(t *testing.T) {
 	// Arrange
 	subject, videoGames := apifarm.NewInMemoryForTests()
-	expected := apifarm.VideoGame{Name: "The Great Gamesby"}
+	videoGame := apifarm.VideoGame{Name: "The Great Gamesby"}
+	expected := apifarm.VideoGame{Id: uint(1), Name: "The Great Gamesby"}
 
 	// Act
-	got := subject.AddVideoGame(expected)
+	got := subject.AddVideoGame(videoGame)
 
 	// Assert
 	assert.Equal(t, expected, got)
