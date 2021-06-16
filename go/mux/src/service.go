@@ -1,5 +1,7 @@
 package apifarm
 
+import "time"
+
 type Service interface {
 	GetAll() Query
 }
@@ -43,6 +45,11 @@ func (s *VideoGameService) Add(data []byte) Query {
 
 	if len(vg.Name) == 0 {
 		return s.qf.BuildMessage(VideoGameNameRequired, uint(400))
+	}
+
+	dt := time.Time{}
+	if vg.DateReleased == dt {
+		return s.qf.BuildMessage(VideoGameDateRequired, uint(400))
 	}
 
 	svg := s.db.AddVideoGame(*vg)
