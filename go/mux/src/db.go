@@ -15,10 +15,11 @@ func NewInMemory() *InMemory {
 	}
 }
 
-func NewInMemoryWithVideoGames(videoGames *[]VideoGame) *InMemory {
-	return &InMemory{
-		videoGames,
-	}
+func NewInMemoryForTests() (*InMemory, **[]VideoGame) {
+	im := &InMemory{&([]VideoGame{})}
+	vgs := &im.videoGames
+
+	return im, vgs
 }
 
 func (db *InMemory) GetAllVideoGames() []VideoGame {
@@ -26,5 +27,7 @@ func (db *InMemory) GetAllVideoGames() []VideoGame {
 }
 
 func (db *InMemory) AddVideoGame(vg VideoGame) VideoGame {
-	return VideoGame{}
+	vgs := append(*db.videoGames, vg)
+	db.videoGames = &vgs
+	return vg
 }

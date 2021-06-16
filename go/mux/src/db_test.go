@@ -9,8 +9,8 @@ import (
 
 func TestInMemoryGetAllVideoGames(t *testing.T) {
 	// Arrange
-	expected := []apifarm.VideoGame{{Name: "Lady's Quest 0"}}
-	subject := apifarm.NewInMemoryWithVideoGames(&expected)
+	subject, videoGames := apifarm.NewInMemoryForTests()
+	expected := **videoGames
 
 	// Act
 	got := subject.GetAllVideoGames()
@@ -21,8 +21,7 @@ func TestInMemoryGetAllVideoGames(t *testing.T) {
 
 func TestInMemoryAddVideoGame(t *testing.T) {
 	// Arrange
-	videoGames := []apifarm.VideoGame{}
-	subject := apifarm.NewInMemoryWithVideoGames(&videoGames)
+	subject, videoGames := apifarm.NewInMemoryForTests()
 	expected := apifarm.VideoGame{Name: "The Great Gamesby"}
 
 	// Act
@@ -30,5 +29,5 @@ func TestInMemoryAddVideoGame(t *testing.T) {
 
 	// Assert
 	assert.Equal(t, expected, got)
-	assert.Contains(t, videoGames, expected)
+	assert.Contains(t, **videoGames, expected)
 }
