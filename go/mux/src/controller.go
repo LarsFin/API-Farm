@@ -37,5 +37,7 @@ func (c *Controller) HandlePost(req Request, res Response) {
 		res.CreatedJSON(query.Result)
 	case http.StatusBadRequest:
 		res.BadRequestText(query.Message)
+	case http.StatusInternalServerError:
+		res.Error(query.Error)
 	}
 }
