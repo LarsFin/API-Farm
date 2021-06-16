@@ -35,7 +35,7 @@ func (s *VideoGameService) GetAll() Query {
 		return s.qf.Error(err)
 	}
 
-	return s.qf.Build(b, uint(0))
+	return s.qf.BuildResult(b, uint(0))
 }
 
 func (s *VideoGameService) Add(data []byte) Query {
@@ -49,5 +49,5 @@ func (s *VideoGameService) Add(data []byte) Query {
 		return s.qf.Error(err)
 	}
 
-	return s.qf.Build(b, uint(0))
+	return s.qf.BuildResult(b, uint(0))
 }

@@ -2,6 +2,8 @@ package apifarm
 
 import "encoding/json"
 
+// Data Utilities
+
 type DataUtils interface {
 	Serialize(interface{}) ([]byte, error)
 	DeserializeVideoGame([]byte) (*VideoGame, error)
@@ -20,17 +22,30 @@ func (*JSON) DeserializeVideoGame(data []byte) (*VideoGame, error) {
 	return vg, err
 }
 
+// Factories
+
 type QueryFactory interface {
-	Build([]byte, uint) Query
+	BuildResult([]byte, uint) Query
+	BuildMessage(string, uint) Query
 	Error(error) Query
 }
 
 type queryFactory struct {
 }
 
-func (*queryFactory) Build(result []byte, code uint) Query {
+func (*queryFactory) BuildResult(result []byte, code uint) Query {
 	return Query{
 		result,
+		"Successfully built.",
+		code,
+		nil,
+	}
+}
+
+func (*queryFactory) BuildMessage(msg string, code uint) Query {
+	return Query{
+		nil,
+		msg,
 		code,
 		nil,
 	}
@@ -39,13 +54,19 @@ func (*queryFactory) Build(result []byte, code uint) Query {
 func (*queryFactory) Error(err error) Query {
 	return Query{
 		nil,
+		"An unforseen error occurred.",
 		500,
 		err,
 	}
 }
 
 type Query struct {
-	Result []byte
-	Code   uint
-	Error  error
+	Result  []byte
+	Message string
+	Code    uint
+	Error   error
 }
+
+// Messages
+
+const VideoGameNameRequired = "A name is required for a video game."

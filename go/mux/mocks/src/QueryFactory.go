@@ -13,8 +13,22 @@ type QueryFactory struct {
 	mock.Mock
 }
 
-// Build provides a mock function with given fields: _a0, _a1
-func (_m *QueryFactory) Build(_a0 []byte, _a1 uint) apifarm.Query {
+// BuildMessage provides a mock function with given fields: _a0, _a1
+func (_m *QueryFactory) BuildMessage(_a0 string, _a1 uint) apifarm.Query {
+	ret := _m.Called(_a0, _a1)
+
+	var r0 apifarm.Query
+	if rf, ok := ret.Get(0).(func(string, uint) apifarm.Query); ok {
+		r0 = rf(_a0, _a1)
+	} else {
+		r0 = ret.Get(0).(apifarm.Query)
+	}
+
+	return r0
+}
+
+// BuildResult provides a mock function with given fields: _a0, _a1
+func (_m *QueryFactory) BuildResult(_a0 []byte, _a1 uint) apifarm.Query {
 	ret := _m.Called(_a0, _a1)
 
 	var r0 apifarm.Query

@@ -29,11 +29,7 @@ func TestHandleGetAll200(t *testing.T) {
 	subject := apifarm.NewController(mockService)
 
 	result := []byte{12, 36, 18}
-	query := apifarm.Query{
-		result,
-		0,
-		nil,
-	}
+	query := apifarm.Query{Result: result}
 
 	mockService.On("GetAll").Return(query)
 	mockResponse.On("OkJSON", result)
@@ -54,11 +50,7 @@ func TestHandleGetAll500(t *testing.T) {
 	subject := apifarm.NewController(mockService)
 
 	err := errors.New("query failed")
-	query := apifarm.Query{
-		nil,
-		500,
-		err,
-	}
+	query := apifarm.Query{Error: err, Code: uint(500)}
 
 	mockService.On("GetAll").Return(query)
 	mockResponse.On("Error", err)

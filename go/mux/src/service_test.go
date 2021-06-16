@@ -26,7 +26,7 @@ func TestVideoGameServiceGetAllSuccessful(t *testing.T) {
 
 	mockStorage.On("GetAllVideoGames").Return(storedVideoGames)
 	mockJSON.On("Serialize", storedVideoGames).Return(serializedVideoGames, nil)
-	mockQueryFactory.On("Build", serializedVideoGames, uint(0)).Return(expectedQuery)
+	mockQueryFactory.On("BuildResult", serializedVideoGames, uint(0)).Return(expectedQuery)
 
 	// Act
 	actualQuery := subject.GetAll()
@@ -90,7 +90,34 @@ func TestVideoGameServiceAddSuccessful(t *testing.T) {
 	mockJSON.On("DeserializeVideoGame", reqData).Return(&videoGame, nil)
 	mockStorage.On("AddVideoGame", videoGame).Return(storedVideoGame)
 	mockJSON.On("Serialize", storedVideoGame).Return(serializedVideoGame, nil)
-	mockQueryFactory.On("Build", serializedVideoGame, uint(0)).Return(expectedQuery)
+	mockQueryFactory.On("BuildResult", serializedVideoGame, uint(0)).Return(expectedQuery)
+
+	// Act
+	actualQuery := subject.Add(reqData)
+
+	// Assert
+	assert.Equal(t, expectedQuery, actualQuery)
+	mockStorage.AssertExpectations(t)
+	mockJSON.AssertExpectations(t)
+	mockQueryFactory.AssertExpectations(t)
+}
+
+func TestVideoGameServiceAddNoNameFailure(t *testing.T) {
+	// Arrange
+	mockStorage := new(mocks.DB)
+	mockJSON := new(mocks.DataUtils)
+	mockQueryFactory := new(mocks.QueryFactory)
+
+	subject := apifarm.NewVideoGameServiceWithUtils(mockStorage, mockJSON, mockQueryFactory)
+
+	reqData := []byte{20, 18, 24}
+	videoGame := apifarm.VideoGame{
+		DateReleased: time.Now(),
+	}
+	expectedQuery := apifarm.Query{}
+
+	mockJSON.On("DeserializeVideoGame", reqData).Return(&videoGame, nil)
+	mockQueryFactory.On("BuildMessage", apifarm.VideoGameNameRequired, uint(400)).Return(expectedQuery)
 
 	// Act
 	actualQuery := subject.Add(reqData)
