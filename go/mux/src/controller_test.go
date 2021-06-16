@@ -50,7 +50,7 @@ func TestHandleGetAll500(t *testing.T) {
 	subject := apifarm.NewController(mockService)
 
 	err := errors.New("query failed")
-	query := apifarm.Query{Error: err, Code: uint(500)}
+	query := apifarm.Query{Code: uint(500), Error: err}
 
 	mockService.On("GetAll").Return(query)
 	mockResponse.On("Error", err)
@@ -103,6 +103,31 @@ func TestHandlePost400(t *testing.T) {
 	mockRequest.On("GetBody").Return(body, nil)
 	mockService.On("Add", body).Return(query)
 	mockResponse.On("BadRequestText", queryMessage)
+
+	// Act
+	subject.HandlePost(mockRequest, mockResponse)
+
+	// Assert
+	mockService.AssertExpectations(t)
+	mockRequest.AssertExpectations(t)
+	mockResponse.AssertExpectations(t)
+}
+
+func TestHandlePost500ServiceFailure(t *testing.T) {
+	// Arrange
+	mockService := new(mocks.Service)
+	mockRequest := new(mocks.Request)
+	mockResponse := new(mocks.Response)
+
+	subject := apifarm.NewController(mockService)
+
+	body := []byte{33, 12, 48}
+	err := errors.New("query failed")
+	query := apifarm.Query{Code: uint(500), Error: err}
+
+	mockRequest.On("GetBody").Return(body, nil)
+	mockService.On("Add", body).Return(query)
+	mockResponse.On("Error", err)
 
 	// Act
 	subject.HandlePost(mockRequest, mockResponse)
