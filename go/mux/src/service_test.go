@@ -76,14 +76,20 @@ func TestVideoGameServiceAddSuccessful(t *testing.T) {
 
 	reqData := []byte{20, 18, 24}
 	videoGame := apifarm.VideoGame{
-		Name: "Lady's Quest 3", DateReleased: time.Now(),
+		Name:         "Lady's Quest 3",
+		DateReleased: time.Now(),
+	}
+	storedVideoGame := apifarm.VideoGame{
+		Id:           1,
+		Name:         "Lady's Quest 3",
+		DateReleased: time.Now(),
 	}
 	serializedVideoGame := []byte{23, 19, 18}
 	expectedQuery := apifarm.Query{}
 
-	mockStorage.On("AddVideoGame")
 	mockJSON.On("DeserializeVideoGame", reqData).Return(&videoGame, nil)
-	mockJSON.On("Serialize", videoGame).Return(serializedVideoGame)
+	mockStorage.On("AddVideoGame", videoGame).Return(storedVideoGame)
+	mockJSON.On("Serialize", storedVideoGame).Return(serializedVideoGame, nil)
 	mockQueryFactory.On("Build", serializedVideoGame, uint(0)).Return(expectedQuery)
 
 	// Act

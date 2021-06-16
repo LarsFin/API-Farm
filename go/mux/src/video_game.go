@@ -3,6 +3,7 @@ package apifarm
 import "time"
 
 type VideoGame struct {
+	Id           uint      `json:"id"`
 	Name         string    `json:"name"`
 	Developers   []string  `json:"developers"`
 	Publishers   []string  `json:"publishers"`

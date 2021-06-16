@@ -38,6 +38,12 @@ func (s *VideoGameService) GetAll() Query {
 	return s.qf.Build(b, uint(0))
 }
 
-func (s *VideoGameService) Add([]byte) Query {
-	return Query{}
+func (s *VideoGameService) Add(data []byte) Query {
+	vg, _ := s.json.DeserializeVideoGame(data)
+
+	svg := s.db.AddVideoGame(*vg)
+
+	b, _ := s.json.Serialize(svg)
+
+	return s.qf.Build(b, uint(0))
 }
