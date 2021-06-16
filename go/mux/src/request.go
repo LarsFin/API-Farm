@@ -6,14 +6,14 @@ import (
 )
 
 type Request interface {
-	GetBody() []byte
+	GetBody() ([]byte, error)
 }
 
 type HTTPRequest struct {
 	r *http.Request
 }
 
-func NewHTTPREquest(r *http.Request) *HTTPRequest {
+func NewHTTPRequest(r *http.Request) *HTTPRequest {
 	return &HTTPRequest{
 		r,
 	}

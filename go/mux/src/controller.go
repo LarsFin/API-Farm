@@ -28,5 +28,9 @@ func (c *Controller) HandleGetAll(res Response) {
 }
 
 func (c *Controller) HandlePost(req Request, res Response) {
+	body, _ := req.GetBody()
 
+	query := c.s.Add(body)
+
+	res.CreatedJSON(query.Result)
 }

@@ -10,7 +10,7 @@ type Request struct {
 }
 
 // GetBody provides a mock function with given fields:
-func (_m *Request) GetBody() []byte {
+func (_m *Request) GetBody() ([]byte, error) {
 	ret := _m.Called()
 
 	var r0 []byte
@@ -22,5 +22,12 @@ func (_m *Request) GetBody() []byte {
 		}
 	}
 
-	return r0
+	var r1 error
+	if rf, ok := ret.Get(1).(func() error); ok {
+		r1 = rf()
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
 }

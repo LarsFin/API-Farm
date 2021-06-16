@@ -75,7 +75,7 @@ func TestHandlePost201(t *testing.T) {
 	result := []byte{40, 23, 98}
 	query := apifarm.Query{Result: result}
 
-	mockRequest.On("GetBody").Return(body)
+	mockRequest.On("GetBody").Return(body, nil)
 	mockService.On("Add", body).Return(query)
 	mockResponse.On("CreatedJSON", result)
 
