@@ -31,3 +31,20 @@ func TestInMemoryAddVideoGame(t *testing.T) {
 	assert.Equal(t, expected, got)
 	assert.Contains(t, **videoGames, expected)
 }
+
+func TestInMemoryAddVideoGameIncrementsAndSetsId(t *testing.T) {
+	// Arrange
+	subject, videoGames := apifarm.NewInMemoryForTests()
+
+	// Act
+	videoGame1 := subject.AddVideoGame(apifarm.VideoGame{Name: "VIDEO GAME 1"})
+	videoGame2 := subject.AddVideoGame(apifarm.VideoGame{Name: "VIDEO GAME 2"})
+	videoGame3 := subject.AddVideoGame(apifarm.VideoGame{Name: "VIDEO GAME 3"})
+
+	// Assert
+	assert.Equal(t, videoGame1.Id, uint(1))
+	assert.Equal(t, videoGame2.Id, uint(2))
+	assert.Equal(t, videoGame3.Id, uint(3))
+
+	assert.Len(t, **videoGames, 3)
+}
