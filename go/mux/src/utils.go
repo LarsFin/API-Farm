@@ -69,4 +69,5 @@ type Query struct {
 
 // Messages
 
+const VideoGameDateRequired = "a date_released is required for a video game."
 const VideoGameNameRequired = "A name is required for a video game."

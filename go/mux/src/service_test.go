@@ -112,6 +112,33 @@ func TestVideoGameServiceAddNoNameFailure(t *testing.T) {
 
 	reqData := []byte{20, 18, 24}
 	videoGame := apifarm.VideoGame{
+		Name: "Lady's Quest 3",
+	}
+	expectedQuery := apifarm.Query{}
+
+	mockJSON.On("DeserializeVideoGame", reqData).Return(&videoGame, nil)
+	mockQueryFactory.On("BuildMessage", apifarm.VideoGameDateRequired, uint(400)).Return(expectedQuery)
+
+	// Act
+	actualQuery := subject.Add(reqData)
+
+	// Assert
+	assert.Equal(t, expectedQuery, actualQuery)
+	mockStorage.AssertExpectations(t)
+	mockJSON.AssertExpectations(t)
+	mockQueryFactory.AssertExpectations(t)
+}
+
+func TestVideoGameServiceAddNoDateFailure(t *testing.T) {
+	// Arrange
+	mockStorage := new(mocks.DB)
+	mockJSON := new(mocks.DataUtils)
+	mockQueryFactory := new(mocks.QueryFactory)
+
+	subject := apifarm.NewVideoGameServiceWithUtils(mockStorage, mockJSON, mockQueryFactory)
+
+	reqData := []byte{20, 18, 24}
+	videoGame := apifarm.VideoGame{
 		DateReleased: time.Now(),
 	}
 	expectedQuery := apifarm.Query{}
