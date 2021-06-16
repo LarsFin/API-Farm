@@ -101,3 +101,39 @@ func TestVideoGameServiceAddSuccessful(t *testing.T) {
 	mockJSON.AssertExpectations(t)
 	mockQueryFactory.AssertExpectations(t)
 }
+
+func TestVideoGameServiceAddSerializationFailure(t *testing.T) {
+	// Arrange
+	mockStorage := new(mocks.DB)
+	mockJSON := new(mocks.DataUtils)
+	mockQueryFactory := new(mocks.QueryFactory)
+
+	subject := apifarm.NewVideoGameServiceWithUtils(mockStorage, mockJSON, mockQueryFactory)
+
+	reqData := []byte{20, 18, 24}
+	videoGame := apifarm.VideoGame{
+		Name:         "Lady's Quest 3",
+		DateReleased: time.Now(),
+	}
+	storedVideoGame := apifarm.VideoGame{
+		Id:           1,
+		Name:         "Lady's Quest 3",
+		DateReleased: time.Now(),
+	}
+	err := errors.New("failed to serialize to json")
+	expectedQuery := apifarm.Query{}
+
+	mockJSON.On("DeserializeVideoGame", reqData).Return(&videoGame, nil)
+	mockStorage.On("AddVideoGame", videoGame).Return(storedVideoGame)
+	mockJSON.On("Serialize", storedVideoGame).Return(nil, err)
+	mockQueryFactory.On("Error", err)
+
+	// Act
+	actualQuery := subject.Add(reqData)
+
+	// Assert
+	assert.Equal(t, expectedQuery, actualQuery)
+	mockStorage.AssertExpectations(t)
+	mockJSON.AssertExpectations(t)
+	mockQueryFactory.AssertExpectations(t)
+}
