@@ -5,6 +5,7 @@ import (
 	apifarm "apifarm/src"
 	"errors"
 	"testing"
+	"time"
 
 	"github.com/stretchr/testify/assert"
 )
@@ -31,7 +32,7 @@ func TestVideoGameServiceGetAllSuccessful(t *testing.T) {
 	actualQuery := subject.GetAll()
 
 	// Assert
-	assert.Equal(t, expectedQuery, actualQuery, "they should be equal")
+	assert.Equal(t, expectedQuery, actualQuery)
 	mockStorage.AssertExpectations(t)
 	mockJSON.AssertExpectations(t)
 	mockQueryFactory.AssertExpectations(t)
@@ -57,7 +58,39 @@ func TestVideoGameServiceGetAllSerializationFailure(t *testing.T) {
 	actualQuery := subject.GetAll()
 
 	// Assert
-	assert.Equal(t, expectedQuery, actualQuery, "they should be equal")
+	assert.Equal(t, expectedQuery, actualQuery)
+	mockStorage.AssertExpectations(t)
+	mockJSON.AssertExpectations(t)
+	mockQueryFactory.AssertExpectations(t)
+}
+
+// VideoGameService -> Add
+
+func TestVideoGameServiceAddSuccessful(t *testing.T) {
+	// Arrange
+	mockStorage := new(mocks.DB)
+	mockJSON := new(mocks.DataUtils)
+	mockQueryFactory := new(mocks.QueryFactory)
+
+	subject := apifarm.NewVideoGameServiceWithUtils(mockStorage, mockJSON, mockQueryFactory)
+
+	reqData := []byte{20, 18, 24}
+	videoGame := apifarm.VideoGame{
+		Name: "Lady's Quest 3", DateReleased: time.Now(),
+	}
+	serializedVideoGame := []byte{23, 19, 18}
+	expectedQuery := apifarm.Query{}
+
+	mockStorage.On("AddVideoGame")
+	mockJSON.On("DeserializeVideoGame", reqData).Return(&videoGame, nil)
+	mockJSON.On("Serialize", videoGame).Return(serializedVideoGame)
+	mockQueryFactory.On("Build", serializedVideoGame, uint(0)).Return(expectedQuery)
+
+	// Act
+	actualQuery := subject.Add(reqData)
+
+	// Assert
+	assert.Equal(t, expectedQuery, actualQuery)
 	mockStorage.AssertExpectations(t)
 	mockJSON.AssertExpectations(t)
 	mockQueryFactory.AssertExpectations(t)

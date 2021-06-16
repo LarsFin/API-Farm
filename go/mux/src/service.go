@@ -37,3 +37,7 @@ func (s *VideoGameService) GetAll() Query {
 
 	return s.qf.Build(b, uint(0))
 }
+
+func (s *VideoGameService) Add([]byte) Query {
+	return Query{}
+}

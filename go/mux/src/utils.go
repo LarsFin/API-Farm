@@ -4,6 +4,7 @@ import "encoding/json"
 
 type DataUtils interface {
 	Serialize(interface{}) ([]byte, error)
+	DeserializeVideoGame([]byte) (*VideoGame, error)
 }
 
 type JSON struct {
@@ -11,6 +12,12 @@ type JSON struct {
 
 func (*JSON) Serialize(obj interface{}) ([]byte, error) {
 	return json.Marshal(obj)
+}
+
+func (*JSON) DeserializeVideoGame(data []byte) (*VideoGame, error) {
+	var vg *VideoGame
+	err := json.Unmarshal(data, vg)
+	return vg, err
 }
 
 type QueryFactory interface {
