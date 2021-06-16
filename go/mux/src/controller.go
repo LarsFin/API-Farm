@@ -26,3 +26,7 @@ func (c *Controller) HandleGetAll(res Response) {
 		res.Error(query.Error)
 	}
 }
+
+func (c *Controller) HandlePost(req Request, res Response) {
+
+}

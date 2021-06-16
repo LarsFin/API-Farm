@@ -9,6 +9,11 @@ type Response struct {
 	mock.Mock
 }
 
+// CreatedJSON provides a mock function with given fields: _a0
+func (_m *Response) CreatedJSON(_a0 []byte) {
+	_m.Called(_a0)
+}
+
 // Error provides a mock function with given fields: _a0
 func (_m *Response) Error(_a0 error) {
 	_m.Called(_a0)

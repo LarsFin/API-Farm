@@ -4,6 +4,7 @@ import "time"
 
 type Service interface {
 	GetAll() Query
+	Add([]byte) Query
 }
 
 type VideoGameService struct {
