@@ -126,7 +126,7 @@ func TestVideoGameServiceAddSerializationFailure(t *testing.T) {
 	mockJSON.On("DeserializeVideoGame", reqData).Return(&videoGame, nil)
 	mockStorage.On("AddVideoGame", videoGame).Return(storedVideoGame)
 	mockJSON.On("Serialize", storedVideoGame).Return(nil, err)
-	mockQueryFactory.On("Error", err)
+	mockQueryFactory.On("Error", err).Return(expectedQuery)
 
 	// Act
 	actualQuery := subject.Add(reqData)

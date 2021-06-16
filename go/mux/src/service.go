@@ -43,7 +43,11 @@ func (s *VideoGameService) Add(data []byte) Query {
 
 	svg := s.db.AddVideoGame(*vg)
 
-	b, _ := s.json.Serialize(svg)
+	b, err := s.json.Serialize(svg)
+
+	if err != nil {
+		return s.qf.Error(err)
+	}
 
 	return s.qf.Build(b, uint(0))
 }
