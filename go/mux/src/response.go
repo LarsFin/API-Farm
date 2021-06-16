@@ -6,6 +6,9 @@ type Response interface {
 	OkJSON([]byte)
 	OkText(string)
 	CreatedJSON([]byte)
+
+	BadRequestText(string)
+
 	Error(error)
 }
 
@@ -48,6 +51,17 @@ func (r *HTTPResponse) CreatedJSON(data []byte) {
 
 	(*r.w).WriteHeader(http.StatusCreated)
 	(*r.w).Header().Set("Content-Type", "application/json")
+}
+
+func (r *HTTPResponse) BadRequestText(text string) {
+	_, err := (*r.w).Write([]byte(text))
+
+	if err != nil {
+		http.Error(*r.w, err.Error(), http.StatusInternalServerError)
+	}
+
+	(*r.w).WriteHeader(http.StatusBadRequest)
+	(*r.w).Header().Set("Content-Type", "text/plain")
 }
 
 func (r *HTTPResponse) Error(err error) {

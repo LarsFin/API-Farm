@@ -9,6 +9,11 @@ type Response struct {
 	mock.Mock
 }
 
+// BadRequestText provides a mock function with given fields: _a0
+func (_m *Response) BadRequestText(_a0 string) {
+	_m.Called(_a0)
+}
+
 // CreatedJSON provides a mock function with given fields: _a0
 func (_m *Response) CreatedJSON(_a0 []byte) {
 	_m.Called(_a0)
