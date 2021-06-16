@@ -115,10 +115,11 @@ func TestHandlePost400(t *testing.T) {
 
 func TestHandlePost500BodyReadFailure(t *testing.T) {
 	// Arrange
+	mockService := new(mocks.Service)
 	mockRequest := new(mocks.Request)
 	mockResponse := new(mocks.Response)
 
-	subject := apifarm.NewController(nil)
+	subject := apifarm.NewController(mockService)
 
 	err := errors.New("body read failed")
 

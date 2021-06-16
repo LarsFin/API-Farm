@@ -28,7 +28,12 @@ func (c *Controller) HandleGetAll(res Response) {
 }
 
 func (c *Controller) HandlePost(req Request, res Response) {
-	body, _ := req.GetBody()
+	body, err := req.GetBody()
+
+	if err != nil {
+		res.Error(err)
+		return
+	}
 
 	query := c.s.Add(body)
 
