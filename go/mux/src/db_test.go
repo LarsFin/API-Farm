@@ -18,3 +18,17 @@ func TestInMemoryGetAllVideoGames(t *testing.T) {
 	// Assert
 	assert.Equal(t, expected, got, "they should be equal")
 }
+
+func TestInMemoryAddVideoGame(t *testing.T) {
+	// Arrange
+	videoGames := []apifarm.VideoGame{}
+	subject := apifarm.NewInMemoryWithVideoGames(&videoGames)
+	expected := apifarm.VideoGame{Name: "The Great Gamesby"}
+
+	// Act
+	got := subject.AddVideoGame(expected)
+
+	// Assert
+	assert.Equal(t, expected, got)
+	assert.Contains(t, videoGames, expected)
+}

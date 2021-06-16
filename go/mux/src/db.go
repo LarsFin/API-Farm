@@ -2,6 +2,7 @@ package apifarm
 
 type DB interface {
 	GetAllVideoGames() []VideoGame
+	AddVideoGame(VideoGame) VideoGame
 }
 
 type InMemory struct {
@@ -20,6 +21,10 @@ func NewInMemoryWithVideoGames(videoGames *[]VideoGame) *InMemory {
 	}
 }
 
-func (db InMemory) GetAllVideoGames() []VideoGame {
+func (db *InMemory) GetAllVideoGames() []VideoGame {
 	return *db.videoGames
+}
+
+func (db *InMemory) AddVideoGame(vg VideoGame) VideoGame {
+	return VideoGame{}
 }
