@@ -21,7 +21,11 @@ func main() {
 
 	r.HandleFunc("/video_games", func(w http.ResponseWriter, r *http.Request) {
 		controller.HandleGetAll(apifarm.NewHTTPResponse(&w))
-	})
+	}).Methods(http.MethodGet)
+
+	r.HandleFunc("/video_games", func(w http.ResponseWriter, r *http.Request) {
+		controller.HandlePost(apifarm.NewHTTPRequest(r), apifarm.NewHTTPResponse(&w))
+	}).Methods(http.MethodPost)
 
 	log.Fatal(http.ListenAndServe(":8080", r))
 }

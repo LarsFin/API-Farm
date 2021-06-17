@@ -26,3 +26,23 @@ func (c *Controller) HandleGetAll(res Response) {
 		res.Error(query.Error)
 	}
 }
+
+func (c *Controller) HandlePost(req Request, res Response) {
+	body, err := req.GetBody()
+
+	if err != nil {
+		res.Error(err)
+		return
+	}
+
+	query := c.s.Add(body)
+
+	switch query.Code {
+	case 0:
+		res.CreatedJSON(query.Result)
+	case http.StatusBadRequest:
+		res.BadRequestText(query.Message)
+	case http.StatusInternalServerError:
+		res.Error(query.Error)
+	}
+}

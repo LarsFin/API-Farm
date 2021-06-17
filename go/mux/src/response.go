@@ -5,6 +5,10 @@ import "net/http"
 type Response interface {
 	OkJSON([]byte)
 	OkText(string)
+	CreatedJSON([]byte)
+
+	BadRequestText(string)
+
 	Error(error)
 }
 
@@ -18,24 +22,38 @@ func NewHTTPResponse(w *http.ResponseWriter) *HTTPResponse {
 	}
 }
 
-func (r *HTTPResponse) OkJSON(data []byte) {
-	_, err := (*r.w).Write(data)
+func write(w *http.ResponseWriter, data []byte) {
+	_, err := (*w).Write(data)
 
 	if err != nil {
-		http.Error(*r.w, err.Error(), http.StatusInternalServerError)
+		http.Error(*w, err.Error(), http.StatusInternalServerError)
 	}
+}
 
+func (r *HTTPResponse) OkJSON(data []byte) {
 	(*r.w).Header().Set("Content-Type", "application/json")
+
+	write(r.w, data)
 }
 
 func (r *HTTPResponse) OkText(text string) {
-	_, err := (*r.w).Write([]byte(text))
-
-	if err != nil {
-		http.Error(*r.w, err.Error(), http.StatusInternalServerError)
-	}
-
 	(*r.w).Header().Set("Content-Type", "text/plain")
+
+	write(r.w, []byte(text))
+}
+
+func (r *HTTPResponse) CreatedJSON(data []byte) {
+	(*r.w).Header().Set("Content-Type", "application/json")
+	(*r.w).WriteHeader(http.StatusCreated)
+
+	write(r.w, data)
+}
+
+func (r *HTTPResponse) BadRequestText(text string) {
+	(*r.w).Header().Set("Content-Type", "text/plain")
+	(*r.w).WriteHeader(http.StatusBadRequest)
+
+	write(r.w, []byte(text))
 }
 
 func (r *HTTPResponse) Error(err error) {
