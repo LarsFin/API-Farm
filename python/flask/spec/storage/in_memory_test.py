@@ -31,3 +31,14 @@ def test_should_get_video_game_from_array():
 
     # Assert
     assert retrieved_video_game == video_game_2
+
+def test_should_return_nil_when_no_video_game_has_passed_id():
+    # Arrange
+    mock = Mock(id = 1)
+    video_game = mock
+
+    # Act
+    retrieved_video_game = in_memory.get
+
+    # Assert
+    assert retrieved_video_game == nil
