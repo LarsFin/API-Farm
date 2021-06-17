@@ -1,6 +1,39 @@
 package apifarm
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"fmt"
+	"strings"
+	"time"
+)
+
+// Custom Time
+
+type CustomTime struct {
+	time.Time
+}
+
+const layout = "02/01/2006"
+
+func (ct *CustomTime) UnmarshalJSON(b []byte) error {
+	s := strings.Trim(string(b), "\"")
+
+	if s == "null" {
+		ct.Time = time.Time{}
+		return nil
+	}
+
+	t, err := time.Parse(layout, s)
+	ct.Time = t
+
+	return err
+}
+
+func (ct *CustomTime) MarshalJSON() ([]byte, error) {
+	s := fmt.Sprintf("\"%s\"", ct.Time.Format(layout))
+
+	return []byte(s), nil
+}
 
 // Data Utilities
 
@@ -17,9 +50,10 @@ func (*JSON) Serialize(obj interface{}) ([]byte, error) {
 }
 
 func (*JSON) DeserializeVideoGame(data []byte) (*VideoGame, error) {
-	var vg *VideoGame
-	err := json.Unmarshal(data, vg)
-	return vg, err
+	var vg VideoGame
+	err := json.Unmarshal(data, &vg)
+
+	return &vg, err
 }
 
 // Factories

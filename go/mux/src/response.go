@@ -31,29 +31,29 @@ func write(w *http.ResponseWriter, data []byte) {
 }
 
 func (r *HTTPResponse) OkJSON(data []byte) {
-	write(r.w, data)
-
 	(*r.w).Header().Set("Content-Type", "application/json")
+
+	write(r.w, data)
 }
 
 func (r *HTTPResponse) OkText(text string) {
-	write(r.w, []byte(text))
-
 	(*r.w).Header().Set("Content-Type", "text/plain")
+
+	write(r.w, []byte(text))
 }
 
 func (r *HTTPResponse) CreatedJSON(data []byte) {
-	write(r.w, data)
-
-	(*r.w).WriteHeader(http.StatusCreated)
 	(*r.w).Header().Set("Content-Type", "application/json")
+	(*r.w).WriteHeader(http.StatusCreated)
+
+	write(r.w, data)
 }
 
 func (r *HTTPResponse) BadRequestText(text string) {
-	write(r.w, []byte(text))
-
-	(*r.w).WriteHeader(http.StatusBadRequest)
 	(*r.w).Header().Set("Content-Type", "text/plain")
+	(*r.w).WriteHeader(http.StatusBadRequest)
+
+	write(r.w, []byte(text))
 }
 
 func (r *HTTPResponse) Error(err error) {

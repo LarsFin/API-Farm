@@ -77,12 +77,12 @@ func TestVideoGameServiceAddSuccessful(t *testing.T) {
 	reqData := []byte{20, 18, 24}
 	videoGame := apifarm.VideoGame{
 		Name:         "Lady's Quest 3",
-		DateReleased: time.Now(),
+		DateReleased: apifarm.CustomTime{time.Now()},
 	}
 	storedVideoGame := apifarm.VideoGame{
 		Id:           1,
 		Name:         "Lady's Quest 3",
-		DateReleased: time.Now(),
+		DateReleased: apifarm.CustomTime{time.Now()},
 	}
 	serializedVideoGame := []byte{23, 19, 18}
 	expectedQuery := apifarm.Query{}
@@ -112,12 +112,12 @@ func TestVideoGameServiceAddNoNameFailure(t *testing.T) {
 
 	reqData := []byte{20, 18, 24}
 	videoGame := apifarm.VideoGame{
-		Name: "Lady's Quest 3",
+		DateReleased: apifarm.CustomTime{time.Now()},
 	}
 	expectedQuery := apifarm.Query{}
 
 	mockJSON.On("DeserializeVideoGame", reqData).Return(&videoGame, nil)
-	mockQueryFactory.On("BuildMessage", apifarm.VideoGameDateRequired, uint(400)).Return(expectedQuery)
+	mockQueryFactory.On("BuildMessage", apifarm.VideoGameNameRequired, uint(400)).Return(expectedQuery)
 
 	// Act
 	actualQuery := subject.Add(reqData)
@@ -139,12 +139,12 @@ func TestVideoGameServiceAddNoDateFailure(t *testing.T) {
 
 	reqData := []byte{20, 18, 24}
 	videoGame := apifarm.VideoGame{
-		DateReleased: time.Now(),
+		Name: "Lady's Quest 3",
 	}
 	expectedQuery := apifarm.Query{}
 
 	mockJSON.On("DeserializeVideoGame", reqData).Return(&videoGame, nil)
-	mockQueryFactory.On("BuildMessage", apifarm.VideoGameNameRequired, uint(400)).Return(expectedQuery)
+	mockQueryFactory.On("BuildMessage", apifarm.VideoGameDateRequired, uint(400)).Return(expectedQuery)
 
 	// Act
 	actualQuery := subject.Add(reqData)
@@ -167,12 +167,12 @@ func TestVideoGameServiceAddSerializationFailure(t *testing.T) {
 	reqData := []byte{20, 18, 24}
 	videoGame := apifarm.VideoGame{
 		Name:         "Lady's Quest 3",
-		DateReleased: time.Now(),
+		DateReleased: apifarm.CustomTime{time.Now()},
 	}
 	storedVideoGame := apifarm.VideoGame{
 		Id:           1,
 		Name:         "Lady's Quest 3",
-		DateReleased: time.Now(),
+		DateReleased: apifarm.CustomTime{time.Now()},
 	}
 	err := errors.New("failed to serialize to json")
 	expectedQuery := apifarm.Query{}

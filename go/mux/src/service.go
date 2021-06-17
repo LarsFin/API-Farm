@@ -1,6 +1,8 @@
 package apifarm
 
-import "time"
+import (
+	"time"
+)
 
 type Service interface {
 	GetAll() Query
@@ -42,14 +44,18 @@ func (s *VideoGameService) GetAll() Query {
 }
 
 func (s *VideoGameService) Add(data []byte) Query {
-	vg, _ := s.json.DeserializeVideoGame(data)
+	vg, err := s.json.DeserializeVideoGame(data)
+
+	if err != nil {
+		s.qf.Error(err)
+	}
 
 	if len(vg.Name) == 0 {
 		return s.qf.BuildMessage(VideoGameNameRequired, uint(400))
 	}
 
 	dt := time.Time{}
-	if vg.DateReleased == dt {
+	if vg.DateReleased.Time == dt {
 		return s.qf.BuildMessage(VideoGameDateRequired, uint(400))
 	}
 
