@@ -112,11 +112,36 @@ func TestVideoGameServiceAddInvalidDateFailure(t *testing.T) {
 
 	invalidTime := "2006/01/02"
 	reqData := []byte{28, 44, 21}
-	err := &(time.ParseError{Value: invalidTime})
+	err := &time.ParseError{Value: invalidTime}
 	expectedQuery := apifarm.Query{}
 
 	mockJSON.On("DeserializeVideoGame", reqData).Return(nil, err)
 	mockQueryFactory.On("BuildMessage", apifarm.VideoGameInvalidDate(invalidTime), uint(400)).Return(expectedQuery)
+
+	// Act
+	actualQuery := subject.Add(reqData)
+
+	// Assert
+	assert.Equal(t, expectedQuery, actualQuery)
+	mockJSON.AssertExpectations(t)
+	mockQueryFactory.AssertExpectations(t)
+}
+
+func TestVideoGameServiceAddInvalidAttributeFailure(t *testing.T) {
+	// Arrange
+	mockStorage := new(mocks.DB)
+	mockJSON := new(mocks.DataUtils)
+	mockQueryFactory := new(mocks.QueryFactory)
+
+	subject := apifarm.NewVideoGameServiceWithUtils(mockStorage, mockJSON, mockQueryFactory)
+
+	attribute := "testers"
+	reqData := []byte{87, 20, 56}
+	err := &apifarm.InvalidAttributeError{Attribute: attribute}
+	expectedQuery := apifarm.Query{}
+
+	mockJSON.On("DeserializeVideoGame", reqData).Return(nil, err)
+	mockQueryFactory.On("BuildMessage", apifarm.VideoGameInvalidAttribute(attribute), uint(400)).Return(expectedQuery)
 
 	// Act
 	actualQuery := subject.Add(reqData)

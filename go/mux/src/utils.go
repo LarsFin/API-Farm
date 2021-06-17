@@ -3,6 +3,7 @@ package apifarm
 import (
 	"encoding/json"
 	"fmt"
+	"reflect"
 	"strings"
 	"time"
 )
@@ -51,9 +52,45 @@ func (*JSON) Serialize(obj interface{}) ([]byte, error) {
 
 func (*JSON) DeserializeVideoGame(data []byte) (*VideoGame, error) {
 	var vg VideoGame
-	err := json.Unmarshal(data, &vg)
+
+	var m map[string]json.RawMessage
+	err := json.Unmarshal(data, &m)
+
+	if err != nil {
+		return &vg, err
+	}
+
+	t := reflect.TypeOf(vg)
+
+	for k := range m {
+		if k == "id" || !hasFieldWithJSONTag(t, k) {
+			return &vg, &InvalidAttributeError{Attribute: k}
+		}
+	}
+
+	err = json.Unmarshal(data, &vg)
 
 	return &vg, err
+}
+
+func hasFieldWithJSONTag(t reflect.Type, jt string) bool {
+	for i := 0; i < t.NumField(); i++ {
+		if t.Field(i).Tag.Get("json") == jt {
+			return true
+		}
+	}
+
+	return false
+}
+
+// Errors
+
+type InvalidAttributeError struct {
+	Attribute string
+}
+
+func (err *InvalidAttributeError) Error() string {
+	return VideoGameInvalidAttribute(err.Attribute)
 }
 
 // Factories
@@ -106,6 +143,10 @@ type Query struct {
 const InvalidJSON = "Invalid JSON in body."
 const VideoGameDateRequired = "a date_released is required for a video game."
 const VideoGameNameRequired = "A name is required for a video game."
+
+func VideoGameInvalidAttribute(invalidAttribute string) string {
+	return fmt.Sprintf("The provided data has an invalid attribute '%s'.", invalidAttribute)
+}
 
 func VideoGameInvalidDate(invalidDate string) string {
 	return fmt.Sprintf("The provided date_released '%s' is invalid.", invalidDate)
