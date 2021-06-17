@@ -140,7 +140,7 @@ func TestVideoGameServiceAddDeserializationFailure(t *testing.T) {
 	expectedQuery := apifarm.Query{}
 
 	mockJSON.On("DeserializeVideoGame", reqData).Return(nil, err)
-	mockQueryFactory.On("Error", err).Return(expectedQuery)
+	mockQueryFactory.On("BuildMessage", apifarm.InvalidJSON, uint(400)).Return(expectedQuery)
 
 	// Act
 	actualQuery := subject.Add(reqData)
