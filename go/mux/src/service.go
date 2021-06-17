@@ -1,6 +1,7 @@
 package apifarm
 
 import (
+	"net/http"
 	"time"
 )
 
@@ -47,24 +48,24 @@ func (s *VideoGameService) Add(data []byte) Query {
 	vg, err := s.json.DeserializeVideoGame(data)
 
 	if err != nil {
-		switch err.(type) {
+		switch t := err.(type) {
 		case *InvalidAttributeError:
-			return s.qf.BuildMessage(err.Error(), uint(400))
+			return s.qf.BuildMessage(t.Error(), http.StatusBadRequest)
 		case *time.ParseError:
-			msg := VideoGameInvalidDate(err.(*time.ParseError).Value)
-			return s.qf.BuildMessage(msg, uint(400))
+			msg := VideoGameInvalidDate(t.Value)
+			return s.qf.BuildMessage(msg, http.StatusBadRequest)
 		default:
-			return s.qf.BuildMessage(InvalidJSON, uint(400))
+			return s.qf.BuildMessage(InvalidJSON, http.StatusBadRequest)
 		}
 	}
 
 	if len(vg.Name) == 0 {
-		return s.qf.BuildMessage(VideoGameNameRequired, uint(400))
+		return s.qf.BuildMessage(VideoGameNameRequired, http.StatusBadRequest)
 	}
 
 	dt := time.Time{}
 	if vg.DateReleased.Time == dt {
-		return s.qf.BuildMessage(VideoGameDateRequired, uint(400))
+		return s.qf.BuildMessage(VideoGameDateRequired, http.StatusBadRequest)
 	}
 
 	svg := s.db.AddVideoGame(*vg)

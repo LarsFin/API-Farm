@@ -125,7 +125,7 @@ func (*queryFactory) BuildMessage(msg string, code uint) Query {
 func (*queryFactory) Error(err error) Query {
 	return Query{
 		nil,
-		"An unforseen error occurred.",
+		"An unforeseen error occurred.",
 		500,
 		err,
 	}

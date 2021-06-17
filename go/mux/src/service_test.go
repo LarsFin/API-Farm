@@ -80,7 +80,7 @@ func TestVideoGameServiceAddSuccessful(t *testing.T) {
 		DateReleased: apifarm.CustomTime{time.Now()},
 	}
 	storedVideoGame := apifarm.VideoGame{
-		Id:           1,
+		ID:           1,
 		Name:         "Lady's Quest 3",
 		DateReleased: apifarm.CustomTime{time.Now()},
 	}
@@ -244,7 +244,7 @@ func TestVideoGameServiceAddSerializationFailure(t *testing.T) {
 		DateReleased: apifarm.CustomTime{time.Now()},
 	}
 	storedVideoGame := apifarm.VideoGame{
-		Id:           1,
+		ID:           1,
 		Name:         "Lady's Quest 3",
 		DateReleased: apifarm.CustomTime{time.Now()},
 	}

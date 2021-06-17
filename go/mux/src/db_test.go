@@ -23,7 +23,7 @@ func TestInMemoryAddVideoGame(t *testing.T) {
 	// Arrange
 	subject, videoGames := apifarm.NewInMemoryForTests()
 	videoGame := apifarm.VideoGame{Name: "The Great Gamesby"}
-	expected := apifarm.VideoGame{Id: uint(1), Name: "The Great Gamesby"}
+	expected := apifarm.VideoGame{ID: uint(1), Name: "The Great Gamesby"}
 
 	// Act
 	got := subject.AddVideoGame(videoGame)
@@ -43,9 +43,9 @@ func TestInMemoryAddVideoGameIncrementsAndSetsId(t *testing.T) {
 	videoGame3 := subject.AddVideoGame(apifarm.VideoGame{Name: "VIDEO GAME 3"})
 
 	// Assert
-	assert.Equal(t, videoGame1.Id, uint(1))
-	assert.Equal(t, videoGame2.Id, uint(2))
-	assert.Equal(t, videoGame3.Id, uint(3))
+	assert.Equal(t, videoGame1.ID, uint(1))
+	assert.Equal(t, videoGame2.ID, uint(2))
+	assert.Equal(t, videoGame3.ID, uint(3))
 
 	assert.Len(t, **videoGames, 3)
 }

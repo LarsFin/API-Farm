@@ -34,7 +34,7 @@ func (db *InMemory) GetAllVideoGames() []VideoGame {
 
 func (db *InMemory) AddVideoGame(vg VideoGame) VideoGame {
 	db.idCounter++
-	vg.Id = db.idCounter
+	vg.ID = db.idCounter
 
 	vgs := append(*db.videoGames, vg)
 	db.videoGames = &vgs

@@ -1,7 +1,7 @@
 package apifarm
 
 type VideoGame struct {
-	Id           uint       `json:"id"`
+	ID           uint       `json:"id"`
 	Name         string     `json:"name"`
 	Developers   []string   `json:"developers"`
 	Publishers   []string   `json:"publishers"`
