@@ -47,7 +47,7 @@ func (s *VideoGameService) Add(data []byte) Query {
 	vg, err := s.json.DeserializeVideoGame(data)
 
 	if err != nil {
-		s.qf.Error(err)
+		return s.qf.Error(err)
 	}
 
 	if len(vg.Name) == 0 {

@@ -102,6 +102,30 @@ func TestVideoGameServiceAddSuccessful(t *testing.T) {
 	mockQueryFactory.AssertExpectations(t)
 }
 
+func TestVideoGameServiceDeserializationFailure(t *testing.T) {
+	// Arrange
+	mockStorage := new(mocks.DB)
+	mockJSON := new(mocks.DataUtils)
+	mockQueryFactory := new(mocks.QueryFactory)
+
+	subject := apifarm.NewVideoGameServiceWithUtils(mockStorage, mockJSON, mockQueryFactory)
+
+	reqData := []byte{35, 34, 12}
+	err := errors.New("failed to deserialize")
+	expectedQuery := apifarm.Query{}
+
+	mockJSON.On("DeserializeVideoGame", reqData).Return(nil, err)
+	mockQueryFactory.On("Error", err).Return(expectedQuery)
+
+	// Act
+	actualQuery := subject.Add(reqData)
+
+	// Assert
+	assert.Equal(t, expectedQuery, actualQuery)
+	mockJSON.AssertExpectations(t)
+	mockQueryFactory.AssertExpectations(t)
+}
+
 func TestVideoGameServiceAddNoNameFailure(t *testing.T) {
 	// Arrange
 	mockStorage := new(mocks.DB)
