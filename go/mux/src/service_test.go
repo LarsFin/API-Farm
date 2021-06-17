@@ -116,7 +116,7 @@ func TestVideoGameServiceAddInvalidDateFailure(t *testing.T) {
 	expectedQuery := apifarm.Query{}
 
 	mockJSON.On("DeserializeVideoGame", reqData).Return(nil, err)
-	mockQueryFactory.On("BuildMessage", apifarm.VideoGameInvalidDate(invalidTime)).Return(expectedQuery)
+	mockQueryFactory.On("BuildMessage", apifarm.VideoGameInvalidDate(invalidTime), uint(400)).Return(expectedQuery)
 
 	// Act
 	actualQuery := subject.Add(reqData)

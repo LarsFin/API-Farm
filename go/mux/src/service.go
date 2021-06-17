@@ -47,7 +47,13 @@ func (s *VideoGameService) Add(data []byte) Query {
 	vg, err := s.json.DeserializeVideoGame(data)
 
 	if err != nil {
-		return s.qf.Error(err)
+		switch err.(type) {
+		case *time.ParseError:
+			msg := VideoGameInvalidDate(err.(*time.ParseError).Value)
+			return s.qf.BuildMessage(msg, uint(400))
+		default:
+			return s.qf.Error(err)
+		}
 	}
 
 	if len(vg.Name) == 0 {
