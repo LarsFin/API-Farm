@@ -48,6 +48,8 @@ func (s *VideoGameService) Add(data []byte) Query {
 
 	if err != nil {
 		switch err.(type) {
+		case *InvalidAttributeError:
+			return s.qf.BuildMessage(err.Error(), uint(400))
 		case *time.ParseError:
 			msg := VideoGameInvalidDate(err.(*time.ParseError).Value)
 			return s.qf.BuildMessage(msg, uint(400))
