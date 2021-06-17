@@ -105,3 +105,7 @@ type Query struct {
 
 const VideoGameDateRequired = "a date_released is required for a video game."
 const VideoGameNameRequired = "A name is required for a video game."
+
+func VideoGameInvalidDate(invalidDate string) string {
+	return fmt.Sprintf("The provided date_released '%s' is invalid.", invalidDate)
+}

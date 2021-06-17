@@ -102,7 +102,32 @@ func TestVideoGameServiceAddSuccessful(t *testing.T) {
 	mockQueryFactory.AssertExpectations(t)
 }
 
-func TestVideoGameServiceDeserializationFailure(t *testing.T) {
+func TestVideoGameServiceAddInvalidDateFailure(t *testing.T) {
+	// Arrange
+	mockStorage := new(mocks.DB)
+	mockJSON := new(mocks.DataUtils)
+	mockQueryFactory := new(mocks.QueryFactory)
+
+	subject := apifarm.NewVideoGameServiceWithUtils(mockStorage, mockJSON, mockQueryFactory)
+
+	invalidTime := "2006/01/02"
+	reqData := []byte{28, 44, 21}
+	err := &(time.ParseError{Value: invalidTime})
+	expectedQuery := apifarm.Query{}
+
+	mockJSON.On("DeserializeVideoGame", reqData).Return(nil, err)
+	mockQueryFactory.On("BuildMessage", apifarm.VideoGameInvalidDate(invalidTime)).Return(expectedQuery)
+
+	// Act
+	actualQuery := subject.Add(reqData)
+
+	// Assert
+	assert.Equal(t, expectedQuery, actualQuery)
+	mockJSON.AssertExpectations(t)
+	mockQueryFactory.AssertExpectations(t)
+}
+
+func TestVideoGameServiceAddDeserializationFailure(t *testing.T) {
 	// Arrange
 	mockStorage := new(mocks.DB)
 	mockJSON := new(mocks.DataUtils)
