@@ -52,7 +52,7 @@ func (s *VideoGameService) Add(data []byte) Query {
 			msg := VideoGameInvalidDate(err.(*time.ParseError).Value)
 			return s.qf.BuildMessage(msg, uint(400))
 		default:
-			return s.qf.Error(err)
+			return s.qf.BuildMessage(InvalidJSON, uint(400))
 		}
 	}
 
