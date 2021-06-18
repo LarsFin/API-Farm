@@ -7,6 +7,25 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+func TestInMemoryGetVideoGame(t *testing.T) {
+	// Arrange
+	const id = 5
+	subject, videoGames := apifarm.NewInMemoryForTests()
+	expected := apifarm.VideoGame{ID: id}
+	includingVideoGames := []apifarm.VideoGame{
+		{ID: 2},
+		expected,
+		{ID: 7},
+	}
+	*videoGames = &includingVideoGames
+
+	// Act
+	got := subject.GetVideoGame(id)
+
+	// Assert
+	assert.Equal(t, expected, got)
+}
+
 func TestInMemoryGetAllVideoGames(t *testing.T) {
 	// Arrange
 	subject, videoGames := apifarm.NewInMemoryForTests()
@@ -16,7 +35,7 @@ func TestInMemoryGetAllVideoGames(t *testing.T) {
 	got := subject.GetAllVideoGames()
 
 	// Assert
-	assert.Equal(t, expected, got, "they should be equal")
+	assert.Equal(t, expected, got)
 }
 
 func TestInMemoryAddVideoGame(t *testing.T) {
