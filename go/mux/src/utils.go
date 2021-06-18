@@ -173,3 +173,7 @@ func VideoGameInvalidAttribute(invalidAttribute string) string {
 func VideoGameInvalidDate(invalidDate string) string {
 	return fmt.Sprintf("The provided date_released '%s' is invalid.", invalidDate)
 }
+
+func VideoGameNotFound(id uint) string {
+	return fmt.Sprintf("No video game with id '%d' could be found.", id)
+}
