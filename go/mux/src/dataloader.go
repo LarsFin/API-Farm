@@ -24,5 +24,9 @@ func NewJSONFileLoaderWithUtils(json DataUtils, f FileUtils) *JSONFileLoader {
 }
 
 func (loader *JSONFileLoader) Load(p string) []VideoGame {
-	return []VideoGame{}
+	b, _ := loader.f.Read(p)
+
+	vgs, _ := loader.json.DeserializeVideoGames(b)
+
+	return *vgs
 }

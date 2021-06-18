@@ -20,7 +20,7 @@ func TestJSONFileLoaderLoadSuccessful(t *testing.T) {
 	expected := []apifarm.VideoGame{}
 
 	mockFileUtils.On("Read", path).Return(data, nil)
-	mockJSON.On("DeserializeVideoGames", data).Return(expected, nil)
+	mockJSON.On("DeserializeVideoGames", data).Return(&expected, nil)
 
 	// Act
 	actual := subject.Load(path)
