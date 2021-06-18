@@ -6,6 +6,7 @@ import (
 )
 
 type Service interface {
+	Get(uint) Query
 	GetAll() Query
 	Add([]byte) Query
 }

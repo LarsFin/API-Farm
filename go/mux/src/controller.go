@@ -16,6 +16,10 @@ func (c *Controller) HandlePing(res Response) {
 	res.OkText("pong")
 }
 
+func (c *Controller) HandleGet(req Request, res Response) {
+
+}
+
 func (c *Controller) HandleGetAll(res Response) {
 	query := c.s.GetAll()
 

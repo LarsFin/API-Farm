@@ -21,6 +21,30 @@ func TestHandlePing(t *testing.T) {
 	mockResponse.AssertExpectations(t)
 }
 
+func TestHandleGet200(t *testing.T) {
+	// Arrange
+	mockService := new(mocks.Service)
+	mockRequest := new(mocks.Request)
+	mockResponse := new(mocks.Response)
+
+	subject := apifarm.NewController(mockService)
+
+	result := []byte{5, 16, 49}
+	query := apifarm.Query{Result: result}
+
+	mockRequest.On("GetParam", "id").Return("5")
+	mockService.On("Get", 5).Return(query)
+	mockResponse.On("OkJSON", result)
+
+	// Act
+	subject.HandleGet(mockRequest, mockResponse)
+
+	// Assert
+	mockService.AssertExpectations(t)
+	mockRequest.AssertExpectations(t)
+	mockResponse.AssertExpectations(t)
+}
+
 func TestHandleGetAll200(t *testing.T) {
 	// Arrange
 	mockService := new(mocks.Service)
