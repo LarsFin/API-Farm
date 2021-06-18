@@ -47,19 +47,19 @@ func (c *Controller) HandlePost(req Request, res Response) {
 	}
 }
 
-type ApiTestingController struct {
+type APITestingController struct {
 	dl DataLoader
 }
 
 const SampleDataPath = "./data.json"
 
-func NewApiTestingController(dl DataLoader) *ApiTestingController {
-	return &ApiTestingController{
+func NewAPITestingController(dl DataLoader) *APITestingController {
+	return &APITestingController{
 		dl,
 	}
 }
 
-func (c *ApiTestingController) HandleTestSetup(res Response) {
+func (c *APITestingController) HandleTestSetup(res Response) {
 	query := c.dl.Load(SampleDataPath)
 
 	if query.Code == http.StatusInternalServerError {

@@ -9,6 +9,8 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+const path = "PATH TO DATA FILE"
+
 func TestJSONFileLoaderLoadSuccessful(t *testing.T) {
 	// Arrange
 	mockStorage := new(mocks.DB)
@@ -18,7 +20,6 @@ func TestJSONFileLoaderLoadSuccessful(t *testing.T) {
 
 	subject := apifarm.NewJSONFileLoaderWithUtils(mockStorage, mockJSON, mockFileUtils, mockQueryFactory)
 
-	path := "PATH TO DATA FILE"
 	data := []byte{12, 8, 29}
 	vg1 := apifarm.VideoGame{Name: "Conquer Rome I"}
 	vg2 := apifarm.VideoGame{Name: "Conquer Rome II"}
@@ -52,7 +53,6 @@ func TestJSONFileLoaderLoadFileReadFailure(t *testing.T) {
 
 	subject := apifarm.NewJSONFileLoaderWithUtils(mockStorage, mockJSON, mockFileUtils, mockQueryFactory)
 
-	path := "PATH TO DATA FILE"
 	err := errors.New("failed to read file")
 	expectedQuery := apifarm.Query{}
 
@@ -78,7 +78,6 @@ func TestJSONFileLoaderLoadDeserializeFailure(t *testing.T) {
 
 	subject := apifarm.NewJSONFileLoaderWithUtils(mockStorage, mockJSON, mockFileUtils, mockQueryFactory)
 
-	path := "PATH TO DATA FILE"
 	data := []byte{12, 9, 34}
 	err := errors.New("failed to deserialize")
 	expectedQuery := apifarm.Query{}

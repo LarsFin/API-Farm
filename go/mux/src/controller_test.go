@@ -164,7 +164,7 @@ func TestHandleTestSetup200(t *testing.T) {
 	mockDataLoader := new(mocks.DataLoader)
 	mockResponse := new(mocks.Response)
 
-	subject := apifarm.NewApiTestingController(mockDataLoader)
+	subject := apifarm.NewAPITestingController(mockDataLoader)
 
 	message := "SUCCESS MESSAGE"
 	query := apifarm.Query{Message: message}
@@ -185,7 +185,7 @@ func TestHandleTestSetup500(t *testing.T) {
 	mockDataLoader := new(mocks.DataLoader)
 	mockResponse := new(mocks.Response)
 
-	subject := apifarm.NewApiTestingController(mockDataLoader)
+	subject := apifarm.NewAPITestingController(mockDataLoader)
 
 	err := errors.New("query failed")
 	query := apifarm.Query{Code: uint(500), Error: err}

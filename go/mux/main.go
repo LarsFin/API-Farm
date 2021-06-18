@@ -14,7 +14,7 @@ var controller = apifarm.NewController(service)
 
 // api testing entities
 var dataLoader = apifarm.NewJSONFileLoader(storage)
-var apiTestingController = apifarm.NewApiTestingController(dataLoader)
+var apiTestingController = apifarm.NewAPITestingController(dataLoader)
 
 func main() {
 	r := mux.NewRouter()
