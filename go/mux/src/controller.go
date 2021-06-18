@@ -62,5 +62,10 @@ func NewApiTestingController(dl DataLoader) *ApiTestingController {
 func (c *ApiTestingController) HandleTestSetup(res Response) {
 	query := c.dl.Load(SampleDataPath)
 
+	if query.Code == http.StatusInternalServerError {
+		res.Error(query.Error)
+		return
+	}
+
 	res.OkText(query.Message)
 }
