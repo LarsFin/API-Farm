@@ -29,6 +29,12 @@ func NewInMemoryForTests() (*InMemory, **[]VideoGame) {
 }
 
 func (db *InMemory) GetVideoGame(id uint) VideoGame {
+	for _, vg := range *db.videoGames {
+		if vg.ID == id {
+			return vg
+		}
+	}
+
 	return VideoGame{}
 }
 
