@@ -30,7 +30,11 @@ func NewJSONFileLoaderWithUtils(storage DB, json DataUtils, f FileUtils, qf Quer
 }
 
 func (loader *JSONFileLoader) Load(p string) Query {
-	b, _ := loader.f.Read(p)
+	b, err := loader.f.Read(p)
+
+	if err != nil {
+		return loader.qf.Error(err)
+	}
 
 	vgs, _ := loader.json.DeserializeVideoGames(b)
 
