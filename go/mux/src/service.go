@@ -32,6 +32,10 @@ func NewVideoGameServiceWithUtils(db DB, json DataUtils, qf QueryFactory) *Video
 	}
 }
 
+func (s *VideoGameService) Get(id uint) Query {
+	return Query{}
+}
+
 func (s *VideoGameService) GetAll() Query {
 	storedVideoGames := s.db.GetAllVideoGames()
 

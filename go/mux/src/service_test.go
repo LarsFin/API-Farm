@@ -10,6 +10,35 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+// VideoGameService -> Get
+
+func TestVideoGameServiceGetSuccessful(t *testing.T) {
+	// Arrange
+	mockStorage := new(mocks.DB)
+	mockJSON := new(mocks.DataUtils)
+	mockQueryFactory := new(mocks.QueryFactory)
+
+	subject := apifarm.NewVideoGameServiceWithUtils(mockStorage, mockJSON, mockQueryFactory)
+
+	const id = uint(5)
+	storedVideoGame := apifarm.VideoGame{Name: "Autotron 95"}
+	serializedVideoGame := []byte{12, 44, 44}
+	expectedQuery := apifarm.Query{}
+
+	mockStorage.On("GetVideoGame", id).Return(&storedVideoGame)
+	mockJSON.On("Serialize", storedVideoGame).Return(serializedVideoGame, nil)
+	mockQueryFactory.On("BuildResult", serializedVideoGame, uint(0)).Return(expectedQuery)
+
+	// Act
+	actualQuery := subject.Get(id)
+
+	// Assert
+	assert.Equal(t, expectedQuery, actualQuery)
+	mockStorage.AssertExpectations(t)
+	mockJSON.AssertExpectations(t)
+	mockQueryFactory.AssertExpectations(t)
+}
+
 // VideoGameService -> GetAll
 
 func TestVideoGameServiceGetAllSuccessful(t *testing.T) {

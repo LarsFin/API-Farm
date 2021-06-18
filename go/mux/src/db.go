@@ -1,6 +1,7 @@
 package apifarm
 
 type DB interface {
+	GetVideoGame(uint) *VideoGame
 	GetAllVideoGames() []VideoGame
 	AddVideoGame(VideoGame) VideoGame
 }

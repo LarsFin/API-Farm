@@ -42,3 +42,19 @@ func (_m *DB) GetAllVideoGames() []apifarm.VideoGame {
 
 	return r0
 }
+
+// GetVideoGame provides a mock function with given fields: _a0
+func (_m *DB) GetVideoGame(_a0 uint) *apifarm.VideoGame {
+	ret := _m.Called(_a0)
+
+	var r0 *apifarm.VideoGame
+	if rf, ok := ret.Get(0).(func(uint) *apifarm.VideoGame); ok {
+		r0 = rf(_a0)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*apifarm.VideoGame)
+		}
+	}
+
+	return r0
+}
