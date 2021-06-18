@@ -39,7 +39,11 @@ func (s *VideoGameService) Get(id uint) Query {
 		return s.qf.BuildMessage(VideoGameNotFound(id), http.StatusNotFound)
 	}
 
-	b, _ := s.json.Serialize(*storedVideoGame)
+	b, err := s.json.Serialize(*storedVideoGame)
+
+	if err != nil {
+		return s.qf.Error(err)
+	}
 
 	return s.qf.BuildResult(b, uint(0))
 }
