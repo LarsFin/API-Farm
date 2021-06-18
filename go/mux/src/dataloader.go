@@ -30,5 +30,13 @@ func NewJSONFileLoaderWithUtils(storage DB, json DataUtils, f FileUtils, qf Quer
 }
 
 func (loader *JSONFileLoader) Load(p string) Query {
-	return Query{}
+	b, _ := loader.f.Read(p)
+
+	vgs, _ := loader.json.DeserializeVideoGames(b)
+
+	for _, vg := range *vgs {
+		loader.storage.AddVideoGame(vg)
+	}
+
+	return loader.qf.BuildMessage(SuccessfullyLoadedData, uint(0))
 }
