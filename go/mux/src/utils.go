@@ -3,6 +3,7 @@ package apifarm
 import (
 	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"reflect"
 	"strings"
 	"time"
@@ -41,6 +42,7 @@ func (ct *CustomTime) MarshalJSON() ([]byte, error) {
 type DataUtils interface {
 	Serialize(interface{}) ([]byte, error)
 	DeserializeVideoGame([]byte) (*VideoGame, error)
+	DeserializeVideoGames([]byte) (*[]VideoGame, error)
 }
 
 type JSON struct {
@@ -71,6 +73,12 @@ func (*JSON) DeserializeVideoGame(data []byte) (*VideoGame, error) {
 	err = json.Unmarshal(data, &vg)
 
 	return &vg, err
+}
+
+func (*JSON) DeserializeVideoGames(data []byte) (*[]VideoGame, error) {
+	var vgs []VideoGame
+	err := json.Unmarshal(data, &vgs)
+	return &vgs, err
 }
 
 func hasFieldWithJSONTag(t reflect.Type, jt string) bool {
@@ -138,9 +146,23 @@ type Query struct {
 	Error   error
 }
 
+// File Reading
+
+type FileUtils interface {
+	Read(string) ([]byte, error)
+}
+
+type fileUtils struct {
+}
+
+func (*fileUtils) Read(p string) ([]byte, error) {
+	return ioutil.ReadFile(p)
+}
+
 // Messages
 
 const InvalidJSON = "Invalid JSON in body."
+const SuccessfullyLoadedData = "Successfully loaded data."
 const VideoGameDateRequired = "a date_released is required for a video game."
 const VideoGameNameRequired = "A name is required for a video game."
 
