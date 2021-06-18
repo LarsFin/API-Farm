@@ -14,16 +14,14 @@ type DataLoader struct {
 }
 
 // Load provides a mock function with given fields: _a0
-func (_m *DataLoader) Load(_a0 string) []apifarm.VideoGame {
+func (_m *DataLoader) Load(_a0 string) apifarm.Query {
 	ret := _m.Called(_a0)
 
-	var r0 []apifarm.VideoGame
-	if rf, ok := ret.Get(0).(func(string) []apifarm.VideoGame); ok {
+	var r0 apifarm.Query
+	if rf, ok := ret.Get(0).(func(string) apifarm.Query); ok {
 		r0 = rf(_a0)
 	} else {
-		if ret.Get(0) != nil {
-			r0 = ret.Get(0).([]apifarm.VideoGame)
-		}
+		r0 = ret.Get(0).(apifarm.Query)
 	}
 
 	return r0

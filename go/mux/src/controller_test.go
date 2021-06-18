@@ -158,3 +158,24 @@ func TestHandlePost500ServiceFailure(t *testing.T) {
 	mockRequest.AssertExpectations(t)
 	mockResponse.AssertExpectations(t)
 }
+
+func TestHandleTestSetup200(t *testing.T) {
+	// Arrange
+	mockDataLoader := new(mocks.DataLoader)
+	mockResponse := new(mocks.Response)
+
+	subject := apifarm.NewApiTestingController(mockDataLoader)
+
+	message := "SUCCESS MESSAGE"
+	query := apifarm.Query{Message: message}
+
+	mockDataLoader.On("Load", apifarm.SampleDataPath).Return(query)
+	mockResponse.On("OkText", message)
+
+	// Act
+	subject.HandleTestSetup(mockResponse)
+
+	// Assert
+	mockDataLoader.AssertExpectations(t)
+	mockResponse.AssertExpectations(t)
+}

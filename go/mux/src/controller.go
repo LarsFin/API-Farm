@@ -46,3 +46,18 @@ func (c *Controller) HandlePost(req Request, res Response) {
 		res.Error(query.Error)
 	}
 }
+
+type ApiTestingController struct {
+	dl DataLoader
+}
+
+const SampleDataPath = "./data.json"
+
+func NewApiTestingController(dl DataLoader) *ApiTestingController {
+	return &ApiTestingController{
+		dl,
+	}
+}
+
+func (c *ApiTestingController) HandleTestSetup(res Response) {
+}
