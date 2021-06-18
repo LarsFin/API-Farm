@@ -1,32 +1,34 @@
 package apifarm
 
 type DataLoader interface {
-	Load(string) []VideoGame
+	Load(string) Query
 }
 
 type JSONFileLoader struct {
-	json DataUtils
-	f    FileUtils
+	storage DB
+	json    DataUtils
+	f       FileUtils
+	qf      QueryFactory
 }
 
-func NewJSONFileLoader() *JSONFileLoader {
+func NewJSONFileLoader(storage DB) *JSONFileLoader {
 	return &JSONFileLoader{
+		storage,
 		&JSON{},
 		&fileUtils{},
+		&queryFactory{},
 	}
 }
 
-func NewJSONFileLoaderWithUtils(json DataUtils, f FileUtils) *JSONFileLoader {
+func NewJSONFileLoaderWithUtils(storage DB, json DataUtils, f FileUtils, qf QueryFactory) *JSONFileLoader {
 	return &JSONFileLoader{
+		storage,
 		json,
 		f,
+		qf,
 	}
 }
 
-func (loader *JSONFileLoader) Load(p string) []VideoGame {
-	b, _ := loader.f.Read(p)
-
-	vgs, _ := loader.json.DeserializeVideoGames(b)
-
-	return *vgs
+func (loader *JSONFileLoader) Load(p string) Query {
+	return Query{}
 }

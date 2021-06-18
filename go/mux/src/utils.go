@@ -162,6 +162,7 @@ func (*fileUtils) Read(p string) ([]byte, error) {
 // Messages
 
 const InvalidJSON = "Invalid JSON in body."
+const SuccessfullyLoadedData = "Successfully loaded data."
 const VideoGameDateRequired = "a date_released is required for a video game."
 const VideoGameNameRequired = "A name is required for a video game."
 
