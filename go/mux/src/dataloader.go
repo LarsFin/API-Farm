@@ -36,7 +36,11 @@ func (loader *JSONFileLoader) Load(p string) Query {
 		return loader.qf.Error(err)
 	}
 
-	vgs, _ := loader.json.DeserializeVideoGames(b)
+	vgs, err := loader.json.DeserializeVideoGames(b)
+
+	if err != nil {
+		return loader.qf.Error(err)
+	}
 
 	for _, vg := range *vgs {
 		loader.storage.AddVideoGame(vg)
