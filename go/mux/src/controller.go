@@ -60,4 +60,7 @@ func NewApiTestingController(dl DataLoader) *ApiTestingController {
 }
 
 func (c *ApiTestingController) HandleTestSetup(res Response) {
+	query := c.dl.Load(SampleDataPath)
+
+	res.OkText(query.Message)
 }
