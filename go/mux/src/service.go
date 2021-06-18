@@ -35,6 +35,10 @@ func NewVideoGameServiceWithUtils(db DB, json DataUtils, qf QueryFactory) *Video
 func (s *VideoGameService) Get(id uint) Query {
 	storedVideoGame := s.db.GetVideoGame(id)
 
+	if storedVideoGame == nil {
+		return s.qf.BuildMessage(VideoGameNotFound(id), http.StatusNotFound)
+	}
+
 	b, _ := s.json.Serialize(*storedVideoGame)
 
 	return s.qf.BuildResult(b, uint(0))
