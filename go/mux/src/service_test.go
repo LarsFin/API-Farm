@@ -63,6 +63,33 @@ func TestVideoGameServiceGetNotFound(t *testing.T) {
 	mockQueryFactory.AssertExpectations(t)
 }
 
+func TestVideoGameServiceGetSerializationFail(t *testing.T) {
+	// Arrange
+	mockStorage := new(mocks.DB)
+	mockJSON := new(mocks.DataUtils)
+	mockQueryFactory := new(mocks.QueryFactory)
+
+	subject := apifarm.NewVideoGameServiceWithUtils(mockStorage, mockJSON, mockQueryFactory)
+
+	const id = uint(5)
+	storedVideoGame := apifarm.VideoGame{Name: "Autotron 95"}
+	err := errors.New("failed to serialize to json")
+	expectedQuery := apifarm.Query{}
+
+	mockStorage.On("GetVideoGame", id).Return(&storedVideoGame)
+	mockJSON.On("Serialize", storedVideoGame).Return(nil, err)
+	mockQueryFactory.On("Error", err).Return(expectedQuery)
+
+	// Act
+	actualQuery := subject.Get(id)
+
+	// Assert
+	assert.Equal(t, expectedQuery, actualQuery)
+	mockStorage.AssertExpectations(t)
+	mockJSON.AssertExpectations(t)
+	mockQueryFactory.AssertExpectations(t)
+}
+
 // VideoGameService -> GetAll
 
 func TestVideoGameServiceGetAllSuccessful(t *testing.T) {
