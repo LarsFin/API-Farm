@@ -179,3 +179,24 @@ func TestHandleTestSetup200(t *testing.T) {
 	mockDataLoader.AssertExpectations(t)
 	mockResponse.AssertExpectations(t)
 }
+
+func TestHandleTestSetup500(t *testing.T) {
+	// Arrange
+	mockDataLoader := new(mocks.DataLoader)
+	mockResponse := new(mocks.Response)
+
+	subject := apifarm.NewApiTestingController(mockDataLoader)
+
+	err := errors.New("query failed")
+	query := apifarm.Query{Code: uint(500), Error: err}
+
+	mockDataLoader.On("Load", apifarm.SampleDataPath).Return(query)
+	mockResponse.On("Error", err)
+
+	// Act
+	subject.HandleTestSetup(mockResponse)
+
+	// Assert
+	mockDataLoader.AssertExpectations(t)
+	mockResponse.AssertExpectations(t)
+}
