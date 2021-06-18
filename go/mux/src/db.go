@@ -28,14 +28,14 @@ func NewInMemoryForTests() (*InMemory, **[]VideoGame) {
 	return im, vgs
 }
 
-func (db *InMemory) GetVideoGame(id uint) VideoGame {
+func (db *InMemory) GetVideoGame(id uint) *VideoGame {
 	for _, vg := range *db.videoGames {
 		if vg.ID == id {
-			return vg
+			return &vg
 		}
 	}
 
-	return VideoGame{}
+	return nil
 }
 
 func (db *InMemory) GetAllVideoGames() []VideoGame {

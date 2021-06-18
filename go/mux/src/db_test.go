@@ -23,7 +23,7 @@ func TestInMemoryGetVideoGame(t *testing.T) {
 	got := subject.GetVideoGame(id)
 
 	// Assert
-	assert.Equal(t, expected, got)
+	assert.Equal(t, expected, *got)
 }
 
 func TestInMemoryGetVideoGameNil(t *testing.T) {
