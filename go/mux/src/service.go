@@ -33,7 +33,11 @@ func NewVideoGameServiceWithUtils(db DB, json DataUtils, qf QueryFactory) *Video
 }
 
 func (s *VideoGameService) Get(id uint) Query {
-	return Query{}
+	storedVideoGame := s.db.GetVideoGame(id)
+
+	b, _ := s.json.Serialize(*storedVideoGame)
+
+	return s.qf.BuildResult(b, uint(0))
 }
 
 func (s *VideoGameService) GetAll() Query {
