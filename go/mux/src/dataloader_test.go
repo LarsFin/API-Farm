@@ -38,8 +38,9 @@ func TestJSONFileLoaderLoadSuccessful(t *testing.T) {
 
 	// Assert
 	assert.Equal(t, expectedQuery, actualQuery)
-	mockJSON.AssertExpectations(t)
 	mockFileUtils.AssertExpectations(t)
+	mockJSON.AssertExpectations(t)
+	mockStorage.AssertExpectations(t)
 }
 
 func TestJSONFileLoaderLoadFileReadFailure(t *testing.T) {
@@ -63,6 +64,35 @@ func TestJSONFileLoaderLoadFileReadFailure(t *testing.T) {
 
 	// Assert
 	assert.Equal(t, expectedQuery, actualQuery)
-	mockJSON.AssertExpectations(t)
 	mockFileUtils.AssertExpectations(t)
+	mockJSON.AssertExpectations(t)
+	mockStorage.AssertExpectations(t)
+}
+
+func TestJSONFileLoaderLoadDeserializeFailure(t *testing.T) {
+	// Arrange
+	mockStorage := new(mocks.DB)
+	mockJSON := new(mocks.DataUtils)
+	mockFileUtils := new(mocks.FileUtils)
+	mockQueryFactory := new(mocks.QueryFactory)
+
+	subject := apifarm.NewJSONFileLoaderWithUtils(mockStorage, mockJSON, mockFileUtils, mockQueryFactory)
+
+	path := "PATH TO DATA FILE"
+	data := []byte{12, 9, 34}
+	err := errors.New("failed to deserialize")
+	expectedQuery := apifarm.Query{}
+
+	mockFileUtils.On("Read", path).Return(data, nil)
+	mockJSON.On("DeserializeVideoGames", data).Return(nil, err)
+	mockQueryFactory.On("Error", err).Return(expectedQuery)
+
+	// Act
+	actualQuery := subject.Load(path)
+
+	// Assert
+	assert.Equal(t, expectedQuery, actualQuery)
+	mockFileUtils.AssertExpectations(t)
+	mockJSON.AssertExpectations(t)
+	mockStorage.AssertExpectations(t)
 }
