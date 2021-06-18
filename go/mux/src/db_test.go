@@ -26,6 +26,17 @@ func TestInMemoryGetVideoGame(t *testing.T) {
 	assert.Equal(t, expected, got)
 }
 
+func TestInMemoryGetVideoGameNil(t *testing.T) {
+	// Arrange
+	subject := apifarm.NewInMemory()
+
+	// Act
+	got := subject.GetVideoGame(99)
+
+	// Assert
+	assert.Nil(t, got)
+}
+
 func TestInMemoryGetAllVideoGames(t *testing.T) {
 	// Arrange
 	subject, videoGames := apifarm.NewInMemoryForTests()
