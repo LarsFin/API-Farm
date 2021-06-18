@@ -12,6 +12,10 @@ var storage = apifarm.NewInMemory()
 var service = apifarm.NewVideoGameService(storage)
 var controller = apifarm.NewController(service)
 
+// api testing entities
+var dataLoader = apifarm.NewJSONFileLoader(storage)
+var apiTestingController = apifarm.NewApiTestingController(dataLoader)
+
 func main() {
 	r := mux.NewRouter()
 
@@ -26,6 +30,10 @@ func main() {
 	r.HandleFunc("/video_games", func(w http.ResponseWriter, r *http.Request) {
 		controller.HandlePost(apifarm.NewHTTPRequest(r), apifarm.NewHTTPResponse(&w))
 	}).Methods(http.MethodPost)
+
+	r.HandleFunc("/api_tests/setup", func(w http.ResponseWriter, r *http.Request) {
+		apiTestingController.HandleTestSetup(apifarm.NewHTTPResponse(&w))
+	})
 
 	log.Fatal(http.ListenAndServe(":8080", r))
 }
