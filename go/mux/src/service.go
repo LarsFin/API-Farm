@@ -109,6 +109,8 @@ func (s *VideoGameService) Update(id uint, data []byte) Query {
 
 	if err != nil {
 		switch t := err.(type) {
+		case *InvalidAttributeError:
+			return s.qf.BuildMessage(t.Error(), http.StatusBadRequest)
 		case *time.ParseError:
 			msg := VideoGameInvalidDate(t.Value)
 			return s.qf.BuildMessage(msg, http.StatusBadRequest)
