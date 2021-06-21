@@ -166,6 +166,10 @@ const SuccessfullyLoadedData = "Successfully loaded data."
 const VideoGameDateRequired = "a date_released is required for a video game."
 const VideoGameNameRequired = "A name is required for a video game."
 
+func ParamInvalidId(invalidId string) string {
+	return fmt.Sprintf("The provided id '%s' is invalid.", invalidId)
+}
+
 func VideoGameInvalidAttribute(invalidAttribute string) string {
 	return fmt.Sprintf("The provided data has an invalid attribute '%s'.", invalidAttribute)
 }

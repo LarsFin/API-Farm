@@ -45,6 +45,27 @@ func TestHandleGet200(t *testing.T) {
 	mockResponse.AssertExpectations(t)
 }
 
+func TestHandleGet400(t *testing.T) {
+	// Arrange
+	mockService := new(mocks.Service)
+	mockRequest := new(mocks.Request)
+	mockResponse := new(mocks.Response)
+
+	subject := apifarm.NewController(mockService)
+
+	invalidId := "invalid!"
+
+	mockRequest.On("GetParam", "id").Return(invalidId)
+	mockResponse.On("BadRequestText", apifarm.ParamInvalidId(invalidId))
+
+	// Act
+	subject.HandleGet(mockRequest, mockResponse)
+
+	// Assert
+	mockRequest.AssertExpectations(t)
+	mockResponse.AssertExpectations(t)
+}
+
 func TestHandleGetAll200(t *testing.T) {
 	// Arrange
 	mockService := new(mocks.Service)
