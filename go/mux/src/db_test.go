@@ -119,6 +119,17 @@ func TestInMemoryUpdateVideoGame(t *testing.T) {
 	assert.Contains(t, **videoGames, expected)
 }
 
+func TestInMemoryUpdateVideoGameReturnsNil(t *testing.T) {
+	// Arrange
+	subject, _ := apifarm.NewInMemoryForTests()
+
+	// Act
+	got := subject.UpdateVideoGame(apifarm.VideoGame{})
+
+	// Assert
+	assert.Nil(t, got)
+}
+
 func TestInMemoryReset(t *testing.T) {
 	// Arrange
 	subject, videoGames := apifarm.NewInMemoryForTests()
