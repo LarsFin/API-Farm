@@ -438,3 +438,26 @@ func TestVideoGameServiceUpdateSuccessful(t *testing.T) {
 	mockJSON.AssertExpectations(t)
 	mockQueryFactory.AssertExpectations(t)
 }
+
+func TestVideoGameServiceUpdateNotFound(t *testing.T) {
+	// Arrange
+	mockStorage := new(mocks.DB)
+	mockJSON := new(mocks.DataUtils)
+	mockQueryFactory := new(mocks.QueryFactory)
+
+	subject := apifarm.NewVideoGameServiceWithUtils(mockStorage, mockJSON, mockQueryFactory)
+
+	id := uint(5)
+	expectedQuery := apifarm.Query{}
+
+	mockStorage.On("GetVideoGame", id).Return(nil)
+	mockQueryFactory.On("BuildResult", apifarm.VideoGameNotFound(id), uint(404)).Return(expectedQuery)
+
+	// Act
+	actualQuery := subject.Update(id, []byte{})
+
+	// Assert
+	assert.Equal(t, expectedQuery, actualQuery)
+	mockStorage.AssertExpectations(t)
+	mockQueryFactory.AssertExpectations(t)
+}
