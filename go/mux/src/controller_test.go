@@ -53,10 +53,10 @@ func TestHandleGet400(t *testing.T) {
 
 	subject := apifarm.NewController(mockService)
 
-	invalidId := "invalid!"
+	invalidID := "invalid!"
 
-	mockRequest.On("GetParam", "id").Return(invalidId)
-	mockResponse.On("BadRequestText", apifarm.ParamInvalidId(invalidId))
+	mockRequest.On("GetParam", "id").Return(invalidID)
+	mockResponse.On("BadRequestText", apifarm.ParamInvalidID(invalidID))
 
 	// Act
 	subject.HandleGet(mockRequest, mockResponse)

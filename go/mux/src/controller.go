@@ -20,12 +20,12 @@ func (c *Controller) HandlePing(res Response) {
 }
 
 func (c *Controller) HandleGet(req Request, res Response) {
-	strId := req.GetParam("id")
+	strID := req.GetParam("id")
 
-	id, err := strconv.Atoi(strId)
+	id, err := strconv.Atoi(strID)
 
 	if err != nil {
-		res.BadRequestText(ParamInvalidId(strId))
+		res.BadRequestText(ParamInvalidID(strID))
 		return
 	}
 
