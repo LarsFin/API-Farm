@@ -66,6 +66,31 @@ func TestHandleGet400(t *testing.T) {
 	mockResponse.AssertExpectations(t)
 }
 
+func TestHandleGet404(t *testing.T) {
+	// Arrange
+	mockService := new(mocks.Service)
+	mockRequest := new(mocks.Request)
+	mockResponse := new(mocks.Response)
+
+	subject := apifarm.NewController(mockService)
+
+	id := uint(99)
+	queryMessage := "VIDEO GAME NOT FOUND"
+	query := apifarm.Query{Message: queryMessage, Code: uint(404)}
+
+	mockRequest.On("GetParam", "id").Return("99")
+	mockService.On("Get", id).Return(query)
+	mockResponse.On("NotFoundText", queryMessage)
+
+	// Act
+	subject.HandleGet(mockRequest, mockResponse)
+
+	// Assert
+	mockService.AssertExpectations(t)
+	mockRequest.AssertExpectations(t)
+	mockResponse.AssertExpectations(t)
+}
+
 func TestHandleGetAll200(t *testing.T) {
 	// Arrange
 	mockService := new(mocks.Service)
