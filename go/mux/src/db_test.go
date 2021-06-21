@@ -79,3 +79,15 @@ func TestInMemoryAddVideoGameIncrementsAndSetsId(t *testing.T) {
 
 	assert.Len(t, **videoGames, 3)
 }
+
+func TestInMemoryReset(t *testing.T) {
+	// Arrange
+	subject, videoGames := apifarm.NewInMemoryForTests()
+	oldVideoGames := *videoGames
+
+	// Act
+	subject.Reset()
+
+	// Assert
+	assert.NotSame(t, *videoGames, oldVideoGames)
+}
