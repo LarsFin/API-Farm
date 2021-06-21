@@ -462,6 +462,35 @@ func TestVideoGameServiceUpdateNotFound(t *testing.T) {
 	mockQueryFactory.AssertExpectations(t)
 }
 
+func TestVideoGameServiceUpdateInvalidAttributeFailure(t *testing.T) {
+	// Arrange
+	mockStorage := new(mocks.DB)
+	mockJSON := new(mocks.DataUtils)
+	mockQueryFactory := new(mocks.QueryFactory)
+
+	subject := apifarm.NewVideoGameServiceWithUtils(mockStorage, mockJSON, mockQueryFactory)
+
+	id := uint(5)
+	reqData := []byte{13, 34, 22}
+	invalidAttribute := "testers"
+	videoGameToUpdate := apifarm.VideoGame{}
+	err := &apifarm.InvalidAttributeError{Attribute: invalidAttribute}
+	expectedQuery := apifarm.Query{}
+
+	mockStorage.On("GetVideoGame", id).Return(&videoGameToUpdate)
+	mockJSON.On("DeserializeVideoGame", reqData).Return(nil, err)
+	mockQueryFactory.On("BuildMessage", apifarm.VideoGameInvalidAttribute(invalidAttribute), uint(400)).Return(expectedQuery)
+
+	// Act
+	actualQuery := subject.Update(id, reqData)
+
+	// Assert
+	assert.Equal(t, expectedQuery, actualQuery)
+	mockStorage.AssertExpectations(t)
+	mockJSON.AssertExpectations(t)
+	mockQueryFactory.AssertExpectations(t)
+}
+
 func TestVideoGameServiceUpdateInvalidDateFailure(t *testing.T) {
 	// Arrange
 	mockStorage := new(mocks.DB)
