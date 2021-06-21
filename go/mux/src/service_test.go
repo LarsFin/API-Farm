@@ -474,7 +474,7 @@ func TestVideoGameServiceUpdateInvalidDateFailure(t *testing.T) {
 	reqData := []byte{13, 34, 22}
 	invalidDate := "2010/08/26"
 	videoGameToUpdate := apifarm.VideoGame{}
-	err := time.ParseError{Value: invalidDate}
+	err := &time.ParseError{Value: invalidDate}
 	expectedQuery := apifarm.Query{}
 
 	mockStorage.On("GetVideoGame", id).Return(&videoGameToUpdate)

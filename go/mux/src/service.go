@@ -105,7 +105,15 @@ func (s *VideoGameService) Update(id uint, data []byte) Query {
 		return s.qf.BuildMessage(VideoGameNotFound(id), http.StatusNotFound)
 	}
 
-	vgu, _ := s.json.DeserializeVideoGame(data)
+	vgu, err := s.json.DeserializeVideoGame(data)
+
+	if err != nil {
+		switch t := err.(type) {
+		case *time.ParseError:
+			msg := VideoGameInvalidDate(t.Value)
+			return s.qf.BuildMessage(msg, http.StatusBadRequest)
+		}
+	}
 
 	uvg := updateVideoGameFields(*vg, *vgu)
 
