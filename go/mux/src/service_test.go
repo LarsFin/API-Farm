@@ -423,10 +423,10 @@ func TestVideoGameServiceUpdateSuccessful(t *testing.T) {
 	serializedUpdatedVideoGame := []byte{12, 21, 35}
 	expectedQuery := apifarm.Query{}
 
-	mockJSON.On("DeserializeVideoGame", reqData).Return(&videoGameToUpdateWith, nil)
 	mockStorage.On("GetVideoGame", id).Return(&videoGameToUpdate)
+	mockJSON.On("DeserializeVideoGame", reqData).Return(&videoGameToUpdateWith, nil)
 	mockStorage.On("UpdateVideoGame", updatedVideoGame).Return(&updatedVideoGame)
-	mockJSON.On("Serialize", updatedVideoGame).Return(serializedUpdatedVideoGame)
+	mockJSON.On("Serialize", &updatedVideoGame).Return(serializedUpdatedVideoGame, nil)
 	mockQueryFactory.On("BuildResult", serializedUpdatedVideoGame, uint(0)).Return(expectedQuery)
 
 	// Act
