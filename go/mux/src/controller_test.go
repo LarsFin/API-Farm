@@ -33,7 +33,7 @@ func TestHandleGet200(t *testing.T) {
 	query := apifarm.Query{Result: result}
 
 	mockRequest.On("GetParam", "id").Return("5")
-	mockService.On("Get", 5).Return(query)
+	mockService.On("Get", uint(5)).Return(query)
 	mockResponse.On("OkJSON", result)
 
 	// Act

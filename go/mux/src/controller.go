@@ -1,6 +1,9 @@
 package apifarm
 
-import "net/http"
+import (
+	"net/http"
+	"strconv"
+)
 
 type Controller struct {
 	s Service
@@ -17,7 +20,13 @@ func (c *Controller) HandlePing(res Response) {
 }
 
 func (c *Controller) HandleGet(req Request, res Response) {
+	strId := req.GetParam("id")
 
+	id, _ := strconv.Atoi(strId)
+
+	query := c.s.Get(uint(id))
+
+	res.OkJSON(query.Result)
 }
 
 func (c *Controller) HandleGetAll(res Response) {
