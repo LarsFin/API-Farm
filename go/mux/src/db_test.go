@@ -52,8 +52,25 @@ func TestInMemoryGetAllVideoGames(t *testing.T) {
 func TestInMemoryAddVideoGame(t *testing.T) {
 	// Arrange
 	subject, videoGames := apifarm.NewInMemoryForTests()
-	videoGame := apifarm.VideoGame{Name: "The Great Gamesby"}
-	expected := apifarm.VideoGame{ID: uint(1), Name: "The Great Gamesby"}
+
+	name := "The Great Gamesby"
+	dateReleased := apifarm.CustomTime{}
+	platforms := []string{"A", "B"}
+	videoGame := apifarm.VideoGame{Name: name, Platforms: platforms, DateReleased: dateReleased}
+	expected := apifarm.VideoGame{
+		uint(1),
+		name,
+		[]string{},
+		[]string{},
+		[]string{},
+		[]string{},
+		[]string{},
+		[]string{},
+		[]string{},
+		[]string{},
+		platforms,
+		dateReleased,
+	}
 
 	// Act
 	got := subject.AddVideoGame(videoGame)
@@ -78,4 +95,16 @@ func TestInMemoryAddVideoGameIncrementsAndSetsId(t *testing.T) {
 	assert.Equal(t, videoGame3.ID, uint(3))
 
 	assert.Len(t, **videoGames, 3)
+}
+
+func TestInMemoryReset(t *testing.T) {
+	// Arrange
+	subject, videoGames := apifarm.NewInMemoryForTests()
+	oldVideoGames := *videoGames
+
+	// Act
+	subject.Reset()
+
+	// Assert
+	assert.NotSame(t, *videoGames, oldVideoGames)
 }

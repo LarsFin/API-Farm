@@ -40,7 +40,7 @@ func (s *VideoGameService) Get(id uint) Query {
 		return s.qf.BuildMessage(VideoGameNotFound(id), http.StatusNotFound)
 	}
 
-	b, err := s.json.Serialize(*storedVideoGame)
+	b, err := s.json.Serialize(storedVideoGame)
 
 	if err != nil {
 		return s.qf.Error(err)
@@ -87,7 +87,7 @@ func (s *VideoGameService) Add(data []byte) Query {
 
 	svg := s.db.AddVideoGame(*vg)
 
-	b, err := s.json.Serialize(svg)
+	b, err := s.json.Serialize(&svg)
 
 	if err != nil {
 		return s.qf.Error(err)

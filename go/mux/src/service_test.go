@@ -26,7 +26,7 @@ func TestVideoGameServiceGetSuccessful(t *testing.T) {
 	expectedQuery := apifarm.Query{}
 
 	mockStorage.On("GetVideoGame", id).Return(&storedVideoGame)
-	mockJSON.On("Serialize", storedVideoGame).Return(serializedVideoGame, nil)
+	mockJSON.On("Serialize", &storedVideoGame).Return(serializedVideoGame, nil)
 	mockQueryFactory.On("BuildResult", serializedVideoGame, uint(0)).Return(expectedQuery)
 
 	// Act
@@ -77,7 +77,7 @@ func TestVideoGameServiceGetSerializationFail(t *testing.T) {
 	expectedQuery := apifarm.Query{}
 
 	mockStorage.On("GetVideoGame", id).Return(&storedVideoGame)
-	mockJSON.On("Serialize", storedVideoGame).Return(nil, err)
+	mockJSON.On("Serialize", &storedVideoGame).Return(nil, err)
 	mockQueryFactory.On("Error", err).Return(expectedQuery)
 
 	// Act
@@ -169,7 +169,7 @@ func TestVideoGameServiceAddSuccessful(t *testing.T) {
 
 	mockJSON.On("DeserializeVideoGame", reqData).Return(&videoGame, nil)
 	mockStorage.On("AddVideoGame", videoGame).Return(storedVideoGame)
-	mockJSON.On("Serialize", storedVideoGame).Return(serializedVideoGame, nil)
+	mockJSON.On("Serialize", &storedVideoGame).Return(serializedVideoGame, nil)
 	mockQueryFactory.On("BuildResult", serializedVideoGame, uint(0)).Return(expectedQuery)
 
 	// Act
@@ -333,7 +333,7 @@ func TestVideoGameServiceAddSerializationFailure(t *testing.T) {
 
 	mockJSON.On("DeserializeVideoGame", reqData).Return(&videoGame, nil)
 	mockStorage.On("AddVideoGame", videoGame).Return(storedVideoGame)
-	mockJSON.On("Serialize", storedVideoGame).Return(nil, err)
+	mockJSON.On("Serialize", &storedVideoGame).Return(nil, err)
 	mockQueryFactory.On("Error", err).Return(expectedQuery)
 
 	// Act

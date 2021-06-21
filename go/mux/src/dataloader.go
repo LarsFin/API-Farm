@@ -42,6 +42,8 @@ func (loader *JSONFileLoader) Load(p string) Query {
 		return loader.qf.Error(err)
 	}
 
+	loader.storage.Reset()
+
 	for _, vg := range *vgs {
 		loader.storage.AddVideoGame(vg)
 	}

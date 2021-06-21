@@ -29,6 +29,7 @@ func TestJSONFileLoaderLoadSuccessful(t *testing.T) {
 
 	mockFileUtils.On("Read", path).Return(data, nil)
 	mockJSON.On("DeserializeVideoGames", data).Return(&videoGames, nil)
+	mockStorage.On("Reset")
 	mockStorage.On("AddVideoGame", vg1).Return(apifarm.VideoGame{})
 	mockStorage.On("AddVideoGame", vg2).Return(apifarm.VideoGame{})
 	mockStorage.On("AddVideoGame", vg3).Return(apifarm.VideoGame{})
