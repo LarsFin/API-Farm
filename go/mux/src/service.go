@@ -85,6 +85,8 @@ func (s *VideoGameService) Add(data []byte) Query {
 		return s.qf.BuildMessage(VideoGameDateRequired, http.StatusBadRequest)
 	}
 
+	setEmptySlices(vg)
+
 	svg := s.db.AddVideoGame(*vg)
 
 	b, err := s.json.Serialize(&svg)
@@ -94,4 +96,34 @@ func (s *VideoGameService) Add(data []byte) Query {
 	}
 
 	return s.qf.BuildResult(b, uint(0))
+}
+
+func setEmptySlices(vg *VideoGame) {
+	if vg.Developers == nil {
+		vg.Developers = []string{}
+	}
+	if vg.Publishers == nil {
+		vg.Publishers = []string{}
+	}
+	if vg.Directors == nil {
+		vg.Directors = []string{}
+	}
+	if vg.Producers == nil {
+		vg.Producers = []string{}
+	}
+	if vg.Designers == nil {
+		vg.Designers = []string{}
+	}
+	if vg.Programmers == nil {
+		vg.Programmers = []string{}
+	}
+	if vg.Artists == nil {
+		vg.Artists = []string{}
+	}
+	if vg.Composers == nil {
+		vg.Composers = []string{}
+	}
+	if vg.Platforms == nil {
+		vg.Platforms = []string{}
+	}
 }

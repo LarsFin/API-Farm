@@ -155,20 +155,40 @@ func TestVideoGameServiceAddSuccessful(t *testing.T) {
 	subject := apifarm.NewVideoGameServiceWithUtils(mockStorage, mockJSON, mockQueryFactory)
 
 	reqData := []byte{20, 18, 24}
+	videoGameName := "Lady's Quest 3"
+	videoGameDevelopers := []string{"A", "B"}
+	videoGameProducers := []string{"A"}
+	videoGameDateReleased := apifarm.CustomTime{time.Now()}
 	videoGame := apifarm.VideoGame{
-		Name:         "Lady's Quest 3",
-		DateReleased: apifarm.CustomTime{time.Now()},
+		Name:         videoGameName,
+		Developers:   videoGameDevelopers,
+		Producers:    videoGameProducers,
+		DateReleased: videoGameDateReleased,
+	}
+	defaultedVideoGame := apifarm.VideoGame{
+		uint(0),
+		videoGameName,
+		videoGameDevelopers,
+		[]string{},
+		[]string{},
+		videoGameProducers,
+		[]string{},
+		[]string{},
+		[]string{},
+		[]string{},
+		[]string{},
+		videoGameDateReleased,
 	}
 	storedVideoGame := apifarm.VideoGame{
 		ID:           1,
-		Name:         "Lady's Quest 3",
-		DateReleased: apifarm.CustomTime{time.Now()},
+		Name:         videoGameName,
+		DateReleased: videoGameDateReleased,
 	}
 	serializedVideoGame := []byte{23, 19, 18}
 	expectedQuery := apifarm.Query{}
 
 	mockJSON.On("DeserializeVideoGame", reqData).Return(&videoGame, nil)
-	mockStorage.On("AddVideoGame", videoGame).Return(storedVideoGame)
+	mockStorage.On("AddVideoGame", defaultedVideoGame).Return(storedVideoGame)
 	mockJSON.On("Serialize", &storedVideoGame).Return(serializedVideoGame, nil)
 	mockQueryFactory.On("BuildResult", serializedVideoGame, uint(0)).Return(expectedQuery)
 
@@ -320,8 +340,18 @@ func TestVideoGameServiceAddSerializationFailure(t *testing.T) {
 
 	reqData := []byte{20, 18, 24}
 	videoGame := apifarm.VideoGame{
-		Name:         "Lady's Quest 3",
-		DateReleased: apifarm.CustomTime{time.Now()},
+		uint(0),
+		"Lady's Quest 3",
+		[]string{},
+		[]string{},
+		[]string{},
+		[]string{},
+		[]string{},
+		[]string{},
+		[]string{},
+		[]string{},
+		[]string{},
+		apifarm.CustomTime{time.Now()},
 	}
 	storedVideoGame := apifarm.VideoGame{
 		ID:           1,

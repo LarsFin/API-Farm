@@ -55,21 +55,11 @@ func TestInMemoryAddVideoGame(t *testing.T) {
 
 	name := "The Great Gamesby"
 	dateReleased := apifarm.CustomTime{}
-	platforms := []string{"A", "B"}
-	videoGame := apifarm.VideoGame{Name: name, Platforms: platforms, DateReleased: dateReleased}
+	videoGame := apifarm.VideoGame{Name: name, DateReleased: dateReleased}
 	expected := apifarm.VideoGame{
-		uint(1),
-		name,
-		[]string{},
-		[]string{},
-		[]string{},
-		[]string{},
-		[]string{},
-		[]string{},
-		[]string{},
-		[]string{},
-		platforms,
-		dateReleased,
+		ID:           uint(1),
+		Name:         name,
+		DateReleased: dateReleased,
 	}
 
 	// Act
