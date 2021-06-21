@@ -31,3 +31,17 @@ func (_m *Request) GetBody() ([]byte, error) {
 
 	return r0, r1
 }
+
+// GetParam provides a mock function with given fields: _a0
+func (_m *Request) GetParam(_a0 string) string {
+	ret := _m.Called(_a0)
+
+	var r0 string
+	if rf, ok := ret.Get(0).(func(string) string); ok {
+		r0 = rf(_a0)
+	} else {
+		r0 = ret.Get(0).(string)
+	}
+
+	return r0
+}
