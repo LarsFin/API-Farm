@@ -114,7 +114,7 @@ func TestInMemoryUpdateVideoGame(t *testing.T) {
 	got := subject.UpdateVideoGame(expected)
 
 	// Assert
-	assert.Equal(t, expected, got)
+	assert.Equal(t, expected, *got)
 	assert.NotContains(t, **videoGames, videoGameToUpdate)
 	assert.Contains(t, **videoGames, expected)
 }

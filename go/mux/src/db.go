@@ -55,8 +55,15 @@ func (db *InMemory) AddVideoGame(vg VideoGame) VideoGame {
 	return vg
 }
 
-func (db *InMemory) UpdateVideoGame(vg VideoGame) VideoGame {
-	return VideoGame{}
+func (db *InMemory) UpdateVideoGame(uvg VideoGame) *VideoGame {
+	for i, vg := range *db.videoGames {
+		if vg.ID == uvg.ID {
+			(*db.videoGames)[i] = uvg
+			return &uvg
+		}
+	}
+
+	return &VideoGame{}
 }
 
 func (db *InMemory) Reset() {
