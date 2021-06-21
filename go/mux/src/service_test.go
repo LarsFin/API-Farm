@@ -451,7 +451,7 @@ func TestVideoGameServiceUpdateNotFound(t *testing.T) {
 	expectedQuery := apifarm.Query{}
 
 	mockStorage.On("GetVideoGame", id).Return(nil)
-	mockQueryFactory.On("BuildResult", apifarm.VideoGameNotFound(id), uint(404)).Return(expectedQuery)
+	mockQueryFactory.On("BuildMessage", apifarm.VideoGameNotFound(id), uint(404)).Return(expectedQuery)
 
 	// Act
 	actualQuery := subject.Update(id, []byte{})

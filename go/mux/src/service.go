@@ -101,6 +101,10 @@ func (s *VideoGameService) Add(data []byte) Query {
 func (s *VideoGameService) Update(id uint, data []byte) Query {
 	vg := s.db.GetVideoGame(id)
 
+	if vg == nil {
+		return s.qf.BuildMessage(VideoGameNotFound(id), http.StatusNotFound)
+	}
+
 	vgu, _ := s.json.DeserializeVideoGame(data)
 
 	uvg := updateVideoGameFields(*vg, *vgu)
