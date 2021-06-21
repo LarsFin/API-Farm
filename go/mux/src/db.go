@@ -1,6 +1,7 @@
 package apifarm
 
 type DB interface {
+	GetVideoGame(uint) *VideoGame
 	GetAllVideoGames() []VideoGame
 	AddVideoGame(VideoGame) VideoGame
 }
@@ -26,6 +27,16 @@ func NewInMemoryForTests() (*InMemory, **[]VideoGame) {
 	vgs := &im.videoGames
 
 	return im, vgs
+}
+
+func (db *InMemory) GetVideoGame(id uint) *VideoGame {
+	for _, vg := range *db.videoGames {
+		if vg.ID == id {
+			return &vg
+		}
+	}
+
+	return nil
 }
 
 func (db *InMemory) GetAllVideoGames() []VideoGame {

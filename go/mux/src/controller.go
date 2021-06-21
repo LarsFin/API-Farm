@@ -1,6 +1,9 @@
 package apifarm
 
-import "net/http"
+import (
+	"net/http"
+	"strconv"
+)
 
 type Controller struct {
 	s Service
@@ -14,6 +17,28 @@ func NewController(s Service) *Controller {
 
 func (c *Controller) HandlePing(res Response) {
 	res.OkText("pong")
+}
+
+func (c *Controller) HandleGet(req Request, res Response) {
+	strID := req.GetParam("id")
+
+	id, err := strconv.Atoi(strID)
+
+	if err != nil {
+		res.BadRequestText(ParamInvalidID(strID))
+		return
+	}
+
+	query := c.s.Get(uint(id))
+
+	switch query.Code {
+	case 0:
+		res.OkJSON(query.Result)
+	case http.StatusNotFound:
+		res.NotFoundText(query.Message)
+	case http.StatusInternalServerError:
+		res.Error(query.Error)
+	}
 }
 
 func (c *Controller) HandleGetAll(res Response) {

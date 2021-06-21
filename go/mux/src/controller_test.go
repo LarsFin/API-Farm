@@ -21,6 +21,99 @@ func TestHandlePing(t *testing.T) {
 	mockResponse.AssertExpectations(t)
 }
 
+func TestHandleGet200(t *testing.T) {
+	// Arrange
+	mockService := new(mocks.Service)
+	mockRequest := new(mocks.Request)
+	mockResponse := new(mocks.Response)
+
+	subject := apifarm.NewController(mockService)
+
+	result := []byte{5, 16, 49}
+	query := apifarm.Query{Result: result}
+
+	mockRequest.On("GetParam", "id").Return("5")
+	mockService.On("Get", uint(5)).Return(query)
+	mockResponse.On("OkJSON", result)
+
+	// Act
+	subject.HandleGet(mockRequest, mockResponse)
+
+	// Assert
+	mockService.AssertExpectations(t)
+	mockRequest.AssertExpectations(t)
+	mockResponse.AssertExpectations(t)
+}
+
+func TestHandleGet400(t *testing.T) {
+	// Arrange
+	mockService := new(mocks.Service)
+	mockRequest := new(mocks.Request)
+	mockResponse := new(mocks.Response)
+
+	subject := apifarm.NewController(mockService)
+
+	invalidID := "invalid!"
+
+	mockRequest.On("GetParam", "id").Return(invalidID)
+	mockResponse.On("BadRequestText", apifarm.ParamInvalidID(invalidID))
+
+	// Act
+	subject.HandleGet(mockRequest, mockResponse)
+
+	// Assert
+	mockRequest.AssertExpectations(t)
+	mockResponse.AssertExpectations(t)
+}
+
+func TestHandleGet404(t *testing.T) {
+	// Arrange
+	mockService := new(mocks.Service)
+	mockRequest := new(mocks.Request)
+	mockResponse := new(mocks.Response)
+
+	subject := apifarm.NewController(mockService)
+
+	queryMessage := "VIDEO GAME NOT FOUND"
+	query := apifarm.Query{Message: queryMessage, Code: uint(404)}
+
+	mockRequest.On("GetParam", "id").Return("99")
+	mockService.On("Get", uint(99)).Return(query)
+	mockResponse.On("NotFoundText", queryMessage)
+
+	// Act
+	subject.HandleGet(mockRequest, mockResponse)
+
+	// Assert
+	mockService.AssertExpectations(t)
+	mockRequest.AssertExpectations(t)
+	mockResponse.AssertExpectations(t)
+}
+
+func TestHandleGet500(t *testing.T) {
+	// Arrange
+	mockService := new(mocks.Service)
+	mockRequest := new(mocks.Request)
+	mockResponse := new(mocks.Response)
+
+	subject := apifarm.NewController(mockService)
+
+	err := errors.New("query failed")
+	query := apifarm.Query{Code: uint(500), Error: err}
+
+	mockRequest.On("GetParam", "id").Return("5")
+	mockService.On("Get", uint(5)).Return(query)
+	mockResponse.On("Error", err)
+
+	// Act
+	subject.HandleGet(mockRequest, mockResponse)
+
+	// Assert
+	mockService.AssertExpectations(t)
+	mockRequest.AssertExpectations(t)
+	mockResponse.AssertExpectations(t)
+}
+
 func TestHandleGetAll200(t *testing.T) {
 	// Arrange
 	mockService := new(mocks.Service)

@@ -6,6 +6,7 @@ import (
 )
 
 type Service interface {
+	Get(uint) Query
 	GetAll() Query
 	Add([]byte) Query
 }
@@ -30,6 +31,22 @@ func NewVideoGameServiceWithUtils(db DB, json DataUtils, qf QueryFactory) *Video
 		json,
 		qf,
 	}
+}
+
+func (s *VideoGameService) Get(id uint) Query {
+	storedVideoGame := s.db.GetVideoGame(id)
+
+	if storedVideoGame == nil {
+		return s.qf.BuildMessage(VideoGameNotFound(id), http.StatusNotFound)
+	}
+
+	b, err := s.json.Serialize(*storedVideoGame)
+
+	if err != nil {
+		return s.qf.Error(err)
+	}
+
+	return s.qf.BuildResult(b, uint(0))
 }
 
 func (s *VideoGameService) GetAll() Query {
