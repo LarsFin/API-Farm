@@ -63,7 +63,7 @@ func (db *InMemory) UpdateVideoGame(uvg VideoGame) *VideoGame {
 		}
 	}
 
-	return &VideoGame{}
+	return nil
 }
 
 func (db *InMemory) Reset() {
