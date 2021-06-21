@@ -31,7 +31,12 @@ func (c *Controller) HandleGet(req Request, res Response) {
 
 	query := c.s.Get(uint(id))
 
-	res.OkJSON(query.Result)
+	switch query.Code {
+	case 0:
+		res.OkJSON(query.Result)
+	case http.StatusNotFound:
+		res.NotFoundText(query.Message)
+	}
 }
 
 func (c *Controller) HandleGetAll(res Response) {

@@ -8,6 +8,7 @@ type Response interface {
 	CreatedJSON([]byte)
 
 	BadRequestText(string)
+	NotFoundText(string)
 
 	Error(error)
 }
@@ -52,6 +53,13 @@ func (r *HTTPResponse) CreatedJSON(data []byte) {
 func (r *HTTPResponse) BadRequestText(text string) {
 	(*r.w).Header().Set("Content-Type", "text/plain")
 	(*r.w).WriteHeader(http.StatusBadRequest)
+
+	write(r.w, []byte(text))
+}
+
+func (r *HTTPResponse) NotFoundText(text string) {
+	(*r.w).Header().Set("Content-Type", "text/plain")
+	(*r.w).WriteHeader(http.StatusNotFound)
 
 	write(r.w, []byte(text))
 }
