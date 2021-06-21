@@ -23,6 +23,10 @@ func main() {
 		controller.HandlePing(apifarm.NewHTTPResponse(&w))
 	})
 
+	r.HandleFunc("/video_games/{id}", func(w http.ResponseWriter, r *http.Request) {
+		controller.HandleGet(apifarm.NewHTTPRequest(r), apifarm.NewHTTPResponse(&w))
+	}).Methods(http.MethodGet)
+
 	r.HandleFunc("/video_games", func(w http.ResponseWriter, r *http.Request) {
 		controller.HandleGetAll(apifarm.NewHTTPResponse(&w))
 	}).Methods(http.MethodGet)
