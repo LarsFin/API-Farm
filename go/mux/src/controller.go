@@ -36,6 +36,8 @@ func (c *Controller) HandleGet(req Request, res Response) {
 		res.OkJSON(query.Result)
 	case http.StatusNotFound:
 		res.NotFoundText(query.Message)
+	case http.StatusInternalServerError:
+		res.Error(query.Error)
 	}
 }
 
