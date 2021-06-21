@@ -375,3 +375,66 @@ func TestVideoGameServiceAddSerializationFailure(t *testing.T) {
 	mockJSON.AssertExpectations(t)
 	mockQueryFactory.AssertExpectations(t)
 }
+
+func TestVideoGameServiceUpdateSuccessful(t *testing.T) {
+	// Arrange
+	mockStorage := new(mocks.DB)
+	mockJSON := new(mocks.DataUtils)
+	mockQueryFactory := new(mocks.QueryFactory)
+
+	subject := apifarm.NewVideoGameServiceWithUtils(mockStorage, mockJSON, mockQueryFactory)
+
+	id := uint(5)
+	reqData := []byte{13, 34, 22}
+	videoGameToUpdateWith := apifarm.VideoGame{
+		Name:       "Updated Name",
+		Developers: []string{"A", "B"},
+		Designers:  []string{"A", "B", "C"},
+		Artists:    []string{"A", "B", "C"},
+	}
+	videoGameToUpdate := apifarm.VideoGame{
+		uint(5),
+		"Old Name",
+		[]string{"1", "2"},
+		[]string{"1"},
+		[]string{"1", "2"},
+		[]string{"1", "2", "3"},
+		[]string{"1", "2"},
+		[]string{"1", "2", "3"},
+		[]string{"1", "2"},
+		[]string{"1", "2"},
+		[]string{"1", "2", "3"},
+		apifarm.CustomTime{Time: time.Now()},
+	}
+	updatedVideoGame := apifarm.VideoGame{
+		videoGameToUpdate.ID,
+		videoGameToUpdateWith.Name,
+		videoGameToUpdateWith.Developers,
+		videoGameToUpdate.Publishers,
+		videoGameToUpdate.Directors,
+		videoGameToUpdate.Producers,
+		videoGameToUpdateWith.Designers,
+		videoGameToUpdate.Programmers,
+		videoGameToUpdateWith.Artists,
+		videoGameToUpdate.Composers,
+		videoGameToUpdate.Platforms,
+		videoGameToUpdate.DateReleased,
+	}
+	serializedUpdatedVideoGame := []byte{12, 21, 35}
+	expectedQuery := apifarm.Query{}
+
+	mockJSON.On("DeserializeVideoGame", reqData).Return(&videoGameToUpdateWith, nil)
+	mockStorage.On("GetVideoGame", id).Return(&videoGameToUpdate)
+	mockStorage.On("UpdateVideoGame", updatedVideoGame).Return(&updatedVideoGame)
+	mockJSON.On("Serialize", updatedVideoGame).Return(serializedUpdatedVideoGame)
+	mockQueryFactory.On("BuildResult", serializedUpdatedVideoGame, uint(0)).Return(expectedQuery)
+
+	// Act
+	actualQuery := subject.Update(id, reqData)
+
+	// Assert
+	assert.Equal(t, expectedQuery, actualQuery)
+	mockStorage.AssertExpectations(t)
+	mockJSON.AssertExpectations(t)
+	mockQueryFactory.AssertExpectations(t)
+}
