@@ -55,6 +55,10 @@ func (db *InMemory) AddVideoGame(vg VideoGame) VideoGame {
 	return vg
 }
 
+func (db *InMemory) UpdateVideoGame(vg VideoGame) VideoGame {
+	return VideoGame{}
+}
+
 func (db *InMemory) Reset() {
 	db.idCounter = 0
 	db.videoGames = &[]VideoGame{}

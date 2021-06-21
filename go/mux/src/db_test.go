@@ -97,6 +97,28 @@ func TestInMemoryAddVideoGameIncrementsAndSetsId(t *testing.T) {
 	assert.Len(t, **videoGames, 3)
 }
 
+func TestInMemoryUpdateVideoGame(t *testing.T) {
+	// Arrange
+	subject, videoGames := apifarm.NewInMemoryForTests()
+
+	videoGameToUpdate := apifarm.VideoGame{ID: 2, Name: "TO BE UPDATED"}
+	includingVideoGames := []apifarm.VideoGame{
+		{ID: 1, Name: "GAME 1"},
+		videoGameToUpdate,
+		{ID: 3, Name: "GAME 3"},
+	}
+	*videoGames = &includingVideoGames
+	expected := apifarm.VideoGame{ID: 2, Name: "HAS BEEN UPDATED"}
+
+	// Act
+	got := subject.UpdateVideoGame(expected)
+
+	// Assert
+	assert.Equal(t, expected, got)
+	assert.NotContains(t, **videoGames, videoGameToUpdate)
+	assert.Contains(t, **videoGames, expected)
+}
+
 func TestInMemoryReset(t *testing.T) {
 	// Arrange
 	subject, videoGames := apifarm.NewInMemoryForTests()
