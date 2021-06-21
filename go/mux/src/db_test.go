@@ -52,8 +52,10 @@ func TestInMemoryGetAllVideoGames(t *testing.T) {
 func TestInMemoryAddVideoGame(t *testing.T) {
 	// Arrange
 	subject, videoGames := apifarm.NewInMemoryForTests()
-	videoGame := apifarm.VideoGame{Name: "The Great Gamesby"}
-	expected := apifarm.VideoGame{ID: uint(1), Name: "The Great Gamesby"}
+
+	name := "The Great Gamesby"
+	videoGame := apifarm.VideoGame{Name: name}
+	expected := apifarm.VideoGame{ID: uint(1), Name: name}
 
 	// Act
 	got := subject.AddVideoGame(videoGame)
@@ -78,6 +80,36 @@ func TestInMemoryAddVideoGameIncrementsAndSetsId(t *testing.T) {
 	assert.Equal(t, videoGame3.ID, uint(3))
 
 	assert.Len(t, **videoGames, 3)
+}
+
+func TestInMemoryAddVideoGameEmptySlicesWhenNull(t *testing.T) {
+	// Arrange
+	subject, videoGames := apifarm.NewInMemoryForTests()
+
+	name := "The Great Gamesby"
+	dateReleased := apifarm.CustomTime{}
+	videoGame := apifarm.VideoGame{Name: name, DateReleased: dateReleased}
+	expected := apifarm.VideoGame{
+		uint(1),
+		name,
+		[]string{},
+		[]string{},
+		[]string{},
+		[]string{},
+		[]string{},
+		[]string{},
+		[]string{},
+		[]string{},
+		[]string{},
+		dateReleased,
+	}
+
+	// Act
+	actual := subject.AddVideoGame(videoGame)
+
+	// Assert
+	assert.Equal(t, expected, actual)
+	assert.Equal(t, expected, (**videoGames)[0])
 }
 
 func TestInMemoryReset(t *testing.T) {
