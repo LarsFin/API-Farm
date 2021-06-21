@@ -22,7 +22,12 @@ func (c *Controller) HandlePing(res Response) {
 func (c *Controller) HandleGet(req Request, res Response) {
 	strId := req.GetParam("id")
 
-	id, _ := strconv.Atoi(strId)
+	id, err := strconv.Atoi(strId)
+
+	if err != nil {
+		res.BadRequestText(ParamInvalidId(strId))
+		return
+	}
 
 	query := c.s.Get(uint(id))
 
