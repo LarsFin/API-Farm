@@ -114,6 +114,8 @@ func (s *VideoGameService) Update(id uint, data []byte) Query {
 		case *time.ParseError:
 			msg := VideoGameInvalidDate(t.Value)
 			return s.qf.BuildMessage(msg, http.StatusBadRequest)
+		default:
+			return s.qf.BuildMessage(InvalidJSON, http.StatusBadRequest)
 		}
 	}
 
