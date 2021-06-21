@@ -58,3 +58,8 @@ func (_m *DB) GetVideoGame(_a0 uint) *apifarm.VideoGame {
 
 	return r0
 }
+
+// Reset provides a mock function with given fields:
+func (_m *DB) Reset() {
+	_m.Called()
+}

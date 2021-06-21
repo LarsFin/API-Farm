@@ -4,6 +4,7 @@ type DB interface {
 	GetVideoGame(uint) *VideoGame
 	GetAllVideoGames() []VideoGame
 	AddVideoGame(VideoGame) VideoGame
+	Reset()
 }
 
 type InMemory struct {
@@ -50,4 +51,8 @@ func (db *InMemory) AddVideoGame(vg VideoGame) VideoGame {
 	vgs := append(*db.videoGames, vg)
 	db.videoGames = &vgs
 	return vg
+}
+
+func (db *InMemory) Reset() {
+
 }
