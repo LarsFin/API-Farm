@@ -477,7 +477,7 @@ func TestVideoGameServiceUpdateInvalidAttributeFailure(t *testing.T) {
 	err := &apifarm.InvalidAttributeError{Attribute: attribute}
 	expectedQuery := apifarm.Query{}
 
-	mockStorage.On("GetVideoGame", id).Return(apifarm.VideoGame{})
+	mockStorage.On("GetVideoGame", id).Return(&apifarm.VideoGame{})
 	mockJSON.On("DeserializeVideoGame", reqData).Return(nil, err)
 	mockQueryFactory.On("BuildMessage", apifarm.VideoGameInvalidAttribute(attribute),
 		uint(400)).Return(expectedQuery)
@@ -507,7 +507,7 @@ func TestVideoGameServiceUpdateInvalidDateFailure(t *testing.T) {
 	err := &time.ParseError{Value: invalidDate}
 	expectedQuery := apifarm.Query{}
 
-	mockStorage.On("GetVideoGame", id).Return(apifarm.VideoGame{})
+	mockStorage.On("GetVideoGame", id).Return(&apifarm.VideoGame{})
 	mockJSON.On("DeserializeVideoGame", reqData).Return(nil, err)
 	mockQueryFactory.On("BuildMessage", apifarm.VideoGameInvalidDate(invalidDate),
 		uint(400)).Return(expectedQuery)
