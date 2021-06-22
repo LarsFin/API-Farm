@@ -22,7 +22,7 @@ func TestGetConfiguration(t *testing.T) {
 	mockJSON.On("DeserializeConfiguration", configData).Return(&expected, nil)
 
 	// Act
-	got, err := apifarm.GetConfiguration(path, mockJSON, mockFileUtils)
+	got, err := apifarm.GetConfigurationForTesting(path, mockJSON, mockFileUtils)
 
 	// Assert
 	assert.Equal(t, expected, got)
@@ -41,7 +41,7 @@ func TestGetConfigurationReadFailure(t *testing.T) {
 	mockFileUtils.On("Read", path).Return(nil, expectedErr)
 
 	// Act
-	got, gotErr := apifarm.GetConfiguration(path, mockJSON, mockFileUtils)
+	got, gotErr := apifarm.GetConfigurationForTesting(path, mockJSON, mockFileUtils)
 
 	// Assert
 	assert.Equal(t, expected, got)
@@ -62,7 +62,7 @@ func TestGetConfigurationDeserializeFailure(t *testing.T) {
 	mockJSON.On("DeserializeConfiguration", configData).Return(&expected, expectedErr)
 
 	// Act
-	got, gotErr := apifarm.GetConfiguration(path, mockJSON, mockFileUtils)
+	got, gotErr := apifarm.GetConfigurationForTesting(path, mockJSON, mockFileUtils)
 
 	// Assert
 	assert.Equal(t, expected, got)
