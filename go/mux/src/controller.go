@@ -89,6 +89,8 @@ func (c *Controller) HandlePut(req Request, res Response) {
 	switch query.Code {
 	case 0:
 		res.OkJSON(query.Result)
+	case 400:
+		res.BadRequestText(query.Message)
 	}
 }
 
