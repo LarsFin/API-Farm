@@ -94,11 +94,11 @@ func (c *Controller) HandlePut(req Request, res Response) {
 	switch query.Code {
 	case 0:
 		res.OkJSON(query.Result)
-	case 400:
+	case http.StatusBadRequest:
 		res.BadRequestText(query.Message)
-	case 404:
+	case http.StatusNotFound:
 		res.NotFoundText(query.Message)
-	case 500:
+	case http.StatusInternalServerError:
 		res.Error(query.Error)
 	}
 }

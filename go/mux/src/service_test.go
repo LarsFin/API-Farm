@@ -462,6 +462,7 @@ func TestVideoGameServiceUpdateNotFound(t *testing.T) {
 	mockQueryFactory.AssertExpectations(t)
 }
 
+//nolint: dupl
 func TestVideoGameServiceUpdateInvalidAttributeFailure(t *testing.T) {
 	// Arrange
 	mockStorage := new(mocks.DB)
@@ -472,14 +473,14 @@ func TestVideoGameServiceUpdateInvalidAttributeFailure(t *testing.T) {
 
 	id := uint(5)
 	reqData := []byte{13, 34, 22}
-	invalidAttribute := "testers"
-	videoGameToUpdate := apifarm.VideoGame{}
-	err := &apifarm.InvalidAttributeError{Attribute: invalidAttribute}
+	attribute := "testers"
+	err := &apifarm.InvalidAttributeError{Attribute: attribute}
 	expectedQuery := apifarm.Query{}
 
-	mockStorage.On("GetVideoGame", id).Return(&videoGameToUpdate)
+	mockStorage.On("GetVideoGame", id).Return(apifarm.VideoGame{})
 	mockJSON.On("DeserializeVideoGame", reqData).Return(nil, err)
-	mockQueryFactory.On("BuildMessage", apifarm.VideoGameInvalidAttribute(invalidAttribute), uint(400)).Return(expectedQuery)
+	mockQueryFactory.On("BuildMessage", apifarm.VideoGameInvalidAttribute(attribute),
+		uint(400)).Return(expectedQuery)
 
 	// Act
 	actualQuery := subject.Update(id, reqData)
@@ -491,6 +492,7 @@ func TestVideoGameServiceUpdateInvalidAttributeFailure(t *testing.T) {
 	mockQueryFactory.AssertExpectations(t)
 }
 
+//nolint: dupl
 func TestVideoGameServiceUpdateInvalidDateFailure(t *testing.T) {
 	// Arrange
 	mockStorage := new(mocks.DB)
@@ -502,13 +504,13 @@ func TestVideoGameServiceUpdateInvalidDateFailure(t *testing.T) {
 	id := uint(5)
 	reqData := []byte{13, 34, 22}
 	invalidDate := "2010/08/26"
-	videoGameToUpdate := apifarm.VideoGame{}
 	err := &time.ParseError{Value: invalidDate}
 	expectedQuery := apifarm.Query{}
 
-	mockStorage.On("GetVideoGame", id).Return(&videoGameToUpdate)
+	mockStorage.On("GetVideoGame", id).Return(apifarm.VideoGame{})
 	mockJSON.On("DeserializeVideoGame", reqData).Return(nil, err)
-	mockQueryFactory.On("BuildMessage", apifarm.VideoGameInvalidDate(invalidDate), uint(400)).Return(expectedQuery)
+	mockQueryFactory.On("BuildMessage", apifarm.VideoGameInvalidDate(invalidDate),
+		uint(400)).Return(expectedQuery)
 
 	// Act
 	actualQuery := subject.Update(id, reqData)

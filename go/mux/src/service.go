@@ -171,61 +171,51 @@ func updateVideoGameFields(vg, vgu VideoGame) VideoGame {
 	} else {
 		uvg.Name = vg.Name
 	}
-
 	if vgu.Developers != nil {
 		uvg.Developers = vgu.Developers
 	} else {
 		uvg.Developers = vg.Developers
 	}
-
 	if vgu.Publishers != nil {
 		uvg.Publishers = vgu.Publishers
 	} else {
 		uvg.Publishers = vg.Publishers
 	}
-
 	if vgu.Directors != nil {
 		uvg.Directors = vgu.Directors
 	} else {
 		uvg.Directors = vg.Directors
 	}
-
 	if vgu.Producers != nil {
 		uvg.Producers = vgu.Producers
 	} else {
 		uvg.Producers = vg.Producers
 	}
-
 	if vgu.Designers != nil {
 		uvg.Designers = vgu.Designers
 	} else {
 		uvg.Designers = vg.Designers
 	}
-
 	if vgu.Programmers != nil {
 		uvg.Programmers = vgu.Programmers
 	} else {
 		uvg.Programmers = vg.Programmers
 	}
-
 	if vgu.Artists != nil {
 		uvg.Artists = vgu.Artists
 	} else {
 		uvg.Artists = vg.Artists
 	}
-
 	if vgu.Composers != nil {
 		uvg.Composers = vgu.Composers
 	} else {
 		uvg.Composers = vg.Composers
 	}
-
 	if vgu.Platforms != nil {
 		uvg.Platforms = vgu.Platforms
 	} else {
 		uvg.Platforms = vg.Platforms
 	}
-
 	dt := time.Time{}
 	if vgu.DateReleased.Time != dt {
 		uvg.DateReleased = vgu.DateReleased
