@@ -9,7 +9,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-const path = "PATH TO DATA FILE"
+const dataPath = "PATH TO DATA FILE"
 
 func TestJSONFileLoaderLoadSuccessful(t *testing.T) {
 	// Arrange
@@ -27,7 +27,7 @@ func TestJSONFileLoaderLoadSuccessful(t *testing.T) {
 	videoGames := []apifarm.VideoGame{vg1, vg2, vg3}
 	expectedQuery := apifarm.Query{}
 
-	mockFileUtils.On("Read", path).Return(data, nil)
+	mockFileUtils.On("Read", dataPath).Return(data, nil)
 	mockJSON.On("DeserializeVideoGames", data).Return(&videoGames, nil)
 	mockStorage.On("Reset")
 	mockStorage.On("AddVideoGame", vg1).Return(apifarm.VideoGame{})
@@ -36,7 +36,7 @@ func TestJSONFileLoaderLoadSuccessful(t *testing.T) {
 	mockQueryFactory.On("BuildMessage", apifarm.SuccessfullyLoadedData, uint(0)).Return(expectedQuery)
 
 	// Act
-	actualQuery := subject.Load(path)
+	actualQuery := subject.Load(dataPath)
 
 	// Assert
 	assert.Equal(t, expectedQuery, actualQuery)
@@ -57,11 +57,11 @@ func TestJSONFileLoaderLoadFileReadFailure(t *testing.T) {
 	err := errors.New("failed to read file")
 	expectedQuery := apifarm.Query{}
 
-	mockFileUtils.On("Read", path).Return(nil, err)
+	mockFileUtils.On("Read", dataPath).Return(nil, err)
 	mockQueryFactory.On("Error", err).Return(expectedQuery)
 
 	// Act
-	actualQuery := subject.Load(path)
+	actualQuery := subject.Load(dataPath)
 
 	// Assert
 	assert.Equal(t, expectedQuery, actualQuery)
@@ -83,12 +83,12 @@ func TestJSONFileLoaderLoadDeserializeFailure(t *testing.T) {
 	err := errors.New("failed to deserialize")
 	expectedQuery := apifarm.Query{}
 
-	mockFileUtils.On("Read", path).Return(data, nil)
+	mockFileUtils.On("Read", dataPath).Return(data, nil)
 	mockJSON.On("DeserializeVideoGames", data).Return(nil, err)
 	mockQueryFactory.On("Error", err).Return(expectedQuery)
 
 	// Act
-	actualQuery := subject.Load(path)
+	actualQuery := subject.Load(dataPath)
 
 	// Assert
 	assert.Equal(t, expectedQuery, actualQuery)

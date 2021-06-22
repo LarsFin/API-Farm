@@ -9,20 +9,21 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+const configPath = "PATH TO CONFIG FILE"
+
 func TestGetConfiguration(t *testing.T) {
 	// Arrange
 	mockJSON := new(mocks.DataUtils)
 	mockFileUtils := new(mocks.FileUtils)
 
-	path := "PATH TO CONFIG FILE"
 	configData := []byte{24, 66, 80}
 	expected := apifarm.Configuration{Host: "localhost", Port: 2550}
 
-	mockFileUtils.On("Read", path).Return(configData, nil)
+	mockFileUtils.On("Read", configPath).Return(configData, nil)
 	mockJSON.On("DeserializeConfiguration", configData).Return(&expected, nil)
 
 	// Act
-	got, err := apifarm.GetConfigurationForTesting(path, mockJSON, mockFileUtils)
+	got, err := apifarm.GetConfigurationForTesting(configPath, mockJSON, mockFileUtils)
 
 	// Assert
 	assert.Equal(t, expected, got)
@@ -34,14 +35,13 @@ func TestGetConfigurationReadFailure(t *testing.T) {
 	mockJSON := new(mocks.DataUtils)
 	mockFileUtils := new(mocks.FileUtils)
 
-	path := "PATH TO CONFIG FILE"
 	expectedErr := errors.New("could not find file")
 	expected := apifarm.Configuration{}
 
-	mockFileUtils.On("Read", path).Return(nil, expectedErr)
+	mockFileUtils.On("Read", configPath).Return(nil, expectedErr)
 
 	// Act
-	got, gotErr := apifarm.GetConfigurationForTesting(path, mockJSON, mockFileUtils)
+	got, gotErr := apifarm.GetConfigurationForTesting(configPath, mockJSON, mockFileUtils)
 
 	// Assert
 	assert.Equal(t, expected, got)
@@ -53,16 +53,15 @@ func TestGetConfigurationDeserializeFailure(t *testing.T) {
 	mockJSON := new(mocks.DataUtils)
 	mockFileUtils := new(mocks.FileUtils)
 
-	path := "PATH TO CONFIG FILE"
 	configData := []byte{24, 66, 80}
 	expectedErr := errors.New("failed to deserialize")
 	expected := apifarm.Configuration{}
 
-	mockFileUtils.On("Read", path).Return(configData, nil)
+	mockFileUtils.On("Read", configPath).Return(configData, nil)
 	mockJSON.On("DeserializeConfiguration", configData).Return(&expected, expectedErr)
 
 	// Act
-	got, gotErr := apifarm.GetConfigurationForTesting(path, mockJSON, mockFileUtils)
+	got, gotErr := apifarm.GetConfigurationForTesting(configPath, mockJSON, mockFileUtils)
 
 	// Assert
 	assert.Equal(t, expected, got)
