@@ -278,6 +278,28 @@ func TestHandlePut200(t *testing.T) {
 	mockResponse.AssertExpectations(t)
 }
 
+func TestHandlePut400InvalidID(t *testing.T) {
+	// Arrange
+	mockService := new(mocks.Service)
+	mockRequest := new(mocks.Request)
+	mockResponse := new(mocks.Response)
+
+	subject := apifarm.NewController(mockService)
+
+	invalidID := "invalid!"
+
+	mockRequest.On("GetParam", "id").Return(invalidID)
+	mockResponse.On("BadRequestText", apifarm.ParamInvalidID(invalidID))
+
+	// Act
+	subject.HandlePut(mockRequest, mockResponse)
+
+	// Assert
+	mockService.AssertExpectations(t)
+	mockRequest.AssertExpectations(t)
+	mockResponse.AssertExpectations(t)
+}
+
 func TestHandleTestSetup200(t *testing.T) {
 	// Arrange
 	mockDataLoader := new(mocks.DataLoader)
