@@ -123,7 +123,11 @@ func (s *VideoGameService) Update(id uint, data []byte) Query {
 
 	suvg := s.db.UpdateVideoGame(uvg)
 
-	b, _ := s.json.Serialize(suvg)
+	b, err := s.json.Serialize(suvg)
+
+	if err != nil {
+		return s.qf.Error(err)
+	}
 
 	return s.qf.BuildResult(b, uint(0))
 }
