@@ -98,6 +98,8 @@ func (c *Controller) HandlePut(req Request, res Response) {
 		res.BadRequestText(query.Message)
 	case 404:
 		res.NotFoundText(query.Message)
+	case 500:
+		res.Error(query.Error)
 	}
 }
 
