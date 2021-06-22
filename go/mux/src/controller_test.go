@@ -252,6 +252,32 @@ func TestHandlePost500ServiceFailure(t *testing.T) {
 	mockResponse.AssertExpectations(t)
 }
 
+func TestHandlePut200(t *testing.T) {
+	// Arrange
+	mockService := new(mocks.Service)
+	mockRequest := new(mocks.Request)
+	mockResponse := new(mocks.Response)
+
+	subject := apifarm.NewController(mockService)
+
+	body := []byte{20, 18, 48}
+	result := []byte{90, 92, 56}
+	query := apifarm.Query{Result: result}
+
+	mockRequest.On("GetParam", "id").Return("5")
+	mockRequest.On("GetBody").Return(body, nil)
+	mockService.On("Update", body).Return(query)
+	mockResponse.On("OkJSON", result)
+
+	// Act
+	subject.HandlePut(mockRequest, mockResponse)
+
+	// Assert
+	mockService.AssertExpectations(t)
+	mockRequest.AssertExpectations(t)
+	mockResponse.AssertExpectations(t)
+}
+
 func TestHandleTestSetup200(t *testing.T) {
 	// Arrange
 	mockDataLoader := new(mocks.DataLoader)

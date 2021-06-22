@@ -72,6 +72,10 @@ func (c *Controller) HandlePost(req Request, res Response) {
 	}
 }
 
+func (c *Controller) HandlePut(req Request, res Response) {
+
+}
+
 type APITestingController struct {
 	dl DataLoader
 }
