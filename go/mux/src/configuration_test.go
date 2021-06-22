@@ -15,14 +15,15 @@ func Test(t *testing.T) {
 
 	path := "PATH TO CONFIG FILE"
 	configData := []byte{24, 66, 80}
-	expected := apifarm.Configuration{}
+	expected := apifarm.Configuration{Host: "localhost", Port: 2550}
 
 	mockFileUtils.On("Read", path).Return(configData, nil)
-	mockJSON.On("DeserializeConfiguration", configData).Return(expected, nil)
+	mockJSON.On("DeserializeConfiguration", configData).Return(&expected, nil)
 
 	// Act
-	got := apifarm.GetConfiguration(path, mockJSON, mockFileUtils)
+	got, err := apifarm.GetConfiguration(path, mockJSON, mockFileUtils)
 
 	// Assert
-	assert.Same(t, expected, got)
+	assert.Equal(t, expected, got)
+	assert.Nil(t, err)
 }

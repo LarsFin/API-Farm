@@ -5,6 +5,10 @@ type Configuration struct {
 	Port uint   `json:"port"`
 }
 
-func GetConfiguration(p string, json DataUtils, f FileUtils) Configuration {
-	return Configuration{}
+func GetConfiguration(p string, json DataUtils, f FileUtils) (Configuration, error) {
+	b, _ := f.Read(p)
+
+	c, _ := json.DeserializeConfiguration(b)
+
+	return *c, nil
 }
