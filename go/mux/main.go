@@ -56,9 +56,11 @@ func main() {
 		controller.HandlePut(apifarm.NewHTTPRequest(r), apifarm.NewHTTPResponse(&w))
 	}).Methods(http.MethodPut)
 
-	r.HandleFunc("/api_tests/setup", func(w http.ResponseWriter, r *http.Request) {
-		apiTestingController.HandleTestSetup(apifarm.NewHTTPResponse(&w))
-	})
+	if env != "PROD" {
+		r.HandleFunc("/api_tests/setup", func(w http.ResponseWriter, r *http.Request) {
+			apiTestingController.HandleTestSetup(apifarm.NewHTTPResponse(&w))
+		})
+	}
 
 	addr := fmt.Sprintf("%s:%d", c.Host, c.Port)
 
