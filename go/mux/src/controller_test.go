@@ -300,6 +300,32 @@ func TestHandlePut400InvalidID(t *testing.T) {
 	mockResponse.AssertExpectations(t)
 }
 
+func TestHandlePut400FromQuery(t *testing.T) {
+	// Arrange
+	mockService := new(mocks.Service)
+	mockRequest := new(mocks.Request)
+	mockResponse := new(mocks.Response)
+
+	subject := apifarm.NewController(mockService)
+
+	body := []byte{20, 18, 48}
+	queryMessage := "INVALID VIDEO GAME"
+	query := apifarm.Query{Message: queryMessage, Code: uint(400)}
+
+	mockRequest.On("GetParam", "id").Return("5")
+	mockRequest.On("GetBody").Return(body, nil)
+	mockService.On("Update", uint(5), body).Return(query)
+	mockResponse.On("BadRequestText", queryMessage)
+
+	// Act
+	subject.HandlePut(mockRequest, mockResponse)
+
+	// Assert
+	mockService.AssertExpectations(t)
+	mockRequest.AssertExpectations(t)
+	mockResponse.AssertExpectations(t)
+}
+
 func TestHandleTestSetup200(t *testing.T) {
 	// Arrange
 	mockDataLoader := new(mocks.DataLoader)
