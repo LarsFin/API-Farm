@@ -266,7 +266,7 @@ func TestHandlePut200(t *testing.T) {
 
 	mockRequest.On("GetParam", "id").Return("5")
 	mockRequest.On("GetBody").Return(body, nil)
-	mockService.On("Update", body).Return(query)
+	mockService.On("Update", uint(5), body).Return(query)
 	mockResponse.On("OkJSON", result)
 
 	// Act

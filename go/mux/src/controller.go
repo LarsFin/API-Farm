@@ -73,7 +73,18 @@ func (c *Controller) HandlePost(req Request, res Response) {
 }
 
 func (c *Controller) HandlePut(req Request, res Response) {
+	strID := req.GetParam("id")
 
+	id, _ := strconv.Atoi(strID)
+
+	body, _ := req.GetBody()
+
+	query := c.s.Update(uint(id), body)
+
+	switch query.Code {
+	case 0:
+		res.OkJSON(query.Result)
+	}
 }
 
 type APITestingController struct {
