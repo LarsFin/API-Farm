@@ -375,6 +375,32 @@ func TestHandlePut500BodyReadFailure(t *testing.T) {
 	mockResponse.AssertExpectations(t)
 }
 
+func TestHandlePut500ServiceFailure(t *testing.T) {
+	// Arrange
+	mockService := new(mocks.Service)
+	mockRequest := new(mocks.Request)
+	mockResponse := new(mocks.Response)
+
+	subject := apifarm.NewController(mockService)
+
+	body := []byte{20, 18, 48}
+	err := errors.New("query failed")
+	query := apifarm.Query{Code: uint(500), Error: err}
+
+	mockRequest.On("GetParam", "id").Return("5")
+	mockRequest.On("GetBody").Return(body, nil)
+	mockService.On("Update", uint(5), body).Return(query)
+	mockResponse.On("Error", err)
+
+	// Act
+	subject.HandlePut(mockRequest, mockResponse)
+
+	// Assert
+	mockService.AssertExpectations(t)
+	mockRequest.AssertExpectations(t)
+	mockResponse.AssertExpectations(t)
+}
+
 func TestHandleTestSetup200(t *testing.T) {
 	// Arrange
 	mockDataLoader := new(mocks.DataLoader)
