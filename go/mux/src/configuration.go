@@ -6,7 +6,11 @@ type Configuration struct {
 }
 
 func GetConfiguration(p string, json DataUtils, f FileUtils) (Configuration, error) {
-	b, _ := f.Read(p)
+	b, err := f.Read(p)
+
+	if err != nil {
+		return Configuration{}, err
+	}
 
 	c, _ := json.DeserializeConfiguration(b)
 
