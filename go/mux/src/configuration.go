@@ -12,7 +12,11 @@ func GetConfiguration(p string, json DataUtils, f FileUtils) (Configuration, err
 		return Configuration{}, err
 	}
 
-	c, _ := json.DeserializeConfiguration(b)
+	c, err := json.DeserializeConfiguration(b)
+
+	if err != nil {
+		return Configuration{}, err
+	}
 
 	return *c, nil
 }
