@@ -91,6 +91,8 @@ func (c *Controller) HandlePut(req Request, res Response) {
 		res.OkJSON(query.Result)
 	case 400:
 		res.BadRequestText(query.Message)
+	case 404:
+		res.NotFoundText(query.Message)
 	}
 }
 
