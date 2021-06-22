@@ -82,7 +82,12 @@ func (c *Controller) HandlePut(req Request, res Response) {
 		return
 	}
 
-	body, _ := req.GetBody()
+	body, err := req.GetBody()
+
+	if err != nil {
+		res.Error(err)
+		return
+	}
 
 	query := c.s.Update(uint(id), body)
 
