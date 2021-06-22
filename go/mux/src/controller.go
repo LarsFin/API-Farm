@@ -75,7 +75,12 @@ func (c *Controller) HandlePost(req Request, res Response) {
 func (c *Controller) HandlePut(req Request, res Response) {
 	strID := req.GetParam("id")
 
-	id, _ := strconv.Atoi(strID)
+	id, err := strconv.Atoi(strID)
+
+	if err != nil {
+		res.BadRequestText(ParamInvalidID(strID))
+		return
+	}
 
 	body, _ := req.GetBody()
 
