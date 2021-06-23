@@ -35,6 +35,10 @@ func main() {
 		controller.HandlePost(apifarm.NewHTTPRequest(r), apifarm.NewHTTPResponse(&w))
 	}).Methods(http.MethodPost)
 
+	r.HandleFunc("/video_games/{id}", func(w http.ResponseWriter, r *http.Request) {
+		controller.HandlePut(apifarm.NewHTTPRequest(r), apifarm.NewHTTPResponse(&w))
+	}).Methods(http.MethodPut)
+
 	r.HandleFunc("/api_tests/setup", func(w http.ResponseWriter, r *http.Request) {
 		apiTestingController.HandleTestSetup(apifarm.NewHTTPResponse(&w))
 	})

@@ -72,6 +72,37 @@ func (c *Controller) HandlePost(req Request, res Response) {
 	}
 }
 
+func (c *Controller) HandlePut(req Request, res Response) {
+	strID := req.GetParam("id")
+
+	id, err := strconv.Atoi(strID)
+
+	if err != nil {
+		res.BadRequestText(ParamInvalidID(strID))
+		return
+	}
+
+	body, err := req.GetBody()
+
+	if err != nil {
+		res.Error(err)
+		return
+	}
+
+	query := c.s.Update(uint(id), body)
+
+	switch query.Code {
+	case 0:
+		res.OkJSON(query.Result)
+	case http.StatusBadRequest:
+		res.BadRequestText(query.Message)
+	case http.StatusNotFound:
+		res.NotFoundText(query.Message)
+	case http.StatusInternalServerError:
+		res.Error(query.Error)
+	}
+}
+
 type APITestingController struct {
 	dl DataLoader
 }

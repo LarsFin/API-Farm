@@ -55,21 +55,11 @@ func TestInMemoryAddVideoGame(t *testing.T) {
 
 	name := "The Great Gamesby"
 	dateReleased := apifarm.CustomTime{}
-	platforms := []string{"A", "B"}
-	videoGame := apifarm.VideoGame{Name: name, Platforms: platforms, DateReleased: dateReleased}
+	videoGame := apifarm.VideoGame{Name: name, DateReleased: dateReleased}
 	expected := apifarm.VideoGame{
-		uint(1),
-		name,
-		[]string{},
-		[]string{},
-		[]string{},
-		[]string{},
-		[]string{},
-		[]string{},
-		[]string{},
-		[]string{},
-		platforms,
-		dateReleased,
+		ID:           uint(1),
+		Name:         name,
+		DateReleased: dateReleased,
 	}
 
 	// Act
@@ -95,6 +85,39 @@ func TestInMemoryAddVideoGameIncrementsAndSetsId(t *testing.T) {
 	assert.Equal(t, videoGame3.ID, uint(3))
 
 	assert.Len(t, **videoGames, 3)
+}
+
+func TestInMemoryUpdateVideoGame(t *testing.T) {
+	// Arrange
+	subject, videoGames := apifarm.NewInMemoryForTests()
+
+	videoGameToUpdate := apifarm.VideoGame{ID: 2, Name: "TO BE UPDATED"}
+	includingVideoGames := []apifarm.VideoGame{
+		{ID: 1, Name: "GAME 1"},
+		videoGameToUpdate,
+		{ID: 3, Name: "GAME 3"},
+	}
+	*videoGames = &includingVideoGames
+	expected := apifarm.VideoGame{ID: 2, Name: "HAS BEEN UPDATED"}
+
+	// Act
+	got := subject.UpdateVideoGame(expected)
+
+	// Assert
+	assert.Equal(t, expected, *got)
+	assert.NotContains(t, **videoGames, videoGameToUpdate)
+	assert.Contains(t, **videoGames, expected)
+}
+
+func TestInMemoryUpdateVideoGameReturnsNil(t *testing.T) {
+	// Arrange
+	subject, _ := apifarm.NewInMemoryForTests()
+
+	// Act
+	got := subject.UpdateVideoGame(apifarm.VideoGame{})
+
+	// Assert
+	assert.Nil(t, got)
 }
 
 func TestInMemoryReset(t *testing.T) {

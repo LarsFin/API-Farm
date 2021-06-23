@@ -54,3 +54,17 @@ func (_m *Service) GetAll() apifarm.Query {
 
 	return r0
 }
+
+// Update provides a mock function with given fields: _a0, _a1
+func (_m *Service) Update(_a0 uint, _a1 []byte) apifarm.Query {
+	ret := _m.Called(_a0, _a1)
+
+	var r0 apifarm.Query
+	if rf, ok := ret.Get(0).(func(uint, []byte) apifarm.Query); ok {
+		r0 = rf(_a0, _a1)
+	} else {
+		r0 = ret.Get(0).(apifarm.Query)
+	}
+
+	return r0
+}

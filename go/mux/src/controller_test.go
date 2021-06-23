@@ -252,6 +252,155 @@ func TestHandlePost500ServiceFailure(t *testing.T) {
 	mockResponse.AssertExpectations(t)
 }
 
+func TestHandlePut200(t *testing.T) {
+	// Arrange
+	mockService := new(mocks.Service)
+	mockRequest := new(mocks.Request)
+	mockResponse := new(mocks.Response)
+
+	subject := apifarm.NewController(mockService)
+
+	body := []byte{20, 18, 48}
+	result := []byte{90, 92, 56}
+	query := apifarm.Query{Result: result}
+
+	mockRequest.On("GetParam", "id").Return("5")
+	mockRequest.On("GetBody").Return(body, nil)
+	mockService.On("Update", uint(5), body).Return(query)
+	mockResponse.On("OkJSON", result)
+
+	// Act
+	subject.HandlePut(mockRequest, mockResponse)
+
+	// Assert
+	mockService.AssertExpectations(t)
+	mockRequest.AssertExpectations(t)
+	mockResponse.AssertExpectations(t)
+}
+
+func TestHandlePut400InvalidID(t *testing.T) {
+	// Arrange
+	mockService := new(mocks.Service)
+	mockRequest := new(mocks.Request)
+	mockResponse := new(mocks.Response)
+
+	subject := apifarm.NewController(mockService)
+
+	invalidID := "invalid!"
+
+	mockRequest.On("GetParam", "id").Return(invalidID)
+	mockResponse.On("BadRequestText", apifarm.ParamInvalidID(invalidID))
+
+	// Act
+	subject.HandlePut(mockRequest, mockResponse)
+
+	// Assert
+	mockService.AssertExpectations(t)
+	mockRequest.AssertExpectations(t)
+	mockResponse.AssertExpectations(t)
+}
+
+func TestHandlePut400FromQuery(t *testing.T) {
+	// Arrange
+	mockService := new(mocks.Service)
+	mockRequest := new(mocks.Request)
+	mockResponse := new(mocks.Response)
+
+	subject := apifarm.NewController(mockService)
+
+	body := []byte{20, 18, 48}
+	queryMessage := "INVALID VIDEO GAME"
+	query := apifarm.Query{Message: queryMessage, Code: uint(400)}
+
+	mockRequest.On("GetParam", "id").Return("5")
+	mockRequest.On("GetBody").Return(body, nil)
+	mockService.On("Update", uint(5), body).Return(query)
+	mockResponse.On("BadRequestText", queryMessage)
+
+	// Act
+	subject.HandlePut(mockRequest, mockResponse)
+
+	// Assert
+	mockService.AssertExpectations(t)
+	mockRequest.AssertExpectations(t)
+	mockResponse.AssertExpectations(t)
+}
+
+func TestHandlePut404(t *testing.T) {
+	// Arrange
+	mockService := new(mocks.Service)
+	mockRequest := new(mocks.Request)
+	mockResponse := new(mocks.Response)
+
+	subject := apifarm.NewController(mockService)
+
+	body := []byte{20, 18, 48}
+	queryMessage := "VIDEO GAME NOT FOUND"
+	query := apifarm.Query{Message: queryMessage, Code: uint(404)}
+
+	mockRequest.On("GetParam", "id").Return("99")
+	mockRequest.On("GetBody").Return(body, nil)
+	mockService.On("Update", uint(99), body).Return(query)
+	mockResponse.On("NotFoundText", queryMessage)
+
+	// Act
+	subject.HandlePut(mockRequest, mockResponse)
+
+	// Assert
+	mockService.AssertExpectations(t)
+	mockRequest.AssertExpectations(t)
+	mockResponse.AssertExpectations(t)
+}
+
+func TestHandlePut500BodyReadFailure(t *testing.T) {
+	// Arrange
+	mockService := new(mocks.Service)
+	mockRequest := new(mocks.Request)
+	mockResponse := new(mocks.Response)
+
+	subject := apifarm.NewController(mockService)
+
+	err := errors.New("body read failed")
+
+	mockRequest.On("GetParam", "id").Return("5")
+	mockRequest.On("GetBody").Return(nil, err)
+	mockResponse.On("Error", err)
+
+	// Act
+	subject.HandlePut(mockRequest, mockResponse)
+
+	// Assert
+	mockService.AssertExpectations(t)
+	mockRequest.AssertExpectations(t)
+	mockResponse.AssertExpectations(t)
+}
+
+func TestHandlePut500ServiceFailure(t *testing.T) {
+	// Arrange
+	mockService := new(mocks.Service)
+	mockRequest := new(mocks.Request)
+	mockResponse := new(mocks.Response)
+
+	subject := apifarm.NewController(mockService)
+
+	body := []byte{20, 18, 48}
+	err := errors.New("query failed")
+	query := apifarm.Query{Code: uint(500), Error: err}
+
+	mockRequest.On("GetParam", "id").Return("5")
+	mockRequest.On("GetBody").Return(body, nil)
+	mockService.On("Update", uint(5), body).Return(query)
+	mockResponse.On("Error", err)
+
+	// Act
+	subject.HandlePut(mockRequest, mockResponse)
+
+	// Assert
+	mockService.AssertExpectations(t)
+	mockRequest.AssertExpectations(t)
+	mockResponse.AssertExpectations(t)
+}
+
 func TestHandleTestSetup200(t *testing.T) {
 	// Arrange
 	mockDataLoader := new(mocks.DataLoader)
