@@ -425,6 +425,28 @@ func TestHandleDelete200(t *testing.T) {
 	mockResponse.AssertExpectations(t)
 }
 
+func TestHandleDelete400(t *testing.T) {
+	// Arrange
+	mockService := new(mocks.Service)
+	mockRequest := new(mocks.Request)
+	mockResponse := new(mocks.Response)
+
+	subject := apifarm.NewController(mockService)
+
+	invalidId := "invalid!"
+
+	mockRequest.On("GetParam", "id").Return(invalidId)
+	mockResponse.On("BadRequestText", apifarm.ParamInvalidID(invalidId))
+
+	// Act
+	subject.HandleDelete(mockRequest, mockResponse)
+
+	// Assert
+	mockService.AssertExpectations(t)
+	mockRequest.AssertExpectations(t)
+	mockResponse.AssertExpectations(t)
+}
+
 func TestHandleTestSetup200(t *testing.T) {
 	// Arrange
 	mockDataLoader := new(mocks.DataLoader)
