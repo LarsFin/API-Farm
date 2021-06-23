@@ -104,7 +104,13 @@ func (c *Controller) HandlePut(req Request, res Response) {
 }
 
 func (c *Controller) HandleDelete(req Request, res Response) {
+	strID := req.GetParam("id")
 
+	id, _ := strconv.Atoi(strID)
+
+	query := c.s.Delete(uint(id))
+
+	res.OkText(query.Message)
 }
 
 type APITestingController struct {
