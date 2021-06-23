@@ -118,7 +118,7 @@ func (c *Controller) HandleDelete(req Request, res Response) {
 	switch query.Code {
 	case 0:
 		res.OkText(query.Message)
-	case 404:
+	case http.StatusNotFound:
 		res.NotFoundText(query.Message)
 	}
 }

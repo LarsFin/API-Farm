@@ -7,6 +7,9 @@ import (
 	"testing"
 )
 
+const invalidID = "invalid!"
+const videoGameNotFoundMessage = "VIDEO GAME NOT FOUND"
+
 func TestHandlePing(t *testing.T) {
 	// Arrange
 	mockResponse := new(mocks.Response)
@@ -53,8 +56,6 @@ func TestHandleGet400(t *testing.T) {
 
 	subject := apifarm.NewController(mockService)
 
-	invalidID := "invalid!"
-
 	mockRequest.On("GetParam", "id").Return(invalidID)
 	mockResponse.On("BadRequestText", apifarm.ParamInvalidID(invalidID))
 
@@ -74,12 +75,11 @@ func TestHandleGet404(t *testing.T) {
 
 	subject := apifarm.NewController(mockService)
 
-	queryMessage := "VIDEO GAME NOT FOUND"
-	query := apifarm.Query{Message: queryMessage, Code: uint(404)}
+	query := apifarm.Query{Message: videoGameNotFoundMessage, Code: uint(404)}
 
 	mockRequest.On("GetParam", "id").Return("99")
 	mockService.On("Get", uint(99)).Return(query)
-	mockResponse.On("NotFoundText", queryMessage)
+	mockResponse.On("NotFoundText", videoGameNotFoundMessage)
 
 	// Act
 	subject.HandleGet(mockRequest, mockResponse)
@@ -286,8 +286,6 @@ func TestHandlePut400InvalidID(t *testing.T) {
 
 	subject := apifarm.NewController(mockService)
 
-	invalidID := "invalid!"
-
 	mockRequest.On("GetParam", "id").Return(invalidID)
 	mockResponse.On("BadRequestText", apifarm.ParamInvalidID(invalidID))
 
@@ -335,13 +333,12 @@ func TestHandlePut404(t *testing.T) {
 	subject := apifarm.NewController(mockService)
 
 	body := []byte{20, 18, 48}
-	queryMessage := "VIDEO GAME NOT FOUND"
-	query := apifarm.Query{Message: queryMessage, Code: uint(404)}
+	query := apifarm.Query{Message: videoGameNotFoundMessage, Code: uint(404)}
 
 	mockRequest.On("GetParam", "id").Return("99")
 	mockRequest.On("GetBody").Return(body, nil)
 	mockService.On("Update", uint(99), body).Return(query)
-	mockResponse.On("NotFoundText", queryMessage)
+	mockResponse.On("NotFoundText", videoGameNotFoundMessage)
 
 	// Act
 	subject.HandlePut(mockRequest, mockResponse)
@@ -433,10 +430,8 @@ func TestHandleDelete400(t *testing.T) {
 
 	subject := apifarm.NewController(mockService)
 
-	invalidId := "invalid!"
-
-	mockRequest.On("GetParam", "id").Return(invalidId)
-	mockResponse.On("BadRequestText", apifarm.ParamInvalidID(invalidId))
+	mockRequest.On("GetParam", "id").Return(invalidID)
+	mockResponse.On("BadRequestText", apifarm.ParamInvalidID(invalidID))
 
 	// Act
 	subject.HandleDelete(mockRequest, mockResponse)
@@ -455,12 +450,11 @@ func TestHandleDelete404(t *testing.T) {
 
 	subject := apifarm.NewController(mockService)
 
-	queryMessage := "VIDEO GAME NOT FOUND"
-	query := apifarm.Query{Message: queryMessage, Code: uint(404)}
+	query := apifarm.Query{Message: videoGameNotFoundMessage, Code: uint(404)}
 
 	mockRequest.On("GetParam", "id").Return("99")
 	mockService.On("Delete", uint(99)).Return(query)
-	mockResponse.On("NotFoundText", queryMessage)
+	mockResponse.On("NotFoundText", videoGameNotFoundMessage)
 
 	// Act
 	subject.HandleDelete(mockRequest, mockResponse)
