@@ -73,7 +73,7 @@ func (db *InMemory) DeleteVideoGame(id uint) *VideoGame {
 		}
 	}
 
-	return &VideoGame{}
+	return nil
 }
 
 func (db *InMemory) Reset() {
