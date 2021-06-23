@@ -134,7 +134,9 @@ func (s *VideoGameService) Update(id uint, data []byte) Query {
 }
 
 func (s *VideoGameService) Delete(id uint) Query {
-	return Query{}
+	s.db.DeleteVideoGame(id)
+
+	return s.qf.BuildMessage(VideoGameDeleted(id), uint(0))
 }
 
 func setEmptySlices(vg *VideoGame) {
