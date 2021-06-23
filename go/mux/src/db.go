@@ -65,6 +65,10 @@ func (db *InMemory) UpdateVideoGame(uvg VideoGame) *VideoGame {
 	return nil
 }
 
+func (db *InMemory) DeleteVideoGame(id uint) *VideoGame {
+	return nil
+}
+
 func (db *InMemory) Reset() {
 	db.idCounter = 0
 	db.videoGames = &[]VideoGame{}

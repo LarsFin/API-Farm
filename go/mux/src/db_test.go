@@ -120,6 +120,22 @@ func TestInMemoryUpdateVideoGameReturnsNil(t *testing.T) {
 	assert.Nil(t, got)
 }
 
+func TestInMemoryDeleteVideoGame(t *testing.T) {
+	// Arrange
+	subject, videoGames := apifarm.NewInMemoryForTests()
+
+	id := uint(5)
+	expected := apifarm.VideoGame{ID: id, Name: "GAME TO DELETE"}
+	*videoGames = &[]apifarm.VideoGame{expected}
+
+	// Act
+	got := subject.DeleteVideoGame(id)
+
+	// Assert
+	assert.Equal(t, expected, *got)
+	assert.NotContains(t, **videoGames, expected)
+}
+
 func TestInMemoryReset(t *testing.T) {
 	// Arrange
 	subject, videoGames := apifarm.NewInMemoryForTests()
