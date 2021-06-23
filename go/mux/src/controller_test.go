@@ -401,6 +401,30 @@ func TestHandlePut500ServiceFailure(t *testing.T) {
 	mockResponse.AssertExpectations(t)
 }
 
+func TestHandleDelete200(t *testing.T) {
+	// Arrange
+	mockService := new(mocks.Service)
+	mockRequest := new(mocks.Request)
+	mockResponse := new(mocks.Response)
+
+	subject := apifarm.NewController(mockService)
+
+	queryMessage := "VIDEO GAME DELETED"
+	query := apifarm.Query{Message: queryMessage}
+
+	mockRequest.On("GetParam", "id").Return("5")
+	mockService.On("Delete", uint(5)).Return(query)
+	mockResponse.On("OkText", queryMessage)
+
+	// Act
+	subject.HandleDelete(mockRequest, mockResponse)
+
+	// Assert
+	mockService.AssertExpectations(t)
+	mockRequest.AssertExpectations(t)
+	mockResponse.AssertExpectations(t)
+}
+
 func TestHandleTestSetup200(t *testing.T) {
 	// Arrange
 	mockDataLoader := new(mocks.DataLoader)

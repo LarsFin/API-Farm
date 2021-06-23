@@ -10,6 +10,7 @@ type Service interface {
 	GetAll() Query
 	Add([]byte) Query
 	Update(uint, []byte) Query
+	Delete(uint) Query
 }
 
 type VideoGameService struct {

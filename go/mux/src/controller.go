@@ -103,6 +103,10 @@ func (c *Controller) HandlePut(req Request, res Response) {
 	}
 }
 
+func (c *Controller) HandleDelete(req Request, res Response) {
+
+}
+
 type APITestingController struct {
 	dl DataLoader
 }
