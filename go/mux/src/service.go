@@ -134,7 +134,11 @@ func (s *VideoGameService) Update(id uint, data []byte) Query {
 }
 
 func (s *VideoGameService) Delete(id uint) Query {
-	s.db.DeleteVideoGame(id)
+	vg := s.db.DeleteVideoGame(id)
+
+	if vg == nil {
+		return s.qf.BuildMessage(VideoGameNotFound(id), http.StatusNotFound)
+	}
 
 	return s.qf.BuildMessage(VideoGameDeleted(id), uint(0))
 }
