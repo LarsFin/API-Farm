@@ -133,6 +133,10 @@ func (s *VideoGameService) Update(id uint, data []byte) Query {
 	return s.qf.BuildResult(b, uint(0))
 }
 
+func (s *VideoGameService) Delete(id uint) Query {
+	return Query{}
+}
+
 func setEmptySlices(vg *VideoGame) {
 	if vg.Developers == nil {
 		vg.Developers = []string{}

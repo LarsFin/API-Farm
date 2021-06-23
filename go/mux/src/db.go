@@ -5,6 +5,7 @@ type DB interface {
 	GetAllVideoGames() []VideoGame
 	AddVideoGame(VideoGame) VideoGame
 	UpdateVideoGame(VideoGame) *VideoGame
+	DeleteVideoGame(uint) *VideoGame
 	Reset()
 }
 
