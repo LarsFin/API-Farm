@@ -604,3 +604,26 @@ func TestVideoGameServiceDeleteSuccessful(t *testing.T) {
 	mockStorage.AssertExpectations(t)
 	mockQueryFactory.AssertExpectations(t)
 }
+
+func TestVideoGameServiceDeleteNotFound(t *testing.T) {
+	// Arrange
+	mockStorage := new(mocks.DB)
+	mockJSON := new(mocks.DataUtils)
+	mockQueryFactory := new(mocks.QueryFactory)
+
+	subject := apifarm.NewVideoGameServiceWithUtils(mockStorage, mockJSON, mockQueryFactory)
+
+	id := uint(5)
+	expectedQuery := apifarm.Query{}
+
+	mockStorage.On("DeleteVideoGame", id).Return(nil)
+	mockQueryFactory.On("BuildMessage", apifarm.VideoGameNotFound(id), uint(0)).Return(expectedQuery)
+
+	// Act
+	actualQuery := subject.Delete(id)
+
+	// Assert
+	assert.Equal(t, expectedQuery, actualQuery)
+	mockStorage.AssertExpectations(t)
+	mockQueryFactory.AssertExpectations(t)
+}
