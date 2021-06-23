@@ -115,7 +115,12 @@ func (c *Controller) HandleDelete(req Request, res Response) {
 
 	query := c.s.Delete(uint(id))
 
-	res.OkText(query.Message)
+	switch query.Code {
+	case 0:
+		res.OkText(query.Message)
+	case 404:
+		res.NotFoundText(query.Message)
+	}
 }
 
 type APITestingController struct {
