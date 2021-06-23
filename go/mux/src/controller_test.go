@@ -447,6 +447,30 @@ func TestHandleDelete400(t *testing.T) {
 	mockResponse.AssertExpectations(t)
 }
 
+func TestHandleDelete404(t *testing.T) {
+	// Arrange
+	mockService := new(mocks.Service)
+	mockRequest := new(mocks.Request)
+	mockResponse := new(mocks.Response)
+
+	subject := apifarm.NewController(mockService)
+
+	queryMessage := "VIDEO GAME NOT FOUND"
+	query := apifarm.Query{Message: queryMessage, Code: uint(404)}
+
+	mockRequest.On("GetParam", "id").Return("99")
+	mockService.On("Delete", uint(99)).Return(query)
+	mockResponse.On("NotFoundText", queryMessage)
+
+	// Act
+	subject.HandleDelete(mockRequest, mockResponse)
+
+	// Assert
+	mockService.AssertExpectations(t)
+	mockRequest.AssertExpectations(t)
+	mockResponse.AssertExpectations(t)
+}
+
 func TestHandleTestSetup200(t *testing.T) {
 	// Arrange
 	mockDataLoader := new(mocks.DataLoader)
