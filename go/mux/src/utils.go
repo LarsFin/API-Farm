@@ -177,6 +177,10 @@ func ParamInvalidID(invalidID string) string {
 	return fmt.Sprintf("The provided id '%s' is invalid.", invalidID)
 }
 
+func VideoGameDeleted(id uint) string {
+	return fmt.Sprintf("Deleted video game with id '%d'.", id)
+}
+
 func VideoGameInvalidAttribute(invalidAttribute string) string {
 	return fmt.Sprintf("The provided data has an invalid attribute '%s'.", invalidAttribute)
 }

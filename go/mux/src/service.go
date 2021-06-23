@@ -10,6 +10,7 @@ type Service interface {
 	GetAll() Query
 	Add([]byte) Query
 	Update(uint, []byte) Query
+	Delete(uint) Query
 }
 
 type VideoGameService struct {
@@ -131,6 +132,16 @@ func (s *VideoGameService) Update(id uint, data []byte) Query {
 	}
 
 	return s.qf.BuildResult(b, uint(0))
+}
+
+func (s *VideoGameService) Delete(id uint) Query {
+	vg := s.db.DeleteVideoGame(id)
+
+	if vg == nil {
+		return s.qf.BuildMessage(VideoGameNotFound(id), http.StatusNotFound)
+	}
+
+	return s.qf.BuildMessage(VideoGameDeleted(id), uint(0))
 }
 
 func setEmptySlices(vg *VideoGame) {

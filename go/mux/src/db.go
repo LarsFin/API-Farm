@@ -5,6 +5,7 @@ type DB interface {
 	GetAllVideoGames() []VideoGame
 	AddVideoGame(VideoGame) VideoGame
 	UpdateVideoGame(VideoGame) *VideoGame
+	DeleteVideoGame(uint) *VideoGame
 	Reset()
 }
 
@@ -65,7 +66,26 @@ func (db *InMemory) UpdateVideoGame(uvg VideoGame) *VideoGame {
 	return nil
 }
 
+func (db *InMemory) DeleteVideoGame(id uint) *VideoGame {
+	for i, vg := range *db.videoGames {
+		if vg.ID == id {
+			*db.videoGames = delete(*db.videoGames, i)
+			return &vg
+		}
+	}
+
+	return nil
+}
+
 func (db *InMemory) Reset() {
 	db.idCounter = 0
 	db.videoGames = &[]VideoGame{}
+}
+
+func delete(vgs []VideoGame, i int) []VideoGame {
+	for ; i < len(vgs)-1; i++ {
+		vgs[i] = vgs[i+1]
+	}
+
+	return vgs[0:i]
 }

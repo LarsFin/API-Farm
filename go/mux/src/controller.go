@@ -103,6 +103,26 @@ func (c *Controller) HandlePut(req Request, res Response) {
 	}
 }
 
+func (c *Controller) HandleDelete(req Request, res Response) {
+	strID := req.GetParam("id")
+
+	id, err := strconv.Atoi(strID)
+
+	if err != nil {
+		res.BadRequestText(ParamInvalidID(strID))
+		return
+	}
+
+	query := c.s.Delete(uint(id))
+
+	switch query.Code {
+	case 0:
+		res.OkText(query.Message)
+	case http.StatusNotFound:
+		res.NotFoundText(query.Message)
+	}
+}
+
 type APITestingController struct {
 	dl DataLoader
 }
