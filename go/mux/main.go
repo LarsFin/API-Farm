@@ -2,8 +2,11 @@ package main
 
 import (
 	apifarm "apifarm/src"
+	"fmt"
 	"log"
 	"net/http"
+	"os"
+	"strings"
 
 	"github.com/gorilla/mux"
 )
@@ -17,6 +20,20 @@ var dataLoader = apifarm.NewJSONFileLoader(storage)
 var apiTestingController = apifarm.NewAPITestingController(dataLoader)
 
 func main() {
+	env := os.Getenv("API_ENV")
+
+	if env != "PROD" {
+		env = "DEV"
+	}
+
+	p := fmt.Sprintf("./config.%s.json", strings.ToLower(env))
+
+	c, err := apifarm.GetConfiguration(p)
+
+	if err != nil {
+		panic(err)
+	}
+
 	r := mux.NewRouter()
 
 	r.HandleFunc("/ping", func(w http.ResponseWriter, r *http.Request) {
@@ -39,9 +56,13 @@ func main() {
 		controller.HandlePut(apifarm.NewHTTPRequest(r), apifarm.NewHTTPResponse(&w))
 	}).Methods(http.MethodPut)
 
-	r.HandleFunc("/api_tests/setup", func(w http.ResponseWriter, r *http.Request) {
-		apiTestingController.HandleTestSetup(apifarm.NewHTTPResponse(&w))
-	})
+	if env != "PROD" {
+		r.HandleFunc("/api_tests/setup", func(w http.ResponseWriter, r *http.Request) {
+			apiTestingController.HandleTestSetup(apifarm.NewHTTPResponse(&w))
+		})
+	}
 
-	log.Fatal(http.ListenAndServe(":8080", r))
+	addr := fmt.Sprintf("%s:%d", c.Host, c.Port)
+
+	log.Fatal(http.ListenAndServe(addr, r))
 }

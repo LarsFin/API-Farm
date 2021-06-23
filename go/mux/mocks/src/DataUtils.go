@@ -13,6 +13,29 @@ type DataUtils struct {
 	mock.Mock
 }
 
+// DeserializeConfiguration provides a mock function with given fields: _a0
+func (_m *DataUtils) DeserializeConfiguration(_a0 []byte) (*apifarm.Configuration, error) {
+	ret := _m.Called(_a0)
+
+	var r0 *apifarm.Configuration
+	if rf, ok := ret.Get(0).(func([]byte) *apifarm.Configuration); ok {
+		r0 = rf(_a0)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*apifarm.Configuration)
+		}
+	}
+
+	var r1 error
+	if rf, ok := ret.Get(1).(func([]byte) error); ok {
+		r1 = rf(_a0)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
 // DeserializeVideoGame provides a mock function with given fields: _a0
 func (_m *DataUtils) DeserializeVideoGame(_a0 []byte) (*apifarm.VideoGame, error) {
 	ret := _m.Called(_a0)

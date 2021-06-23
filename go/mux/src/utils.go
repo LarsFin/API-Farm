@@ -41,6 +41,7 @@ func (ct *CustomTime) MarshalJSON() ([]byte, error) {
 
 type DataUtils interface {
 	Serialize(interface{}) ([]byte, error)
+	DeserializeConfiguration([]byte) (*Configuration, error)
 	DeserializeVideoGame([]byte) (*VideoGame, error)
 	DeserializeVideoGames([]byte) (*[]VideoGame, error)
 }
@@ -50,6 +51,12 @@ type JSON struct {
 
 func (*JSON) Serialize(obj interface{}) ([]byte, error) {
 	return json.Marshal(obj)
+}
+
+func (*JSON) DeserializeConfiguration(data []byte) (*Configuration, error) {
+	var c Configuration
+	err := json.Unmarshal(data, &c)
+	return &c, err
 }
 
 func (*JSON) DeserializeVideoGame(data []byte) (*VideoGame, error) {
